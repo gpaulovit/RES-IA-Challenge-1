@@ -1,3 +1,4 @@
 - [Início](/)
 - [Perguntas](perguntas.md)
+- [Requisitos](requisitos.md)
 - [Referências](refs.md)
