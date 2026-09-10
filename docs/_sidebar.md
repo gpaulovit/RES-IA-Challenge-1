@@ -1,3 +1,4 @@
 - [Início](/)
 - [Perguntas](perguntas.md)
+- [Histórias de usuário](historias.md)
 - [Referências](refs.md)
