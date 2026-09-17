@@ -164,7 +164,7 @@ consistentes:
 | Nome | Foco principal |
 | --- | --- |
 | Ingrid Soares | Problema e ecossistema |
-| | Domínio de dados |
+| Cibelly Lourenco | Domínio de dados |
 | Paulo | Modelos de IA |
 | Ana Júlia| Produto e decisão |
 | | Engenharia |
