@@ -166,7 +166,7 @@ consistentes:
 | Ingrid Soares | Problema e ecossistema |
 | | Domínio de dados |
 | Paulo | Modelos de IA |
-| | Produto e decisão |
+| Ana Júlia| Produto e decisão |
 | | Engenharia |
 
 ## Log de edições
