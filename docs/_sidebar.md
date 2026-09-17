@@ -1,4 +1,5 @@
 - [Início](/)
+- [Cronograma](cronograma.md)
 - [Perguntas](perguntas.md)
 - [Requisitos](requisitos.md)
 - [Histórias de usuário](historias.md)

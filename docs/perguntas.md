@@ -31,12 +31,6 @@
 
 Existe evidência suficiente, nesta fase de concepção, de que o principal gargalo do combate à desinformação política no Brasil é a falta de acesso rápido e comparável a checagens já existentes — e não a falta de checagens em si, a falta de vontade do público em checar, ou uma barreira estrutural das plataformas de mensageria — de forma que um produto de recuperação semântica endereça a causa raiz do problema, e não apenas um sintoma secundário dele?
 
-Essa pergunta é a mais importante das cinco norteadoras: se a resposta for não, os quatro eixos técnicos anteriores descrevem um produto tecnicamente correto para um problema que não é o gargalo real.
-
-## Eixo 1 — Dados e Contexto Eleitoral
-
-### Expansão
-
 - Usando os embeddings das alegações já catalogadas, é possível identificar clusters temáticos latentes (ex.: urnas eletrônicas, saúde, segurança pública) sem depender de rótulos manuais prévios?
 - Existe uma sazonalidade temporal nos boatos (picos em datas de debate, véspera de votação, resultado) que se correlacione com o tipo de entidade mencionada?
 - Boatos antigos "ressurgem" reciclados em novos eventos eleitorais? Isso é detectável via similaridade semântica entre alegações de anos diferentes na base?
