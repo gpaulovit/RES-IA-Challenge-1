@@ -163,7 +163,7 @@ consistentes:
 
 | Nome | Foco principal |
 | --- | --- |
-| | Problema e ecossistema |
+| Ingrid Soares | Problema e ecossistema |
 | | Domínio de dados |
 | Paulo | Modelos de IA |
 | | Produto e decisão |
@@ -174,3 +174,4 @@ consistentes:
 | Data | O que mudou | Por quê |
 | --- | --- | --- |
 | 2026-09-17 | Adicionadas as frentes de trabalho e preenchida a tabela de papéis | Tornar explícita no cronograma a divisão de trabalho já usada nos labels `papel:` do GitHub |
+| 2026-09-17 | Atribuída Ingrid Soares à frente de Problema e ecossistema | Registrar a responsabilidade definida pelo grupo |
