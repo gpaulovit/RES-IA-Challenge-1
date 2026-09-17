@@ -128,18 +128,49 @@ e a narrativa do que foi aprendido e construído.
 **Entregável:** produto entregue com todos os cenários de aceitação
 passando + material de apresentação.
 
+## Frentes de trabalho
+
+O grupo dividiu o trabalho em 5 frentes, uma por pessoa. As frentes
+espelham os labels `papel:` usados nas issues e PRs do GitHub do
+repositório, para manter cronograma e rastreamento de trabalho
+consistentes:
+
+- **Problema e ecossistema** (`papel: problema-ecossistema`) — investiga
+  por que esse problema (boatos políticos reciclados) é real e importante,
+  e o que já existe por aí tentando resolver algo parecido. É quem
+  consegue explicar, em uma frase, por que vale a pena construir isso.
+- **Domínio de dados** (`papel: dominio-dados`) — cuida da base de boatos
+  e checagens usada pelo projeto: organiza, confere se tem informação
+  suficiente e de várias épocas/temas, e se dá pra confiar nela antes de
+  qualquer coisa ser construída em cima.
+- **Modelos de IA** (`papel: modelos-ia`) — ensina o computador a
+  reconhecer quando uma alegação nova é, na verdade, um boato antigo
+  reescrito de outro jeito (com gíria, erro de digitação proposital,
+  apelido etc.), e testa qual "modelo" faz esse reconhecimento melhor.
+- **Produto e decisão** (`papel: produto-decisao`) — define como o
+  sistema mostra o resultado para quem for usar (o que aparece na tela, o
+  que precisa ficar claro, quando ele deve dizer "não tenho certeza" em
+  vez de arriscar), escreve os requisitos e ajuda a contar essa história
+  na apresentação final.
+- **Engenharia** (`papel: engenharia`) — acompanha a construção do
+  sistema do início ao fim, semana após semana, ajudando a transformar o
+  que cada frente vai decidindo (os dados prontos, o modelo escolhido, as
+  regras de produto) em código que realmente funciona e se conecta — não
+  é uma etapa isolada só do final, e sim um trabalho contínuo junto com as
+  outras frentes.
+
 ## Papéis e responsabilidades
 
 | Nome | Foco principal |
 | --- | --- |
-| | |
-| | |
-| | |
-| | |
-| | |
+| | Problema e ecossistema |
+| | Domínio de dados |
+| Paulo | Modelos de IA |
+| | Produto e decisão |
+| | Engenharia |
 
 ## Log de edições
 
 | Data | O que mudou | Por quê |
 | --- | --- | --- |
-| | | |
+| 2026-09-17 | Adicionadas as frentes de trabalho e preenchida a tabela de papéis | Tornar explícita no cronograma a divisão de trabalho já usada nos labels `papel:` do GitHub |
