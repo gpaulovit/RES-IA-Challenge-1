@@ -138,10 +138,12 @@ espelham os labels `papel:` usados nas issues e PRs do GitHub do
 repositório, para manter cronograma e rastreamento de trabalho
 consistentes:
 
-- **Problema e ecossistema** (`papel: problema-ecossistema`) — investiga
-  por que esse problema (boatos políticos reciclados) é real e importante,
-  e o que já existe por aí tentando resolver algo parecido. É quem
-  consegue explicar, em uma frase, por que vale a pena construir isso.
+- **Engenharia** (`papel: engenharia`) — acompanha a construção do
+  sistema do início ao fim, semana após semana, ajudando a transformar o
+  que cada frente vai decidindo (os dados prontos, o modelo escolhido, as
+  regras de produto) em código que realmente funciona e se conecta — não
+  é uma etapa isolada só do final, e sim um trabalho contínuo junto com as
+  outras frentes.
 - **Domínio de dados** (`papel: dominio-dados`) — cuida da base de boatos
   e checagens usada pelo projeto: organiza, confere se tem informação
   suficiente e de várias épocas/temas, e se dá pra confiar nela antes de
@@ -155,19 +157,16 @@ consistentes:
   que precisa ficar claro, quando ele deve dizer "não tenho certeza" em
   vez de arriscar), escreve os requisitos e ajuda a contar essa história
   na apresentação final.
-- **Engenharia** (`papel: engenharia`) — acompanha a construção do
-  sistema do início ao fim, semana após semana, ajudando a transformar o
-  que cada frente vai decidindo (os dados prontos, o modelo escolhido, as
-  regras de produto) em código que realmente funciona e se conecta — não
-  é uma etapa isolada só do final, e sim um trabalho contínuo junto com as
-  outras frentes.
+- **DevOps e MLOps** (`papel: devops-mlops`) — cuida da infraestrutura de
+  execução, automação de testes, empacotamento, reprodutibilidade do
+  ambiente e suporte ao ciclo de vida de dados e modelos (MLOps).
 
 ## Papéis e responsabilidades
 
 | Nome | Foco principal |
 | --- | --- |
-| | Problema e ecossistema |
+| | Engenharia |
 | Cibelly Lourenco | Domínio de dados |
 | Paulo | Modelos de IA |
 | Ana Júlia| Produto e decisão |
-| Ingrid Soares | Engenharia |
+| Ingrid Soares | DevOps e MLOps |
