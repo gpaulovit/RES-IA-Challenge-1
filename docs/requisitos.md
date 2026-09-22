@@ -2,8 +2,12 @@
 
 Gerados via OpenSpec, na proposta de mudança
 [`add-recycled-claim-semantic-retrieval`](https://github.com/gpaulovit/RES-IA-Challenge-1/tree/main/openspec/changes/add-recycled-claim-semantic-retrieval).
-Ainda não implementados/arquivados — os requisitos formais oficiais só migram
+Os requisitos do produto real abaixo ainda não estão implementados/arquivados — os requisitos formais oficiais só migram
 para `openspec/specs/` quando a implementação for concluída.
+
+Já existe um [protótipo de Engenharia](funcionalidades.md) com três exemplos
+fictícios e comparação por palavras. Ele tem critérios próprios na proposta e
+não conclui os requisitos de busca semântica e confiança descritos nesta página.
 
 Esta página segue o fluxo completo trabalhado durante a concepção do
 produto: **problema → objetivo de produto → objetivos específicos →

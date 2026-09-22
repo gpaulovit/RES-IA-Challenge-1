@@ -1,0 +1,23 @@
+[
+  {
+    "id": "demo-001",
+    "alegacao": "A prefeitura de Vila Exemplo cancelou a eleição municipal.",
+    "checagem": "Exemplo inteiramente fictício: no cenário inventado, o calendário da eleição municipal foi mantido.",
+    "agencia": "Agência Escola — fictícia",
+    "veredito_original": "Falso no cenário fictício"
+  },
+  {
+    "id": "demo-002",
+    "alegacao": "A câmara de Cidade Modelo aprovou transporte gratuito aos domingos.",
+    "checagem": "Exemplo inteiramente fictício: no cenário inventado, a proposta de transporte gratuito ainda não foi votada.",
+    "agencia": "Agência Oficina — fictícia",
+    "veredito_original": "Falso no cenário fictício"
+  },
+  {
+    "id": "demo-003",
+    "alegacao": "O conselho de Bairro Imaginário publicou o orçamento das escolas.",
+    "checagem": "Exemplo inteiramente fictício: no cenário inventado, o documento do orçamento escolar foi publicado.",
+    "agencia": "Agência Laboratório — fictícia",
+    "veredito_original": "Verdadeiro no cenário fictício"
+  }
+]

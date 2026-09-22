@@ -1,5 +1,8 @@
 # Histórias de usuário
 
+O [protótipo de Engenharia](funcionalidades.md) demonstra a integração com dados
+fictícios. Seus testes não concluem as histórias nem os alvos do produto real abaixo.
+
 Cada história segue o padrão **quero** / **para que**: alguém quer fazer X, para conseguir Y.
 
 No SDD deste projeto, “usuário” da história é quem **usa o software**. Isso não é a mesma coisa que o público que **sofre o problema** (por exemplo, pessoas 40+ que recebem e encaminham boato no WhatsApp). Quem cai no boato é o beneficiário; quem cola o texto e lê o resultado é o usuário. Os dois só coincidem se essa pessoa decidir conferir.

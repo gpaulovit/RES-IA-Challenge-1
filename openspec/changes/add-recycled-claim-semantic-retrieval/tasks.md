@@ -1,3 +1,19 @@
+## 0. Protótipo de Engenharia com exemplos fictícios
+
+Esta seção pode preceder o gate. Concluí-la não conclui as seções 1–4.
+
+- [x] 0.1 Alinhar proposta, design e spec para permitir somente a demonstração fictícia antes do gate.
+- [x] 0.2 Criar carregamento validado dos três exemplos, representação substituível e busca TF-IDF ordenada.
+- [x] 0.3 Criar API local com saúde, busca, validação em português e identificação de demonstração.
+- [x] 0.4 Verificar busca, erros, ordenação, limites, substituição de representação e caminho completo pela API.
+- [x] 0.5 Documentar instalação, execução, funcionalidades, organização, testes, ciclo semanal, glossário e apresentação; verificar comandos e links.
+
+Verificação do protótipo em 2026-09-22: instalação em ambiente virtual novo,
+41 testes passando no Python 3.14.6, dependências compatíveis (`pip check`),
+consultas HTTP reais de saúde, resultado conhecido e ausência de resultado,
+e links locais dos guias conferidos. O CLI OpenSpec não está instalado neste
+ambiente; os documentos foram revisados diretamente, sem validação pelo CLI.
+
 ## 1. Validação empírica de reciclagem (gate)
 
 - [ ] 1.1 Consolidar o corpus FactPolCheckBr (texto da alegação + texto de

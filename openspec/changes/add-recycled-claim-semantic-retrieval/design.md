@@ -1,8 +1,8 @@
 ## Context
 
-See proposal.md - Why. Current state: greenfield project — no code, no
-chosen tech stack (`openspec/config.yaml` has no `context` yet), and no
-existing specs. The only concrete asset is the external
+See proposal.md - Why. The project started without application code or
+an established stack. A local engineering demonstration now uses Python,
+FastAPI and TF-IDF with fictional examples. The real-data reference remains the external
 [FactPolCheckBr](https://github.com/Interfaces-UFSCAR/Dataset-FactPolCheckBr)
 corpus: ~1,882 claims across 10 fact-checking agencies, CC BY-NC-SA 4.0
 (non-commercial), verdict labels not normalized across agencies, no
@@ -31,8 +31,40 @@ documented time range.
 
 ## Decisions
 
-- **The recycling-validation gate precedes indexing work.** Before any
-  indexing or retrieval implementation, run an empirical check directly on
+### Protótipo de Engenharia: exceção limitada ao gate
+
+O gate é a decisão de continuar ou rever o projeto com base nos dados reais.
+Antes dessa decisão, é permitido demonstrar as peças conectadas usando apenas
+três checagens fictícias. Essa exceção não conclui os requisitos do produto real.
+
+- Python 3.11+, FastAPI (API HTTP), Uvicorn (servidor), scikit-learn
+  (TF-IDF e cosseno) e pytest (testes). Sem banco, serviços pagos ou modelos baixados.
+- Dados em `data/exemplos.json`; código em `src/checagens/`, separado em dados,
+  representação de textos, busca e API. Dependências em `pyproject.toml`.
+- Cada exemplo tem `id`, `alegacao`, `checagem`, `agencia` e `veredito_original`.
+  Campos são textos não vazios e ids são únicos. Erros nos dados impedem iniciar.
+- Na inicialização, TF-IDF aprende o vocabulário das alegações e prepara seus
+  vetores em memória. A consulta usa o mesmo vocabulário. A comparação por
+  cosseno mede palavras compartilhadas; não prova equivalência de significado.
+- `GET /health` retorna `status: ok` e `modo: demonstracao`.
+- `POST /buscar` recebe `texto` não vazio e `top_k` inteiro de 1 a 10, padrão 3.
+  Retorna `modo`, `metodo`, `status`, `aviso` e `candidatos`. Cada candidato tem
+  os campos do exemplo e `pontuacao`. Resultados com pontuação maior que zero
+  são ordenados por pontuação decrescente e id crescente em caso de empate.
+- Lista vazia tem status `nao_encontrada`; caso contrário,
+  `candidatos_encontrados`. Não se atribuem faixas de confiança nem um veredito
+  à consulta. Entradas inválidas recebem HTTP 422 com explicação em português.
+- A representação de textos é substituível por um componente com `metodo`,
+  `preparar(textos)` e `transformar(textos)`, retornando matrizes numéricas.
+  A troca de técnica não exige mudar a API, mas exige refazer os vetores da base.
+- README e guias explicam execução, funcionalidades, testes (harness), ciclo
+  semanal, glossário e apresentação. Testes fictícios verificam integração;
+  não medem qualidade semântica ou validam os requisitos de confiança abaixo.
+
+### Decisões para o produto com dados reais
+
+- **The recycling-validation gate precedes real-corpus indexing work.** Before
+  indexing or retrieval implementation over real data, run an empirical check directly on
   the corpus: latent thematic clustering (no manual labels) and a temporal
   analysis of whether claims recur, reworded, across different periods.
   *Why*: the whole capability is only justified if this phenomenon is real

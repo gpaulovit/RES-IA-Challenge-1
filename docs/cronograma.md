@@ -13,6 +13,11 @@ problema, o domínio e os modelos. Ao editar:
 
 ## Semana 1 — Estudo de caso, do problema e do domínio
 
+**Trabalho paralelo de Engenharia:** uma demonstração local com três exemplos
+fictícios pode ser executada antes do gate. Ela conecta dados, comparação por
+palavras e API, sem antecipar a busca no corpus real da semana 3. Veja a
+[organização](engenharia.md) e o [roteiro de apresentação](apresentacao.md).
+
 **Objetivo de aprendizado:** entender por que o problema existe e o domínio
 de dados em que a solução vai operar, antes de comprometer com qualquer
 abordagem técnica.
@@ -173,4 +178,5 @@ consistentes:
 
 | Data | O que mudou | Por quê |
 | --- | --- | --- |
+| 2026-09-22 | Registrada a demonstração fictícia de Engenharia antes do gate | Permitir testar a integração sem concluir a validação ou antecipar a busca com dados reais |
 | 2026-09-17 | Adicionadas as frentes de trabalho e preenchida a tabela de papéis | Tornar explícita no cronograma a divisão de trabalho já usada nos labels `papel:` do GitHub |

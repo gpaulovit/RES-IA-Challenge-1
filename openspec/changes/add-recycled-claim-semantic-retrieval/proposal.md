@@ -14,10 +14,14 @@ reincidência de forma robusta e responsável.
 
 ## What Changes
 
+- Protótipo local de Engenharia com três checagens fictícias, API HTTP e
+  comparação lexical TF-IDF. Esta demonstração pode preceder o gate para
+  verificar a integração das peças; não valida a hipótese de reciclagem,
+  não implementa busca semântica robusta nem define faixas de confiança.
 - Nova capacidade de indexação semântica do corpus de alegações verificadas
   (título + texto de verificação), cobrindo as ~1.882 alegações de 10
   agências do FactPolCheckBr.
-- Gate de decisão empírico e prévio a qualquer indexação: clusterização
+- Gate de decisão empírico e prévio à indexação e busca sobre dados reais: clusterização
   temática latente e análise de sazonalidade/ressurgimento temporal do
   corpus, sem depender de rótulo manual, para confirmar que a reciclagem de
   boato é um fenômeno mensurável nos dados disponíveis.
@@ -57,8 +61,8 @@ reincidência de forma robusta e responsável.
   sob licença CC BY-NC-SA 4.0 (uso não comercial) — ~1.882 alegações, 10
   agências, rótulos de veredito heterogêneos entre agências, sem janela
   temporal documentada no README de origem.
-- Nenhum código ou infraestrutura existente é afetado — projeto greenfield;
-  `openspec/config.yaml` ainda não declara stack técnico.
+- Primeira estrutura de código em Python 3.11+, FastAPI, scikit-learn e
+  pytest, com exemplos fictícios e guias simples de execução e apresentação.
 - Escolha de modelo de embeddings, threshold(s) da política de confiança e
   estrutura de indexação ficam para `design.md`, condicionadas ao
   resultado do gate empírico de reciclagem descrito acima.

@@ -7,6 +7,33 @@ instead of returning a single opaque verdict.
 
 ## ADDED Requirements
 
+### Requirement: Isolated fictional engineering demonstration
+The system SHALL allow a local demonstration before the real-corpus validation
+gate using only three explicitly fictional checks and lexical TF-IDF similarity.
+Only this demonstration requirement applies to the prototype; the subsequent
+requirements remain acceptance criteria for the future real-corpus system.
+
+#### Scenario: Local query returns traceable fictional candidates
+- **WHEN** POST /buscar receives nonblank `texto` and optional integer `top_k` from 1 to 10 (default 3)
+- **THEN** the response identifies `modo: demonstracao`, the method and a warning that similarity is not truth, with at most `top_k` candidates containing id, source claim, check text, fictional agency, original verdict and similarity score
+- **AND** only positive scores are returned, sorted descending with id ascending as the tie-breaker
+
+#### Scenario: No shared vocabulary
+- **WHEN** a query shares no recognized terms with the fictional claims
+- **THEN** the response has status `nao_encontrada` and an empty candidate list, without claiming that the input is true, false or novel
+
+#### Scenario: Invalid input or data
+- **WHEN** input text is blank or top_k is not an integer in the permitted range
+- **THEN** the API returns HTTP 422 with a Portuguese explanation
+- **WHEN** the data file is missing, empty, malformed or has duplicate identifiers
+- **THEN** startup fails with an understandable error
+
+#### Scenario: Demonstration is reproducible and replaceable
+- **WHEN** a teammate follows the README
+- **THEN** they can start the API, check GET /health, submit sample queries and run automated tests
+- **AND** the text representation can be replaced without changing the HTTP contract
+- **AND** passing these tests does not complete the real-corpus gate or semantic retrieval requirements
+
 ### Requirement: Corpus indexing for semantic retrieval
 The system SHALL index the corpus of catalogued political claims (claim
 text and its associated fact-check verdict) into a form that supports
