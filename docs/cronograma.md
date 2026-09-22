@@ -8,8 +8,6 @@ problema, o domínio e os modelos. Ao editar:
 
 - Mantenha a estrutura de semanas (objetivo → base → atividades →
   entregável) mesmo se o conteúdo mudar.
-- Registre toda mudança relevante na tabela [Log de edições](#log-de-edições)
-  no final deste arquivo.
 
 ## Semana 1 — Estudo de caso, do problema e do domínio
 
@@ -157,7 +155,7 @@ consistentes:
   que precisa ficar claro, quando ele deve dizer "não tenho certeza" em
   vez de arriscar), escreve os requisitos e ajuda a contar essa história
   na apresentação final.
-- **Engenharia / DevOps e MLOps** (`papel: engenharia`) — acompanha a construção do
+- **Engenharia** (`papel: engenharia`) — acompanha a construção do
   sistema do início ao fim, semana após semana, ajudando a transformar o
   que cada frente vai decidindo (os dados prontos, o modelo escolhido, as
   regras de produto) em código que realmente funciona e se conecta — não
@@ -172,12 +170,4 @@ consistentes:
 | Cibelly Lourenco | Domínio de dados |
 | Paulo | Modelos de IA |
 | Ana Júlia| Produto e decisão |
-| Ingrid Soares | DevOps e MLOps |
-
-## Log de edições
-
-| Data | O que mudou | Por quê |
-| --- | --- | --- |
-| 2026-09-22 | Atualizada atribuição de Ingrid Soares para DevOps e MLOps | Mudança de foco da integrante para a frente de engenharia, infraestrutura e MLOps |
-| 2026-09-22 | Registrada a demonstração fictícia de Engenharia antes do gate | Permitir testar a integração sem concluir a validação ou antecipar a busca com dados reais |
-| 2026-09-17 | Adicionadas as frentes de trabalho e preenchida a tabela de papéis | Tornar explícita no cronograma a divisão de trabalho já usada nos labels `papel:` do GitHub |
+| Ingrid Soares | Engenharia |
