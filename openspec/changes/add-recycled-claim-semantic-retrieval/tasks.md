@@ -16,6 +16,15 @@ ambiente; os documentos foram revisados diretamente, sem validação pelo CLI.
 
 ## 1. Validação empírica de reciclagem (gate)
 
+Avanço parcial de 1.1 em 22/09/2026: inspeção da versão
+`e4b4feafce9b83789a517f649abb39ad4645f1b3` da fonte concluída, com
+1.882 registros. Data e agência não têm vazios; há 8 datas fora do formato
+informado e 738 ambíguas entre dia/mês e mês/dia, 50 vereditos e 4 textos
+vazios, 1 link vazio, 11 nomes de agência e 5 ocorrências integralmente
+duplicadas além das primeiras. Original preservado, sem correções ou exclusões.
+Diagnóstico e reprodução em `docs/semana-1-engenharia.md`. Tarefa 1.1 permanece
+aberta: organização e decisões sobre as lacunas serão tratadas na próxima etapa.
+
 - [ ] 1.1 Consolidar o corpus FactPolCheckBr (texto da alegação + texto de
       verificação + veredito + data + agência) em um formato pronto para
       análise; verificar carregando o dataset e confirmando que a

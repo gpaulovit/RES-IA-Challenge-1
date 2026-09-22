@@ -4,6 +4,7 @@ Recuperação semântica de checagens de boatos políticos reciclados.
 
 ## Conteúdo
 
+- [Semana 1 — Engenharia passo a passo](semana-1-engenharia.md) — diagnóstico da base real e aprendizado por etapas.
 - [Organização da Engenharia](engenharia.md) — como as peças se conectam e como acompanhar as entregas.
 - [Funcionalidades](funcionalidades.md) — o que o protótipo faz e o que ainda está planejado.
 - [Testes e exemplos](testes.md) — como conferir o funcionamento (harness).

@@ -63,6 +63,31 @@ três checagens fictícias. Essa exceção não conclui os requisitos do produto
 
 ### Decisões para o produto com dados reais
 
+#### Preparação do corpus — Etapa 2 da Semana 1
+
+Consolidar a versão já inspecionada em um JSON local para análise, separado da
+API demonstrativa. Não indexar nem emitir decisão go/no-go nesta entrega.
+O comando `python -m checagens.organizacao` deve verificar o SHA-256 do CSV e
+os metadados de origem antes de gerar a base e o relatório de organização.
+
+- Um registro de saída para cada registro do CSV, na ordem original, com id
+  formado pela versão da fonte e pelo número do registro. Não deduplicar.
+- Preservar os sete campos originais integralmente em `original`. Nos campos
+  organizados, retirar apenas espaços externos e representar vazios com `null`.
+- Manter `titulo_checagem`, sem inventar a alegação original; preservar rótulos
+  de veredito e nomes de agência, sem normalização de significado.
+- Datas com interpretação única sob mês/dia/ano recebem `AAAA-MM-DD`.
+  Datas ambíguas, impossíveis, ausentes ou válidas somente em dia/mês/ano
+  ficam com valor padronizado `null`, status explícito e possibilidades de
+  interpretação. Mesmo dia e mês não é ambiguidade. Não tratar essas regras
+  sintáticas como verificação da data na página de origem.
+- Sinalizar campos essenciais ausentes, datas pendentes e grupos de registros
+  integralmente repetidos. Não completar lacunas nem excluir grupos.
+- Guardar origem, licença e versão das regras no JSON; gerar relatório de
+  contagens. Reexecutar com a mesma fonte e regras produz arquivos idênticos.
+- Os dados gerados ficam fora do Git. Código e documentação ficam versionados.
+  A tarefa 1.1 permanece aberta enquanto persistirem lacunas que afetam análise.
+
 - **The recycling-validation gate precedes real-corpus indexing work.** Before
   indexing or retrieval implementation over real data, run an empirical check directly on
   the corpus: latent thematic clustering (no manual labels) and a temporal

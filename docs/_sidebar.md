@@ -5,6 +5,7 @@
 - [Histórias de usuário](historias.md)
 - [Referências](refs.md)
 - Engenharia
+  - [Semana 1 — passo a passo](semana-1-engenharia.md)
   - [Organização](engenharia.md)
   - [Funcionalidades](funcionalidades.md)
   - [Testes e exemplos](testes.md)

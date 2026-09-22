@@ -47,3 +47,7 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .coverage
+
+# Base externa original e resultados reproduzíveis da inspeção
+data/originais/
+data/relatorios/
