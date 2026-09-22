@@ -63,14 +63,41 @@ Aqui a expansão principal é sobre o que fazer nas zonas cinzentas, que é onde
 ### Expansão
 
 - Em vez de um único threshold binário, faz sentido um sistema de faixas de confiança (match confirmado / match provável, sugerir conferência humana / sem match, alegação inédita)?
+   - Sim, faz sentido. Adotaremos uma política de faixas em vez de decisão binária:
+     - **Alta similaridade (ex.: ≥ 80%):** *Match verificado.* Exibe o veredito oficial com link da agência.
+     - **Média similaridade (ex.: 60% a 79%):** *Match provável.* Apresenta o resultado como "Alegação similar encontrada no acervo" e solicita conferência do usuário.
+     - **Baixa similaridade (ex.: < 60%):** *Não catalogado / Alegação inédita.* Resposta transparente indicando que não há checagem histórica correspondente no banco.
+
 - Como o sistema deve tratar uma alegação que é parcialmente verdadeira misturada com uma parte falsa já checada — retornar o veredito da parte catalogada arrisca "endossar" a parte não checada?
+  - Não retornaremos o veredito de forma genérica para o texto inteiro. Quando houver correspondência apenas com um trecho específico, o sistema exibirá um aviso de limitação de escopo.
+  - A resposta mostrará explicitamente qual trecho foi encontrado no acervo e informará ao usuário que o veredito se aplica exclusivamente a essa alegação catalogada, sem validar ou desmentir o restante do texto não checado.
+ 
 - É viável apresentar ao usuário o top-k de candidatos mais próximos com explicação do porquê do match, em vez de uma resposta única e opaca, para mitigar erro de confiança excessiva?
+    - Sim, é totalmente viável e será adotado. Em vez de uma resposta única e categórica, o produto exibirá o Top-K (limitado aos 2 ou 3 candidatos mais semelhantes).
+    - Para cada candidato retornado, o sistema apresentará:
+      - A porcentagem/grau de similaridade semântica.
+      - O texto original da alegação catalogada.
+      - O veredito e o link direto para a checagem oficial da agência.
+    - Isso evita o efeito de "caixa-preta", dando transparência sobre o porquê daquele resultado ter sido encontrado e permitindo que o próprio usuário compare as informações.
+
 - Como o produto deve se posicionar quando o veredito de duas agências de checagem diverge para alegações semanticamente equivalentes?
+    - O produto manterá uma postura de neutralidade e transparência. Caso duas ou mais agências apresentem vereditos divergentes (ex.: uma carimbou como "Falso" e outra como "Distorcido" ou "Sem Provas") para a mesma alegação:
+      - O sistema não tentará decidir qual veredito é o "correto".
+      - A interface exibirá os vereditos de ambas as agências lado a lado no Top-K.
+      - O produto incluirá um alerta explícito indicando a existência de divergência no ecossistema de checagem, disponibilizando os links das duas fontes para que o usuário leia os fundamentos de cada uma.
+
 - Existe um teste possível, ainda nesta fase, para simular "falsos positivos" com alegações reais e legítimas fora da base, medindo taxa de erro antes de ir a campo?
+    - Sim, é viável e necessário ainda nesta fase de concepção.A metodologia consiste em:
+      - Criar um conjunto de controle de validação com 20 a 30 declarações legítimas e notícias reais recentes (que não constam no acervo do FactPolCheckBr).
+      - Rodar a busca semântica dessas alegações verdadeiras contra o banco de boatos e medir a taxa de colisão (porcentagem de notícias verdadeiras classificadas erroneamente com alta similaridade).
+      - Usar esses dados empíricos para calibrar os limiares de corte (thresholds) e definir a zona de baixa similaridade/fallback antes de ir para a fase de desenvolvimento da interface.
 
 ### Pergunta norteadora (Eixo 3)
 
 É possível, com os dados e modelos disponíveis nesta fase de concepção, definir uma política de decisão (threshold(s) + tratamento de fallback) que separe de forma confiável alegações já checadas de alegações inéditas ou ambíguas, dentro de margens de erro toleráveis para uso público?
+
+- **Sim, é totalmente possível.** A combinação da política de decisão em 3 faixas de confiança com a exposição transparente do Top-K e avisos explícitos para casos ambíguos/mistos permite separar com segurança o conteúdo catalogado do inédito.
+- A validação prática dessa política será respaldada pelo teste de falsos positivos com dados de controle ainda na fase de concepção, garantindo margens de erro toleráveis antes da implementação final do produto.
 
 ## Eixo 4 — Impacto Social e Cidadania
 
