@@ -1,0 +1,468 @@
+[
+  {
+    "id_teste": 1,
+    "tipo": "controle_falso_positivo",
+    "fonte": "g1",
+    "texto_testado": "VÍDEO: pode beber no dia da eleição? Não há uma proibição nacional para venda ou consumo de bebidas alcoólicas no dia da eleição",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 2,
+    "tipo": "controle_falso_positivo",
+    "fonte": "g1",
+    "texto_testado": "Datafolha divulga nova pesquisa eleitoral para presidente nesta quinta (24)",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 3,
+    "tipo": "controle_falso_positivo",
+    "fonte": "g1",
+    "texto_testado": "Violência é o maior problema do RJ para 62%, aponta Quaest",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 4,
+    "tipo": "controle_falso_positivo",
+    "fonte": "g1",
+    "texto_testado": "Quaest no DF: 46% temem novo mandato de Lula, e 39%, volta da família Bolsonaro ao poder",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 5,
+    "tipo": "controle_falso_positivo",
+    "fonte": "g1",
+    "texto_testado": "Lula diz que vai acabar com bets e que clubes precisam aprender a viver sem",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 6,
+    "tipo": "controle_falso_positivo",
+    "fonte": "g1",
+    "texto_testado": "Lula compara discurso na ONU ao de Trump e diz que presidente dos EUA fala como se estivesse ameaçando todo mundo",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 7,
+    "tipo": "controle_falso_positivo",
+    "fonte": "g1",
+    "texto_testado": "PT pede ao STF abertura de inquérito por suposta interferência estrangeira na eleição",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 8,
+    "tipo": "controle_falso_positivo",
+    "fonte": "g1",
+    "texto_testado": "Flávio Bolsonaro defende novo programa contra dívidas dos brasileiros e critica ausência do Brasil no Escudo das Américas",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 9,
+    "tipo": "controle_falso_positivo",
+    "fonte": "cnn",
+    "texto_testado": "Flávio usou jatinho de Vorcaro em viagem dos EUA ao Brasil, diz revista",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 10,
+    "tipo": "controle_falso_positivo",
+    "fonte": "cnn",
+    "texto_testado": "Possível reforma do Judiciário deve incluir precatórios, diz especialista",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 11,
+    "tipo": "controle_falso_positivo",
+    "fonte": "cnn",
+    "texto_testado": "Análise: Postagem de Messias sobre precatórios é instrumentalizada",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 12,
+    "tipo": "controle_falso_positivo",
+    "fonte": "cnn",
+    "texto_testado": "Queremos eleições livres no Brasil, diz porta-voz dos EUA à CNN Brasil",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 13,
+    "tipo": "controle_falso_positivo",
+    "fonte": "cnn",
+    "texto_testado": "Governo busca respaldo jurídico por MP com veto a bets e cassinos on-line",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 14,
+    "tipo": "controle_falso_positivo",
+    "fonte": "cnn",
+    "texto_testado": "Governo vê acordo do Escudo das Américas como porta para militarização",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 15,
+    "tipo": "controle_falso_positivo",
+    "fonte": "cnn",
+    "texto_testado": "Flávio pede ao STF investigação contra Lula por suposto presente de Vorcaro",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 16,
+    "tipo": "controle_falso_positivo",
+    "fonte": "cnn",
+    "texto_testado": "PF desmarca novo depoimento de Vorcaro",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 17,
+    "tipo": "controle_falso_positivo",
+    "fonte": "uol",
+    "texto_testado": "Empresário delator que financiou Dark Horse movimentou R$ 1,2 mi em espécie",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 18,
+    "tipo": "controle_falso_positivo",
+    "fonte": "uol",
+    "texto_testado": "Do INSS ao Master, Flávio voou no jato de Vorcaro com escândalos na mala",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 19,
+    "tipo": "controle_falso_positivo",
+    "fonte": "uol",
+    "texto_testado": "Caiado pede para Flávio explicar o inexplicável em relação com Vorcaro",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 20,
+    "tipo": "controle_falso_positivo",
+    "fonte": "uol",
+    "texto_testado": "RealTime Big Data: Flávio Bolsonaro tem 45%, contra 44% de Lula no 2º turno",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 21,
+    "tipo": "controle_falso_positivo",
+    "fonte": "uol",
+    "texto_testado": "Flávio promete incluir Brasil no Escudo das Américas",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 22,
+    "tipo": "controle_falso_positivo",
+    "fonte": "uol",
+    "texto_testado": "Lula, Tarcísio e Haddad lideram gastos com impulsionamento; veja ranking",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 23,
+    "tipo": "controle_falso_positivo",
+    "fonte": "uol",
+    "texto_testado": "Do jatinho aos R$ 130 milhões, Flávio e Moraes são irmãos em Vorcaro",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 24,
+    "tipo": "controle_falso_positivo",
+    "fonte": "uol",
+    "texto_testado": "Em evento com artistas, Lula promete acabar com as bets no país",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 25,
+    "tipo": "controle_falso_positivo",
+    "fonte": "folha",
+    "texto_testado": "Flávio Bolsonaro viajou dos EUA ao Brasil em 2025 em jato de Vorcaro, diz revista",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 26,
+    "tipo": "controle_falso_positivo",
+    "fonte": "folha",
+    "texto_testado": "Zanin nega pedido para determinar instalação de CPI do Banco Master",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 27,
+    "tipo": "controle_falso_positivo",
+    "fonte": "folha",
+    "texto_testado": "Ato de Lula com artistas no RJ tem apelos contra bets, ataque a Trump e vaia a aliado",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 28,
+    "tipo": "controle_falso_positivo",
+    "fonte": "folha",
+    "texto_testado": "Avanço de Flávio Bolsonaro faz Lula reavaliar estratégia, e presidente deve ir a debate da Globo",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 29,
+    "tipo": "controle_falso_positivo",
+    "fonte": "folha",
+    "texto_testado": "Série mostra danos ao ambiente sob impulso de emendas parlamentares",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 30,
+    "tipo": "controle_falso_positivo",
+    "fonte": "folha",
+    "texto_testado": "TSE manda Instagram retirar vídeo que associa Flávio Bolsonaro ao Master",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 31,
+    "tipo": "controle_falso_positivo",
+    "fonte": "folha",
+    "texto_testado": "Visita de Lula a Pernambuco coloca em dúvida apoio de Lyra a ele em eventual segundo turno",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 32,
+    "tipo": "controle_falso_positivo",
+    "fonte": "folha",
+    "texto_testado": "PF confirma apreensão de valores não declarados em operação recente",
+    "alegacao_ref_original": null,
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 33,
+    "tipo": "giria",
+    "texto_testado": "vcs viram no zap q os banqueiros fecharao apoio c o lula pra tirar o pix??",
+    "alegacao_ref_original": "Banqueiros definem apoio a Lula em troca da revogação do Pix #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 34,
+    "tipo": "giria",
+    "texto_testado": "genteee o pessoal do ibge ta passando c celular pra roubar a biometria d qm vota no bolsonaro slk",
+    "alegacao_ref_original": "IBGE tem celular com urna eletrônica para roubar biometria de eleitores de Bolsonaro #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 35,
+    "tipo": "giria",
+    "texto_testado": "povo do zap ta falando q a vera magalhaes ganha 500k por mes na tv cultura, e mole??",
+    "alegacao_ref_original": "Salário de Vera Magalhães na TV Cultura é de R$ 500 mil #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 36,
+    "tipo": "giria",
+    "texto_testado": "lojas renner fechou c o pt pra apoiar o lula nas eleicao, ces tao sabendo??",
+    "alegacao_ref_original": "Renner declara apoio a Lula e fecha parceria com o PT #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 37,
+    "tipo": "giria",
+    "texto_testado": "anitta pulou do barco e cancelou o apoio ao lula no zap kkkkk",
+    "alegacao_ref_original": "Anitta retira apoio à candidatura de Lula e pula do barco #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 38,
+    "tipo": "giria",
+    "texto_testado": "lula falou em discurso q o agronegocio tem q sumir da terra, vcs viram??",
+    "alegacao_ref_original": "Lula diz que agronegócio deve ser eliminado da Terra #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 39,
+    "tipo": "apelido",
+    "texto_testado": "Xandão recebeu 60 milhas do Molusco para fraudar o sistema das urnas",
+    "alegacao_ref_original": "Alexandre de Moraes recebeu R$ 60 milhões de Lula para fraudar urnas nas eleições #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 40,
+    "tipo": "apelido",
+    "texto_testado": "A cantora pop cancelou o apoio ao Luladrão e pulou do barco",
+    "alegacao_ref_original": "Anitta retira apoio à candidatura de Lula e pula do barco #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 41,
+    "tipo": "apelido",
+    "texto_testado": "Trio do STF quer impugnar o Mito após pesquisa secreta do PT",
+    "alegacao_ref_original": "Trio do STF quer impugnar Bolsonaro após pesquisa do PT mostrar 62% de intenção de votos do presidente #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 42,
+    "tipo": "apelido",
+    "texto_testado": "Museu Imperial apagou o nome do Bolso para prejudicar a campanha",
+    "alegacao_ref_original": "Museu Imperial oculta o nome do governo em guia de visitação para prejudicar Bolsonaro #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 43,
+    "tipo": "apelido",
+    "texto_testado": "Xandão e a CIA americana se uniram para alterar os votos nas urnas",
+    "alegacao_ref_original": "Alexandre de Moraes recebeu R$ 60 milhões de Lula para fraudar urnas nas eleições #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 44,
+    "tipo": "apelido",
+    "texto_testado": "Molusco discursou afirmando que o agronegócio tem que acabar",
+    "alegacao_ref_original": "Lula diz que agronegócio deve ser eliminado da Terra #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 45,
+    "tipo": "erro_ortografico",
+    "texto_testado": "Tarcisio de Freita forjo atentado em Paraisopolis pra encriminar o PT",
+    "alegacao_ref_original": "Tarcísio de Freitas forjou atentado em Paraisópolis para incriminar PT e Haddad #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 46,
+    "tipo": "erro_ortografico",
+    "texto_testado": "Salario da Vera Magalhaes na TV Cultra eh de 500 mil reias mensai",
+    "alegacao_ref_original": "Salário de Vera Magalhães na TV Cultura é de R$ 500 mil #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 47,
+    "tipo": "erro_ortografico",
+    "texto_testado": "Rener declara apoiol a Lula e fes parceria com PT",
+    "alegacao_ref_original": "Renner declara apoio a Lula e fecha parceria com o PT #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 48,
+    "tipo": "erro_ortografico",
+    "texto_testado": "Banqueiro definem apoiu a Lula em troka da revogacao do Pix",
+    "alegacao_ref_original": "Banqueiros definem apoio a Lula em troca da revogação do Pix #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 49,
+    "tipo": "erro_ortografico",
+    "texto_testado": "IBGE tem selular com urna eletroica pra rouba biometria",
+    "alegacao_ref_original": "IBGE tem celular com urna eletrônica para roubar biometria de eleitores de Bolsonaro #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 50,
+    "tipo": "erro_ortografico",
+    "texto_testado": "Lula dis que agronegocio deue ser eliminada da Tera",
+    "alegacao_ref_original": "Lula diz que agronegócio deve ser eliminado da Terra #boato",
+    "resultado_esperado": "match_confirmado"
+  },
+  {
+    "id_teste": 51,
+    "tipo": "negacao",
+    "texto_testado": "Lula NÃO prometeu acabar com o Pix em reunião com banqueiros.",
+    "alegacao_ref_original": "Banqueiros definem apoio a Lula em troca da revogação do Pix #boato",
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 52,
+    "tipo": "negacao",
+    "texto_testado": "A rede de lojas Renner NÃO declarou apoio oficial ao PT nem fechou parceria.",
+    "alegacao_ref_original": "Renner declara apoio a Lula e fecha parceria com o PT #boato",
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 53,
+    "tipo": "negacao",
+    "texto_testado": "Anitta NÃO retirou o apoio à candidatura nem mudou de lado.",
+    "alegacao_ref_original": "Anitta retira apoio à candidatura de Lula e pula do barco #boato",
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 54,
+    "tipo": "negacao",
+    "texto_testado": "A TV Cultura confirmou que o salário de Vera Magalhães NÃO é de R$ 500 mil.",
+    "alegacao_ref_original": "Salário de Vera Magalhães na TV Cultura é de R$ 500 mil #boato",
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 55,
+    "tipo": "negacao",
+    "texto_testado": "Lula NÃO declarou em entrevista que o agronegócio deve ser eliminado.",
+    "alegacao_ref_original": "Lula diz que agronegócio deve ser eliminado da Terra #boato",
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 56,
+    "tipo": "negacao",
+    "texto_testado": "O Museu Imperial NÃO ocultou o nome do governo federal nos guias.",
+    "alegacao_ref_original": "Museu Imperial oculta o nome do governo em guia de visitação para prejudicar Bolsonaro #boato",
+    "resultado_esperado": "sem_match"
+  },
+  {
+    "id_teste": 57,
+    "tipo": "recorrencia_temporal",
+    "texto_testado": "Trio do STF quer impugnar candidatura para a eleição de 2026 após pesquisa do PT",
+    "alegacao_ref_original": "Trio do STF quer impugnar Bolsonaro após pesquisa do PT mostrar 62% de intenção de votos do presidente #boato",
+    "resultado_esperado": "match_provavel"
+  },
+  {
+    "id_teste": 58,
+    "tipo": "recorrencia_temporal",
+    "texto_testado": "Pesquisa indica que salário da jornalista na TV Cultura continua sendo R$ 500 mil nestas eleições",
+    "alegacao_ref_original": "Salário de Vera Magalhães na TV Cultura é de R$ 500 mil #boato",
+    "resultado_esperado": "match_provavel"
+  },
+  {
+    "id_teste": 59,
+    "tipo": "recorrencia_temporal",
+    "texto_testado": "Banqueiros voltam a cobrar revogação do Pix para apoiar candidatura em 2026",
+    "alegacao_ref_original": "Banqueiros definem apoio a Lula em troca da revogação do Pix #boato",
+    "resultado_esperado": "match_provavel"
+  },
+  {
+    "id_teste": 60,
+    "tipo": "recorrencia_temporal",
+    "texto_testado": "Agentes do IBGE são acusados de usar celular-urna nas eleições deste ano",
+    "alegacao_ref_original": "IBGE tem celular com urna eletrônica para roubar biometria de eleitores de Bolsonaro #boato",
+    "resultado_esperado": "match_provavel"
+  },
+  {
+    "id_teste": 61,
+    "tipo": "recorrencia_temporal",
+    "texto_testado": "Lojas Renner renovam parceria e apoio político para a campanha de 2026",
+    "alegacao_ref_original": "Renner declara apoio a Lula e fecha parceria com o PT #boato",
+    "resultado_esperado": "match_provavel"
+  },
+  {
+    "id_teste": 62,
+    "tipo": "recorrencia_temporal",
+    "texto_testado": "Caso do atentado de Paraisópolis volta a ser usado em embates eleitorais de 2026",
+    "alegacao_ref_original": "Tarcísio de Freitas forjou atentado em Paraisópolis para incriminar PT e Haddad #boato",
+    "resultado_esperado": "match_provavel"
+  }
+]
