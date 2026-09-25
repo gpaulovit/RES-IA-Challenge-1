@@ -69,6 +69,11 @@ fictícia e baseline técnico reproduzível validados. A comparação semântica
 seleção previstas em 3.2 continuam pendentes da issue #8. Nenhum modelo foi
 selecionado e a indexação real da tarefa 3.3 não foi iniciada.
 
+Busca k-NN exata implementada de forma isolada em 24/09/2026, com validação de
+hashes, alinhamento de metadados e amostra fictícia reproduzível. A tarefa 3.3
+permanece aberta: falta decisão `go`, modelo selecionado, QA de Dados e cenários
+executáveis de Produto para validar o corpus real e a reescrita histórica.
+
 - [ ] 3.1 Montar um conjunto de teste rotulado de pares de alegação
       parafraseada/adversarial (gíria, apelido, erro ortográfico,
       inversão de negação, e recorrência reescrita ao longo do tempo)

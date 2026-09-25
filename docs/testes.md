@@ -25,6 +25,10 @@ Os testes do pipeline de embeddings conferem a ligação entre vetor e metadados
 rejeitam saídas inválidas de modelos, verificam os hashes dos artefatos e usam
 um modelo falso pequeno para não depender de downloads durante a suíte.
 
+Os testes do retrieval conferem a busca exata, o primeiro resultado de uma
+consulta idêntica, desempate por id, modelo compatível e rejeição de arquivos
+alterados. Esses testes técnicos não medem a acurácia de um modelo semântico.
+
 ## O que é conferido
 
 | Verificação | Resultado esperado |

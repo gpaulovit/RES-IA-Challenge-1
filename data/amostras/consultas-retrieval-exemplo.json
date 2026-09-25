@@ -1,0 +1,20 @@
+[
+  {
+    "nome": "texto idêntico",
+    "texto": "Vídeo antigo não mostra o evento desta semana",
+    "resultado_esperado_amostra": "exemplo:0002",
+    "uso": "confere se o registro indexado pode ser recuperado"
+  },
+  {
+    "nome": "palavras relacionadas",
+    "texto": "evento desta semana usa vídeo antigo",
+    "resultado_esperado_amostra": "exemplo:0002",
+    "uso": "confere somente o baseline lexical; não prova equivalência semântica"
+  },
+  {
+    "nome": "sem relação clara",
+    "texto": "telescópio submarino",
+    "resultado_esperado_amostra": null,
+    "uso": "a política de sem match depende dos thresholds da Semana 4"
+  }
+]
