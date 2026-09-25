@@ -6,6 +6,7 @@ Recuperação semântica de checagens de boatos políticos reciclados.
 
 - [Guia da arquiteta de software](guia-arquiteta.md) — retomada do projeto, fluxo, dependências e roteiro das semanas 1 a 3.
 - [Semana 1 — Engenharia passo a passo](semana-1-engenharia.md) — diagnóstico da base real e aprendizado por etapas.
+- [Semana 2 — pipeline de embeddings](semana-2-engenharia.md) — geração de vetores, metadados, amostra e recuperação.
 - [Organização da Engenharia](engenharia.md) — como as peças se conectam e como acompanhar as entregas.
 - [Funcionalidades](funcionalidades.md) — o que o protótipo faz e o que ainda está planejado.
 - [Testes e exemplos](testes.md) — como conferir o funcionamento (harness).

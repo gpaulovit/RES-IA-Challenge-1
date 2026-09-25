@@ -21,6 +21,10 @@ Os testes de organização também conferem a preservação dos sete campos
 originais, datas e lacunas explícitas, duplicações, integridade da fonte e
 repetibilidade dos arquivos gerados.
 
+Os testes do pipeline de embeddings conferem a ligação entre vetor e metadados,
+rejeitam saídas inválidas de modelos, verificam os hashes dos artefatos e usam
+um modelo falso pequeno para não depender de downloads durante a suíte.
+
 ## O que é conferido
 
 | Verificação | Resultado esperado |

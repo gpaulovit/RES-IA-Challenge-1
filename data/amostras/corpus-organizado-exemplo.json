@@ -1,0 +1,35 @@
+{
+  "metadados": {
+    "versao_fonte": "exemplo-ficticio",
+    "sha256_fonte": "nao-aplicavel"
+  },
+  "registros": [
+    {
+      "id": "exemplo:0001",
+      "organizado": {
+        "titulo_checagem": "É falso que a praça será fechada aos domingos",
+        "veredito_original": "Falso",
+        "agencia": "Agência fictícia",
+        "data": {"original": "10/30/2022", "padronizada": "2022-10-30", "status": "padronizada"}
+      }
+    },
+    {
+      "id": "exemplo:0002",
+      "organizado": {
+        "titulo_checagem": "Vídeo antigo não mostra o evento desta semana",
+        "veredito_original": "Enganoso",
+        "agencia": "Agência fictícia",
+        "data": {"original": "02/03/2022", "padronizada": null, "status": "ambigua"}
+      }
+    },
+    {
+      "id": "exemplo:0003",
+      "organizado": {
+        "titulo_checagem": "A imagem compartilhada foi alterada digitalmente",
+        "veredito_original": "Falso",
+        "agencia": "Agência fictícia",
+        "data": {"original": "11/15/2022", "padronizada": "2022-11-15", "status": "padronizada"}
+      }
+    }
+  ]
+}

@@ -7,6 +7,7 @@
 - Engenharia
   - [Guia da arquiteta](guia-arquiteta.md)
   - [Semana 1 — passo a passo](semana-1-engenharia.md)
+  - [Semana 2 — pipeline de embeddings](semana-2-engenharia.md)
   - [Organização](engenharia.md)
   - [Funcionalidades](funcionalidades.md)
   - [Testes e exemplos](testes.md)

@@ -63,6 +63,12 @@ vereditos ausentes; detalhes em `docs/semana-1-engenharia.md`.
 
 ## 3. Retrieval semântico robusto
 
+Infraestrutura parcial de Engenharia registrada em 24/09/2026: pipeline
+substituível gera vetores, metadados alinhados e manifesto com hashes; amostra
+fictícia e baseline técnico reproduzível validados. A comparação semântica e a
+seleção previstas em 3.2 continuam pendentes da issue #8. Nenhum modelo foi
+selecionado e a indexação real da tarefa 3.3 não foi iniciada.
+
 - [ ] 3.1 Montar um conjunto de teste rotulado de pares de alegação
       parafraseada/adversarial (gíria, apelido, erro ortográfico,
       inversão de negação, e recorrência reescrita ao longo do tempo)
