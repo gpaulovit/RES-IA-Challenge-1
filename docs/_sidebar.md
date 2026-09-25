@@ -14,3 +14,8 @@
   - [Testes e exemplos](testes.md)
   - [Apresentação](apresentacao.md)
   - [Glossário](glossario.md)
+  - [Pipeline e contratos](05-pipeline-e-contratos.md)
+  - [MLOps aplicado](08-mlops-aplicado-ao-res-ia.md)
+  - [Modelos visuais](09-modelos-visuais-de-arquitetura.md)
+  - [Decisões de arquitetura](decisoes/README.md)
+  - [Sugestões de issues](06-sugestoes-de-issues.md)
