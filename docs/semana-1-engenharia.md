@@ -14,8 +14,8 @@ vírgulas e várias linhas; contar as linhas do arquivo não basta para contar r
 | Etapa | Entrega | Situação |
 | --- | --- | --- |
 | 1. Conhecer | Original preservado, origem registrada e diagnóstico | Concluída |
-| 2. Organizar | Conversão repetível, mantendo valores originais e problemas visíveis | Aguardando continuidade |
-| 3. Conferir | Testes da conversão e instruções para outro computador | Aguardando etapa 2 |
+| 2. Organizar | Conversão repetível, mantendo valores originais e problemas visíveis | Implementada; aguarda validação de Dados |
+| 3. Conferir | Testes da conversão e instruções para outro computador | Implementada com dados fictícios; execução real descrita abaixo |
 | 4. Alinhar | Pendências com Produto e síntese da semana | Aguardando etapas anteriores |
 
 ## 2. De onde vieram os dados
@@ -186,6 +186,41 @@ Para estudar, sem precisar terminar um curso inteiro:
 - [Fluxo de trabalho com dados — Do zero à prática, Escola de Dados](https://escoladedados.org/wp-content/uploads/2021/03/livrov2.pdf): partes de obtenção e limpeza. Objetivo: relacionar fonte, inspeção e preparação.
 
 ## 8. Diário e próximo passo
+
+### Organizar o corpus
+
+Depois de executar a inspeção, organize a mesma cópia validada:
+
+```sh
+python -m checagens.organizacao
+```
+
+O comando confere novamente o SHA-256 e o manifesto de origem antes de gerar:
+
+| Local | Conteúdo |
+| --- | --- |
+| `data/processados/factpolcheckbr/corpus.json` | Os 1.882 registros na ordem original, com bloco original e bloco organizado. |
+| `data/relatorios/organizacao-factpolcheckbr.json` | Contagens, datas pendentes, campos ausentes e duplicações exatas. |
+
+Esses arquivos são locais e ficam fora do Git. A conversão remove espaços
+externos somente no bloco organizado e representa valores vazios com `null`.
+Ela não remove duplicações, normaliza vereditos nem transforma o título em
+alegação. Datas ambíguas ou fora do formato declarado continuam sem data
+padronizada e recebem um status explícito.
+
+O código da organização não exige bibliotecas de modelos. As dependências de
+embeddings serão definidas na Semana 2, depois que Modelos de IA informar os
+candidatos usados no gate.
+
+**Verificação em 24/09/2026:** a organização preservou os 1.882 registros e
+produziu arquivos idênticos em execuções repetidas. O relatório registrou 1.136
+datas padronizadas, 738 ambíguas e 8 válidas apenas como dia/mês/ano; 50
+vereditos, 4 textos e 1 link ausentes; e 5 grupos integralmente duplicados,
+mantidos no corpus. Ao todo, 791 registros têm ao menos uma pendência.
+
+O status permanece `pendente_validacao_dados`: a frente de Dados precisa
+confirmar como representar a alegação, as datas pendentes e os vereditos
+ausentes. Essa validação é necessária antes de declarar a tarefa 1.1 concluída.
 
 **22/09/2026 — Etapa 1:** cópia original preservada, proveniência registrada,
 inspeção reproduzível implementada e diagnóstico documentado. Testes específicos

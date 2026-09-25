@@ -90,6 +90,7 @@ para entender o que foi conferido e o que ainda depende de dados reais.
 ## Entender e apresentar
 
 - [Semana 1 — passo a passo](docs/semana-1-engenharia.md): inspeção da base real, descobertas e exercício para aprender.
+- [Guia da arquiteta](docs/guia-arquiteta.md): papel, dependências, pipeline e roteiro das semanas 1 a 3.
 - [Organização da Engenharia](docs/engenharia.md): peças, ferramentas e ciclo semanal.
 - [Funcionalidades](docs/funcionalidades.md): o que está pronto e o que falta.
 - [Testes e exemplos (harness)](docs/testes.md): como conferir o funcionamento.

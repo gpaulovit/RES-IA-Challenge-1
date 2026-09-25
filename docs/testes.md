@@ -17,6 +17,10 @@ python -m pytest -q
 No Windows, ative com `.venv\Scripts\Activate.ps1`. Não é preciso ligar Uvicorn:
 os testes usam uma versão da API dentro do próprio processo de teste.
 
+Os testes de organização também conferem a preservação dos sete campos
+originais, datas e lacunas explícitas, duplicações, integridade da fonte e
+repetibilidade dos arquivos gerados.
+
 ## O que é conferido
 
 | Verificação | Resultado esperado |

@@ -25,6 +25,12 @@ duplicadas além das primeiras. Original preservado, sem correções ou exclusõ
 Diagnóstico e reprodução em `docs/semana-1-engenharia.md`. Tarefa 1.1 permanece
 aberta: organização e decisões sobre as lacunas serão tratadas na próxima etapa.
 
+Organização implementada e executada em 24/09/2026: os 1.882 registros foram
+preservados em ordem, com campos originais, versão da fonte e pendências
+explícitas. A conversão foi repetida com saída idêntica. A tarefa continua
+aberta até a frente de Dados validar o uso do título, as datas pendentes e os
+vereditos ausentes; detalhes em `docs/semana-1-engenharia.md`.
+
 - [ ] 1.1 Consolidar o corpus FactPolCheckBr (texto da alegação + texto de
       verificação + veredito + data + agência) em um formato pronto para
       análise; verificar carregando o dataset e confirmando que a

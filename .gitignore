@@ -51,3 +51,4 @@ __pycache__/
 # Base externa original e resultados reproduzíveis da inspeção
 data/originais/
 data/relatorios/
+data/processados/

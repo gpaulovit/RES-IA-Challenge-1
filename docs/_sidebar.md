@@ -5,6 +5,7 @@
 - [Histórias de usuário](historias.md)
 - [Referências](refs.md)
 - Engenharia
+  - [Guia da arquiteta](guia-arquiteta.md)
   - [Semana 1 — passo a passo](semana-1-engenharia.md)
   - [Organização](engenharia.md)
   - [Funcionalidades](funcionalidades.md)
