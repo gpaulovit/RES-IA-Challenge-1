@@ -10,6 +10,8 @@
 
 O pesquisador precisa comparar a consulta da pessoa com uma unidade textual do acervo. O título da publicação não é necessariamente a alegação: pode resumir, criar suspense ou misturar contexto e conclusão. O corpo inteiro também mistura evidências e veredito. Sem uma unidade canônica, o índice pode encontrar o mesmo tema sem encontrar a mesma afirmação.
 
+A [revisão da entrega de Dados](../11-revisao-dominio-dados.md) reforça essa proposta: 50 checagens não têm veredito consolidado e muitas reúnem várias afirmações. A ausência do rótulo não causa falha no relatório atual; a decisão pendente é qual alegação individual pode ser indexada e como justificar a escolha.
+
 ## Decisão proposta
 
 Adotar `texto_alegacao` como unidade semântica do pesquisador: uma frase curta, verificável e sem o veredito. O título original permanece preservado, mas só pode ser usado como alegação quando sua origem e aprovação estiverem explícitas.

@@ -2,6 +2,8 @@
 
 Este é um caderno de argumentos para discussão. As frases abaixo são fictícias. Os números vêm de uma amostra pequena, criada para revelar erros possíveis; **não medem a qualidade do produto com checagens reais**.
 
+A [revisão da entrega de Domínio de Dados](11-revisao-dominio-dados.md) relaciona estas escolhas ao corpus real e distingue riscos confirmados de pontos já tratados pelo código.
+
 ## 1. O que a busca atual realmente faz
 
 Hoje a API de demonstração usa TF-IDF: dá peso às palavras que aparecem no texto. A `main` também tem um índice experimental com `baseline-hashing`, que transforma palavras em números de outra maneira. **Esse baseline ainda não entende significado**. Chamar qualquer lista de números de “busca semântica” seria enganoso.
