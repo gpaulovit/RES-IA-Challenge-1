@@ -1,0 +1,21 @@
+{
+  "aviso": "Cenários inteiramente fictícios; não descrevem fatos políticos reais.",
+  "alegacoes": [
+    {"id": "a1", "texto": "A prefeitura de Vila Exemplo proibiu automóveis no centro."},
+    {"id": "a2", "texto": "A prefeitura de Vila Exemplo autorizou automóveis no centro."},
+    {"id": "a3", "texto": "A Câmara de Cidade Modelo aprovou ônibus gratuitos aos domingos."},
+    {"id": "a4", "texto": "A Câmara de Cidade Modelo rejeitou ônibus gratuitos aos domingos."},
+    {"id": "a5", "texto": "O conselho de Bairro Imaginário publicou o orçamento das escolas."}
+  ],
+  "consultas": [
+    {"tipo": "identica", "texto": "A prefeitura de Vila Exemplo proibiu automóveis no centro.", "id_referencia": "a1"},
+    {"tipo": "parafrase", "texto": "Carros foram impedidos de circular na região central de Vila Exemplo.", "id_referencia": "a1"},
+    {"tipo": "parafrase", "texto": "Passagens de ônibus não serão cobradas aos domingos em Cidade Modelo após votação da Câmara.", "id_referencia": "a3"},
+    {"tipo": "parafrase_sem_termos_centrais", "texto": "No domingo, o coletivo municipal passou a ser gratuito.", "id_referencia": "a3"},
+    {"tipo": "parafrase", "texto": "O conselho de Bairro Imaginário divulgou as contas das escolas.", "id_referencia": "a5"},
+    {"tipo": "negacao", "texto": "A prefeitura de Vila Exemplo não proibiu automóveis no centro.", "id_referencia": null},
+    {"tipo": "mesmo_assunto", "texto": "A prefeitura de Vila Exemplo proibiu bicicletas no centro.", "id_referencia": null},
+    {"tipo": "alegacao_diferente", "texto": "A Câmara de Cidade Modelo rejeitou ônibus gratuitos aos domingos.", "id_referencia": "a4"},
+    {"tipo": "sem_relacao", "texto": "Um telescópio encontrou uma nova galáxia.", "id_referencia": null}
+  ]
+}

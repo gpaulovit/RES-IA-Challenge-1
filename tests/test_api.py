@@ -57,6 +57,19 @@ def test_json_malformado(cliente):
     assert "JSON válido" in resposta.json()["detail"][0]["mensagem"]
 
 
+def test_texto_longo_e_rejeitado_sem_erro_interno(cliente):
+    resposta = cliente.post("/buscar", json={"texto": "a" * 2001})
+    assert resposta.status_code == 422
+    assert "2000 caracteres" in resposta.json()["detail"][0]["mensagem"]
+
+
+def test_unicode_e_outro_idioma_nao_causam_erro(cliente):
+    for texto in ("Olá 🌎 eleição", "The city council approved free buses"):
+        resposta = cliente.post("/buscar", json={"texto": texto})
+        assert resposta.status_code == 200
+        assert resposta.json()["status"] in ("candidatos_encontrados", "nao_encontrada")
+
+
 def test_documentacao_interativa(cliente):
     assert cliente.get("/docs").status_code == 200
     contrato = cliente.get("/openapi.json").json()

@@ -22,7 +22,7 @@ AVISO = (
 class Consulta(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    texto: str = Field(description="Texto que você quer comparar com os exemplos fictícios.")
+    texto: str = Field(max_length=2000, description="Texto de até 2000 caracteres para comparar com os exemplos fictícios.")
     top_k: Annotated[int, Field(strict=True, ge=1, le=10)] = Field(
         default=3, description="Quantidade máxima de resultados, de 1 a 10."
     )
@@ -73,7 +73,7 @@ def criar_app(
         for item in erro.errors():
             campo = str(item["loc"][-1])
             if campo == "texto":
-                mensagem = "Informe texto como uma frase não vazia."
+                mensagem = "Informe uma frase não vazia com até 2000 caracteres."
             elif campo == "top_k":
                 mensagem = "top_k deve ser um número inteiro de 1 a 10."
             elif item["type"] == "extra_forbidden":
