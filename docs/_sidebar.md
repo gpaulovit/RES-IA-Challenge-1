@@ -15,6 +15,7 @@
   - [Apresentação](apresentacao.md)
   - [Glossário](glossario.md)
   - [Pipeline e contratos](05-pipeline-e-contratos.md)
+  - [Escolhas com exemplos e medições](10-escolhas-com-evidencias.md)
   - [MLOps aplicado](08-mlops-aplicado-ao-res-ia.md)
   - [Modelos visuais](09-modelos-visuais-de-arquitetura.md)
   - [Decisões de arquitetura](decisoes/README.md)

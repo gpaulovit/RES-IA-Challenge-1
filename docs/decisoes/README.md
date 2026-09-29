@@ -12,6 +12,8 @@ Uma ADR (*Architecture Decision Record*) é uma ficha curta que explica uma deci
 ## Decisões existentes
 
 - [ADR-001 — Campo canônico da alegação](ADR-001-texto-alegacao.md) — proposta para revisão conjunta de `dominio-dados` e `produto-decisao`.
+- [ADR-002 — Busca e armazenamento](ADR-002-busca-e-armazenamento.md) — como decidir com medições.
+- [ADR-003 — Entradas e organização](ADR-003-entradas-e-organizacao.md) — limites da demonstração e estrutura atual.
 
 ## Resumo final da etapa
 
