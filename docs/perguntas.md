@@ -31,14 +31,38 @@
 
 Existe evidência suficiente, nesta fase de concepção, de que o principal gargalo do combate à desinformação política no Brasil é a falta de acesso rápido e comparável a checagens já existentes — e não a falta de checagens em si, a falta de vontade do público em checar, ou uma barreira estrutural das plataformas de mensageria — de forma que um produto de recuperação semântica endereça a causa raiz do problema, e não apenas um sintoma secundário dele?
 
+Essa pergunta é a mais importante das cinco norteadoras: se a resposta for não, os quatro eixos técnicos anteriores descrevem um produto tecnicamente correto para um problema que não é o gargalo real.
+
+## Eixo 1 — Dados e Contexto Eleitoral
+
+Evidências, números e forma de reprodução em [Semana 1 — Domínio de dados](semana-1-dados.md).
+
+### Expansão
+
 - Usando os embeddings das alegações já catalogadas, é possível identificar clusters temáticos latentes (ex.: urnas eletrônicas, saúde, segurança pública) sem depender de rótulos manuais prévios?
+  - Os temas existem nos dados, mas a separação por embeddings ainda é fraca. Uma contagem de palavras-chave nos títulos mostra forte concentração em **urnas e sistema eleitoral (603 títulos)**, seguida de mídia/pesquisas, Forças Armadas/instituições e segurança (140–165 cada), e temas menores como religião, saúde e costumes.
+  - Um primeiro teste de Modelos de IA (KMeans sobre MiniLM, branch `feat/testsmodelo`) teve silhouette de ~0,085: os clusters se sobrepõem bastante. A resposta definitiva depende da tarefa 1.2 com o modelo escolhido.
+
 - Existe uma sazonalidade temporal nos boatos (picos em datas de debate, véspera de votação, resultado) que se correlacione com o tipo de entidade mencionada?
+  - **Sim, há picos claros**, mas só dentro de uma eleição. Todas as checagens estão entre **01/08/2022 e 01/12/2022**. As semanas do 1º turno (201 checagens) e do 2º turno (194) têm quase o triplo das semanas de agosto (50–78).
+  - As 738 datas ambíguas foram resolvidas como mês/dia/ano: 256 das 262 que têm data no link confirmam essa leitura e nenhuma confirma dia/mês.
+  - A correlação com o tipo de entidade não foi medida. O campo de candidato favorecido é muito concentrado (1.547 Bolsonaro, 156 Lula, 178 indefinido) para separar por entidade sem antes extrair nomes dos textos.
+
 - Boatos antigos "ressurgem" reciclados em novos eventos eleitorais? Isso é detectável via similaridade semântica entre alegações de anos diferentes na base?
+  - **Entre anos diferentes, não é possível testar com esta base**: ela cobre só a campanha de 2022.
+  - Dentro da campanha, há sinais: **243 registros (13%)** têm um título quase igual (TF-IDF ≥ 0,6), a maioria o mesmo boato checado por agências diferentes na mesma semana. Nove pares estão a 30 dias ou mais de distância, como "banqueiros apoiam Lula em troca do fim do Pix" (1º/08) → "Lula define taxa no Pix após encontro com banqueiros" (29/10). Por ser uma medida por palavras, subestima paráfrases; a medida semântica é a tarefa 1.3.
+
 - Há uma diferença estrutural mensurável entre o texto da alegação (como o boato circula) e o texto do veredito (como a agência escreve), que o modelo precise aprender a atravessar?
+  - **Sim, e ela começa no título.** A base não tem uma coluna com o boato original. O título já é a correção em muitos casos ("Bolsonaro **não** criou o Pix…", "O portal g1 **não** noticiou…"), enquanto Boatos.org e Fato ou Fake escrevem o boato em si ("… #boato", "É #FAKE que …").
+  - Assim, a consulta do usuário (o boato) e o texto indexado (a correção) podem ter polaridade oposta. Isso reforça o teste de inversão de negação do Eixo 2 e a decisão sobre qual texto representa a alegação.
 
 ### Pergunta norteadora (Eixo 1)
 
 A base de dados consolidada do FactPolCheckBr possui volume, cobertura temática e temporal suficientes para sustentar um índice semântico representativo do universo de boatos políticos brasileiros, validável por meio de clusterização e análise de distribuição dentro desta fase de concepção?
+
+- **Parcialmente.** O volume (1.882 checagens, 9 agências com 50 a 315 registros cada) é suficiente para um MVP e para o gate. A cobertura, porém, é de **uma única campanha presidencial (ago–dez/2022)**, com 97% dos vereditos `falso` e forte concentração no tema urnas/sistema eleitoral.
+- O índice é representativo da **desinformação da eleição presidencial de 2022**, não do "universo de boatos políticos brasileiros". Para o gate, a reciclagem deve ser medida dentro dessa campanha. Medir entre eleições exige suplementar a base com outros anos (a avaliar na issue #6).
+- Os vereditos já vêm consolidados pela fonte (Falsa, Verdadeira, Parcialmente verdadeira e 50 vazios). A taxonomia do projeto mapeia esses quatro valores; os 50 vazios são, na maioria, checagens com várias alegações e não devem entrar no índice como alegação única.
 
 ## Eixo 2 — IA e NLP
 
