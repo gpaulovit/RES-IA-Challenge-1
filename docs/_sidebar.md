@@ -19,6 +19,7 @@
   - [Pipeline e contratos](05-pipeline-e-contratos.md)
   - [Escolhas com exemplos e medições](10-escolhas-com-evidencias.md)
   - [Revisão da entrega de Domínio de Dados](11-revisao-dominio-dados.md)
+  - [PRs, issues e próximos passos](12-prs-issues-e-proximos-passos.md)
   - [MLOps aplicado](08-mlops-aplicado-ao-res-ia.md)
   - [Modelos visuais](09-modelos-visuais-de-arquitetura.md)
   - [Decisões de arquitetura](decisoes/README.md)
