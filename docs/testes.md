@@ -29,6 +29,10 @@ Os testes do retrieval conferem a busca exata, o primeiro resultado de uma
 consulta idêntica, desempate por id, modelo compatível e rejeição de arquivos
 alterados. Esses testes técnicos não medem a acurácia de um modelo semântico.
 
+Os testes da cobertura conferem o mapeamento de vereditos, a interrupção diante
+de rótulo sem mapeamento, a confirmação de datas ambíguas pelo link e a contagem
+de títulos parecidos. Usam registros fictícios e não alteram o corpus.
+
 ## O que é conferido
 
 | Verificação | Resultado esperado |
