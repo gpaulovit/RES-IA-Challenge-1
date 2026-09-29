@@ -52,6 +52,13 @@ vereditos ausentes; detalhes em `docs/semana-1-engenharia.md`.
 
 ## 2. Cobertura e preparação de dados
 
+Avanço de Dados em 29/09/2026: relatório reproduzível de cobertura
+(`python -m checagens.cobertura`) e taxonomia dos quatro valores de veredito
+da fonte. A fonte já consolida os rótulos das agências; os 62 registros não
+`falso` foram conferidos. Base limitada a ago–dez/2022, 97% `falso`. Datas
+ambíguas: leitura mês/dia proposta com base nos links. Tarefas 2.1 e 2.2 ficam
+abertas até o grupo aceitar as propostas; detalhes em `docs/semana-1-dados.md`.
+
 - [ ] 2.1 Construir um mapeamento curado dos rótulos de veredito de cada
       agência para uma taxonomia normalizada; verificar checando por
       amostragem se os registros mapeados batem com os rótulos de origem.
