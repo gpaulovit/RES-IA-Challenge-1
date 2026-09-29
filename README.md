@@ -14,6 +14,9 @@ significados diferentes com segurança e não verifica a verdade de uma notícia
 ## Como executar
 
 Pré-requisito: Python 3.11 ou superior. Confira com `python3 --version`.
+
+### Testar rapidamente
+
 Abra um terminal **na pasta deste repositório**, onde está este README.
 Os comandos abaixo são para macOS/Linux; no Windows use `py -3` para criar
 o ambiente e `.venv\Scripts\Activate.ps1` para ativá-lo no PowerShell.
@@ -22,6 +25,17 @@ o ambiente e `.venv\Scripts\Activate.ps1` para ativá-lo no PowerShell.
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[test]'
+python -m checagens.demo
+```
+
+O último comando mostra uma consulta fictícia e o candidato `demo-002`,
+sem iniciar o servidor. Depois da instalação, basta repetir esse comando.
+
+### Iniciar a API
+
+Com o ambiente ativado, execute:
+
+```sh
 python -m uvicorn checagens.api:app --host 127.0.0.1 --port 8000
 ```
 
@@ -86,6 +100,12 @@ python -m pytest -q
 O servidor não precisa estar ligado para os testes. A indicação `passed`
 significa que as verificações passaram. Consulte o [guia de testes](docs/testes.md)
 para entender o que foi conferido e o que ainda depende de dados reais.
+
+Para reproduzir uma pequena comparação entre os dois métodos lexicais já
+disponíveis, use `python -m checagens.avaliacao`. O comando imprime acertos e
+falhas sobre dados inteiramente fictícios. `python -m checagens.capacidade`
+mede só o tempo de comparação de 1.882 vetores gerados para teste neste
+computador; esse tempo não inclui o modelo nem mede a qualidade da busca.
 
 ## Entender e apresentar
 
