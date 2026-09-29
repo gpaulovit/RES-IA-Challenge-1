@@ -89,6 +89,7 @@ para entender o que foi conferido e o que ainda depende de dados reais.
 
 ## Entender e apresentar
 
+- [Semana 1 — Domínio de dados](docs/semana-1-dados.md): cobertura do corpus, taxonomia de vereditos e lacunas.
 - [Semana 1 — passo a passo](docs/semana-1-engenharia.md): inspeção da base real, descobertas e exercício para aprender.
 - [Semana 2 — pipeline de embeddings](docs/semana-2-engenharia.md): vetores, metadados, amostra e recuperação.
 - [Semana 3 — retrieval k-NN](docs/semana-3-engenharia.md): busca exata, exemplos e dependências ainda abertas.
