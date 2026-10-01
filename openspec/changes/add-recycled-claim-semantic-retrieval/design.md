@@ -119,6 +119,31 @@ cada alegação em no máximo um par), 20 pares por faixa, semente 44.
 
 **O que este gate NÃO muda:** o NO-GO dentro de um ciclo (Gate Result de 2026-09-29) continua valendo.
 
+## Escolha do modelo de embeddings (critério, 2026-10-01, antes de qualquer resultado)
+
+**Candidatos** (revisões fixadas em `experiments/06_modelos.ipynb`): multilíngue genérico
+(`paraphrase-multilingual-MiniLM-L12-v2`, `paraphrase-multilingual-mpnet-base-v2`,
+`multilingual-e5-base`, `bge-m3`) e BERTimbau (`bert-base-portuguese-cased` com mean pooling,
+`bert-large-portuguese-cased-sts`). Fine-tuned: só se nenhum candidato atender ao piso abaixo.
+
+**Avaliação definitiva:** índice com os dois corpora (2022 + Central de Fatos, 12.240 alegações),
+conjunto de teste do `experiments/05_avaliacao.ipynb` (categorias `apelido`, `girias`,
+`apelido+girias`, `negacao`, `digitacao`, `parafrase_real`), consulta com a normalização
+`condicional`. A rodada só no índice de 2022 é preliminar e não decide.
+
+**Regra:**
+
+1. **Métrica principal:** Recall@5 médio entre as categorias (cada categoria pesa igual).
+2. **Piso:** nenhuma categoria com Recall@5 abaixo de 80%. Modelo abaixo do piso em alguma
+   categoria só é escolhido se todos estiverem abaixo; aí vale o melhor e a lacuna vira risco registrado.
+3. **Empate** (diferença < 2 p.p. no Recall@5 médio): fica o mais barato para o deploy (menor tempo
+   de codificação por mil textos).
+4. **Desempate final:** maior Recall@5 em `parafrase_real`, a única categoria de reescritas reais.
+
+**Ressalva conhecida antes de rodar:** os pares de `parafrase_real` foram sorteados entre os vizinhos
+que o MiniLM já achava parecidos (cosseno ≥ 0,75), o que favorece o MiniLM nessa categoria. A
+ressalva vai junto do resultado.
+
 
 ## Decisions
 

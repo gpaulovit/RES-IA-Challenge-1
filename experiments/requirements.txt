@@ -27,3 +27,10 @@ nbconvert==7.17.1
 
 # Versionamento de dados (experiments/data → DVC)
 dvc==3.67.1
+
+# Normalização da consulta (05): Enelvo 0.15 depende de gensim, que não compila no Python 3.14
+# e só é usado num modo opcional. Instalar à parte, sem dependências:
+#   pip install --no-deps enelvo==0.15
+editdistance==0.8.1
+emoji==2.2.0
+tabulate==0.10.0
