@@ -1,4 +1,6 @@
 - [Início](/)
+- [Estado do projeto](estado_do_projeto.md)
+- [Guia de qualidade](guia_de_qualidade.md)
 - [Cronograma](cronograma.md)
 - [Perguntas](perguntas.md)
 - [Requisitos](requisitos.md)

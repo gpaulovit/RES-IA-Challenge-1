@@ -2,6 +2,10 @@
 
 Este guia distingue **implementado**, **experimental** e **pendente**, para que
 Dados, Produto, Modelos e Engenharia terminem o projeto sem refazer trabalho.
+Para ver as cinco frentes e as entregas por semana, consulte o
+[estado do projeto](estado_do_projeto.md). O
+[guia de qualidade](guia_de_qualidade.md) explica os portões e a amostragem em
+linguagem simples.
 Conferido em 01/10/2026: `main` `d612370`, `feat/testsmodelo` `2981f5a`,
 `feat/ci-mlops` `6d649f7` e `feat/benchmark-mlops` `4b4ea03`.
 

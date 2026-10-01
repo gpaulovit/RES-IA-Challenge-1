@@ -89,6 +89,8 @@ para entender o que foi conferido e o que ainda depende de dados reais.
 
 ## Entender e apresentar
 
+- [Estado do projeto](docs/estado_do_projeto.md): entregas e pendências das cinco frentes, com evidências por semana.
+- [Guia de qualidade](docs/guia_de_qualidade.md): portões, amostragem proposta e critérios ainda em decisão.
 - [Mapa da entrega de Engenharia](docs/mapa-entrega-engenharia.md): issues, dependências, evidências e limites para a entrega final.
 - [Semana 1 — Domínio de dados](docs/semana-1-dados.md): cobertura do corpus, taxonomia de vereditos e lacunas.
 - [Semana 1 — passo a passo](docs/semana-1-engenharia.md): inspeção da base real, descobertas e exercício para aprender.

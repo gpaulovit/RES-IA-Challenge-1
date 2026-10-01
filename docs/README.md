@@ -4,6 +4,8 @@ Recuperação semântica de checagens de boatos políticos reciclados.
 
 ## Conteúdo
 
+- [Estado do projeto](estado_do_projeto.md) — entregas, pendências e evidências das cinco frentes.
+- [Guia de qualidade](guia_de_qualidade.md) — como medir, revisar e aceitar cada passagem.
 - [Mapa da entrega de Engenharia](mapa-entrega-engenharia.md) — por onde começar, critérios e responsáveis.
 - [Guia da arquiteta de software](guia-arquiteta.md) — retomada do projeto, fluxo, dependências e roteiro das semanas 1 a 3.
 - [Semana 1 — Domínio de dados](semana-1-dados.md) — cobertura do corpus, taxonomia de vereditos e lacunas.
