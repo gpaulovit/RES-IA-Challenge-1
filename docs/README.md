@@ -6,6 +6,8 @@ Recuperação semântica de checagens de boatos políticos reciclados.
 
 - [Guia da arquiteta de software](guia-arquiteta.md) — retomada do projeto, fluxo, dependências e roteiro das semanas 1 a 3.
 - [Semana 1 — Domínio de dados](semana-1-dados.md) — cobertura do corpus, taxonomia de vereditos e lacunas.
+- [Revisão de arquitetura da entrega de Dados](11-revisao-dominio-dados.md) — riscos confirmados, pontos já tratados e decisões pendentes.
+- [PRs, issues e próximos passos](12-prs-issues-e-proximos-passos.md) — o que cada entrega apoia e o que ainda falta.
 - [Semana 1 — Engenharia passo a passo](semana-1-engenharia.md) — diagnóstico da base real e aprendizado por etapas.
 - [Semana 1 — Produto e Decisão](semana-1-produto.md) — mitigação de falsos positivos, regras do bot e MLOps.
 - [Semana 2 — pipeline de embeddings](semana-2-engenharia.md) — geração de vetores, metadados, amostra e recuperação.
