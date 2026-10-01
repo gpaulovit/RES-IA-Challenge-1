@@ -1,0 +1,29 @@
+# Instalação: python3 -m venv .venv && .venv/bin/pip install -r experiments/requirements.txt
+
+# Dados
+pandas==3.0.6
+numpy==2.5.3
+scipy==1.18.1
+
+# Embeddings (01, 03)
+sentence-transformers==6.1.0
+transformers==5.17.0
+tokenizers==0.23.2
+huggingface-hub==1.33.0
+safetensors==0.8.0
+torch==2.14.0
+
+# Clusterização (02)
+scikit-learn==1.9.1
+umap-learn==0.5.12
+numba==0.68.0
+pynndescent==0.6.0
+
+# Gráficos e execução dos notebooks
+matplotlib==3.11.2
+jupyter==1.1.1
+ipykernel==7.3.0
+nbconvert==7.17.1
+
+# Versionamento de dados (experiments/data → DVC)
+dvc==3.67.1

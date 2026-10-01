@@ -64,7 +64,7 @@ ambíguas conferem, nenhuma como dia/mês). Reprodução, hashes e protocolo de 
 | ≥ 0,90 | 8 | 7 | 88% | 53–98% | 88% | 53–98% |
 
 - **Leitura usada (a):** taxa no menor τ com precisão acumulada ≥ 75%. Só τ = 0,90 atende,
-  com taxa de **1,35%**, abaixo de 3%, então NO-GO.
+  com taxa de **1,36%**, abaixo de 3%, então NO-GO.
 - **Leitura complementar (b):** taxa ponderada pela precisão = **5,0%** (inconclusivo).
   A (a) foi escolhida por aplicar diretamente a régua de precisão do critério. A escolha
   foi feita depois de ver as duas leituras; mesmo pela (b), o resultado não seria GO.
@@ -112,8 +112,9 @@ cada alegação em no máximo um par), 20 pares por faixa, semente 44.
 
 **Decisão:**
 - GO (reabre a premissa temporal, agora entre ciclos): taxa ≥ 10%
+- O cenário de recorrência do spec volta, redefinido como recorrência entre ciclos (base histórica 2013–2021)".
 - NO-GO (confirma o reenquadramento): taxa < 3%
-- Inconclusivo: entre os dois → Testar viabilidade de nova arquitertura de modelo ou mudanças no foco do modelo, mudar hipotese.
+- Inconclusivo: entre os dois → Repetir com o melhor modelo testado e verificar se a pergunta é efetivamente respondida.
 - **Por que esses limites:** Seguir o padrão já definido anteriormente, para efetivamente testar se a escolha do modelo funciona, ter algo efetivamente para recuperar.
 
 **O que este gate NÃO muda:** o NO-GO dentro de um ciclo (Gate Result de 2026-09-29) continua valendo.
