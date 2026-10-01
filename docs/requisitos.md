@@ -1,202 +1,41 @@
-# Requisitos
+# Especificação de Requisitos do Sistema (RES-IA-Challenge-1)
 
-Gerados via OpenSpec, na proposta de mudança
-[`add-recycled-claim-semantic-retrieval`](https://github.com/gpaulovit/RES-IA-Challenge-1/tree/main/openspec/changes/add-recycled-claim-semantic-retrieval).
-Os requisitos do produto real abaixo ainda não estão implementados/arquivados — os requisitos formais oficiais só migram
-para `openspec/specs/` quando a implementação for concluída.
+Documento de especificação de Requisitos Funcionais (RF), Requisitos Não-Funcionais (RNF) e Restrições de Arquitetura do sistema de detecção e recuperação semântica de desinformação eleitoral reciclada, alinhado às Histórias de Usuário (US-01 a US-10) e aos padrões de MLOps.
 
-Já existe um [protótipo de Engenharia](funcionalidades.md) com três exemplos
-fictícios e comparação por palavras. Ele tem critérios próprios na proposta e
-não conclui os requisitos de busca semântica e confiança descritos nesta página.
+---
 
-Esta página segue o fluxo completo trabalhado durante a concepção do
-produto: **problema → objetivo de produto → objetivos específicos →
-requisitos**. As perguntas orientadoras que sustentam cada etapa estão em
-[Perguntas](perguntas.md).
+## 1. Requisitos Funcionais (RF)
 
-## 1. Problema
+*Descrevem as capacidades, comportamentos e ações ativas que o sistema deve executar em resposta às consultas dos usuários.*
 
-O público e as próprias agências de checagem não têm como identificar, de
-forma rápida e sistemática, quando uma alegação política nova é, na
-verdade, um boato reciclado que já foi checado anteriormente sob outra
-redação. Busca lexical ou manual não detecta essa recorrência por
-definição, porque a superfície do texto muda a cada reescrita — mesmo
-quando a checagem daquela alegação já existe e está catalogada.
+| Código | Requisito Funcional | Descrição Detalhada | Histórias de Usuário (US) |
+| :--- | :--- | :--- | :--- |
+| **RF-01** | **Busca Semântica por Alegações** | O sistema deve permitir a entrada de textos livres em linguagem natural (mensagens de WhatsApp, trechos de notícias ou boatos) e recuperar as checagens correspondentes no acervo por similaridade vetorial $k$-NN. | **US-03, US-04** |
+| **RF-02** | **Resiliência a Variações Adversariais** | O sistema deve recuperar a checagem original referente a alegações recicladas mesmo quando apresentarem variações de formato (gírias, erros de digitação, apelidos de figuras públicas ou paráfrases). | **US-03, US-04** |
+| **RF-03** | **Tratamento de Inversão de Negação** | O sistema deve identificar e diferenciar sentenças com mudança de polaridade ou negação (ex: *"Lula NÃO fez X"* vs. *"Lula fez X"*), evitando atribuições incorretas de correspondência positiva. | **US-03, US-05** |
+| **RF-04** | **Reconhecimento de Reincidência Temporal** | O sistema deve reconhecer boatos antigos (distância $\ge 180$ dias) apresentados com nova roupagem como a mesma alegação catalogada, sem classificá-los como inéditos. | **US-01, US-04** |
+| **RF-05** | **Filtro do Grupo de Controle (Falsos Positivos)** | O sistema deve identificar consultas referentes a notícias legítimas e verdadeiras do dia a dia (imprensa) e classificá-las como `sem_match` ou `inédito` quando a similaridade estiver abaixo do limiar predefinido. | **US-02, US-05** |
+| **RF-06** | **Exibição Neutra e Completa de Evidências** | O sistema deve exibir o top-5 candidatos contendo obrigatoriamente o texto da alegação de origem, o veredito normalizado, a agência de checagem e o link oficial, sem emitir vereditos automatizados sumários sem respaldo das fontes. | **US-06, US-10** |
+| **RF-07** | **Atribuição de Faixas de Confiança** | O sistema deve atribuir os resultados a faixas claras de confiança (`confirmado`, `provável`, `sem match`, `inédito`), encaminhando correspondências duvidosas (zona cinzenta) para revisão humana. | **US-07** |
+| **RF-08** | **Isolamento de Conteúdo Misto** | O sistema deve garantir que o veredito de um boato antigo checado não seja aplicado indevidamente a trechos novos adicionados à mensagem (evitar "lavagem" de afirmação nova). | **US-08** |
+| **RF-09** | **Exposição de Divergências entre Agências** | O sistema deve identificar e exibir simultaneamente os dois lados quando agências de checagem distintas possuírem vereditos divergentes sobre a mesma alegação, sem escolher um lado em silêncio. | **US-09, US-10** |
+| **RF-10** | **Normalização Taxonômica de Vereditos** | O sistema deve mapear e padronizar os diferentes rótulos das agências de origem para uma taxonomia única (`falsa`, `enganosa`, `verdadeira`, `inconclusiva`). | **US-10** |
 
-**Pergunta norteadora do problema:** existe evidência suficiente, nesta
-fase de concepção, de que o principal gargalo do combate à desinformação
-política no Brasil é a falta de acesso rápido e comparável a checagens já
-existentes — e não a falta de checagens em si, a falta de vontade do
-público em checar, ou uma barreira estrutural das plataformas de
-mensageria — de forma que um produto de recuperação semântica endereça a
-causa raiz do problema, e não apenas um sintoma secundário dele?
+---
 
-## 2. Objetivo de produto
+## 🛡️ 2. Requisitos Não-Funcionais (RNF) & Restrições
 
-Construir uma capacidade de recuperação semântica sobre o corpus de
-alegações políticas já verificadas
-([FactPolCheckBr](https://github.com/Interfaces-UFSCAR/Dataset-FactPolCheckBr)),
-capaz de reconhecer alegações reincidentes — recicladas ou reescritas ao
-longo do tempo — de forma robusta e responsável, classificando cada
-correspondência por nível de confiança em vez de retornar um veredito
-único e opaco.
+*Descrevem as propriedades de qualidade, critérios de desempenho, segurança, rastreabilidade e restrições arquiteturais do produto.*
 
-- **Capacidade:** `claim-recurrence-retrieval`.
-- **Validação prévia obrigatória:** um gate empírico (clusterização
-  temática latente + análise de sazonalidade/ressurgimento temporal, sem
-  depender de rótulo manual) precede qualquer trabalho de indexação, para
-  confirmar que a reciclagem de boato é um fenômeno mensurável nesta base.
-- **Fora de escopo deste change:** indicadores de impacto social/
-  comportamental pós-lançamento — dependem de dado de uso real e ficam
-  para um change futuro.
+### A. Atributos de Qualidade e Desempenho
 
-## 3. Objetivos específicos
+* **RNF-01 (Limiar de Decisão e Taxa de Falso Positivo):** O modelo de retrieval deve aplicar o limiar de similaridade semântica de 60% (0.60) para classificação de correspondência (`match_confirmado`), garantindo uma taxa de falso-positivo FPR ≤ 5% no grupo de controle de notícias reais. *(Vinculado a **US-05, US-07**)*
+* **RNF-02 (Acurácia de Retrieval / Recall@5):** O sistema deve atingir Recall@5 ≥ 70% no conjunto global de testes de benchmark e Recall@5 ≥ 60% especificamente em pares com reincidência temporal ≥ 180 dias. *(Vinculado a **US-03, US-04**)*
+* **RNF-03 (Latência da Busca):** O mecanismo de recuperação semântica $k$-NN em memória deve processar a consulta e retornar o Top-5 de evidências em tempo inferior a 2 segundos. *(Vinculado a **US-03, US-06**)*
+* **RNF-04 (Completude das Evidências):** 100% dos resultados retornados no Top-5 devem apresentar a estrutura de campos obrigatórios completa (texto original + veredito + agência + link). *(Vinculado a **US-06**)*
 
-Cada eixo de investigação da concepção do produto se traduz em um
-objetivo específico, testável ainda nesta fase de concepção.
+### B. Restrições e Arquitetura (Constraints & MLOps)
 
-### Eixo 1 — Dados e Contexto Eleitoral
-
-**Objetivo específico:** validar que a base FactPolCheckBr tem volume,
-cobertura temática e temporal suficientes para sustentar um índice
-semântico representativo do universo de boatos políticos brasileiros,
-por meio de clusterização e análise de distribuição.
-
-### Eixo 2 — IA e NLP
-
-**Objetivo específico:** selecionar (ou ajustar) um modelo de embeddings
-que recupere corretamente a checagem correspondente para uma parcela
-relevante de alegações parafraseadas ou informais, validando
-empiricamente a busca semântica como abordagem superior à classificação
-estilística de "fake ou não".
-
-### Eixo 3 — Decisão, Validação e Produto
-
-**Objetivo específico:** definir uma política de decisão (faixas de
-confiança + tratamento de fallback) que separe de forma confiável
-alegações já checadas de alegações inéditas ou ambíguas, dentro de
-margens de erro toleráveis para uso público.
-
-### Eixo 4 — Impacto Social e Cidadania *(fora de escopo deste change)*
-
-**Objetivo específico (reformulado):** projetar, com os dados e a
-literatura disponíveis nesta fase, indicadores mensuráveis de impacto
-social (concentração temática de vulnerabilidade, padrões por canal) que
-sirvam de baseline — deixando explícito que a validação causal do efeito
-sobre o comportamento do eleitor depende de dados de uso pós-lançamento e
-não é resolvível na etapa de concepção. Não gera requisitos nesta
-proposta.
-
-## 4. Requisitos
-
-Cada requisito abaixo realiza um dos objetivos específicos acima.
-
-### Indexar o corpus para recuperação semântica
-
-*Realiza o objetivo específico do Eixo 1.*
-
-O sistema DEVE indexar o corpus de alegações políticas catalogadas (texto da
-alegação e seu veredito de checagem associado) em uma forma que suporte
-recuperação por similaridade.
-
-- **Cenário — alegação recuperável após indexação**: quando uma alegação do
-  corpus catalogado foi indexada, uma consulta de entrada semanticamente
-  equivalente a essa alegação a retorna como candidata de recuperação.
-
-### Recuperar a alegação catalogada sob reescrita
-
-*Realiza o objetivo específico do Eixo 2.*
-
-O sistema DEVE recuperar a alegação catalogada correta para uma alegação de
-entrada que seja paráfrase, substituição por gíria/apelido, erro ortográfico
-proposital, inversão de negação, ou uma alegação que ressurge em um período
-posterior sob redação de superfície diferente — dentro de uma degradação
-tolerável de acurácia de recuperação em relação a alegações não modificadas.
-
-- **Cenário — alegação histórica reescrita é reconhecida como recorrência**:
-  quando uma alegação de entrada é uma versão reescrita de uma alegação
-  catalogada em um período anterior, o sistema retorna a alegação catalogada
-  original entre os top-k candidatos de recuperação.
-- **Cenário — paráfrase adversarial não falha silenciosamente**: quando uma
-  alegação de entrada usa gíria, substituição por apelido, ou erro
-  ortográfico proposital de uma alegação catalogada, o sistema retorna a
-  alegação catalogada entre os top-k candidatos, ou classifica a consulta
-  conforme o requisito de faixas de confiança abaixo, em vez de retornar um
-  resultado não relacionado silenciosamente.
-
-### Classificar cada resultado por faixa de confiança
-
-*Realiza o objetivo específico do Eixo 3.*
-
-O sistema DEVE classificar cada resultado de recuperação em uma de um
-conjunto definido de faixas de confiança (match confirmado, match provável
-que requer revisão, sem match, alegação inédita) em vez de retornar um único
-veredito binário sim/não.
-
-- **Cenário — similaridade ambígua é sinalizada, não resolvida
-  silenciosamente**: quando o escore de similaridade do candidato principal
-  de recuperação cai entre os limiares de match confirmado e sem match, o
-  sistema classifica o resultado como "match provável" e não o apresenta
-  como confirmado.
-
-### Tratar com responsabilidade alegações parciais e mistas
-
-*Realiza o objetivo específico do Eixo 3.*
-
-O sistema NÃO DEVE aplicar um veredito catalogado a partes de uma alegação de
-entrada que não foram cobertas por aquela checagem catalogada, quando a
-alegação de entrada mistura conteúdo previamente verificado com conteúdo
-novo e não verificado.
-
-- **Cenário — alegação mista não é totalmente endossada por um match
-  parcial**: quando uma alegação de entrada combina uma alegação falsa
-  previamente catalogada com uma afirmação adicional não catalogada, a
-  resposta do sistema aborda apenas a parte catalogada e marca a afirmação
-  adicional como não coberta/não verificada.
-
-### Expor divergências de veredito entre agências
-
-*Realiza o objetivo específico do Eixo 3.*
-
-O sistema DEVE expor quando duas ou mais agências de checagem emitiram
-vereditos divergentes para alegações semanticamente equivalentes, em vez de
-selecionar um silenciosamente.
-
-- **Cenário — veredictos divergentes são ambos exibidos**: quando um match
-  recuperado corresponde a alegações checadas por mais de uma agência com
-  veredictos diferentes, o sistema apresenta ambos os veredictos e suas
-  fontes em vez de resolver a divergência automaticamente.
-
-### Apresentar os resultados de forma explicável
-
-*Realiza o objetivo específico do Eixo 3.*
-
-O sistema DEVE apresentar resultados de recuperação como uma lista
-ranqueada de candidatos com a justificativa/evidência de cada
-correspondência, em vez de uma única resposta não explicada.
-
-- **Cenário — usuário consegue ver por que um match foi retornado**: quando
-  uma consulta retorna candidatos de recuperação, cada candidato é
-  apresentado junto com o texto da alegação/veredito fonte contra o qual foi
-  comparado, não uma conclusão única e opaca.
-
-### Normalizar rótulos de veredito entre agências
-
-*Realiza o objetivo específico do Eixo 3 (pré-requisito de dado).*
-
-O sistema DEVE mapear os rótulos de veredito heterogêneos usados pelas
-agências contribuintes do corpus (ex.: "Falsa", "Fake", "Enganosa") para uma
-taxonomia normalizada única antes de aplicar a classificação por faixas de
-confiança ou a lógica de match parcial.
-
-- **Cenário — rótulo específico de agência é normalizado antes da
-  classificação**: quando uma alegação de qualquer agência contribuinte é
-  indexada, seu rótulo de veredito original é mapeado para a taxonomia de
-  veredito normalizada do sistema antes de ser usado na lógica de
-  classificação.
-
-## Fora de escopo
-
-Indicadores de impacto social/comportamental pós-lançamento (concentração de
-vulnerabilidade, padrões por canal). Dependem de dado de uso real e não são
-resolvíveis na fase de concepção — ficam para um change futuro.
+* **RNF-05 (Arquitetura Simplificada em Memória):** O sistema deve operar via busca vetorial $k$-NN exata direta em memória para o volume atual do corpus, dispensando a complexidade e o custo de manutenção de um banco vetorial dedicado nesta fase do MVP. *(Vinculado a **US-01, US-03**)*
+* **RNF-06 (Rastreabilidade e Versioneamento de MLOps):** Todo o pipeline de geração de embeddings, a bancada de testes de benchmark (`data/testes_benchmark.json`) e a suíte de testes devem ser estritamente versionados via Git/DVC e reprodutíveis via esteira de automação (`pytest`). *(Vinculado a **US-02, US-03**)*
+* **RNF-07 (Privacidade e Segurança de Dados):** O sistema não deve armazenar ou persistir dados pessoais identificáveis (PII) eventualmente presentes nas consultas submetidas pelos usuários finais. *(Vinculado a **US-03, US-05**)*
