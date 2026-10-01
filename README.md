@@ -83,8 +83,16 @@ Na raiz do repositório, com o ambiente ativado, execute:
 python -m pytest -q
 ```
 
+Ou, utilizando o Makefile:
+
+```sh
+make test
+```
+
 O servidor não precisa estar ligado para os testes. A indicação `passed`
-significa que as verificações passaram. Consulte o [guia de testes](docs/testes.md)
+significa que as verificações passaram. Os testes e o pipeline de amostra também
+são validados automaticamente a cada commit ou PR via GitHub Actions.
+Consulte o [guia de testes](docs/testes.md)
 para entender o que foi conferido e o que ainda depende de dados reais.
 
 ## Entender e apresentar
