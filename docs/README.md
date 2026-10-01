@@ -4,6 +4,7 @@ Recuperação semântica de checagens de boatos políticos reciclados.
 
 ## Conteúdo
 
+- [Mapa da entrega de Engenharia](mapa-entrega-engenharia.md) — por onde começar, critérios e responsáveis.
 - [Guia da arquiteta de software](guia-arquiteta.md) — retomada do projeto, fluxo, dependências e roteiro das semanas 1 a 3.
 - [Semana 1 — Domínio de dados](semana-1-dados.md) — cobertura do corpus, taxonomia de vereditos e lacunas.
 - [Semana 1 — Engenharia passo a passo](semana-1-engenharia.md) — diagnóstico da base real e aprendizado por etapas.

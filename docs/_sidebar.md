@@ -7,6 +7,7 @@
 - Domínio de dados
   - [Semana 1 — cobertura e vereditos](semana-1-dados.md)
 - Engenharia
+  - [Mapa da entrega](mapa-entrega-engenharia.md)
   - [Guia da arquiteta](guia-arquiteta.md)
   - [Semana 1 — passo a passo](semana-1-engenharia.md)
   - [Semana 2 — pipeline de embeddings](semana-2-engenharia.md)
