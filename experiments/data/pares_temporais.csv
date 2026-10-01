@@ -1,0 +1,35 @@
+idx_i,idx_j,sim,dias,reciclada_i,original_j
+160,1812,0.76,7,"CNN não noticiou que Lula tributará o PIX, congelará poupanças e criará o “Peso Real”","UOL não publicou que Lula pretende taxar Pix, como alega post"
+690,1346,0.814,25,"Ciro Gomes pede voto para Bolsonaro “22” no domingo, mostra vídeo",Ciro Gomes declarou apoio a Bolsonaro no 2º turno
+1524,1072,0.815,34,Vídeo foi manipulado para mostrar Bolsonaro à frente em pesquisa do Ipec,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 15 de agosto de 2022
+1856,470,0.82,8,Vídeo de manifestação bolsonarista em Brasília foi gravado no 7/9 de 2021,"Vídeo mostra ato do 7 de Setembro em Brasília, não manifestação recente"
+256,1077,0.883,8,Randolfe Rodrigues disse controlar PF e STF,Senador Randolfe Rodrigues disse em áudio que controla ações da PF e do STF
+401,54,0.862,38,PT votou contra a criação do Auxílio Brasil no Congresso,"PT votou contra a PEC dos Precatórios, e não contra o Auxílio Brasil como sugere vídeo viral"
+611,1680,0.884,19,"Pesquisa Ipec no Jornal Nacional mostra Bolsonaro com 55%, na frente de Lula no 2º turno das eleições",Pesquisa Ipec mostra Bolsonaro na frente de Lula com 46% no JN
+1100,1251,0.856,33,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 12 de setembro de 2022,Vídeo em que JN exibe pesquisa do Ipec com Bolsonaro na liderança
+1132,1321,0.875,7,Boletins de urna em vídeo provem que votos não foram computados,Vídeo que alerta sobre risco de o voto não ser computado na urna
+1494,1072,0.888,13,Vídeo que mostra Bolsonaro à frente na pesquisa Ipec do dia 15 de agosto de 2022 é falso,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 15 de agosto de 2022
+1841,1197,0.918,8,A Torre Eiffel foi iluminada em homenagem à eleição de Lula,Torre Eiffel foi iluminada de verde e amarelo em homenagem à vitória de Lula
+1671,48,0.918,7,Vídeo em que Lula fala em comprar voto de baianos por R$ 10,Vídeo de Lula falando em comprar voto de baianos por 10 reais foi manipulado
+852,584,0.908,13,Vídeo: 7 fake news que circularam na semana das eleições de 2022,Principais fake news de 1º de outubro de 2022 (véspera das eleições 2022)
+1163,1269,0.92,55,Polícia Federal fez exposição com pilhas de dinheiro roubado pelo PT,Polícia Federal fez exposição com dinheiro recuperado em governos do PT
+1665,1277,0.949,10,Jornalista Vera Magalhães ganha R$ 500 mil ao ano da TV Cultura,Vera Magalhães ganha R$ 500 mil por ano da TV Cultura
+1620,728,0.903,7,"5,1 milhões de votos foram roubados de Bolsonaro no 2º turno","Mike Lindell está certo ao dizer que 5,1 milhões de votos foram roubados de Bolsonaro"
+1652,242,0.962,9,Vídeo em que Bolsonaro faz oração é de 2018 e não foi gravado antes do JN,"Vídeo que mostra oração de Bolsonaro é de 2018, não anterior ao JN"
+1568,597,0.811,10,Vídeo de boletins de urna com mais votos para Bolsonaro não prova fraude,Boletim de urna encontrado na rua em Curitiba (Paraná) prova fraude de votos não contabilizados para Bolsonaro nas eleições
+563,524,0.842,32,Pesquisa Ipec no Jornal Nacional mostra Bolsonaro na frente de Lula com 46%,Pesquisa Ipec do Jornal Nacional (Globo) mostra Bolsonaro na frente de Lula
+803,1614,0.844,20,Biden e CIA interferiram nas eleições do Brasil,Jornalista provou influência de Biden na eleição brasileira
+1660,1278,0.868,8,Jayme Monjardim não gravou vídeo criticando Fernando Haddad,Jayme Monjardim gravou vídeo criticando Fernando Haddad
+1509,1090,0.857,10,"Justiça Eleitoral rejeitou candidatura de Lula em 2018, não em 2022",TSE rejeitou candidatura de Lula em agosto de 2022
+1670,1295,0.896,8,Pistola d'água foi usada em atentado contra Cristina Kirchner,Arma usada em atentado contra Cristina Kirchner era uma pistola d'água
+1496,1262,0.879,8,Apresentadores estrangeiros fizeram piada sobre Lula e eleitores baianos,Jornalistas estrangeiros riram sobre Lula querer comprar votos de baianos
+425,126,0.839,12,Lula não usou ponto eletrônico no ouvido no debate da Globo,"Lula não usou ponto eletrônico no primeiro debate do 2º turno, segundo imagens do evento"
+1566,295,0.819,23,Vídeo foi editado para mostrar Bolsonaro à frente na pesquisa Ipec sobre segundo turno,Vídeo é manipulado para afirmar que Bolsonaro liderou pesquisa Ipec divulgada em 12 de setembro
+729,1202,0.847,31,Geraldo Alckmin diz que a taxação do Pix é algo extremamente necessário,G1 publicou reportagem afirmando que Alckmin diz que taxação do Pix é necessária
+32,232,0.873,13,Não há nenhuma lei ou projeto de lei que proíba o uso da Bíblia no Brasil,Uso da Bíblia não foi proibido no Brasil
+373,1313,0.859,22,Vídeo do JN é editado para fazer crer que Bolsonaro aparece à frente de Lula em pesquisa do Ipec,Vídeo em que Jornal Nacional divulga pesquisa com Bolsonaro à frente de Lula
+73,47,0.875,15,"Vídeo de Bolsonaro cumprimentando apoiadores é de 2021 e foi gravado em São Paulo, não nos EUA",Vídeo com multidão de apoiadores de Jair Bolsonaro não é de 2022; circula desde 2021
+1259,513,0.852,13,Lula foi chamado de ladrão durante comício em Belo Horizonte,Militantes chamam Lula de ladrão em protesto durante comício
+1642,750,0.866,17,Lula não possa ser diplomado; petista teve condenações anuladas,Lula não pode ser diplomado porque é ficha suja e não foi inocentado
+718,617,0.891,24,Alexandre de Moraes vendeu as eleições de 2022 para Lula e o PT em escândalo que todo mundo suspeitava,Alexandre de Moraes vendeu as eleições 2022 para o PT em “escândalo” divulgado por Roberto Jefferson
+1700,1314,0.854,9,Moraes não pediu para Bolsonaro remover vídeo chorando das redes,TSE não mandou apagar vídeo em que Bolsonaro chora ao relembrar facada

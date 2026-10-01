@@ -18,6 +18,7 @@ documented time range.
   an implementation approach that is proportionate to the corpus's small
   size.
 
+
 **Non-Goals:**
 - Benchmarking against, or defining success relative to, existing
   fact-check assistants (e.g., Aos Fatos' Fátima, TSE's "Fato ou Boato").
@@ -28,6 +29,59 @@ documented time range.
 - Committing to a specific embedding model or numeric confidence
   thresholds in this document — both require empirical calibration against
   the corpus and are left as implementation decisions, not fixed here.
+
+## Critério go/no-go (escrito em 2026-09-29, antes da grade)
+
+- **GO se:** taxa ≥ 10 % no τ validado, com precisão manual ≥ 75 % e N = 7 dias.
+- **NO-GO se:** taxa < 3% OU nenhuma faixa com precisão ≥ 75%.
+- **Inconclusivo (entre 3% e 9%):** rotular mais pares e discutir o enquadramento do produto
+  antes do Bloco 3.
+- **Por que:** abaixo de ~3%, o checador raramente teria algo para recuperar. Abaixo de 75%
+  de precisão, 1 em cada 4 sugestões estaria errada, o que acaba com a confiança na
+  ferramenta. A taxa é um piso, porque o corpus cobre só 4 meses. N = 7 fica acima da
+  janela de cobertura paralela (0 a 2 dias).
+
+## Gate Result (2026-09-29)
+
+**Decisão: NO-GO** para "reciclagem temporal dentro de um ciclo eleitoral" como justificativa da capacidade.
+
+Parâmetros: N = 7 dias; filtros de agregador e duplicata ativos; modelo `paraphrase-multilingual-MiniLM-L12-v2`;
+71 pares validados manualmente, com cada alegação em no máximo 1 par.
+
+| Faixa de τ | n | Mesma | Precisão | IC 95% | Acumulada (≥ faixa) | IC 95% acum. |
+|---|---|---|---|---|---|---|
+| 0,75–0,80 | 8 | 1 | 12% | 2–47% | 49% | 38–61% |
+| 0,80–0,85 | 30 | 10 | 33% | 19–51% | 54% | 42–66% |
+| 0,85–0,90 | 25 | 17 | 68% | 48–83% | 73% | 56–85% |
+| ≥ 0,90 | 8 | 7 | 88% | 53–98% | 88% | 53–98% |
+
+- **Leitura usada (a):** taxa no menor τ com precisão acumulada ≥ 75%. Só τ = 0,90 atende,
+  com taxa de **1,35%**, abaixo de 3%, então NO-GO.
+- **Leitura complementar (b):** taxa ponderada pela precisão = **5,2%** (inconclusivo).
+  A (a) foi escolhida por aplicar diretamente a régua de precisão do critério. A escolha
+  foi feita depois de ver as duas leituras; mesmo pela (b), o resultado não seria GO.
+- **Definição de "mesma":** pares com mesma história e detalhe diferente (data, número)
+  contam como `mesma`. Contando como `tema`, a precisão acumulada em ≥ 0,90 cai para 75%
+  e a decisão pela (a) não muda.
+- **Revisão de critério:** os limites da taxa foram ajustados em 29/09 depois de ver a grade;
+  a régua de precisão (75%) é a do pré-registro.
+
+**Ressalvas**
+- O corpus cobre 122 dias (um ciclo): a reciclagem entre eleições não é observável. A conclusão
+  vale para "dentro de um ciclo", não para "reciclagem não existe".
+- A data é a da checagem, não a da circulação do boato.
+- Um único modelo: a precisão por τ depende dele (reavaliar no Bloco 5).
+- n de 8 nas faixas extremas: ICs largos.
+
+**Consequência** (mitigação prevista em Risks): reenquadrar a capacidade como **recuperação
+robusta a reescrita** (paráfrase, negação, gíria), sem a premissa temporal. Evidência:
+26% das alegações têm vizinho com similaridade ≥ 0,85 (a mesma alegação checada por agências
+diferentes com outra redação); dos 35 pares `mesma`, 13 são paráfrase e 7 são negação.
+Próximos passos: Bloco 4 (conjunto de teste centrado em paráfrase e negação; data
+augmentation entra aqui) e Bloco 5 (comparar modelos, incluindo se algum eleva a precisão em τ menor).
+
+- 
+
 
 ## Decisions
 

@@ -1,0 +1,77 @@
+faixa,sim,dias,idx_i,idx_j,reciclada_i,original_j,rotulo
+0.75-0.80,0.78,60,1187,1273,Lula usou ponto eletrônico em debate da Globo,Globo entregou folha com respostas a Lula no Jornal Nacional,tema
+0.75-0.80,0.797,92,1848,1480,Janones não disse que Lula vai acabar com Auxílio Brasil; vídeo foi editado,"Ao contrário do que afirma vídeo, Lula não disse que vai implantar ditadura no Brasil em entrevista a canal chinês",diferente
+0.75-0.80,0.786,17,1519,1274,Vídeo que mostra Lula supostamente xingando apoiadores,É falsa foto de Silas Malafaia apoiando Lula exibida em vídeo viral,tema
+0.75-0.80,0.78,30,1586,297,Vídeo mente ao insinuar que protesto em Recife teria sido convocado por Lula,Comício de Lula em Curitiba não estava vazio; vídeo foi gravado antes do início,tema
+0.75-0.80,0.763,7,1791,1763,Felipão declarou apoio a Lula,Padre Marcelo Rossi manifestou apoio à candidatura de Lula,tema
+0.75-0.80,0.76,7,160,1812,"CNN não noticiou que Lula tributará o PIX, congelará poupanças e criará o “Peso Real”","UOL não publicou que Lula pretende taxar Pix, como alega post",mesma
+0.75-0.80,0.764,22,763,130,Janones diz que Lula vai acabar com o Auxílio Brasil para se vingar dos mais pobres,É uma montagem o tuíte em que Lula diz que confiscará poupanças para manter o Auxílio Brasil,tema
+0.75-0.80,0.782,13,1516,1282,Vídeo satiriza participação de Lula em comício em Belém,Vídeo que Lula chama apoiadores de vagabundos e bandidos,diferente
+0.80-0.85,0.822,49,1834,64,Boulos posta vídeo antigo de Bolsonaro como se fosse fala após derrota,Vídeo do Jornal Nacional foi adulterado para mostrar Jair Bolsonaro à frente em pesquisa Ipec,diferente
+0.80-0.85,0.821,14,1561,1112,Vídeo que insinua fraude em votação em Maceió reproduz infográfico com erro,Vídeo mostre fraude em urnas em sindicato,tema
+0.80-0.85,0.814,25,690,1346,"Ciro Gomes pede voto para Bolsonaro “22” no domingo, mostra vídeo",Ciro Gomes declarou apoio a Bolsonaro no 2º turno,mesma
+0.80-0.85,0.815,34,1524,1072,Vídeo foi manipulado para mostrar Bolsonaro à frente em pesquisa do Ipec,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 15 de agosto de 2022,mesma
+0.80-0.85,0.843,20,282,1265,"Na CNN, Lula usa desinformação para atacar governo Bolsonaro","Lula disse, em vídeo, que produz fake news e mente contra Bolsonaro",tema
+0.80-0.85,0.827,24,763,1382,Janones diz que Lula vai acabar com o Auxílio Brasil para se vingar dos mais pobres,Lula tuitou que vai 'bloquear poupanças' para manter Auxílio Brasil,tema
+0.80-0.85,0.82,8,1856,470,Vídeo de manifestação bolsonarista em Brasília foi gravado no 7/9 de 2021,"Vídeo mostra ato do 7 de Setembro em Brasília, não manifestação recente",mesma
+0.80-0.85,0.802,13,1423,1383,É antigo vídeo em que Bolsonaro supostamente comenta derrota na eleição,É antigo vídeo de Eduardo Leite declarando voto em Bolsonaro,diferente
+0.85-0.90,0.883,8,256,1077,Randolfe Rodrigues disse controlar PF e STF,Senador Randolfe Rodrigues disse em áudio que controla ações da PF e do STF,mesma
+0.85-0.90,0.862,38,401,54,PT votou contra a criação do Auxílio Brasil no Congresso,"PT votou contra a PEC dos Precatórios, e não contra o Auxílio Brasil como sugere vídeo viral",tema
+0.85-0.90,0.858,18,1349,1677,Foto de Bolsonaro na maçonaria posando com quadro de Baphomet,Imagem de Flávio Bolsonaro com camisa contra nordestinos é montagem,tema
+0.85-0.90,0.868,20,1433,1568,Seção sem voto para Bolsonaro no MT comprova fraude eleitoral,Vídeo de boletins de urna com mais votos para Bolsonaro não prova fraude,tema
+0.85-0.90,0.884,19,611,1680,"Pesquisa Ipec no Jornal Nacional mostra Bolsonaro com 55%, na frente de Lula no 2º turno das eleições",Pesquisa Ipec mostra Bolsonaro na frente de Lula com 46% no JN,mesma
+0.85-0.90,0.856,33,1100,1251,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 12 de setembro de 2022,Vídeo em que JN exibe pesquisa do Ipec com Bolsonaro na liderança,mesma
+0.85-0.90,0.875,7,1132,1321,Boletins de urna em vídeo provem que votos não foram computados,Vídeo que alerta sobre risco de o voto não ser computado na urna,mesma
+0.85-0.90,0.888,13,1494,1072,Vídeo que mostra Bolsonaro à frente na pesquisa Ipec do dia 15 de agosto de 2022 é falso,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 15 de agosto de 2022,mesma
+0.90-1.00,0.918,8,1841,1197,A Torre Eiffel foi iluminada em homenagem à eleição de Lula,Torre Eiffel foi iluminada de verde e amarelo em homenagem à vitória de Lula,mesma
+0.90-1.00,0.918,7,1671,48,Vídeo em que Lula fala em comprar voto de baianos por R$ 10,Vídeo de Lula falando em comprar voto de baianos por 10 reais foi manipulado,mesma
+0.90-1.00,0.905,13,1695,1514,Áudio de Bolsonaro que dá a entender que Michelle cumpriu pena,Áudio em que Bolsonaro xinga Michelle antes de ato de 7 de Setembro,tema
+0.90-1.00,0.908,13,852,584,Vídeo: 7 fake news que circularam na semana das eleições de 2022,Principais fake news de 1º de outubro de 2022 (véspera das eleições 2022),mesma
+0.90-1.00,0.92,55,1163,1269,Polícia Federal fez exposição com pilhas de dinheiro roubado pelo PT,Polícia Federal fez exposição com dinheiro recuperado em governos do PT,mesma
+0.90-1.00,0.949,10,1665,1277,Jornalista Vera Magalhães ganha R$ 500 mil ao ano da TV Cultura,Vera Magalhães ganha R$ 500 mil por ano da TV Cultura,mesma
+0.90-1.00,0.903,7,1620,728,"5,1 milhões de votos foram roubados de Bolsonaro no 2º turno","Mike Lindell está certo ao dizer que 5,1 milhões de votos foram roubados de Bolsonaro",mesma
+0.90-1.00,0.962,9,1652,242,Vídeo em que Bolsonaro faz oração é de 2018 e não foi gravado antes do JN,"Vídeo que mostra oração de Bolsonaro é de 2018, não anterior ao JN",mesma
+0.80-0.85,0.811,10,1568,597,Vídeo de boletins de urna com mais votos para Bolsonaro não prova fraude,Boletim de urna encontrado na rua em Curitiba (Paraná) prova fraude de votos não contabilizados para Bolsonaro nas eleições,mesma
+0.80-0.85,0.801,92,477,1480,Janones não disse que Lula vai acabar com o Auxílio Brasil,"Ao contrário do que afirma vídeo, Lula não disse que vai implantar ditadura no Brasil em entrevista a canal chinês",
+0.80-0.85,0.824,87,1834,224,Boulos posta vídeo antigo de Bolsonaro como se fosse fala após derrota,Vídeo que mostra recepção a Bolsonaro não é recente nem foi gravado em Goiânia,
+0.80-0.85,0.813,33,1313,1251,Vídeo em que Jornal Nacional divulga pesquisa com Bolsonaro à frente de Lula,Vídeo em que JN exibe pesquisa do Ipec com Bolsonaro na liderança,
+0.80-0.85,0.805,22,733,630,Fraude nas urnas 2022.pdf é um documento de 70 páginas da FFAA que comprova fraudes nas eleições do Brasil,Vídeo de boletins de urna de Minas Gerais mostram fraude contra Bolsonaro nas eleições 2022,
+0.80-0.85,0.842,32,563,524,Pesquisa Ipec no Jornal Nacional mostra Bolsonaro na frente de Lula com 46%,Pesquisa Ipec do Jornal Nacional (Globo) mostra Bolsonaro na frente de Lula,
+0.80-0.85,0.82,22,1196,620,Vídeo mostre Lula agradecendo ao chefe do tráfico por eleição,Vídeo mostra presidiários comemorando vitória de Lula no 1º turno das eleições,
+0.80-0.85,0.818,23,1686,1494,Video erra dados do Datafolha para desacreditar 2º lugar de Bolsonaro,Vídeo que mostra Bolsonaro à frente na pesquisa Ipec do dia 15 de agosto de 2022 é falso,
+0.80-0.85,0.821,24,1848,1764,Janones não disse que Lula vai acabar com Auxílio Brasil; vídeo foi editado,Lula não disse que vai bloquear poupanças para manter Auxílio Brasil,
+0.80-0.85,0.82,42,373,1494,Vídeo do JN é editado para fazer crer que Bolsonaro aparece à frente de Lula em pesquisa do Ipec,Vídeo que mostra Bolsonaro à frente na pesquisa Ipec do dia 15 de agosto de 2022 é falso,
+0.80-0.85,0.82,17,1867,1450,Votos de eleitores não foram revelados a partir da decodificação de urnas,Modelos de urnas usados na eleição não foram auditados,
+0.80-0.85,0.827,15,231,1229,Vídeo que usa imagens do JN para dizer que Bolsonaro lidera pesquisa Ipec,Fábio Assunção gravou vídeo imaginando reeleição de Bolsonaro,
+0.80-0.85,0.841,39,865,596,Relatório das Forças Armadas descobriu fraude nas urnas eletrônicas?,Exército pediu código-fonte das urnas eletrônicas porque descobriu fraude no “voto de rebanho”,
+0.80-0.85,0.811,25,475,384,Lula não reduziu o Auxílio Brasil para R$ 375 nem disse que manterá o benefício por mais quatro meses,Lula não escreveu tuíte sobre bloquear poupanças para manter Auxílio Brasil,
+0.80-0.85,0.824,80,432,224,"Vídeo mostra entrevista de Bolsonaro em 26 de outubro, não pronunciamento após derrota",Vídeo que mostra recepção a Bolsonaro não é recente nem foi gravado em Goiânia,
+0.80-0.85,0.812,30,584,837,Principais fake news de 1º de outubro de 2022 (véspera das eleições 2022),A verdade sobre 6 notícias falsas envolvendo as eleições!,
+0.80-0.85,0.807,29,1187,581,Lula usou ponto eletrônico em debate da Globo,Lula usou tornozeleira eletrônica durante debate da Globo,
+0.80-0.85,0.808,35,1518,224,Não é Fabio Assunção em vídeo de apoio a Bolsonaro e com críticas ao PT,Vídeo que mostra recepção a Bolsonaro não é recente nem foi gravado em Goiânia,
+0.80-0.85,0.814,33,64,524,Vídeo do Jornal Nacional foi adulterado para mostrar Jair Bolsonaro à frente em pesquisa Ipec,Pesquisa Ipec do Jornal Nacional (Globo) mostra Bolsonaro na frente de Lula,
+0.80-0.85,0.836,33,64,1251,Vídeo do Jornal Nacional foi adulterado para mostrar Jair Bolsonaro à frente em pesquisa Ipec,Vídeo em que JN exibe pesquisa do Ipec com Bolsonaro na liderança,
+0.80-0.85,0.805,41,1367,1494,Vídeo em que JN exibe pesquisa do Ipec com Bolsonaro na liderança no 2º turno,Vídeo que mostra Bolsonaro à frente na pesquisa Ipec do dia 15 de agosto de 2022 é falso,
+0.80-0.85,0.844,20,803,1614,Biden e CIA interferiram nas eleições do Brasil,Jornalista provou influência de Biden na eleição brasileira,
+0.85-0.90,0.898,9,1374,596,Exército pediu código-fonte da votação após fraude na eleição,Exército pediu código-fonte das urnas eletrônicas porque descobriu fraude no “voto de rebanho”,
+0.85-0.90,0.852,24,172,1764,Janones não disse que Lula pretende acabar com o Auxílio Brasil; vídeo viral é uma montagem,Lula não disse que vai bloquear poupanças para manter Auxílio Brasil,
+0.85-0.90,0.881,23,1566,1524,Vídeo foi editado para mostrar Bolsonaro à frente na pesquisa Ipec sobre segundo turno,Vídeo foi manipulado para mostrar Bolsonaro à frente em pesquisa do Ipec,
+0.85-0.90,0.874,25,493,423,Lula não disse que irá colocar ‘caminhoneiros em seu devido lugar’,Lula não disse que vai rever ou acabar com o PIX,
+0.85-0.90,0.878,57,1566,231,Vídeo foi editado para mostrar Bolsonaro à frente na pesquisa Ipec sobre segundo turno,Vídeo que usa imagens do JN para dizer que Bolsonaro lidera pesquisa Ipec,
+0.85-0.90,0.88,24,475,1764,Lula não reduziu o Auxílio Brasil para R$ 375 nem disse que manterá o benefício por mais quatro meses,Lula não disse que vai bloquear poupanças para manter Auxílio Brasil,
+0.85-0.90,0.884,19,1695,1299,Áudio de Bolsonaro que dá a entender que Michelle cumpriu pena,Áudio em gravação que mostra 'repreensão' de Bolsonaro a Michelle é falso,
+0.85-0.90,0.868,8,1660,1278,Jayme Monjardim não gravou vídeo criticando Fernando Haddad,Jayme Monjardim gravou vídeo criticando Fernando Haddad,
+0.85-0.90,0.858,34,1524,231,Vídeo foi manipulado para mostrar Bolsonaro à frente em pesquisa do Ipec,Vídeo que usa imagens do JN para dizer que Bolsonaro lidera pesquisa Ipec,
+0.85-0.90,0.871,39,1138,1494,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 5 de outubro de 2022,Vídeo que mostra Bolsonaro à frente na pesquisa Ipec do dia 15 de agosto de 2022 é falso,
+0.85-0.90,0.871,30,1433,597,Seção sem voto para Bolsonaro no MT comprova fraude eleitoral,Boletim de urna encontrado na rua em Curitiba (Paraná) prova fraude de votos não contabilizados para Bolsonaro nas eleições,
+0.85-0.90,0.863,57,1566,1072,Vídeo foi editado para mostrar Bolsonaro à frente na pesquisa Ipec sobre segundo turno,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 15 de agosto de 2022,
+0.85-0.90,0.852,7,1617,1815,Vídeo reúne dados incorretos e engana sobre comemoração da vitória de Lula,Vídeo usa dado errado para calcular resultado da eleição; Lula não perdeu,
+0.85-0.90,0.857,10,1509,1090,"Justiça Eleitoral rejeitou candidatura de Lula em 2018, não em 2022",TSE rejeitou candidatura de Lula em agosto de 2022,
+0.85-0.90,0.865,33,64,231,Vídeo do Jornal Nacional foi adulterado para mostrar Jair Bolsonaro à frente em pesquisa Ipec,Vídeo que usa imagens do JN para dizer que Bolsonaro lidera pesquisa Ipec,
+0.85-0.90,0.87,52,1867,1720,Votos de eleitores não foram revelados a partir da decodificação de urnas,Comprovante de votação não indica em quem o eleitor votou,
+0.85-0.90,0.892,27,152,1132,Vídeo não mostra voto sendo computado duas vezes e mesário não tem acesso à escolha do eleitor,Boletins de urna em vídeo provem que votos não foram computados,
+0.85-0.90,0.861,21,1524,1494,Vídeo foi manipulado para mostrar Bolsonaro à frente em pesquisa do Ipec,Vídeo que mostra Bolsonaro à frente na pesquisa Ipec do dia 15 de agosto de 2022 é falso,
+0.85-0.90,0.885,43,852,837,Vídeo: 7 fake news que circularam na semana das eleições de 2022,A verdade sobre 6 notícias falsas envolvendo as eleições!,
+0.85-0.90,0.858,52,1138,1251,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 5 de outubro de 2022,Vídeo em que JN exibe pesquisa do Ipec com Bolsonaro na liderança,
+0.85-0.90,0.896,8,1670,1295,Pistola d'água foi usada em atentado contra Cristina Kirchner,Arma usada em atentado contra Cristina Kirchner era uma pistola d'água,
+0.85-0.90,0.879,8,1496,1262,Apresentadores estrangeiros fizeram piada sobre Lula e eleitores baianos,Jornalistas estrangeiros riram sobre Lula querer comprar votos de baianos,

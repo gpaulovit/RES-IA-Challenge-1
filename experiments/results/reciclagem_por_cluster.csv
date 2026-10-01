@@ -1,0 +1,37 @@
+cluster_hdbscan,tamanho,taxa,exemplo
+23,54,0.7037037037037037,Vídeo de 2020 é usado para sugerir que Ratinho agendou entrevista com Bolsonaro em 25/08/2022
+29,16,0.5625,Vídeo de Tom Cruise segurando um emblema escrito “Brasil” não era em apoio a Bolsonaro
+24,76,0.3157894736842105,Pesquisa Ipec de 08/2022 não apontou Bolsonaro com 44% dos votos; reportagem foi manipulada
+19,16,0.3125,Áudio em que Bolsonaro parece xingar a primeira-dama antes do desfile de 7 de setembro é falso
+17,189,0.2751322751322751,O portal g1 não noticiou que banqueiros apoiarão Lula em troca de revogação do PIX
+13,122,0.22950819672131148,William Bonner não chamou Lula e Alckmin de ladrões; áudio de vídeo viral foi manipulado
+31,57,0.21052631578947367,"Vídeo de 2020 foi cortado para simular contradição de Renata Vasconcellos sobre o ""fique em casa"""
+9,57,0.19298245614035087,"Instituto Lula não fica no mesmo endereço do Ipec, que realiza pesquisas eleitorais"
+21,37,0.1891891891891892,Comparação entre gráficos de apuração no Brasil e nos EUA não prova fraude; sistemas são distintos
+32,30,0.16666666666666666,O primeiro debate presidencial para as eleições 2022 verificado
+30,77,0.15584415584415584,Denúncia de policiais sobre suposto problema nas urnas é de 2018 e foi considerada infundada
+14,78,0.15384615384615385,Programas da TV Globo apresentados por Luciano Huck não receberam verbas da Lei Rouanet
+3,21,0.14285714285714285,"Os homens com tatuagens nazistas fotografados em uma praia são húngaros, não refugiados ucranianos"
+10,15,0.13333333333333333,"Número divulgado por usuários em referência a Bolsonaro é de 2018; em 2022, ele usa 22"
+25,16,0.125,"Mulher que diz em vídeo que sistema eleitoral brasileiro é ""inauditável"" não é funcionária do TSE"
+0,18,0.1111111111111111,Salário anual de Vera Magalhães na TV Cultura não é de R$ 500 mil; é de quase metade desse valor
+7,28,0.10714285714285714,"Ao menos outros 12 países tiveram deflação em julho; Brasil não foi o único, como dizem nas redes"
+12,47,0.10638297872340426,Este vídeo foi publicado há mais de um ano e não mostra a escolta de Nancy Pelosi em Taiwan
+22,29,0.10344827586206896,Checamos as principais alegações de Bolsonaro sobre a covid-19 em entrevista ao podcast Flow
+26,20,0.1,"O presidente Jair Bolsonaro tenha deixado o Exército por ""insanidade mental"""
+33,22,0.09090909090909091,Mesário não tem como anular votos e alterar a assinatura do eleitor é crime eleitoral
+1,35,0.08571428571428572,Não há nenhuma lei ou projeto de lei que proíba o uso da Bíblia no Brasil
+34,47,0.0851063829787234,O QR Code no título de eleitor não é usado para computar voto nas eleições
+27,24,0.08333333333333333,Urnas estão sendo modificadas no Sindicato dos Metalúrgicos do ABC
+28,27,0.07407407407407407,"Maiara e Maraisa pararam show por brigas na plateia, não por se posicionarem contra Bolsonaro"
+11,65,0.06153846153846154,"O vídeo do suposto saque em Tucumán, na Argentina, foi gravado em um protesto"
+4,17,0.058823529411764705,Frases sobre família e igreja atribuídas a Lula em postagem são falsas
+20,40,0.05,A ONU não promove a fome mundial; o artigo que fala dos seus “benefícios” é uma crítica
+35,24,0.041666666666666664,"Divergência de números em seção no Amapá se deu por voto em trânsito, não por fraude na urna"
+5,34,0.029411764705882353,"CNSaúde iniciou ação contra piso da enfermagem, e não Conselho Nacional de Saúde"
+8,35,0.02857142857142857,"Marcelo Freixo não disse em entrevista que, se for eleito, policiais não poderão atirar em ninguém"
+16,17,0.0,Posts distorcem fala de Lula ao JN sobre setor ‘fascista’ do agronegócio
+15,20,0.0,Denúncias contra o PT em aplicativo do TSE devem ser feitas na aba destinada a federações partidárias
+6,19,0.0,"Dias Toffoli não “assumiu” a presidência do TSE, e sim tomou posse como ministro substituto"
+2,23,0.0,"Vídeo mostra manifestantes entrando em faculdade, não em igreja em Joinville"
+18,21,0.0,"Impulsionar o aborto, fomentar a eutanásia e outras frases falsas sobre a Agenda 2030 da ONU"
