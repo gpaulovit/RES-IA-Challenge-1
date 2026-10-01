@@ -183,9 +183,11 @@ outro tamanho), o 02 para com erro em vez de colar a nota antiga num cluster que
 outro. Isso evita o que aconteceu na reexecução de 01/10, quando o arquivo ficou com notas
 de clusters que não existiam mais. O arquivo fica no git para revisão.
 
-**Pendente:** dar as notas dos 10 clusters da execução atual. As notas da 1ª execução
-(4 com nota 3, 3 com nota 2 e 3 com nota 1) estão no commit `726c6ef` e valem só para aquela
-clusterização.
+**Notas da execução atual (01/10/2026, Paulo):** média 2,2 nos 10 clusters inspecionados.
+4 receberam nota 3 (257 alegações), 4 nota 2 (109) e 2 nota 1 (51). Os clusters de tema
+único são os maiores (ex.: 11, votos "roubados" de Bolsonaro; 15, pesquisa Ipec; 17, urna
+e boletim). As notas da 1ª execução (média 2,1) estão no commit `726c6ef` e valem só para
+aquela clusterização.
 
 ## Recorrência temporal (03, tarefas 1.3–1.4)
 
