@@ -6,6 +6,8 @@
 - [Referências](refs.md)
 - Domínio de dados
   - [Semana 1 — cobertura e vereditos](semana-1-dados.md)
+- DevOps e MLOps
+  - [Avaliação de benchmark e métricas](avaliacao-benchmark.md)
 - Engenharia
   - [Guia da arquiteta](guia-arquiteta.md)
   - [Semana 1 — passo a passo](semana-1-engenharia.md)
