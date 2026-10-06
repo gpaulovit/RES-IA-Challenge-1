@@ -128,7 +128,7 @@ pela frente de Modelos), e a estabilidade de faixa (≥ 92%) foi movida para dep
 faixas (Decisão 6).
 
 **Resultado da 1ª rodada (2026-10-06): NO-GO.** Rodado com `experiments/gate.py` no commit
-`59a11ed`, posterior ao pré-registro (`31c1837` e `59a11ed`). Números de
+`34332ae`, posterior ao pré-registro (`1f63886` e `34332ae`). Números de
 `experiments/results/gate_criterios.csv` e `gate_temporal.csv`; contagens e SHA-256 dos conjuntos
 em `gate_conjuntos.csv`.
 
