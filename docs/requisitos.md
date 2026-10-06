@@ -1,202 +1,182 @@
 # Requisitos
 
 Gerados via OpenSpec, na proposta de mudança
-[`add-recycled-claim-semantic-retrieval`](https://github.com/gpaulovit/RES-IA-Challenge-1/tree/main/openspec/changes/add-recycled-claim-semantic-retrieval).
-Os requisitos do produto real abaixo ainda não estão implementados/arquivados — os requisitos formais oficiais só migram
-para `openspec/specs/` quando a implementação for concluída.
+[`add-fake-news-pattern-scoring`](https://github.com/gpaulovit/RES-IA-Challenge-1/tree/main/openspec/changes/add-fake-news-pattern-scoring).
+Os requisitos abaixo ainda não estão implementados nem arquivados: os requisitos formais só
+migram para `openspec/specs/` quando a implementação for concluída.
 
-Já existe um [protótipo de Engenharia](funcionalidades.md) com três exemplos
-fictícios e comparação por palavras. Ele tem critérios próprios na proposta e
-não conclui os requisitos de busca semântica e confiança descritos nesta página.
+> **Reenquadramento (2026-10-06).** A versão anterior desta página descrevia um produto de
+> recuperação da checagem já existente (change
+> [`add-recycled-claim-semantic-retrieval`](https://github.com/gpaulovit/RES-IA-Challenge-1/tree/main/openspec/changes/add-recycled-claim-semantic-retrieval),
+> mantida como histórico dos gates). A equipe descartou essa ideia; a versão anterior desta
+> página está no histórico do git.
 
-Esta página segue o fluxo completo trabalhado durante a concepção do
-produto: **problema → objetivo de produto → objetivos específicos →
-requisitos**. As perguntas orientadoras que sustentam cada etapa estão em
+O [protótipo de Engenharia](funcionalidades.md) com três exemplos fictícios ainda segue o contrato
+antigo de busca e não conclui nenhum requisito desta página.
+
+Esta página segue o fluxo da concepção do produto: **problema → objetivo de produto → objetivos
+específicos → requisitos**. As perguntas que sustentam cada etapa estão em
 [Perguntas](perguntas.md).
 
 ## 1. Problema
 
-O público e as próprias agências de checagem não têm como identificar, de
-forma rápida e sistemática, quando uma alegação política nova é, na
-verdade, um boato reciclado que já foi checado anteriormente sob outra
-redação. Busca lexical ou manual não detecta essa recorrência por
-definição, porque a superfície do texto muda a cada reescrita — mesmo
-quando a checagem daquela alegação já existe e está catalogada.
+Quem recebe uma notícia política nova pelo WhatsApp não tem como saber, na hora, se ela se parece
+com boatos que já circularam. A maior parte do que chega nunca foi checada, e a checagem humana
+demora. Os gates do projeto mostraram que a mesma alegação raramente volta (1,4% dentro de um
+ciclo; 1,6% entre ciclos), mas que a mesma **narrativa** volta com frequência: 62 de 71 pares
+dentro de 2022 e 53 de 59 pares entre 2013–2021 e 2022 foram rotulados como mesma alegação ou
+mesmo tema.
 
-**Pergunta norteadora do problema:** existe evidência suficiente, nesta
-fase de concepção, de que o principal gargalo do combate à desinformação
-política no Brasil é a falta de acesso rápido e comparável a checagens já
-existentes — e não a falta de checagens em si, a falta de vontade do
-público em checar, ou uma barreira estrutural das plataformas de
-mensageria — de forma que um produto de recuperação semântica endereça a
-causa raiz do problema, e não apenas um sintoma secundário dele?
+**Pergunta norteadora do problema:** o padrão semântico das notícias falsas sobre política no
+Brasil se repete ao longo do tempo a ponto de um modelo treinado com boatos já checados de um
+período estimar, com confiabilidade, a chance de uma notícia nova de um período posterior ser
+falsa — sem que o que ele aprendeu seja só o veículo, a época ou o formato do texto?
 
 ## 2. Objetivo de produto
 
-Construir uma capacidade de recuperação semântica sobre o corpus de
-alegações políticas já verificadas
-([FactPolCheckBr](https://github.com/Interfaces-UFSCAR/Dataset-FactPolCheckBr)),
-capaz de reconhecer alegações reincidentes — recicladas ou reescritas ao
-longo do tempo — de forma robusta e responsável, classificando cada
-correspondência por nível de confiança em vez de retornar um veredito
-único e opaco.
+Construir um bot que estime, de forma calibrada e explicada, a chance de uma notícia política nova
+ser falsa, a partir dos padrões narrativos de boatos já checados, apresentando o resultado em
+faixas e nunca como veredito.
 
-- **Capacidade:** `claim-recurrence-retrieval`.
-- **Validação prévia obrigatória:** um gate empírico (clusterização
-  temática latente + análise de sazonalidade/ressurgimento temporal, sem
-  depender de rótulo manual) precede qualquer trabalho de indexação, para
-  confirmar que a reciclagem de boato é um fenômeno mensurável nesta base.
-- **Fora de escopo deste change:** indicadores de impacto social/
-  comportamental pós-lançamento — dependem de dado de uso real e ficam
-  para um change futuro.
+- **Capacidade:** `fake-news-pattern-scoring`.
+- **Validação prévia obrigatória:** um gate de generalização temporal — o modelo treinado até um
+  ano precisa separar falsas de verdadeiras em um período posterior, inclusive quando a fonte
+  muda, com critério escrito antes de rodar. Sem passar no gate, nenhum score é exposto.
+- **Fora de escopo deste change:** dizer se uma notícia é verdadeira ou falsa; verificação de
+  fatos automatizada; indicadores de impacto social/comportamental pós-lançamento.
 
 ## 3. Objetivos específicos
 
-Cada eixo de investigação da concepção do produto se traduz em um
-objetivo específico, testável ainda nesta fase de concepção.
+Cada eixo de investigação da concepção se traduz em um objetivo específico, testável ainda nesta
+fase.
 
 ### Eixo 1 — Dados e Contexto Eleitoral
 
-**Objetivo específico:** validar que a base FactPolCheckBr tem volume,
-cobertura temática e temporal suficientes para sustentar um índice
-semântico representativo do universo de boatos políticos brasileiros,
-por meio de clusterização e análise de distribuição.
+**Objetivo específico:** montar uma base no recorte político com exemplos falsos (FactPolCheckBr,
+Central de Fatos) e verdadeiros (Fake.br, FakeRecogna), com rótulos normalizados e carimbos de
+agência removidos, e medir quanto do rótulo é explicado só pela fonte e pela época.
 
 ### Eixo 2 — IA e NLP
 
-**Objetivo específico:** selecionar (ou ajustar) um modelo de embeddings
-que recupere corretamente a checagem correspondente para uma parcela
-relevante de alegações parafraseadas ou informais, validando
-empiricamente a busca semântica como abordagem superior à classificação
-estilística de "fake ou não".
+**Objetivo específico:** treinar um modelo sobre embeddings que estime de forma calibrada a chance
+de uma notícia política ser falsa em um período posterior ao do treino, estável a reescritas de
+superfície, e cujo desempenho não seja explicado pela fonte ou pela época.
 
 ### Eixo 3 — Decisão, Validação e Produto
 
-**Objetivo específico:** definir uma política de decisão (faixas de
-confiança + tratamento de fallback) que separe de forma confiável
-alegações já checadas de alegações inéditas ou ambíguas, dentro de
-margens de erro toleráveis para uso público.
+**Objetivo específico:** definir faixas de resposta e uma linguagem que comuniquem a estimativa sem
+afirmar veredito, com taxa de falso alarme sobre notícias verdadeiras dentro de uma margem
+tolerável e com uma saída honesta ("fora dos padrões conhecidos") para o que o modelo não conhece.
 
 ### Eixo 4 — Impacto Social e Cidadania *(fora de escopo deste change)*
 
-**Objetivo específico (reformulado):** projetar, com os dados e a
-literatura disponíveis nesta fase, indicadores mensuráveis de impacto
-social (concentração temática de vulnerabilidade, padrões por canal) que
-sirvam de baseline — deixando explícito que a validação causal do efeito
-sobre o comportamento do eleitor depende de dados de uso pós-lançamento e
-não é resolvível na etapa de concepção. Não gera requisitos nesta
-proposta.
+**Objetivo específico (reformulado):** projetar, com os dados e a literatura disponíveis nesta
+fase, indicadores mensuráveis de impacto social (concentração temática de vulnerabilidade,
+padrões por canal) que sirvam de baseline — deixando explícito que a validação causal do efeito
+sobre o comportamento do eleitor depende de dados de uso pós-lançamento e não é resolvível na
+etapa de concepção. Não gera requisitos nesta proposta.
 
 ## 4. Requisitos
 
-Cada requisito abaixo realiza um dos objetivos específicos acima.
+Cada requisito abaixo realiza um dos objetivos específicos acima. O texto normativo, em inglês,
+está no [spec da change](https://github.com/gpaulovit/RES-IA-Challenge-1/tree/main/openspec/changes/add-fake-news-pattern-scoring/specs/fake-news-pattern-scoring/spec.md).
 
-### Indexar o corpus para recuperação semântica
-
-*Realiza o objetivo específico do Eixo 1.*
-
-O sistema DEVE indexar o corpus de alegações políticas catalogadas (texto da
-alegação e seu veredito de checagem associado) em uma forma que suporte
-recuperação por similaridade.
-
-- **Cenário — alegação recuperável após indexação**: quando uma alegação do
-  corpus catalogado foi indexada, uma consulta de entrada semanticamente
-  equivalente a essa alegação a retorna como candidata de recuperação.
-
-### Recuperar a alegação catalogada sob reescrita
+### Gate de generalização temporal antes do produto
 
 *Realiza o objetivo específico do Eixo 2.*
 
-O sistema DEVE recuperar a alegação catalogada correta para uma alegação de
-entrada que seja paráfrase, substituição por gíria/apelido, erro ortográfico
-proposital, inversão de negação, ou uma alegação que ressurge em um período
-posterior sob redação de superfície diferente — dentro de uma degradação
-tolerável de acurácia de recuperação em relação a alegações não modificadas.
+O sistema NÃO DEVE expor score a usuários sem que um modelo treinado só com itens até um ano de
+corte tenha passado no critério pré-registrado de generalização, avaliado em itens posteriores a
+esse ano. O critério (métricas e limites) DEVE ser registrado antes da avaliação.
 
-- **Cenário — alegação histórica reescrita é reconhecida como recorrência**:
-  quando uma alegação de entrada é uma versão reescrita de uma alegação
-  catalogada em um período anterior, o sistema retorna a alegação catalogada
-  original entre os top-k candidatos de recuperação.
-- **Cenário — paráfrase adversarial não falha silenciosamente**: quando uma
-  alegação de entrada usa gíria, substituição por apelido, ou erro
-  ortográfico proposital de uma alegação catalogada, o sistema retorna a
-  alegação catalogada entre os top-k candidatos, ou classifica a consulta
-  conforme o requisito de faixas de confiança abaixo, em vez de retornar um
-  resultado não relacionado silenciosamente.
+- **Cenário — gate avaliado num período posterior**: quando o modelo é treinado até o ano de
+  corte e avaliado depois dele, o resultado traz as métricas pré-registradas, no geral e por
+  fonte, e registra `go` ou `no-go`.
+- **Cenário — gate não aprovado**: quando o resultado é `no-go`, nenhum score aparece na
+  interface e o motivo fica registrado.
 
-### Classificar cada resultado por faixa de confiança
+### Estimar de forma calibrada a chance de ser falsa
 
-*Realiza o objetivo específico do Eixo 3.*
+*Realiza o objetivo específico do Eixo 2.*
 
-O sistema DEVE classificar cada resultado de recuperação em uma de um
-conjunto definido de faixas de confiança (match confirmado, match provável
-que requer revisão, sem match, alegação inédita) em vez de retornar um único
-veredito binário sim/não.
+O sistema DEVE devolver, para uma notícia enviada, uma estimativa da probabilidade de ela ser
+falsa, calibrada: entre os itens com estimativa perto de p, a fração de falsos observada em dados
+não vistos fica perto de p.
 
-- **Cenário — similaridade ambígua é sinalizada, não resolvida
-  silenciosamente**: quando o escore de similaridade do candidato principal
-  de recuperação cai entre os limiares de match confirmado e sem match, o
-  sistema classifica o resultado como "match provável" e não o apresenta
-  como confirmado.
+- **Cenário — score para texto válido**: quando alguém envia um texto não vazio, o sistema
+  devolve uma estimativa entre 0 e 1 e a faixa correspondente.
+- **Cenário — calibração medida, não presumida**: na avaliação, a calibração é relatada junto com
+  a discriminação, e as faixas saem das estimativas calibradas.
 
-### Tratar com responsabilidade alegações parciais e mistas
+### Apresentar em faixas, com estado "fora dos padrões"
 
 *Realiza o objetivo específico do Eixo 3.*
 
-O sistema NÃO DEVE aplicar um veredito catalogado a partes de uma alegação de
-entrada que não foram cobertas por aquela checagem catalogada, quando a
-alegação de entrada mistura conteúdo previamente verificado com conteúdo
-novo e não verificado.
+O sistema DEVE apresentar a estimativa em uma de quatro faixas: compatível com narrativas falsas
+conhecidas, incerto, pouco compatível ou fora dos padrões conhecidos. "Fora dos padrões" vale
+quando o texto não se parece com nenhuma narrativa do treino, qualquer que seja a probabilidade.
 
-- **Cenário — alegação mista não é totalmente endossada por um match
-  parcial**: quando uma alegação de entrada combina uma alegação falsa
-  previamente catalogada com uma afirmação adicional não catalogada, a
-  resposta do sistema aborda apenas a parte catalogada e marca a afirmação
-  adicional como não coberta/não verificada.
+- **Cenário — estimativa intermediária**: entre os limites inferior e superior, a resposta é
+  "incerto" e não pende para falsa nem para verdadeira.
+- **Cenário — texto longe de tudo o que o modelo conhece**: abaixo do limite de semelhança, a
+  resposta é "fora dos padrões conhecidos" e diz que o modelo não tem base para avaliar.
 
-### Expor divergências de veredito entre agências
+### Nunca apresentar o resultado como veredito
 
 *Realiza o objetivo específico do Eixo 3.*
 
-O sistema DEVE expor quando duas ou mais agências de checagem emitiram
-vereditos divergentes para alegações semanticamente equivalentes, em vez de
-selecionar um silenciosamente.
+O sistema NÃO DEVE afirmar nem sugerir que a notícia é verdadeira ou falsa. Toda resposta DEVE
+dizer que o resultado mede semelhança com padrões de boatos já checados e DEVE indicar as fontes
+de checagem para o veredito.
 
-- **Cenário — veredictos divergentes são ambos exibidos**: quando um match
-  recuperado corresponde a alegações checadas por mais de uma agência com
-  veredictos diferentes, o sistema apresenta ambos os veredictos e suas
-  fontes em vez de resolver a divergência automaticamente.
+- **Cenário — estimativa alta**: na faixa "compatível com narrativas falsas conhecidas", a
+  resposta diz que a notícia se parece com narrativas falsas já checadas, traz o aviso de
+  limitação e não usa "falsa" ou "fake" como conclusão sobre a notícia.
 
-### Apresentar os resultados de forma explicável
+### Explicar pelo que já foi checado
 
 *Realiza o objetivo específico do Eixo 3.*
 
-O sistema DEVE apresentar resultados de recuperação como uma lista
-ranqueada de candidatos com a justificativa/evidência de cada
-correspondência, em vez de uma única resposta não explicada.
+O sistema DEVE mostrar, com cada resultado, as notícias já checadas mais próximas do texto
+enviado, cada uma com agência, data e o rótulo publicado pela agência.
 
-- **Cenário — usuário consegue ver por que um match foi retornado**: quando
-  uma consulta retorna candidatos de recuperação, cada candidato é
-  apresentado junto com o texto da alegação/veredito fonte contra o qual foi
-  comparado, não uma conclusão única e opaca.
+- **Cenário — usuário vê por que recebeu o score**: com cada score vêm os itens checados mais
+  próximos, com fonte, data e rótulo da agência.
 
-### Normalizar rótulos de veredito entre agências
+### Manter a faixa sob reescrita de superfície
 
-*Realiza o objetivo específico do Eixo 3 (pré-requisito de dado).*
+*Realiza o objetivo específico do Eixo 2.*
 
-O sistema DEVE mapear os rótulos de veredito heterogêneos usados pelas
-agências contribuintes do corpus (ex.: "Falsa", "Fake", "Enganosa") para uma
-taxonomia normalizada única antes de aplicar a classificação por faixas de
-confiança ou a lógica de match parcial.
+O sistema DEVE manter a faixa de uma notícia, dentro de uma tolerância registrada no design,
+quando ela é reescrita por paráfrase, gíria, apelido ou erro de digitação proposital. A negação
+NÃO é tratada como reescrita de superfície, porque pode inverter o sentido.
 
-- **Cenário — rótulo específico de agência é normalizado antes da
-  classificação**: quando uma alegação de qualquer agência contribuinte é
-  indexada, seu rótulo de veredito original é mapeado para a taxonomia de
-  veredito normalizada do sistema antes de ser usado na lógica de
-  classificação.
+- **Cenário — reescrita com gíria e apelido**: a notícia e a reescrita recebem a mesma faixa em
+  pelo menos a fração tolerada dos casos de teste.
+- **Cenário — negação avaliada à parte**: a notícia e a versão negada são relatadas numa categoria
+  separada, e mudança de faixa ali não conta como falha de robustez.
+
+### Normalizar rótulos antes do treino
+
+*Realiza o objetivo específico do Eixo 1 (pré-requisito de dado).*
+
+O sistema DEVE mapear os rótulos de cada fonte para uma taxonomia única antes de qualquer uso em
+treino ou avaliação, e DEVE excluir itens cujo rótulo não tenha mapeamento.
+
+- **Cenário — rótulo sem mapeamento**: o item fica fora do treino e da avaliação e é contado no
+  relatório de cobertura.
+
+### Validar a entrada
+
+*Realiza o objetivo específico do Eixo 3.*
+
+O sistema DEVE recusar entrada vazia ou malformada com um erro explicativo, sem devolver score.
+
+- **Cenário — texto vazio**: texto vazio ou só com espaços gera erro de validação e nenhum
+  score.
 
 ## Fora de escopo
 
-Indicadores de impacto social/comportamental pós-lançamento (concentração de
-vulnerabilidade, padrões por canal). Dependem de dado de uso real e não são
-resolvíveis na fase de concepção — ficam para um change futuro.
+- Afirmar a verdade ou a falsidade de uma notícia; verificação de fatos automatizada.
+- Indicadores de impacto social/comportamental pós-lançamento (concentração de vulnerabilidade,
+  padrões por canal). Dependem de dado de uso real e ficam para um change futuro.

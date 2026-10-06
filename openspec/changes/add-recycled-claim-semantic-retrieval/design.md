@@ -112,12 +112,49 @@ cada alegação em no máximo um par), 20 pares por faixa, semente 44.
 
 **Decisão:**
 - GO (reabre a premissa temporal, agora entre ciclos): taxa ≥ 10%
-- O cenário de recorrência do spec volta, redefinido como recorrência entre ciclos (base histórica 2013–2021)".
+- O cenário de recorrência do spec volta, redefinido como recorrência entre ciclos (base histórica 2013–2021).
 - NO-GO (confirma o reenquadramento): taxa < 3%
 - Inconclusivo: entre os dois → Repetir com o melhor modelo testado e verificar se a pergunta é efetivamente respondida.
 - **Por que esses limites:** Seguir o padrão já definido anteriormente, para efetivamente testar se a escolha do modelo funciona, ter algo efetivamente para recuperar.
 
 **O que este gate NÃO muda:** o NO-GO dentro de um ciclo (Gate Result de 2026-09-29) continua valendo.
+
+## Gate complementar: resultado (2026-10-06)
+
+**Decisão pela regra pré-registrada: NO-GO** para reciclagem da mesma alegação entre ciclos.
+
+Rotulagem às cegas de 59 pares (2022 × vizinho mais próximo em 2013–2021; a faixa não era visível
+para quem rotulou), feita por anotador(a) fora da frente de Modelos. Arquivos:
+`experiments/results/validacao_entre_ciclos.csv` (rótulos) e `validacao_entre_ciclos_chave.csv`
+(faixa e similaridade). Totais: 28 `mesma`, 25 `tema`, 6 `diferente`.
+
+| Faixa de τ | n | Mesma | Tema | Diferente |
+|---|---|---|---|---|
+| 0,80–0,85 | 20 | 3 | 11 | 6 |
+| 0,85–0,90 | 20 | 10 | 10 | 0 |
+| 0,90–0,95 | 18 | 14 | 4 | 0 |
+| ≥ 0,95 | 1 | 1 | 0 | 0 |
+
+- **Leitura pré-registrada (só `mesma`):** a precisão acumulada é 47% em τ ≥ 0,80, 65% em ≥ 0,85
+  e **79% (IC 95% 57–91%) em ≥ 0,90**. O menor τ com precisão ≥ 75% é 0,90, onde a taxa é
+  **1,6%** das alegações de 2022 (0,6% só com vizinhos de 2018). Abaixo de 3%: NO-GO.
+- **Releitura por narrativa (exploratória, feita depois de ver os rótulos):** contando `mesma`
+  e `tema` como "mesma narrativa", a precisão é **100% em τ ≥ 0,85** (40/40, IC 91–100%) e 70%
+  (14/20) na faixa 0,80–0,85. Somando o gate dentro do ciclo, 62 dos 71 pares eram `mesma`
+  ou `tema`. A alegação específica raramente volta; a narrativa volta com frequência.
+- **Ressalvas:** a faixa ≥ 0,95 tem 1 par (3 das 4 alegações tinham o mesmo vizinho antigo); um
+  único anotador nesta rodada, sem medida de concordância; um único modelo (MiniLM); a releitura
+  por narrativa não foi pré-registrada e por isso **não decide nada aqui**. Ela vira a hipótese
+  pré-registrada da change `add-fake-news-pattern-scoring`, a ser testada em dados ainda não
+  usados.
+
+## Substituição (2026-10-06)
+
+A ideia de produto desta change (recuperar a checagem já existente para uma alegação) foi
+descartada pela equipe. O produto passa a ser um bot que estima a chance de uma notícia nova
+ser falsa, apoiado na hipótese de que o padrão narrativo das fake news se repete ao longo do
+tempo. Ver `openspec/changes/add-fake-news-pattern-scoring/`. Esta change fica como histórico
+dos gates e da preparação de dados; não deve ser arquivada como concluída.
 
 ## Escolha do modelo de embeddings (critério, 2026-10-01, antes de qualquer resultado)
 
