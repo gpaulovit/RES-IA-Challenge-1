@@ -1,0 +1,14 @@
+teste,criterio,valor,nivel
+A,auc,0.8347495131881748,INCONCLUSIVO
+A,ece,0.04962841859805019,GO
+A,brier_skill,0.31660251529000294,GO
+A,ganho_sobre_lexica,-0.02141202367483297,NO-GO
+A,distancia_ao_atalho,-0.08633501889522588,NO-GO
+A,giria_apelido,"média 0.097; >0,25: 8.0%",INCONCLUSIVO
+B,auc,0.6512674342544857,NO-GO
+B,ece,0.18847225235470044,NO-GO
+B,brier_skill,0.027959465360069102,GO
+B,ganho_sobre_lexica,-0.039159287367154905,NO-GO
+B,distancia_ao_atalho,-0.2072372816981648,NO-GO
+B,giria_apelido,"média 0.094; >0,25: 7.0%",INCONCLUSIVO
+A+B,veredito,,NO-GO

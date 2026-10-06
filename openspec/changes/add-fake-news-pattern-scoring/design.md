@@ -127,6 +127,37 @@ variação da probabilidade (limites 0,10 / 0,15 / 0,25 / 5% / 10%, sugeridos na
 pela frente de Modelos), e a estabilidade de faixa (≥ 92%) foi movida para depois da definição das
 faixas (Decisão 6).
 
+**Resultado da 1ª rodada (2026-10-06): NO-GO.** Rodado com `experiments/gate.py` no commit
+`59a11ed`, posterior ao pré-registro (`31c1837` e `59a11ed`). Números de
+`experiments/results/gate_criterios.csv` e `gate_temporal.csv`; contagens e SHA-256 dos conjuntos
+em `gate_conjuntos.csv`.
+
+| Critério | Teste A (FakeRecogna 2020 → 2021) | Teste B (Fake.br + CdF ≤ 2018 → FakeRecogna + CdF 2020–21) |
+|---|---|---|
+| AUC do modelo principal (MiniLM + reg. logística) | 0,835 — inconclusivo | 0,651 — **NO-GO** |
+| ECE | 0,050 — GO | 0,188 — **NO-GO** |
+| Brier skill score | 0,317 — GO | 0,028 — GO |
+| Ganho sobre TF-IDF (AUC 0,856 / 0,690) | −0,021 — **NO-GO** | −0,039 — **NO-GO** |
+| Distância ao controle fonte+ano (AUC 0,921 / 0,859) | −0,086 — **NO-GO** | −0,207 — **NO-GO** |
+| Gíria e apelido (pior classe: média; % > 0,25) | 0,097; 8,0% — inconclusivo | 0,094; 7,0% — inconclusivo |
+
+n de avaliação: A = 1.129 (322 falsas); B = 3.468 (1.330 falsas).
+
+**Leitura:**
+
+- **O que separa falsas de verdadeiras nesses dados é o veículo, não a narrativa.** Só o domínio
+  e o ano preveem o rótulo melhor que o modelo: AUC 0,92 em A e 0,86 em B. Isso vale dentro do
+  FakeRecogna, porque UOL e Globo publicam verdadeiras e as agências publicam falsas.
+- **Os embeddings não superam o TF-IDF** em nenhum dos testes.
+- **Quando a fonte muda (B), a separação cai para 0,65** e as probabilidades deixam de ser
+  calibradas.
+- **A hipótese "o padrão narrativo aprendido num período se transfere para o seguinte" não tem
+  apoio com estas bases.** Pela regra de agregação e pela tarefa 4.3, a change para aqui. Nada
+  das Seções 5–8 é construído antes de o grupo rediscutir o escopo.
+- **Ressalva:** é uma rodada com um modelo, sem k-NN e sem ajuste. Esses itens adiados não
+  mudariam o critério de atalho, que é o que mais falha: o controle fonte+ano não depende do
+  modelo de texto.
+
 ### 5. Modelos: linhas de base antes de qualquer coisa maior
 
 1. Regressão logística sobre embeddings de frase (os candidatos e revisões do notebook

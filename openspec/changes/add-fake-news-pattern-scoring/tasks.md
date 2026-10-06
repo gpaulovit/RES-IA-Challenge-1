@@ -10,41 +10,41 @@
 
 ## 2. Base de treino e avaliação
 
-- [ ] 2.1 Estender `experiments/corpora.py` para carregar Fake.br e FakeRecogna (do zip, com
+- [x] 2.1 Estender `experiments/corpora.py` para carregar Fake.br e FakeRecogna (do zip, com
       `csv.reader`) mantendo `is_fake`, ano, fonte e categoria; verificar contagens por ano e
       classe iguais à tabela do design.md.
-- [ ] 2.2 Acrescentar a `experiments/limpeza.py` a remoção de carimbos de agência ("É #FAKE",
+- [x] 2.2 Acrescentar a `experiments/limpeza.py` a remoção de carimbos de agência ("É #FAKE",
       "Boato –", nomes de agência no início) e conferir por diff: nenhum título que começa com um
       carimbo sobra, e os títulos de 2022 mudam só onde havia carimbo.
-- [ ] 2.3 Montar os conjuntos dos testes A, B e C (design.md, Decisão 3) só com o recorte político
+- [x] 2.3 Montar os conjuntos dos testes A, B e C (design.md, Decisão 3) só com o recorte político
       e a unidade título/1ª linha; verificar por tabela de contagem por conjunto, ano, fonte e
       classe, e registrar o hash de cada conjunto no `experiments/README.md`.
-- [ ] 2.4 Normalizar os rótulos de todas as fontes numa taxonomia única e gerar o relatório de
+- [x] 2.4 Normalizar os rótulos de todas as fontes numa taxonomia única e gerar o relatório de
       cobertura; verificar que nenhum item sem mapeamento entra nos conjuntos.
-- [ ] 2.5 Auditoria de atalho antes de treinar: medir quanto fonte e ano sozinhos predizem o
+- [x] 2.5 Auditoria de atalho antes de treinar: medir quanto fonte e ano sozinhos predizem o
       rótulo em cada conjunto; verificar que a tabela está no relatório da Seção 4.
 
 ## 3. Linhas de base
 
-- [ ] 3.1 Regressão logística sobre embeddings para cada modelo da lista do notebook 06, treinada
+- [x] 3.1 *(1ª rodada: só MiniLM)* Regressão logística sobre embeddings para cada modelo da lista do notebook 06, treinada
       só no período de treino; verificar que nenhum item do período de avaliação foi usado
       (assert por ano e por hash de texto).
 - [ ] 3.2 *(adiada na 1ª rodada, design.md Decisão 5)* Score por vizinhos (k-NN ponderado sobre os itens rotulados); verificar o mesmo assert de
       separação temporal.
-- [ ] 3.3 Modelo-controle só com fonte e ano; verificar que roda nos mesmos conjuntos.
-- [ ] 3.4 Linha de base léxica (TF-IDF + regressão logística) com a mesma separação temporal;
+- [x] 3.3 Modelo-controle só com fonte e ano; verificar que roda nos mesmos conjuntos.
+- [x] 3.4 Linha de base léxica (TF-IDF + regressão logística) com a mesma separação temporal;
       verificar o mesmo assert de separação temporal.
 
 ## 4. Gate de generalização temporal
 
-- [ ] 4.1 Avaliar A e B com os sete critérios da Decisão 4 (AUC, ECE, Brier skill score, ganho
+- [x] 4.1 Avaliar A e B com os sete critérios da Decisão 4 (AUC, ECE, Brier skill score, ganho
       sobre a linha de base léxica, distância ao controle de atalho, estabilidade a gíria e
       apelido medida pelas tarefas 7.1–7.2 sobre o modelo candidato) e escrever o resultado no
       design.md como GO, NO-GO ou inconclusivo pela regra de agregação; verificar que os números
       citados batem com o CSV de resultados.
 - [ ] 4.2 *(adiada na 1ª rodada, design.md Decisão 5)* Rodar o teste C descritivo (falsas de 2022 por faixa; controles do g1 por faixa);
       verificar que o relatório separa os dois e informa o n de cada um.
-- [ ] 4.3 Se o resultado for NO-GO ou inconclusivo, parar e rediscutir o escopo antes da Seção 5;
+- [x] 4.3 Se o resultado for NO-GO ou inconclusivo, parar e rediscutir o escopo antes da Seção 5;
       verificar que a decisão está registrada no design.md.
 
 ## 5. Calibração e faixas
@@ -68,7 +68,7 @@
 
 ## 7. Robustez (alimenta o critério de gíria do gate em 4.1)
 
-- [ ] 7.1 Medir a variação da probabilidade |p_original − p_reescrita| em
+- [x] 7.1 Medir a variação da probabilidade |p_original − p_reescrita| em
       `experiments/results/teste_reescrita.csv` sem a categoria `negacao`, mais reescritas
       (apelido, gíria, erro de digitação) de notícias verdadeiras do período de avaliação geradas
       com `experiments/reescrita.py`; verificar contra a Decisão 4 (GO: média ≤ 0,10 e ≤ 5% dos
