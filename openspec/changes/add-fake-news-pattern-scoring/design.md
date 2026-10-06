@@ -70,18 +70,62 @@ muda. Os dois juntos dizem se o padrão é de narrativa ou de veículo.
 
 ### 4. Critério pré-registrado do gate
 
-A ser preenchido e commitado pela frente de Modelos **antes** de qualquer avaliação nos períodos de
-teste. Métricas fixadas agora; limites em aberto:
+Limites definidos pela frente de Modelos em 2026-10-06, **antes** de qualquer avaliação nos
+períodos de teste; vale o commit deste arquivo como prova de ordem. Todas as métricas são medidas no
+**período de avaliação** de cada teste (Decisão 3), nunca no conjunto onde a calibração é ajustada.
 
-- **Discriminação:** AUC-ROC no período de avaliação, geral e por fonte. GO exige AUC ≥ ___ em A e
-  ≥ ___ em B.
-- **Calibração:** ECE (10 faixas) ≤ ___ e Brier ≤ ___ no período de avaliação.
-- **Controle de atalho:** AUC de um modelo que só vê a fonte ou o ano. Se ele chegar perto do
-  modelo principal (diferença < ___ p.p.), o resultado é atalho e não conta como GO.
-- **NO-GO** se A ou B ficar abaixo do limite. **Inconclusivo** se A passar e B não: o padrão
-  existe dentro da fonte, mas não se transfere; registrar e discutir antes de seguir.
-- Teste C é só descritivo: % das falsas de 2022 nas faixas altas e quantos dos 32 controles caem
-  em "compatível com narrativas falsas".
+| Critério | GO | Inconclusivo | NO-GO |
+|---|---|---|---|
+| AUC-ROC no teste A (mesma fonte, ano seguinte) | ≥ 0,85 | 0,75 a < 0,85 | < 0,75 |
+| AUC-ROC no teste B (outra fonte, anos depois) | ≥ 0,80 | 0,75 a < 0,80 | < 0,75 |
+| ECE (10 faixas) | ≤ 0,05 | > 0,05 a ≤ 0,10 | > 0,10 |
+| Brier skill score (ganho sobre prever a proporção de falsas) | > 0 | — | ≤ 0 |
+| Ganho de AUC sobre a linha de base léxica (TF-IDF + regressão logística) | ≥ +0,05 | +0,02 a < +0,05 | < +0,02 |
+| Atalho: AUC do modelo principal − AUC do modelo que só vê fonte e ano | ≥ +0,10 | +0,05 a < +0,10 | < +0,05 |
+| Gíria e apelido: variação da probabilidade entre original e reescrita (falsas e verdadeiras) | média ≤ 0,10 **e** ≤ 5% dos pares com variação > 0,25 | média ≤ 0,15 **e** ≤ 10% dos pares com variação > 0,25 (sem ser GO) | média > 0,15 **ou** > 10% dos pares com variação > 0,25 |
+
+**Agregação:** GO só se todos os critérios forem GO, em A e em B. Qualquer NO-GO → NO-GO.
+O resto → inconclusivo, inclusive o caso "A passa e B não" (o padrão existe dentro da fonte, mas não
+se transfere). Inconclusivo e NO-GO são registrados e rediscutidos antes da Seção 5 de `tasks.md`.
+
+**Por que esses números:**
+
+- **AUC por teste temporal:** A mede o tempo isolado e B mede tempo e fonte juntos; um limite por
+  teste evita que um bom resultado em A esconda a falha de transferência em B. AUC abaixo de 0,75 é
+  separação fraca demais para um score exposto ao público.
+- **ECE e Brier skill score:** o produto mostra uma probabilidade; ela precisa significar o que
+  diz para que as faixas não gerem falso alarme com alta confiança. O Brier entra como skill score
+  (e não como valor absoluto) porque, com classes equilibradas, até um modelo perfeitamente
+  calibrado com AUC 0,85 tem Brier ≈ 0,16 (simulação binormal, 2026-10-06); um limite absoluto de
+  0,10 exigiria AUC ≈ 0,94 e contradiria os limites de AUC.
+- **Linha de base léxica:** embeddings só se justificam se superarem um método léxico barato.
+- **Atalho:** as verdadeiras e as falsas vêm de veículos diferentes até dentro do teste A
+  (FakeRecogna: verdadeiras de UOL, Globo e gov.br; falsas de agências de checagem). Se fonte e ano
+  sozinhos chegam perto do modelo, o que ele aprendeu é o veículo, não a narrativa.
+- **Gíria e apelido:** o que circula em redes raramente segue a norma culta; a forma não pode
+  decidir mais do que o conteúdo. No gate, a medida é a **variação da probabilidade** entre a
+  notícia e a reescrita (|p_original − p_reescrita|), e não a mudança de faixa: o gate testa o
+  modelo, e as faixas do produto só são definidas depois dele (Decisão 6). A média sozinha
+  esconderia casos extremos, por isso há também um teto para a fração de pares com variação
+  acima de 0,25. Os pares incluem reescritas de notícias verdadeiras, para medir também se a gíria
+  **cria** falso alarme. A estabilidade de **faixa** (≥ 92% dos pares, as tolerâncias de 8% e 15%
+  da proposta original) vira teste de produto, depois que as faixas existirem (Decisão 6).
+
+**Teste C** é só descritivo: % das falsas de 2022 em cada faixa e quantos dos 32 controles do g1
+caem em "compatível com narrativas falsas".
+
+**Revisão (2026-10-06, antes de qualquer avaliação):** a primeira versão destes limites, colada
+pela frente de Modelos, usava fatias por tema (política/geral × saúde/redes sociais), Recall@5,
+Brier ≤ 0,10 medido no conjunto de validação e ganho de "+15%" sobre TF-IDF. Foi adaptada: as
+fatias passaram aos testes temporais A e B (a hipótese é temporal e a base é só política), o
+Recall@5 virou ganho de AUC e estabilidade de faixa (o produto devolve probabilidade, não lista),
+o Brier virou skill score medido no período de avaliação, o ganho foi fixado em pontos de AUC e o
+controle de atalho por fonte e ano, que tinha saído, voltou. Os limites de AUC (0,85 / 0,80 / 0,75),
+de ECE (0,05 / 0,10) e as tolerâncias de 8% e 15% são os da proposta original. Na mesma data, ainda
+antes de qualquer avaliação, o critério de gíria do gate passou de estabilidade de faixa para
+variação da probabilidade (limites 0,10 / 0,15 / 0,25 / 5% / 10%, sugeridos na revisão e aceitos
+pela frente de Modelos), e a estabilidade de faixa (≥ 92%) foi movida para depois da definição das
+faixas (Decisão 6).
 
 ### 5. Modelos: linhas de base antes de qualquer coisa maior
 
@@ -90,6 +134,8 @@ teste. Métricas fixadas agora; limites em aberto:
 2. Score por vizinhos: média ponderada dos rótulos dos k itens rotulados mais próximos. É também a
    fonte da explicação (Decisão 7).
 3. Controle de atalho: modelo só com fonte e ano (ver critério).
+4. Linha de base léxica: TF-IDF + regressão logística, com a mesma separação temporal. É a régua do
+   critério "ganho de AUC" (Decisão 4).
 
 Fine-tuning só se nenhuma linha de base passar no gate e houver indício de que falta capacidade,
 não dados. **Por quê:** com milhares de exemplos e um risco alto de atalho, um modelo simples e
@@ -103,6 +149,10 @@ limites tirados das estimativas calibradas, não das probabilidades brutas. "For
 similaridade máxima com os itens de treino, com limite tirado dos controles do g1 e de itens fora
 de política.
 
+Depois de definidas as faixas, o teste de produto de robustez é a **estabilidade de faixa**: ≥ 92%
+dos pares original × reescrita (falsas e verdadeiras, sem negação) mantêm a faixa; abaixo de 85%,
+as faixas ou o modelo voltam para revisão antes do uso público. É a "tolerated rate" da spec.
+
 ### 7. Explicação por vizinhos
 
 A resposta mostra os itens rotulados mais próximos (fonte, data e rótulo publicado pela agência),
@@ -112,8 +162,11 @@ de ser o produto e passa a ser a explicação do score.
 ### 8. Robustez
 
 O conjunto `experiments/results/teste_reescrita.csv` (534 consultas) é reaproveitado como teste de
-estabilidade da faixa, **sem** a categoria `negacao`, que vai para um relatório à parte. A
-tolerância de mudança de faixa (spec: "tolerated rate") é fixada junto com o critério do gate.
+estabilidade da faixa, **sem** a categoria `negacao`, que vai para um relatório à parte. Como ele só
+tem boatos, é complementado por reescritas (apelido, gíria, erro de digitação) de notícias
+**verdadeiras** do período de avaliação, geradas com `experiments/reescrita.py`, para medir também
+se a gíria cria falso alarme. No gate, mede-se a variação da probabilidade (Decisão 4); depois das
+faixas, a estabilidade de faixa (Decisão 6).
 
 ### 9. Normalização de rótulos
 
@@ -149,7 +202,5 @@ troca o contrato `POST /buscar` por um endpoint de score depois do gate (tarefa 
 
 ## Open Questions
 
-- Quais limites numéricos o gate usa (Decisão 4)? Precisam ser fixados e commitados antes da
-  avaliação; não mudam a estrutura das tarefas.
 - Vale coletar um conjunto pequeno de manchetes verdadeiras de 2022 para o teste C? Decisão de
   custo, que não muda o desenho do gate.
