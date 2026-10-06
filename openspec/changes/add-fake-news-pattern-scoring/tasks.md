@@ -4,9 +4,9 @@
       `add-recycled-claim-semantic-retrieval` (design.md, seções "Gate complementar: resultado" e
       "Substituição"); verificado: totais 28/25/6 conferem com
       `experiments/results/validacao_entre_ciclos.csv` + `_chave.csv`.
-- [ ] 1.2 Preencher os limites do critério do gate (design.md, Decisão 4: AUC em A e B, ECE,
-      Brier, distância mínima ao modelo-controle, tolerância de mudança de faixa) e commitar só o
-      design.md; verificar que o commit é anterior a qualquer avaliação nos períodos de teste.
+- [ ] 1.2 Revisar os limites do gate já escritos (design.md, Decisão 4, 2026-10-06) e commitar só o
+      design.md; verificar com `git log` que o commit é anterior a qualquer avaliação nos períodos
+      de teste.
 
 ## 2. Base de treino e avaliação
 
@@ -32,12 +32,16 @@
 - [ ] 3.2 Score por vizinhos (k-NN ponderado sobre os itens rotulados); verificar o mesmo assert de
       separação temporal.
 - [ ] 3.3 Modelo-controle só com fonte e ano; verificar que roda nos mesmos conjuntos.
+- [ ] 3.4 Linha de base léxica (TF-IDF + regressão logística) com a mesma separação temporal;
+      verificar o mesmo assert de separação temporal.
 
 ## 4. Gate de generalização temporal
 
-- [ ] 4.1 Avaliar A e B com o critério commitado (AUC geral e por fonte, ECE, Brier, distância ao
-      controle) e escrever o resultado no design.md como GO, NO-GO ou inconclusivo; verificar que
-      os números citados batem com o CSV de resultados.
+- [ ] 4.1 Avaliar A e B com os sete critérios da Decisão 4 (AUC, ECE, Brier skill score, ganho
+      sobre a linha de base léxica, distância ao controle de atalho, estabilidade a gíria e
+      apelido medida pelas tarefas 7.1–7.2 sobre o modelo candidato) e escrever o resultado no
+      design.md como GO, NO-GO ou inconclusivo pela regra de agregação; verificar que os números
+      citados batem com o CSV de resultados.
 - [ ] 4.2 Rodar o teste C descritivo (falsas de 2022 por faixa; controles do g1 por faixa);
       verificar que o relatório separa os dois e informa o n de cada um.
 - [ ] 4.3 Se o resultado for NO-GO ou inconclusivo, parar e rediscutir o escopo antes da Seção 5;
@@ -50,6 +54,9 @@
 - [ ] 5.2 Definir os limites das faixas e o limite de "fora dos padrões" (similaridade máxima com o
       treino, calibrada com os controles do g1 e itens fora de política); verificar o cenário
       "Text far from all known narratives" da spec com esses controles.
+- [ ] 5.3 Medir a estabilidade de faixa com os mesmos pares da tarefa 7.1 e as faixas definidas em
+      5.2; verificar contra a Decisão 6 (≥ 92% dos pares mantêm a faixa; < 85% devolve faixas ou
+      modelo para revisão), separando falsas e verdadeiras.
 
 ## 6. Explicação e linguagem da resposta
 
@@ -59,12 +66,15 @@
       verificar o cenário "High estimate" (nenhuma resposta usa "falsa" ou "fake" como conclusão
       sobre o item).
 
-## 7. Robustez
+## 7. Robustez (alimenta o critério de gíria do gate em 4.1)
 
-- [ ] 7.1 Medir a estabilidade da faixa em `experiments/results/teste_reescrita.csv` sem a
-      categoria `negacao`; verificar contra a tolerância pré-registrada (1.2).
-- [ ] 7.2 Relatório à parte da categoria `negacao`; verificar que ela não entra na taxa de
-      estabilidade.
+- [ ] 7.1 Medir a variação da probabilidade |p_original − p_reescrita| em
+      `experiments/results/teste_reescrita.csv` sem a categoria `negacao`, mais reescritas
+      (apelido, gíria, erro de digitação) de notícias verdadeiras do período de avaliação geradas
+      com `experiments/reescrita.py`; verificar contra a Decisão 4 (GO: média ≤ 0,10 e ≤ 5% dos
+      pares > 0,25; NO-GO: média > 0,15 ou > 10% dos pares > 0,25), separando falsas e verdadeiras.
+- [ ] 7.2 Relatório à parte da categoria `negacao`; verificar que ela não entra no critério de
+      gíria do gate nem na estabilidade de faixa.
 
 ## 8. Contrato da API (depois do GO)
 

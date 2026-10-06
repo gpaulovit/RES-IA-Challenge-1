@@ -17,7 +17,7 @@ Nesta fase, as duas primeiras histórias são da equipe de pesquisa. As demais s
 
 Os critérios de aceitação são requisitos não funcionais: uma **métrica** com alvo numérico e uma **entrega** (relatório, conjunto de teste ou comportamento mensurável). Uma **classificação auxiliar** complementa a métrica para não virar um número cego.
 
-Alvos numéricos desta página são **provisórios da fase de concepção**. Os que dependem do gate (US-01, US-03, US-08) **não têm número aqui**: são fixados no critério pré-registrado do design da change (Decisão 4) e commitados antes de qualquer avaliação. A história só fecha com número publicado — não com impressão.
+Alvos numéricos desta página são **provisórios da fase de concepção**. Os que dependem do gate (US-01, US-03) seguem o critério pré-registrado do design da change (Decisão 4); a US-08 segue a Decisão 6. Os dois foram fixados antes de qualquer avaliação. A história só fecha com número publicado — não com impressão.
 
 ## Classificações auxiliares
 
@@ -148,7 +148,7 @@ Como quem envia uma notícia escrita do jeito que chegou no WhatsApp, **quero** 
 | | |
 |---|---|
 | Métrica | % de pares (original × reescrita) com a mesma faixa, por tipo de reescrita; negação relatada à parte |
-| Alvo | Tolerância definida no critério pré-registrado (Decisão 4) |
+| Alvo | ≥ 92% dos pares mantêm a faixa; abaixo de 85%, faixas ou modelo voltam para revisão (design, Decisão 6). No gate, o modelo já passou pelo critério de variação da probabilidade (Decisão 4) |
 | Entrega | Tabela por tipo de reescrita com `experiments/results/teste_reescrita.csv`, sem a categoria negação, mais um relatório só da negação |
 | Classificação auxiliar | Tipo de reescrita |
 
@@ -191,7 +191,7 @@ Como pesquisador(a), **quero** os rótulos de todas as fontes traduzidos para um
 | 05 | Ouvir "fora dos padrões" | Não inventar score | ≥ 90% fora do domínio em `fora dos padrões` |
 | 06 | Ver as checagens mais parecidas | Entender o score | 100% explicação `completa` |
 | 07 | Não receber veredito | Não tomar score por checagem | 0% "falsa/fake" como conclusão; 100% com aviso |
-| 08 | Mesma faixa com gíria | A forma não decidir | Estabilidade de faixa (pré-registro); negação à parte |
+| 08 | Mesma faixa com gíria | A forma não decidir | ≥ 92% dos pares na mesma faixa; negação à parte |
 | 09 | Não marcar quem é muito citado | Não reproduzir viés | Nenhuma figura > 2× a média de falso alarme |
 | 10 | Unificar rótulos das fontes | Treinar com rótulos iguais | 100% mapeados; ≥ 95% corretos na amostra |
 
