@@ -32,6 +32,9 @@ recorrência de narrativa, e um gate que testa a hipótese antes do produto:
   entra nessa lista, porque inverte o sentido.
 - **Normalização dos rótulos de veredito** entre agências: deixa de ser só exibição e passa a ser
   o alvo do treino.
+- **Canal de uso: bot do Telegram.** Quem usa o produto envia o texto da notícia a um bot do
+  Telegram, criado pelo @BotFather, que consulta a API de score e responde com a faixa, as
+  narrativas próximas e o aviso de limitação. Integração direta com o WhatsApp fica fora desta fase.
 - **BREAKING (em relação à change anterior):** sai o contrato de busca de checagens (`POST
   /buscar` com candidatos e veredito original), as faixas confirmado/provável/sem match/inédito, o
   tratamento de alegação mista e a exposição de divergência entre agências como funções do produto.
@@ -65,6 +68,8 @@ Nenhuma: `openspec/specs/` ainda não tem capacidades sincronizadas. A capacidad
   Recall@k de `avaliacao.py` deixa de ser critério do produto.
 - **Protótipo (`src/checagens/`):** a API e a busca mudam de contrato; inspeção, organização e
   geração de embeddings continuam.
+- **Canal (Telegram):** um bot criado pelo @BotFather, cliente da API de score. O token do bot é
+  segredo e fica fora do repositório.
 - **Documentação:** `docs/perguntas.md`, `docs/requisitos.md` e `docs/historias.md` reescritos
   nesta change. Cronograma, docs de engenharia, README raiz e `experiments/README.md` ficam
   pendentes.

@@ -174,6 +174,20 @@ Mapeamento curado (como na change anterior), agora cobrindo também `is_fake` de
 FakeRecogna e os vereditos de Central de Fatos. Itens sem mapeamento ficam fora, contados num
 relatório de cobertura.
 
+### 10. Canal: bot do Telegram
+
+O produto chega ao usuário por um bot do Telegram criado pelo @BotFather (`/newbot` devolve o token
+que autoriza o bot na Bot API). O bot recebe o texto, chama a API de score (tarefa 8.1) e responde
+com a faixa, as narrativas próximas com link para cada checagem e o aviso de limitação. Ele não tem
+lógica de decisão própria. Mensagens sem texto (foto, áudio, figurinha) recebem uma orientação para
+enviar o texto. Na demonstração, o bot recebe mensagens por *long polling* (`getUpdates`), que não
+exige servidor público; um *webhook* com HTTPS fica para quando houver servidor.
+**Por quê:** criar um bot pelo @BotFather não exige aprovação nem conta empresarial, e a Bot API é
+gratuita. **Alternativa descartada:** a API oficial do WhatsApp, que exige conta Business e
+aprovação da Meta, burocracia incompatível com o prazo do projeto.
+**Custo:** o boato circula no WhatsApp, então o usuário precisa copiar o texto de um aplicativo para
+o outro (ver Riscos).
+
 ## Risks / Trade-offs
 
 - **[Atalho por fonte ou época]** O modelo pode separar "veículo de checagem" de "veículo de
@@ -189,6 +203,13 @@ relatório de cobertura.
   afirma veredito (spec) e explicação sempre visível.
 - **[Viés político]** Se uma figura pública concentra boatos no treino, notícias verdadeiras sobre
   ela podem receber score alto. → Relatório de score por entidade mencionada nos controles.
+- **[Canal diferente de onde o boato circula]** O público-alvo recebe boatos no WhatsApp e precisa
+  copiar o texto para o Telegram, o que reduz o uso. → Registrar como limitação do MVP; integração
+  com o WhatsApp fica para depois.
+- **[Token do bot exposto]** Quem tem o token controla o bot. → Token fora do repositório (variável
+  de ambiente ou segredo) e troca pelo @BotFather se vazar.
+- **[Dados do usuário no Telegram]** O bot recebe o identificador de quem escreve. → Não persistir
+  identificador de usuário nem de chat; registrar só metadados.
 - **[Licenças]** Fake.br, FakeRecogna e Central de Fatos têm origem própria; o HF declara MIT para
   o pacote. → Conferir antes do deploy; FactPolCheckBr segue não comercial.
 - **[Um anotador por rodada]** Os pares de narrativa herdados não têm medida de concordância. →

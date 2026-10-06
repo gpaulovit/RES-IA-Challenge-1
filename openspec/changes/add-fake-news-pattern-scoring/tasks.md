@@ -82,6 +82,11 @@
       estimativa, vizinhos e aviso; verificar com testes de API para entrada válida, entrada
       vazia (erro de validação, cenário "Empty text") e gate não aprovado (sem score exposto).
 
+- [ ] 8.2 Criar o bot do Telegram pelo @BotFather e ligá-lo ao endpoint de score (design.md,
+      Decisão 10), com o token fora do repositório; verificar com testes para texto válido,
+      mensagem sem texto (orientação para enviar o texto), gate não aprovado (sem score exposto) e
+      que nenhum identificador de usuário ou de chat é persistido.
+
 ## 9. Documentação
 
 - [x] 9.1 Reescrever `docs/perguntas.md`, `docs/requisitos.md` e `docs/historias.md` para a nova
