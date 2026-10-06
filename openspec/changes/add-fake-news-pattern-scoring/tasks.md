@@ -78,7 +78,7 @@
 
 ## 8. Contrato da API (depois do GO)
 
-- [ ] 8.1 Trocar `POST /buscar` em `src/checagens/api.py` por um endpoint de score com faixa,
+- [ ] 8.1 Criar a API com um endpoint de score (o protótipo `src/checagens/` foi removido) com faixa,
       estimativa, vizinhos e aviso; verificar com testes de API para entrada válida, entrada
       vazia (erro de validação, cenário "Empty text") e gate não aprovado (sem score exposto).
 

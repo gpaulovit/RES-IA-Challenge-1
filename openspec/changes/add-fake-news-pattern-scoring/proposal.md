@@ -63,8 +63,8 @@ Nenhuma: `openspec/specs/` ainda não tem capacidades sincronizadas. A capacidad
   de rótulo), `reescrita.py`, `normalizacao.py`, `corpora.py` (precisa manter o rótulo
   `is_fake`), os pares rotulados dos gates e a lista de modelos do notebook 06. A métrica de
   Recall@k de `avaliacao.py` deixa de ser critério do produto.
-- **Protótipo (`src/checagens/`):** a API e a busca mudam de contrato; inspeção, organização e
-  geração de embeddings continuam.
+- **Protótipo (`src/checagens/`):** removido em 2026-10-06 (tag git `legado-busca`); a API do
+  score é criada do zero depois do GO.
 - **Documentação:** `docs/perguntas.md`, `docs/requisitos.md` e `docs/historias.md` reescritos
   nesta change. Cronograma, docs de engenharia, README raiz e `experiments/README.md` ficam
   pendentes.

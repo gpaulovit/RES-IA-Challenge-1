@@ -6,8 +6,8 @@
 > [`add-fake-news-pattern-scoring`](https://github.com/gpaulovit/RES-IA-Challenge-1/tree/main/openspec/changes/add-fake-news-pattern-scoring)).
 > A versão anterior está no histórico do git. US-10 e o método de critérios foram mantidos.
 
-O [protótipo de Engenharia](funcionalidades.md) ainda segue o contrato antigo de busca e não
-conclui nenhuma história abaixo.
+Nenhuma história abaixo está implementada: o protótipo de busca anterior foi removido (tag git
+`legado-busca`) e o gate temporal deu NO-GO na 1ª rodada (veja [Engenharia](engenharia.md)).
 
 Cada história segue o padrão **quero** / **para que**: alguém quer fazer X, para conseguir Y.
 

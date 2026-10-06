@@ -11,8 +11,8 @@ migram para `openspec/specs/` quando a implementação for concluída.
 > mantida como histórico dos gates). A equipe descartou essa ideia; a versão anterior desta
 > página está no histórico do git.
 
-O [protótipo de Engenharia](funcionalidades.md) com três exemplos fictícios ainda segue o contrato
-antigo de busca e não conclui nenhum requisito desta página.
+Nenhum requisito desta página está implementado: o protótipo de busca anterior foi removido (tag
+git `legado-busca`) e o gate temporal deu NO-GO na 1ª rodada (veja [Engenharia](engenharia.md)).
 
 Esta página segue o fluxo da concepção do produto: **problema → objetivo de produto → objetivos
 específicos → requisitos**. As perguntas que sustentam cada etapa estão em

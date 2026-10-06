@@ -1,4 +1,9 @@
-s# Cronograma
+# Cronograma
+
+> **Situação (2026-10-06).** O escopo mudou para estimar a chance de a notícia ser falsa (change
+> `add-fake-news-pattern-scoring`), e a 1ª rodada do gate temporal deu **NO-GO**: fonte e ano
+> preveem o rótulo melhor que o modelo. As semanas 3–5 abaixo ainda descrevem o plano anterior e
+> serão refeitas quando o grupo decidir a nova rota. Detalhes em [Engenharia](engenharia.md).
 
 ## Como editar este cronograma
 
@@ -13,8 +18,8 @@ problema, o domínio e os modelos. Ao editar:
 
 **Trabalho paralelo de Engenharia:** uma demonstração local com três exemplos
 fictícios pode ser executada antes do gate. Ela conecta dados, comparação por
-palavras e API, sem antecipar a busca no corpus real da semana 3. Veja a
-[organização](engenharia.md) e o [roteiro de apresentação](apresentacao.md).
+palavras e API, sem antecipar a busca no corpus real da semana 3. Esse protótipo foi
+removido em 2026-10-06 (tag git `legado-busca`); veja [Engenharia](engenharia.md).
 
 **Objetivo de aprendizado:** entender por que o problema existe e o domínio
 de dados em que a solução vai operar, antes de comprometer com qualquer
