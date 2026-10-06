@@ -89,6 +89,7 @@ para entender o que foi conferido e o que ainda depende de dados reais.
 
 ## Entender e apresentar
 
+- [Semana 1 — Domínio de dados](docs/semana-1-dados.md): cobertura do corpus, taxonomia de vereditos e lacunas.
 - [Semana 1 — passo a passo](docs/semana-1-engenharia.md): inspeção da base real, descobertas e exercício para aprender.
 - [Semana 2 — pipeline de embeddings](docs/semana-2-engenharia.md): vetores, metadados, amostra e recuperação.
 - [Semana 3 — retrieval k-NN](docs/semana-3-engenharia.md): busca exata, exemplos e dependências ainda abertas.
@@ -118,7 +119,7 @@ para entender o que foi conferido e o que ainda depende de dados reais.
 - [openspec/](openspec/) — propostas e specs geridas pelo [OpenSpec](https://openspec.dev).
 - [refs/](refs/) — material de referência (PDFs, papers).
 
-## Resumo
+## Resumo do projeto
 
 **Já é possível enviar um texto para uma API local e receber checagens fictícias
 parecidas. Os guias explicam como executar, testar e apresentar. A base real,

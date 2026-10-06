@@ -52,6 +52,10 @@ As bases disponíveis — FactPolCheckBr e Central de Fatos como exemplos falsos
 
 - Ponto crítico conhecido: os corpora de checagem são quase só de boatos (FactPolCheckBr: 1.815 falsas, 9 verdadeiras; Central de Fatos: 10.286 e 141), e não há notícias verdadeiras de 2022 em volume.
 
+- **Parcialmente.** O volume (1.882 checagens, 9 agências com 50 a 315 registros cada) é suficiente para um MVP e para o gate. A cobertura, porém, é de **uma única campanha presidencial (ago–dez/2022)**, com 97% dos vereditos `falso` e forte concentração no tema urnas/sistema eleitoral.
+- O índice é representativo da **desinformação da eleição presidencial de 2022**, não do "universo de boatos políticos brasileiros". Para o gate, a reciclagem deve ser medida dentro dessa campanha. Medir entre eleições exige suplementar a base com outros anos (a avaliar na issue #6).
+- Os vereditos já vêm consolidados pela fonte (Falsa, Verdadeira, Parcialmente verdadeira e 50 vazios). A taxonomia do projeto mapeia esses quatro valores; os 50 vazios são, na maioria, checagens com várias alegações e não devem entrar no índice como alegação única.
+
 ## Eixo 2 — IA e NLP
 
 Este eixo é o núcleo técnico: o modelo precisa aprender o padrão da narrativa, generalizar para o futuro e não se deixar enganar por reescrita de superfície.

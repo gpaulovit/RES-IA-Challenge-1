@@ -1,4 +1,4 @@
-# Requisitos
+# Especificação de Requisitos do Sistema (RES-IA-Challenge-1)
 
 Gerados via OpenSpec, na proposta de mudança
 [`add-fake-news-pattern-scoring`](https://github.com/gpaulovit/RES-IA-Challenge-1/tree/main/openspec/changes/add-fake-news-pattern-scoring).
@@ -18,7 +18,7 @@ Esta página segue o fluxo da concepção do produto: **problema → objetivo de
 específicos → requisitos**. As perguntas que sustentam cada etapa estão em
 [Perguntas](perguntas.md).
 
-## 1. Problema
+*Descrevem as capacidades, comportamentos e ações ativas que o sistema deve executar em resposta às consultas dos usuários.*
 
 Quem recebe uma notícia política nova pelo WhatsApp não tem como saber, na hora, se ela se parece
 com boatos que já circularam. A maior parte do que chega nunca foi checada, e a checagem humana
@@ -32,7 +32,7 @@ Brasil se repete ao longo do tempo a ponto de um modelo treinado com boatos já 
 período estimar, com confiabilidade, a chance de uma notícia nova de um período posterior ser
 falsa — sem que o que ele aprendeu seja só o veículo, a época ou o formato do texto?
 
-## 2. Objetivo de produto
+## 🛡️ 2. Requisitos Não-Funcionais (RNF) & Restrições
 
 Construir um bot que estime, de forma calibrada e explicada, a chance de uma notícia política nova
 ser falsa, a partir dos padrões narrativos de boatos já checados, apresentando o resultado em
@@ -45,7 +45,10 @@ faixas e nunca como veredito.
 - **Fora de escopo deste change:** dizer se uma notícia é verdadeira ou falsa; verificação de
   fatos automatizada; indicadores de impacto social/comportamental pós-lançamento.
 
-## 3. Objetivos específicos
+* **RNF-01 (Limiar de Decisão e Taxa de Falso Positivo):** O modelo de retrieval deve aplicar o limiar de similaridade semântica de 60% (0.60) para classificação de correspondência (`match_confirmado`), garantindo uma taxa de falso-positivo FPR ≤ 5% no grupo de controle de notícias reais. *(Vinculado a **US-05, US-07**)*
+* **RNF-02 (Acurácia de Retrieval / Recall@5):** O sistema deve atingir Recall@5 ≥ 70% no conjunto global de testes de benchmark e Recall@5 ≥ 60% especificamente em pares com reincidência temporal ≥ 180 dias. *(Vinculado a **US-03, US-04**)*
+* **RNF-03 (Latência da Busca):** O mecanismo de recuperação semântica $k$-NN em memória deve processar a consulta e retornar o Top-5 de evidências em tempo inferior a 2 segundos. *(Vinculado a **US-03, US-06**)*
+* **RNF-04 (Completude das Evidências):** 100% dos resultados retornados no Top-5 devem apresentar a estrutura de campos obrigatórios completa (texto original + veredito + agência + link). *(Vinculado a **US-06**)*
 
 Cada eixo de investigação da concepção se traduz em um objetivo específico, testável ainda nesta
 fase.
