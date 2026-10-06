@@ -4,7 +4,7 @@
       `add-recycled-claim-semantic-retrieval` (design.md, seções "Gate complementar: resultado" e
       "Substituição"); verificado: totais 28/25/6 conferem com
       `experiments/results/validacao_entre_ciclos.csv` + `_chave.csv`.
-- [ ] 1.2 Revisar os limites do gate já escritos (design.md, Decisão 4, 2026-10-06) e commitar só o
+- [x] 1.2 Revisar os limites do gate já escritos (design.md, Decisão 4, 2026-10-06) e commitar só o
       design.md; verificar com `git log` que o commit é anterior a qualquer avaliação nos períodos
       de teste.
 
@@ -29,7 +29,7 @@
 - [ ] 3.1 Regressão logística sobre embeddings para cada modelo da lista do notebook 06, treinada
       só no período de treino; verificar que nenhum item do período de avaliação foi usado
       (assert por ano e por hash de texto).
-- [ ] 3.2 Score por vizinhos (k-NN ponderado sobre os itens rotulados); verificar o mesmo assert de
+- [ ] 3.2 *(adiada na 1ª rodada, design.md Decisão 5)* Score por vizinhos (k-NN ponderado sobre os itens rotulados); verificar o mesmo assert de
       separação temporal.
 - [ ] 3.3 Modelo-controle só com fonte e ano; verificar que roda nos mesmos conjuntos.
 - [ ] 3.4 Linha de base léxica (TF-IDF + regressão logística) com a mesma separação temporal;
@@ -42,7 +42,7 @@
       apelido medida pelas tarefas 7.1–7.2 sobre o modelo candidato) e escrever o resultado no
       design.md como GO, NO-GO ou inconclusivo pela regra de agregação; verificar que os números
       citados batem com o CSV de resultados.
-- [ ] 4.2 Rodar o teste C descritivo (falsas de 2022 por faixa; controles do g1 por faixa);
+- [ ] 4.2 *(adiada na 1ª rodada, design.md Decisão 5)* Rodar o teste C descritivo (falsas de 2022 por faixa; controles do g1 por faixa);
       verificar que o relatório separa os dois e informa o n de cada um.
 - [ ] 4.3 Se o resultado for NO-GO ou inconclusivo, parar e rediscutir o escopo antes da Seção 5;
       verificar que a decisão está registrada no design.md.
