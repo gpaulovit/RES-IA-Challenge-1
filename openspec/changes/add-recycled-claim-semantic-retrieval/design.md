@@ -18,6 +18,7 @@ documented time range.
   an implementation approach that is proportionate to the corpus's small
   size.
 
+
 **Non-Goals:**
 - Benchmarking against, or defining success relative to, existing
   fact-check assistants (e.g., Aos Fatos' Fátima, TSE's "Fato ou Boato").
@@ -28,6 +29,158 @@ documented time range.
 - Committing to a specific embedding model or numeric confidence
   thresholds in this document — both require empirical calibration against
   the corpus and are left as implementation decisions, not fixed here.
+
+## Critério go/no-go (escrito em 2026-09-29, antes da grade)
+
+- **GO se:** taxa ≥ 10 % no τ validado, com precisão manual ≥ 75 % e N = 7 dias.
+- **NO-GO se:** taxa < 3% OU nenhuma faixa com precisão ≥ 75%.
+- **Inconclusivo (entre 3% e 10%):** rotular mais pares e discutir o enquadramento do produto
+  antes do Bloco 3.
+- **Por que:** abaixo de ~3%, o checador raramente teria algo para recuperar. Abaixo de 75%
+  de precisão, 1 em cada 4 sugestões estaria errada, o que acaba com a confiança na
+  ferramenta. A taxa é um piso, porque o corpus cobre só 4 meses. N = 7 fica acima da
+  janela de cobertura paralela (0 a 2 dias).
+- **Taxa comparada:** a do menor τ cuja precisão acumulada é ≥ 75%.
+- **Revisão (2026-09-29, depois de ver a grade):** os limites da taxa mudaram de NO-GO < 2% e
+  inconclusivo 2–5% para NO-GO < 3% e inconclusivo 3–10%, e a taxa comparada foi definida
+  como a leitura (a). A régua de precisão (75%) e o N = 7 são os do pré-registro.
+
+## Gate Result (2026-09-29)
+
+**Decisão: NO-GO** para "reciclagem temporal dentro de um ciclo eleitoral" como justificativa da capacidade.
+
+Parâmetros: N = 7 dias; filtros de agregador e duplicata ativos; modelo `paraphrase-multilingual-MiniLM-L12-v2`;
+71 pares validados manualmente por um único anotador, com cada alegação em no máximo 1 par;
+datas lidas como mês/dia/ano, formato validado contra as datas das URLs (256 de 262 datas
+ambíguas conferem, nenhuma como dia/mês). Reprodução, hashes e protocolo de rotulagem em
+[`experiments/README.md`](../../../experiments/README.md); fonte dos números:
+`experiments/results/precisao_por_faixa.csv` e `taxa_reciclagem_grade.csv`.
+
+| Faixa de τ | n | Mesma | Precisão | IC 95% | Acumulada (≥ faixa) | IC 95% acum. |
+|---|---|---|---|---|---|---|
+| 0,75–0,80 | 8 | 1 | 12% | 2–47% | 48% | 37–59% |
+| 0,80–0,85 | 30 | 9 | 30% | 17–48% | 52% | 40–64% |
+| 0,85–0,90 | 25 | 17 | 68% | 48–83% | 73% | 56–85% |
+| ≥ 0,90 | 8 | 7 | 88% | 53–98% | 88% | 53–98% |
+
+- **Leitura usada (a):** taxa no menor τ com precisão acumulada ≥ 75%. Só τ = 0,90 atende,
+  com taxa de **1,36%**, abaixo de 3%, então NO-GO.
+- **Leitura complementar (b):** taxa ponderada pela precisão = **5,0%** (inconclusivo).
+  A (a) foi escolhida por aplicar diretamente a régua de precisão do critério. A escolha
+  foi feita depois de ver as duas leituras; mesmo pela (b), o resultado não seria GO.
+- **Definição de "mesma":** pares com mesma história e detalhe diferente (data, número)
+  contam como `mesma`. Contando como `tema`, a precisão acumulada em ≥ 0,90 cai para 75%,
+  a taxa ponderada cai para 4,0% e a decisão pela (a) não muda.
+
+**Ressalvas**
+- O corpus cobre 122 dias (um ciclo): a reciclagem entre eleições não é observável. A conclusão
+  vale para "dentro de um ciclo", não para "reciclagem não existe".
+- A data é a da checagem, não a da circulação do boato.
+- Um único modelo: a precisão por τ depende dele (reavaliar no Bloco 5).
+- n de 8 nas faixas extremas: ICs largos.
+- Um único anotador, sem medida de concordância entre anotadores.
+- Os 16,6% (τ = 0,75) e a `reciclagem_por_cluster.csv` do notebook 03 são exploratórios:
+  τ = 0,75 tem precisão de 12% e não é taxa de reciclagem.
+
+**Consequência:** reenquadrar a capacidade como recuperação
+robusta a reescrita (paráfrase, negação, gíria), sem a premissa temporal. Evidência:
+26% das alegações têm vizinho com similaridade ≥ 0,85 (a mesma alegação checada por agências
+diferentes com outra redação); dos 34 pares `mesma`, 13 são paráfrase, 7 são negação e 8 têm
+detalhe diferente.
+Próximos passos: conjunto de teste centrado em paráfrase e negação e comparação de modelos,
+incluindo se algum eleva a precisão em τ menor.
+
+## Gate complementar: reciclagem entre ciclos (critério, 2026-10-01)
+
+**Pergunta:** que % das alegações de 2022 (FactPolCheckBr) têm uma alegação `mesma` já checada
+entre 2013 e 2021 (Central de Fatos)?
+
+**Dados e preparação** (fixados antes de rodar):
+- 2022: `com_texto_limpo.csv` (hash `45b54bb3…`), sem `multi_claim` e sem data inválida.
+- Antigo: `central_de_fatos.tsv` da release v0.1 do FactChecks.br (TSV `1b3c964b…`), título = 1ª linha
+  do `review_text`, mesma `limpar_titulo()` (`experiments/limpeza.py`), sem `multi_claim` e sem `claim` vazio.
+- Modelo: `paraphrase-multilingual-MiniLM-L12-v2`, revisão `e8f8c21`, embeddings normalizados.
+
+**Métrica:** para cada alegação de 2022, o vizinho mais similar no corpus antigo.
+Taxa = % de alegações de 2022 com vizinho ≥ τ. Grade τ ∈ {0,80; 0,85; 0,90; 0,95}.
+Recorte secundário: só vizinhos de 2018 (eleição anterior).
+
+**Validação:** rótulos novos (mesmo protocolo do gate: `mesma`/`tema`/`diferente` + `tipo`,
+cada alegação em no máximo um par), 20 pares por faixa, semente 44.
+
+**Taxa comparada:** a do menor τ com precisão acumulada ≥ 75%.
+
+**Decisão:**
+- GO (reabre a premissa temporal, agora entre ciclos): taxa ≥ 10%
+- O cenário de recorrência do spec volta, redefinido como recorrência entre ciclos (base histórica 2013–2021).
+- NO-GO (confirma o reenquadramento): taxa < 3%
+- Inconclusivo: entre os dois → Repetir com o melhor modelo testado e verificar se a pergunta é efetivamente respondida.
+- **Por que esses limites:** Seguir o padrão já definido anteriormente, para efetivamente testar se a escolha do modelo funciona, ter algo efetivamente para recuperar.
+
+**O que este gate NÃO muda:** o NO-GO dentro de um ciclo (Gate Result de 2026-09-29) continua valendo.
+
+## Gate complementar: resultado (2026-10-06)
+
+**Decisão pela regra pré-registrada: NO-GO** para reciclagem da mesma alegação entre ciclos.
+
+Rotulagem às cegas de 59 pares (2022 × vizinho mais próximo em 2013–2021; a faixa não era visível
+para quem rotulou), feita por anotador(a) fora da frente de Modelos. Arquivos:
+`experiments/results/validacao_entre_ciclos.csv` (rótulos) e `validacao_entre_ciclos_chave.csv`
+(faixa e similaridade). Totais: 28 `mesma`, 25 `tema`, 6 `diferente`.
+
+| Faixa de τ | n | Mesma | Tema | Diferente |
+|---|---|---|---|---|
+| 0,80–0,85 | 20 | 3 | 11 | 6 |
+| 0,85–0,90 | 20 | 10 | 10 | 0 |
+| 0,90–0,95 | 18 | 14 | 4 | 0 |
+| ≥ 0,95 | 1 | 1 | 0 | 0 |
+
+- **Leitura pré-registrada (só `mesma`):** a precisão acumulada é 47% em τ ≥ 0,80, 65% em ≥ 0,85
+  e **79% (IC 95% 57–91%) em ≥ 0,90**. O menor τ com precisão ≥ 75% é 0,90, onde a taxa é
+  **1,6%** das alegações de 2022 (0,6% só com vizinhos de 2018). Abaixo de 3%: NO-GO.
+- **Releitura por narrativa (exploratória, feita depois de ver os rótulos):** contando `mesma`
+  e `tema` como "mesma narrativa", a precisão é **100% em τ ≥ 0,85** (40/40, IC 91–100%) e 70%
+  (14/20) na faixa 0,80–0,85. Somando o gate dentro do ciclo, 62 dos 71 pares eram `mesma`
+  ou `tema`. A alegação específica raramente volta; a narrativa volta com frequência.
+- **Ressalvas:** a faixa ≥ 0,95 tem 1 par (3 das 4 alegações tinham o mesmo vizinho antigo); um
+  único anotador nesta rodada, sem medida de concordância; um único modelo (MiniLM); a releitura
+  por narrativa não foi pré-registrada e por isso **não decide nada aqui**. Ela vira a hipótese
+  pré-registrada da change `add-fake-news-pattern-scoring`, a ser testada em dados ainda não
+  usados.
+
+## Substituição (2026-10-06)
+
+A ideia de produto desta change (recuperar a checagem já existente para uma alegação) foi
+descartada pela equipe. O produto passa a ser um bot que estima a chance de uma notícia nova
+ser falsa, apoiado na hipótese de que o padrão narrativo das fake news se repete ao longo do
+tempo. Ver `openspec/changes/add-fake-news-pattern-scoring/`. Esta change fica como histórico
+dos gates e da preparação de dados; não deve ser arquivada como concluída.
+
+## Escolha do modelo de embeddings (critério, 2026-10-01, antes de qualquer resultado)
+
+**Candidatos** (revisões fixadas em `experiments/06_modelos.ipynb`): multilíngue genérico
+(`paraphrase-multilingual-MiniLM-L12-v2`, `paraphrase-multilingual-mpnet-base-v2`,
+`multilingual-e5-base`, `bge-m3`) e BERTimbau (`bert-base-portuguese-cased` com mean pooling,
+`bert-large-portuguese-cased-sts`). Fine-tuned: só se nenhum candidato atender ao piso abaixo.
+
+**Avaliação definitiva:** índice com os dois corpora (2022 + Central de Fatos, 12.240 alegações),
+conjunto de teste do `experiments/05_avaliacao.ipynb` (categorias `apelido`, `girias`,
+`apelido+girias`, `negacao`, `digitacao`, `parafrase_real`), consulta com a normalização
+`condicional`. A rodada só no índice de 2022 é preliminar e não decide.
+
+**Regra:**
+
+1. **Métrica principal:** Recall@5 médio entre as categorias (cada categoria pesa igual).
+2. **Piso:** nenhuma categoria com Recall@5 abaixo de 80%. Modelo abaixo do piso em alguma
+   categoria só é escolhido se todos estiverem abaixo; aí vale o melhor e a lacuna vira risco registrado.
+3. **Empate** (diferença < 2 p.p. no Recall@5 médio): fica o mais barato para o deploy (menor tempo
+   de codificação por mil textos).
+4. **Desempate final:** maior Recall@5 em `parafrase_real`, a única categoria de reescritas reais.
+
+**Ressalva conhecida antes de rodar:** os pares de `parafrase_real` foram sorteados entre os vizinhos
+que o MiniLM já achava parecidos (cosseno ≥ 0,75), o que favorece o MiniLM nessa categoria. A
+ressalva vai junto do resultado.
+
 
 ## Decisions
 

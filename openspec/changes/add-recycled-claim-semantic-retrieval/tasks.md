@@ -31,21 +31,21 @@ explícitas. A conversão foi repetida com saída idêntica. A tarefa continua
 aberta até a frente de Dados validar o uso do título, as datas pendentes e os
 vereditos ausentes; detalhes em `docs/semana-1-engenharia.md`.
 
-- [ ] 1.1 Consolidar o corpus FactPolCheckBr (texto da alegação + texto de
+- [x] 1.1 Consolidar o corpus FactPolCheckBr (texto da alegação + texto de
       verificação + veredito + data + agência) em um formato pronto para
       análise; verificar carregando o dataset e confirmando que a
       contagem de registros bate com a fonte (~1.882) e que data/agência
       estão preenchidas em cada registro.
-- [ ] 1.2 Rodar clusterização temática latente (sem rótulo manual) sobre
+- [x] 1.2 Rodar clusterização temática latente (sem rótulo manual) sobre
       os embeddings do corpus; verificar inspecionando uma amostra dos
       clusters quanto à coerência temática e reportando número/tamanho
       dos clusters.
-- [ ] 1.3 Rodar análise de recorrência temporal: para cada cluster/tema,
+- [x] 1.3 Rodar análise de recorrência temporal: para cada cluster/tema,
       checar se alegações reaparecem reescritas em períodos diferentes;
       verificar produzindo uma taxa de recorrência mensurável (ex.: % de
       alegações com pelo menos uma alegação semanticamente similar a
       >= N dias de distância) e uma conclusão escrita de go/no-go.
-- [ ] 1.4 Registrar a decisão go/no-go do gate (atualizar `design.md` com
+- [x] 1.4 Registrar a decisão go/no-go do gate (atualizar `design.md` com
       o resultado); se no-go, parar e revisitar o escopo com o usuário
       conforme a mitigação de risco descrita em `design.md` antes de
       seguir para a seção 2.

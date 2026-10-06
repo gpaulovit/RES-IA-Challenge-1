@@ -1,0 +1,535 @@
+consulta_id,categoria,consulta,alvo,detalhe,excluir_texto,apelido_no_normalizador
+1,apelido,Marcelo Madureira não é autor de texto com críticas a Lularápio,Marcelo Madureira não é autor de texto com críticas a Lula,Lula→Lularápio,,nao
+2,apelido,Luladrão morreu aos 77 anos de idade após sofrer AVC,Lula morreu aos 77 anos de idade após sofrer AVC,Lula→Luladrão,,sim
+3,apelido,Vídeo em que Neymar fala sobre voto foi cortado para sugerir que ele apoia Barba,Vídeo em que Neymar fala sobre voto foi cortado para sugerir que ele apoia Lula,Lula→Barba,,nao
+4,apelido,"Grupo se passava por pesquisadores para pedir votos para Mito, em Alagoas, como mostra vídeo","Grupo se passava por pesquisadores para pedir votos para Bolsonaro, em Alagoas, como mostra vídeo",Bolsonaro→Mito,,sim
+5,apelido,Vídeo manipulado mistura campanha apartidária de 2018 com imagens de Molusco,Vídeo manipulado mistura campanha apartidária de 2018 com imagens de Lula,Lula→Molusco,,sim
+6,apelido,Imagem mostre Gilmar Mendes com filho de Luladrão em restaurante de Roma,Imagem mostre Gilmar Mendes com filho de Lula em restaurante de Roma,Lula→Luladrão,,sim
+7,apelido,Vídeo mostra presidiários comemorando vitória de Nove Dedos no 1º turno das eleições,Vídeo mostra presidiários comemorando vitória de Lula no 1º turno das eleições,Lula→Nove Dedos,,sim
+8,apelido,Público gritou 'Molusco ladrão' na abertura da Copa de 2022,Público gritou 'Lula ladrão' na abertura da Copa de 2022,Lula→Molusco,,sim
+9,apelido,Homem que aparece em vídeo não é Geddel e fazendas citadas não são de Lula e Dilmãe,Homem que aparece em vídeo não é Geddel e fazendas citadas não são de Lula e Dilma,Dilma→Dilmãe,,sim
+10,apelido,Dono da Havan (Luciano Hang) vai dar cerveja grátis se Coiso vencer as eleições,Dono da Havan (Luciano Hang) vai dar cerveja grátis se Bolsonaro vencer as eleições,Bolsonaro→Coiso,,nao
+11,apelido,Felipe Neto prometeu deixar o país e Janones prometeu renunciar se Coiso quebrasse o recorde de audiência em live,Felipe Neto prometeu deixar o país e Janones prometeu renunciar se Bolsonaro quebrasse o recorde de audiência em live,Bolsonaro→Coiso,,nao
+12,apelido,"Corrupção, transposição do São Francisco e pobreza: veja os temas mais checados pelo Fato ou Fake nas falas de Lula e Coiso","Corrupção, transposição do São Francisco e pobreza: veja os temas mais checados pelo Fato ou Fake nas falas de Lula e Bolsonaro",Bolsonaro→Coiso,,nao
+13,apelido,Lularápio aconselhou Daniel Ortega a manter ditadura na Nicarágua,Lula aconselhou Daniel Ortega a manter ditadura na Nicarágua,Lula→Lularápio,,nao
+14,apelido,Imagem que mostra Lularápio e Eduardo Paes ao lado do traficante Celsinho da Vila Vintém,Imagem que mostra Lula e Eduardo Paes ao lado do traficante Celsinho da Vila Vintém,Lula→Lularápio,,nao
+15,apelido,Molusco usou ponto eletrônico em debate da Globo,Lula usou ponto eletrônico em debate da Globo,Lula→Molusco,,sim
+16,apelido,Homem ao lado de Molusco em vídeo viral não foi preso em São Paulo por ataque a Tarcísio de Freitas,Homem ao lado de Lula em vídeo viral não foi preso em São Paulo por ataque a Tarcísio de Freitas,Lula→Molusco,,sim
+17,apelido,PT está preocupado com Lularápio ser internado ou desistir da candidatura por problemas de saúde,PT está preocupado com Lula ser internado ou desistir da candidatura por problemas de saúde,Lula→Lularápio,,nao
+18,apelido,Texto mostra a “lista de proibições do TSE” e prova censura contra Bozo,Texto mostra a “lista de proibições do TSE” e prova censura contra Bolsonaro,Bolsonaro→Bozo,,sim
+19,apelido,"Certidões eleitorais de Barba no TRF1 não foram alteradas, elas se referem a instâncias diferentes","Certidões eleitorais de Lula no TRF1 não foram alteradas, elas se referem a instâncias diferentes",Lula→Barba,,nao
+20,apelido,Xandão foi indicado ao STF pelo PT,Alexandre de Moraes foi indicado ao STF pelo PT,Alexandre de Moraes→Xandão,,sim
+21,apelido,Bozo tuitou crítica a padres e bispos sobre campanha em Aparecida,Bolsonaro tuitou crítica a padres e bispos sobre campanha em Aparecida,Bolsonaro→Bozo,,sim
+22,apelido,Bozo foi preso por ato terrorista e expulso do Exército,Bolsonaro foi preso por ato terrorista e expulso do Exército,Bolsonaro→Bozo,,sim
+23,apelido,"No SBT, Bolsolixo fala mentiras vetadas pelo TSE em propaganda eleitoral","No SBT, Bolsonaro fala mentiras vetadas pelo TSE em propaganda eleitoral",Bolsonaro→Bolsolixo,,sim
+24,apelido,PF do Pará apreendeu dinheiro usado para comprar votos para Nove Dedos,PF do Pará apreendeu dinheiro usado para comprar votos para Lula,Lula→Nove Dedos,,sim
+25,apelido,Apoiador que tirou foto com Coiso em Garanhuns não é tio de Lula,Apoiador que tirou foto com Bolsonaro em Garanhuns não é tio de Lula,Bolsonaro→Coiso,,nao
+26,apelido,Vídeo de Bozo criticando direitos trabalhistas é de 2019,Vídeo de Bolsonaro criticando direitos trabalhistas é de 2019,Bolsonaro→Bozo,,sim
+27,apelido,"Molusco confirma criação da guarda nacional, o maior exército vermelho da América Latina","Lula confirma criação da guarda nacional, o maior exército vermelho da América Latina",Lula→Molusco,,sim
+28,apelido,Biroliro repete frase falsa atribuída a Joaquim Barbosa sobre ele,Bolsonaro repete frase falsa atribuída a Joaquim Barbosa sobre ele,Bolsonaro→Biroliro,,nao
+29,apelido,G1 não publicou texto 'Nove Dedos diz que nem Deus tira essa eleição dele',G1 não publicou texto 'Lula diz que nem Deus tira essa eleição dele',Lula→Nove Dedos,,sim
+30,apelido,Post resgata vídeo antigo de confronto em protesto anti-Mito na Itália,Post resgata vídeo antigo de confronto em protesto anti-Bolsonaro na Itália,Bolsonaro→Mito,,sim
+31,apelido,"Luladrão usou ponto eletrônico durante debate da Globo, mostra vídeo","Lula usou ponto eletrônico durante debate da Globo, mostra vídeo",Lula→Luladrão,,sim
+32,apelido,Vídeo que mostra Mito recebido com refrão de apoio a Lula em igreja,Vídeo que mostra Bolsonaro recebido com refrão de apoio a Lula em igreja,Bolsonaro→Mito,,sim
+33,apelido,"Nove Dedos e Paes estavam ao lado de André Ceciliano em foto, e não do traficante Celsinho da Vila Vintém","Lula e Paes estavam ao lado de André Ceciliano em foto, e não do traficante Celsinho da Vila Vintém",Lula→Nove Dedos,,sim
+34,apelido,Ponte sobre rio das Mortes que aparece em vídeo não é obra do governo Biroliro,Ponte sobre rio das Mortes que aparece em vídeo não é obra do governo Bolsonaro,Bolsonaro→Biroliro,,nao
+35,apelido,Apoiador de Lularápio na BA não foi preso por tiroteio em agenda de Tarcísio,Apoiador de Lula na BA não foi preso por tiroteio em agenda de Tarcísio,Lula→Lularápio,,nao
+36,apelido,"Luladrão disse que o agronegócio deve ser ""eliminado da Terra""","Lula disse que o agronegócio deve ser ""eliminado da Terra""",Lula→Luladrão,,sim
+37,apelido,Nove Dedos tuitou que vai 'bloquear poupanças' para manter Auxílio Brasil,Lula tuitou que vai 'bloquear poupanças' para manter Auxílio Brasil,Lula→Nove Dedos,,sim
+38,apelido,PT votou contra o Auxílio Brasil e Mito foi proibido de falar a verdade,PT votou contra o Auxílio Brasil e Bolsonaro foi proibido de falar a verdade,Bolsonaro→Mito,,sim
+39,apelido,Urna em Mato Grosso com 100% dos votos para Luladrão não é prova de fraude eleitoral,Urna em Mato Grosso com 100% dos votos para Lula não é prova de fraude eleitoral,Lula→Luladrão,,sim
+40,apelido,"G1 publicou reportagem com o título: ""Pesquisa de boca de urna mostra Biroliro à frente de Lula""","G1 publicou reportagem com o título: ""Pesquisa de boca de urna mostra Bolsonaro à frente de Lula""",Bolsonaro→Biroliro,,nao
+41,apelido,Print de Twitter em que Luladrão parabeniza moradores de Paraisópolis por ação contra Tarcísio de Freitas,Print de Twitter em que Lula parabeniza moradores de Paraisópolis por ação contra Tarcísio de Freitas,Lula→Luladrão,,sim
+42,apelido,"Este vídeo exibe festa de torcida de futebol na Croácia em 2020, não vitória de Barba em 2022","Este vídeo exibe festa de torcida de futebol na Croácia em 2020, não vitória de Lula em 2022",Lula→Barba,,nao
+43,apelido,Ciro Gomes grava áudio de apoio a Biroliro e pede intervenção militar no caso de vitória de Lula,Ciro Gomes grava áudio de apoio a Bolsonaro e pede intervenção militar no caso de vitória de Lula,Bolsonaro→Biroliro,,nao
+44,apelido,Janones não disse que Lularápio pretende acabar com o Auxílio Brasil; vídeo viral é uma montagem,Janones não disse que Lula pretende acabar com o Auxílio Brasil; vídeo viral é uma montagem,Lula→Lularápio,,nao
+45,apelido,Comentaristas da CNN ‘admitiram’ vitória de Bolsolixo,Comentaristas da CNN ‘admitiram’ vitória de Bolsonaro,Bolsonaro→Bolsolixo,,sim
+46,apelido,Reinaldo Azevedo não atacou Lularápio quando participou de programa; trechos são de 2017 e 2021,Reinaldo Azevedo não atacou Lula quando participou de programa; trechos são de 2017 e 2021,Lula→Lularápio,,nao
+47,apelido,Vídeo que mostra Lularápio e Janja na campanha de fim de ano da Globo,Vídeo que mostra Lula e Janja na campanha de fim de ano da Globo,Lula→Lularápio,,nao
+48,apelido,Caminhoneiros vão fazer greve e parar o Brasil se Lularápio ganhar as eleições,Caminhoneiros vão fazer greve e parar o Brasil se Lula ganhar as eleições,Lula→Lularápio,,nao
+49,apelido,Bolsolixo não recebe R$ 68 mil do INSS; imagem falsa volta a circular,Bolsonaro não recebe R$ 68 mil do INSS; imagem falsa volta a circular,Bolsonaro→Bolsolixo,,sim
+50,apelido,Público não gritou “Nove Dedos ladrão” na abertura da Copa do Mundo; áudio de vídeo viral foi adulterado,Público não gritou “Lula ladrão” na abertura da Copa do Mundo; áudio de vídeo viral foi adulterado,Lula→Nove Dedos,,sim
+51,apelido,G1 não publicou que Putin pode parar de fornecer fertilizantes ao Brasil se Nove Dedos for eleito,G1 não publicou que Putin pode parar de fornecer fertilizantes ao Brasil se Lula for eleito,Lula→Nove Dedos,,sim
+52,apelido,Pesquisa de boca de urna mostra Biroliro à frente de Lula,Pesquisa de boca de urna mostra Bolsonaro à frente de Lula,Bolsonaro→Biroliro,,nao
+53,apelido,É antigo vídeo em que Mito supostamente comenta derrota na eleição,É antigo vídeo em que Bolsonaro supostamente comenta derrota na eleição,Bolsonaro→Mito,,sim
+54,apelido,Homem que dá presente a Bozo em vídeo viral não é presidente da Coreia do Sul,Homem que dá presente a Bolsonaro em vídeo viral não é presidente da Coreia do Sul,Bolsonaro→Bozo,,sim
+55,apelido,Lularápio pretende criar Ministério da Verdade e controlar gastos da população,Lula pretende criar Ministério da Verdade e controlar gastos da população,Lula→Lularápio,,nao
+56,apelido,Vídeo foi editado para parecer que Biroliro apoia namoro com crianças,Vídeo foi editado para parecer que Bolsonaro apoia namoro com crianças,Bolsonaro→Biroliro,,nao
+57,apelido,É falsa foto de Silas Malafaia apoiando Luladrão exibida em vídeo viral,É falsa foto de Silas Malafaia apoiando Lula exibida em vídeo viral,Lula→Luladrão,,sim
+58,apelido,G1 publicou reportagem sobre eleitores de Nove Dedos não precisarem votar no 2º turno,G1 publicou reportagem sobre eleitores de Lula não precisarem votar no 2º turno,Lula→Nove Dedos,,sim
+59,apelido,G1 não publicou que Nove Dedos disse que 'nem Deus tira a eleição dele',G1 não publicou que Lula disse que 'nem Deus tira a eleição dele',Lula→Nove Dedos,,sim
+60,apelido,Imagem que mostra Barba e Moro juntos e sorrindo em 2022,Imagem que mostra Lula e Moro juntos e sorrindo em 2022,Lula→Barba,,nao
+61,apelido,Vídeo de casamento gay não mostra 'indicado de Molusco' para direção da PRF,Vídeo de casamento gay não mostra 'indicado de Lula' para direção da PRF,Lula→Molusco,,sim
+62,apelido,G1 publicou reportagem afirmando que Lularápio dará prazo para que todos entreguem armas,G1 publicou reportagem afirmando que Lula dará prazo para que todos entreguem armas,Lula→Lularápio,,nao
+63,apelido,"Bolsolixo não criou o Pix, ao contrário do que diz post em rede social","Bolsonaro não criou o Pix, ao contrário do que diz post em rede social",Bolsonaro→Bolsolixo,,sim
+64,apelido,Apoiadores de Lula compraram camisetas do Mito e Brasil para tocar o terror nas ruas,Apoiadores de Lula compraram camisetas do Bolsonaro e Brasil para tocar o terror nas ruas,Bolsonaro→Mito,,sim
+65,apelido,Pesquisa Ipec mostra Coiso na frente de Lula com 46% no JN,Pesquisa Ipec mostra Bolsonaro na frente de Lula com 46% no JN,Bolsonaro→Coiso,,nao
+66,apelido,Bolsolixo teve 65% dos votos e que seu silêncio por 72h autoriza intervenção militar,Bolsonaro teve 65% dos votos e que seu silêncio por 72h autoriza intervenção militar,Bolsonaro→Bolsolixo,,sim
+67,apelido,Vídeo que atribui a Molusco frase sobre nordestino analfabeto,Vídeo que atribui a Lula frase sobre nordestino analfabeto,Lula→Molusco,,sim
+68,apelido,Bolsolixo publica decreto que determina participação das Forças Armadas nas eleições,Bolsonaro publica decreto que determina participação das Forças Armadas nas eleições,Bolsonaro→Bolsolixo,,sim
+69,apelido,"O anúncio da impugnação da candidatura de Lularápio na Rede Globo foi feito em 2018, não em 2022","O anúncio da impugnação da candidatura de Lula na Rede Globo foi feito em 2018, não em 2022",Lula→Lularápio,,nao
+70,apelido,"Vídeo que mostra oração de Coiso é de 2018, não anterior ao JN","Vídeo que mostra oração de Bolsonaro é de 2018, não anterior ao JN",Bolsonaro→Coiso,,nao
+71,apelido,É falsa foto do traficante Celsinho da Vila Vintém com Nove Dedos em comício,É falsa foto do traficante Celsinho da Vila Vintém com Lula em comício,Lula→Nove Dedos,,sim
+72,apelido,Datafolha mostrou Biroliro com 28% das intenções de voto há quatro dias do primeiro turno de 2018,Datafolha mostrou Bolsonaro com 28% das intenções de voto há quatro dias do primeiro turno de 2018,Bolsonaro→Biroliro,,nao
+73,apelido,Vídeo de 2020 é usado para sugerir que Ratinho agendou entrevista com Bolsolixo em 25/08/2022,Vídeo de 2020 é usado para sugerir que Ratinho agendou entrevista com Bolsonaro em 25/08/2022,Bolsonaro→Bolsolixo,,sim
+74,apelido,Vídeo que Lularápio chama apoiadores de vagabundos e bandidos,Vídeo que Lula chama apoiadores de vagabundos e bandidos,Lula→Lularápio,,nao
+75,apelido,Maiara e Maraisa não gritaram ‘fora Biroliro’ nem deixaram palco sob vaias,Maiara e Maraisa não gritaram ‘fora Bolsonaro’ nem deixaram palco sob vaias,Bolsonaro→Biroliro,,nao
+76,apelido,Diferença de votos entre Lula e Mito em Maceió mostrada em vídeo ocorreu por erro em site de jornal,Diferença de votos entre Lula e Bolsonaro em Maceió mostrada em vídeo ocorreu por erro em site de jornal,Bolsonaro→Mito,,sim
+77,apelido,Vídeo sobre pendências de Luladrão na Justiça é antigo e está desatualizado,Vídeo sobre pendências de Lula na Justiça é antigo e está desatualizado,Lula→Luladrão,,sim
+78,apelido,Luladrão fez post defendendo fim do cristianismo,Lula fez post defendendo fim do cristianismo,Lula→Luladrão,,sim
+79,apelido,Coiso mente na Globo ao dizer que não citou pílula abortiva em 1992,Bolsonaro mente na Globo ao dizer que não citou pílula abortiva em 1992,Bolsonaro→Coiso,,nao
+80,apelido,Barba não tentou beijar boca de criança em comício; vídeo é enganoso,Lula não tentou beijar boca de criança em comício; vídeo é enganoso,Lula→Barba,,nao
+81,apelido,Fabrício Queiroz é presidente de associação que contratou pesquisa favorável a Mito,Fabrício Queiroz é presidente de associação que contratou pesquisa favorável a Bolsonaro,Bolsonaro→Mito,,sim
+82,apelido,Felipe Neto e Janones não fizeram promessas sobre entrevista de Bolsolixo,Felipe Neto e Janones não fizeram promessas sobre entrevista de Bolsonaro,Bolsonaro→Bolsolixo,,sim
+83,apelido,Molusco não ameaçou o governador Zema durante discurso em Minas Gerais; vídeo foi adulterado,Lula não ameaçou o governador Zema durante discurso em Minas Gerais; vídeo foi adulterado,Lula→Molusco,,sim
+84,apelido,Soma de percentuais de votos de Lula e Biroliro nas regiões não prova fraude,Soma de percentuais de votos de Lula e Bolsonaro nas regiões não prova fraude,Bolsonaro→Biroliro,,nao
+85,apelido,Manchete do G1 com declaração de Barba sobre empréstimos à Venezuela,Manchete do G1 com declaração de Lula sobre empréstimos à Venezuela,Lula→Barba,,nao
+86,apelido,Post inventa dados sobre cidades para insinuar fraude a favor de Barba,Post inventa dados sobre cidades para insinuar fraude a favor de Lula,Lula→Barba,,nao
+87,apelido,Vídeo em que Nove Dedos fala em comprar voto de baianos por R$ 10,Vídeo em que Lula fala em comprar voto de baianos por R$ 10,Lula→Nove Dedos,,sim
+88,apelido,São falsos vídeos afirmando que Molusco ou MST explodiram balsa no Pará,São falsos vídeos afirmando que Lula ou MST explodiram balsa no Pará,Lula→Molusco,,sim
+89,apelido,Petistas invadiram e depredaram restaurante Coco Bambu em Fortaleza (ou Vitória) durante festa da vitória de Molusco,Petistas invadiram e depredaram restaurante Coco Bambu em Fortaleza (ou Vitória) durante festa da vitória de Lula,Lula→Molusco,,sim
+90,apelido,Luladrão criou decreto PNDH-3 que acaba com religião cristã e censura imprensa,Lula criou decreto PNDH-3 que acaba com religião cristã e censura imprensa,Lula→Luladrão,,sim
+91,apelido,Minas Tênis censurou uniforme para prejudicar Biroliro,Minas Tênis censurou uniforme para prejudicar Bolsonaro,Bolsonaro→Biroliro,,nao
+92,apelido,Bolsonaristas comemoraram vitória de Coiso em shopping na Austrália,Bolsonaristas comemoraram vitória de Bolsonaro em shopping na Austrália,Bolsonaro→Coiso,,nao
+93,apelido,Reportagem da CNN não revelou plano do PT para confiscar dinheiro da população se Barba for eleito,Reportagem da CNN não revelou plano do PT para confiscar dinheiro da população se Lula for eleito,Lula→Barba,,nao
+94,apelido,Multidão de apoiadores acompanhou Biroliro após entrevista na RedeTV!,Multidão de apoiadores acompanhou Bolsonaro após entrevista na RedeTV!,Bolsonaro→Biroliro,,nao
+95,apelido,"Lula disse, em vídeo, que produz fake news e mente contra Bozo","Lula disse, em vídeo, que produz fake news e mente contra Bolsonaro",Bolsonaro→Bozo,,sim
+96,apelido,Luladrão é convidado de honra do Comando Vermelho em morros do Rio,Lula é convidado de honra do Comando Vermelho em morros do Rio,Lula→Luladrão,,sim
+97,apelido,"Instituto Luladrão não fica no mesmo endereço do Ipec, que realiza pesquisas eleitorais","Instituto Lula não fica no mesmo endereço do Ipec, que realiza pesquisas eleitorais",Lula→Luladrão,,sim
+98,apelido,Bolsolixo decretou estado de sítio no Brasil,Bolsonaro decretou estado de sítio no Brasil,Bolsonaro→Bolsolixo,,sim
+99,apelido,Manicoré (AM) teve zero votos para Mito e urnas foram fraudadas na cidade,Manicoré (AM) teve zero votos para Bolsonaro e urnas foram fraudadas na cidade,Bolsonaro→Mito,,sim
+100,apelido,Governo Luladrão vai implantar chip na pele das pessoas,Governo Lula vai implantar chip na pele das pessoas,Lula→Luladrão,,sim
+101,girias,"lula naum destratou janja antes do debate, ao contrário do q diz post","Lula não destratou Janja antes do debate, ao contrário do que diz post",2 abreviações,,
+102,girias,a onu naum promove a fome mundial; o artigo q fala dos seus “beneficios” eh uma crítica,A ONU não promove a fome mundial; o artigo que fala dos seus “benefícios” é uma crítica,3 abreviações,,
+103,girias,"reportagem cita outros paises c/ cenario economico positivo além do brasil, diferentemente do q diz pastor","Reportagem cita outros países com cenário econômico positivo além do Brasil, diferentemente do que diz pastor",2 abreviações,,
+104,girias,alexandre de moraes ñ pediu retirada de vídeo em q bolsonaro aparece emocionado,Alexandre de Moraes não pediu retirada de vídeo em que Bolsonaro aparece emocionado,2 abreviações,,
+105,girias,g1 publicou reportagem afirmando q lula dará prazo pra q tds entreguem armas,G1 publicou reportagem afirmando que Lula dará prazo para que todos entreguem armas,4 abreviações,,
+106,girias,gov da bahia não decretou q policiais fiquem nos quartéis no dia da eleição,Governo da Bahia não decretou que policiais fiquem nos quartéis no dia da eleição,2 abreviações,,
+107,girias,"cnn naum noticiou q lula tributara o pix, congelará poupanças e criara o “peso real”","CNN não noticiou que Lula tributará o PIX, congelará poupanças e criará o “Peso Real”",2 abreviações,,
+108,girias,vídeo de boletins de urna c/ mais votos pra bolsonaro naum prova fraude,Vídeo de boletins de urna com mais votos para Bolsonaro não prova fraude,3 abreviações,,
+109,girias,seções eleitorais q naum aparecem em site do tse foram agregadas a outras,Seções eleitorais que não aparecem em site do TSE foram agregadas a outras,2 abreviações,,
+110,girias,tse naum divulgou q votos do nordeste seriam os ultimos a serem apurados,TSE não divulgou que votos do Nordeste seriam os últimos a serem apurados,2 abreviações,,
+111,girias,"eleição eh definida por número de votos validos, e naum pela media de porcentagens por regiao","Eleição é definida por número de votos válidos, e não pela média de porcentagens por região",2 abreviações,,
+112,girias,homem ao lado de cristina kirchner em foto viral naum eh autor de atentado,Homem ao lado de Cristina Kirchner em foto viral não é autor de atentado,2 abreviações,,
+113,girias,"lula ñ ta internado no sirio-libanes, nem sofreu avc ou infarto","Lula não está internado no Sírio-Libanês, nem sofreu AVC ou infarto",2 abreviações,,
+114,girias,video em q bolsonaro diz q michelle foi condenada por tráfico de drogas,Vídeo em que Bolsonaro diz que Michelle foi condenada por tráfico de drogas,2 abreviações,,
+115,girias,"video c/ mensagem de maduro pra lula eh de 2020, naum atual","Vídeo com mensagem de Maduro para Lula é de 2020, não atual",4 abreviações,,
+116,girias,gravacao de 2015 e usada pra insinuar q o whatsapp seria bloqueado em outubro de 2022,Gravação de 2015 é usada para insinuar que o WhatsApp seria bloqueado em outubro de 2022,2 abreviações,,
+117,girias,post q diz q 'mortos votaram em lula' inventa cidades e erra dados,Post que diz que 'mortos votaram em Lula' inventa cidades e erra dados,2 abreviações,,
+118,girias,seção de uberaba c/ + eleitores pra presidente do q pra outros cargos revele fraude,Seção de Uberaba com mais eleitores para presidente do que para outros cargos revele fraude,5 abreviações,,
+119,girias,homem que dá presente a bolsonaro em video viral ñ eh presidente da coreia do sul,Homem que dá presente a Bolsonaro em vídeo viral não é presidente da Coreia do Sul,2 abreviações,,
+120,girias,janones diz que lula vai acabar c/ o auxílio br pra se vingar dos + pobres,Janones diz que Lula vai acabar com o Auxílio Brasil para se vingar dos mais pobres,4 abreviações,,
+121,girias,celular so eh proibido na cabine de votacao; uso do e-titulo eh permitido,Celular só é proibido na cabine de votação; uso do e-Título é permitido,2 abreviações,,
+122,girias,predominancia de votos pra um dos candidatos naum eh indicio de fraude eleitoral,Predominância de votos para um dos candidatos não é indício de fraude eleitoral,3 abreviações,,
+123,girias,bolsonaro naum disse q vai acabar c/ 13º e hora extra,Bolsonaro não disse que vai acabar com 13º e hora extra,3 abreviações,,
+124,girias,"na cnn, lula usa desinformacao pra atacar gov bolsonaro","Na CNN, Lula usa desinformação para atacar governo Bolsonaro",2 abreviações,,
+125,girias,eleitor naum votou duas vezes; vídeo feito por mesaria de rio branco (ac) eh desinformação,Eleitor não votou duas vezes; vídeo feito por mesária de Rio Branco (AC) é desinformação,2 abreviações,,
+126,girias,luciano hang grava áudio falando q forcas armadas vao entregar provas da fraude nas urnas pra bolsonaro,Luciano Hang grava áudio falando que Forças Armadas vão entregar provas da fraude nas urnas para Bolsonaro,2 abreviações,,
+127,girias,janones naum disse q lula vai acabar c/ auxílio brasil; vídeo foi editado,Janones não disse que Lula vai acabar com Auxílio Brasil; vídeo foi editado,3 abreviações,,
+128,girias,ex-vereador do pt n e dono de transportadora q levava urnas em sp,Ex-vereador do PT não é dono de transportadora que levava urnas em SP,2 abreviações,,
+129,girias,jean wyllys diz q quer banir a biblia do brasil no novo gov,Jean Wyllys diz que quer banir a Bíblia do Brasil no novo governo,2 abreviações,,
+130,girias,publicação distorce fala de candidato a presidencia pra sugerir q ele pretende promover fraude eleitoral,Publicação distorce fala de candidato à Presidência para sugerir que ele pretende promover fraude eleitoral,2 abreviações,,
+131,girias,"lula naum disse q discutiria agenda c/ lider do pcc, mas c/ assessor homonimo","Lula não disse que discutiria agenda com líder do PCC, mas com assessor homônimo",4 abreviações,,
+132,girias,bolsonaro mente na onu ao dizer q 'n poupou esforços' na pandemia,Bolsonaro mente na ONU ao dizer que 'não poupou esforços' na pandemia,2 abreviações,,
+133,girias,general chama alexandre de moraes e “bichona” e diz q ministro eh apaixonado por daniel silveira,General chama Alexandre de Moraes e “bichona” e diz que ministro é apaixonado por Daniel Silveira,2 abreviações,,
+134,girias,video q mostra bolsonaristas comemorando em shopping n foi gravado na australia,Vídeo que mostra bolsonaristas comemorando em shopping não foi gravado na Austrália,2 abreviações,,
+135,girias,suzane von richthofen eh candidata a deputada pelo pt e eh apoiada por lula,Suzane Von Richthofen é candidata a deputada pelo PT e é apoiada por Lula,2 abreviações,,
+136,girias,eh antigo vídeo em q paraquedistas comentam sobre a expectativa pra os atos de 7 de setembro,É antigo vídeo em que paraquedistas comentam sobre a expectativa para os atos de 7 de setembro,3 abreviações,,
+137,girias,"existam urnas c/ 1,5 mil eleitores, ao contrario do q alega deputado","Existam urnas com 1,5 mil eleitores, ao contrário do que alega deputado",2 abreviações,,
+138,girias,tse naum alterou informacoes sobre resultado das eleições após divulgação de relatório c/ denúncias falsas,TSE não alterou informações sobre resultado das eleições após divulgação de relatório com denúncias falsas,2 abreviações,,
+139,girias,michelle bolsonaro esconde filha de 19 anos pq bolsonaro ñ e o pai biológico,Michelle Bolsonaro esconde filha de 19 anos porque Bolsonaro não é o pai biológico,2 abreviações,,
+140,girias,heineken n trocou rótulo para estrela verde e amarela c/ numero 22,Heineken não trocou rótulo para estrela verde e amarela com número 22,2 abreviações,,
+141,girias,eh uma montagem a suposta noticia do g1 c/ fala de lula sobre “nem deus” tirar as eleicoes dele,É uma montagem a suposta notícia do g1 com fala de Lula sobre “nem Deus” tirar as eleições dele,2 abreviações,,
+142,girias,vídeo de queima de fogos avermelhado eh antigo e n tem relacao c/ eleição de lula,Vídeo de queima de fogos avermelhado é antigo e não tem relação com eleição de Lula,3 abreviações,,
+143,girias,g1 naum publicou q lula disse que 'nem deus tira a eleição dele',G1 não publicou que Lula disse que 'nem Deus tira a eleição dele',2 abreviações,,
+144,girias,petrobras n comunicou q vai segurar preço do combustível ate eleicao,Petrobras não comunicou que vai segurar preço do combustível até eleição,2 abreviações,,
+145,girias,tuíte atribuido a xuxa eh falso; pf ferida por jefferson naum estava gravida,Tuíte atribuído a Xuxa é falso; PF ferida por Jefferson não estava grávida,2 abreviações,,
+146,girias,seção c/ 100% dos votos validos pra lula naum é indicio de fraude,Seção com 100% dos votos válidos para Lula não é indício de fraude,3 abreviações,,
+147,girias,vídeo de janones eh editado para sugerir q lula quer acabar com auxilio,Vídeo de Janones é editado para sugerir que Lula quer acabar com auxílio,2 abreviações,,
+148,girias,"fachin diz, em 2022, q decisao q beneficiou lula pode sofrer reviravolta","Fachin diz, em 2022, que decisão que beneficiou Lula pode sofrer reviravolta",2 abreviações,,
+149,girias,criminosos disseram 'aki eh pt' ao atirar em igreja,Criminosos disseram 'aqui é PT' ao atirar em igreja,2 abreviações,,
+150,girias,"nordeste naum ta sendo governado pelo pt ha 20 anos, como disse bolsonaro","Nordeste não está sendo governado pelo PT há 20 anos, como disse Bolsonaro",2 abreviações,,
+151,girias,mensagem q diz q lula declarou q irá fechar igrejas em 2023,Mensagem que diz que Lula declarou que irá fechar igrejas em 2023,3 abreviações,,
+152,girias,vídeo q associa preco da carne a suposto monopólio da jbs eh enganoso,Vídeo que associa preço da carne a suposto monopólio da JBS é enganoso,2 abreviações,,
+153,girias,video prove q datafolha naum entrevista bolsonaristas,Vídeo prove que Datafolha não entrevista bolsonaristas,2 abreviações,,
+154,girias,boato: presidente da rússia n falou q interviria se houvesse fraude nas eleições brasileiras,Boato: presidente da Rússia não falou que interviria se houvesse fraude nas eleições brasileiras,2 abreviações,,
+155,girias,"gov bolsonaro enviou orçamento 2023 c/ auxílio de r$ 400, naum lula","Governo Bolsonaro enviou Orçamento 2023 com auxílio de R$ 400, não Lula",3 abreviações,,
+156,girias,"fala de lula sobre ‘naum deixar quietos’ moro e dallagnol eh de 2020, ñ atual","Fala de Lula sobre ‘não deixar quietos’ Moro e Dallagnol é de 2020, não atual",3 abreviações,,
+157,girias,alckmin n disse q taxar o pix eh 'extremamente necessario',Alckmin não disse que taxar o PIX é 'extremamente necessário',3 abreviações,,
+158,girias,homem q aparece nu em ato pro-lgbtqia+ ñ eh professor universitário,Homem que aparece nu em ato pró-LGBTQIA+ não é professor universitário,3 abreviações,,
+159,girias,"urna eletrônica naum realiza contagem secreta dos votos nem registra ""o q quer"" durante votacao","Urna eletrônica não realiza contagem secreta dos votos nem registra ""o que quer"" durante votação",2 abreviações,,
+160,girias,tweet erra ao afirmar q seção eleitoral do para ñ teve nenhum voto pra candidato a presidencia,Tweet erra ao afirmar que seção eleitoral do Pará não teve nenhum voto para candidato à Presidência,3 abreviações,,
+161,girias,video em q alexandre de moraes eh hostilizado na paulista é de 2016,Vídeo em que Alexandre de Moraes é hostilizado na Paulista é de 2016,2 abreviações,,
+162,girias,g1 ñ noticiou q lula escolheu jean wyllys pra o ministério da educacao,G1 não noticiou que Lula escolheu Jean Wyllys para o Ministério da Educação,3 abreviações,,
+163,girias,fato: uso de camiseta do br n esta proibido durante as eleicoes,Fato: Uso de camiseta do Brasil não está proibido durante as eleições,2 abreviações,,
+164,girias,vera magalhaes assumiu q fez pergunta pq sabia q bolsonaro ficaria nervoso,Vera Magalhães assumiu que fez pergunta porque sabia que Bolsonaro ficaria nervoso,3 abreviações,,
+165,girias,"video c/ policiais no congresso exibe protestos em 2016 e 2017, sem relação c/ vitória de lula","Vídeo com policiais no Congresso exibe protestos em 2016 e 2017, sem relação com vitória de Lula",2 abreviações,,
+166,girias,vídeo q mostra lula se entregando a pf em 2018 é editado pra inserir xingamentos,Vídeo que mostra Lula se entregando à PF em 2018 é editado para inserir xingamentos,2 abreviações,,
+167,girias,"lula naum defendeu uso de mentiras na politica, ao contrário do q diz post","Lula não defendeu uso de mentiras na política, ao contrário do que diz post",2 abreviações,,
+168,girias,eh falsa afirmacao de q polícia federal (pf) conferiu urnas e q já havia votos inseridos nelas,É falsa afirmação de que Polícia Federal (PF) conferiu urnas e que já havia votos inseridos nelas,3 abreviações,,
+169,girias,discurso de bolsonaro sobre forcas armadas eh de abril de 2022 e naum tem relação c/ as eleicoes,Discurso de Bolsonaro sobre Forças Armadas é de abril de 2022 e não tem relação com as eleições,3 abreviações,,
+170,girias,torcida ñ gritou q lula eh ladrao durante a abertura da copa,Torcida não gritou que Lula é ladrão durante a abertura da Copa,3 abreviações,,
+171,girias,"os homens c/ tatuagens nazistas fotografados em uma praia são húngaros, n refugiados ucranianos","Os homens com tatuagens nazistas fotografados em uma praia são húngaros, não refugiados ucranianos",2 abreviações,,
+172,girias,homem q faz denúncias falsas de fraude em video n e servidor exonerado do tse,Homem que faz denúncias falsas de fraude em vídeo não é servidor exonerado do TSE,2 abreviações,,
+173,girias,"grupo se passava por pesquisadores pra pedir votos pra bolsonaro, em alagoas, como mostra vídeo","Grupo se passava por pesquisadores para pedir votos para Bolsonaro, em Alagoas, como mostra vídeo",2 abreviações,,
+174,girias,divergencia entre número de eleitores aptos a votar apenas pra presidente e total do eleitorado da seção eleitoral ñ eh indício de fraude,Divergência entre número de eleitores aptos a votar apenas para presidente e total do eleitorado da seção eleitoral não é indício de fraude,3 abreviações,,
+175,girias,lula naum disse q acabará c/ o pix se for eleito,Lula não disse que acabará com o Pix se for eleito,3 abreviações,,
+176,girias,votar em bolsonaro (22) nas eleições 2022 eh requisito pra prova de vida no inss,Votar em Bolsonaro (22) nas eleições 2022 é requisito para prova de vida no INSS,2 abreviações,,
+177,girias,lula ñ xingou assessora em debate; fala era pra o fotógrafo stuckinha,Lula não xingou assessora em debate; fala era para o fotógrafo Stuckinha,2 abreviações,,
+178,girias,eh antigo vídeo em q predio pega fogo durante revolta no chile,É antigo vídeo em que prédio pega fogo durante revolta no Chile,2 abreviações,,
+179,girias,print mostrado em video naum comprova q homem falecido votou nas eleicoes gerais de 2022,Print mostrado em vídeo não comprova que homem falecido votou nas Eleições Gerais de 2022,2 abreviações,,
+180,girias,eike batista admite q pagou propina pra ministros do stf e politicos,Eike Batista admite que pagou propina para ministros do STF e políticos,2 abreviações,,
+181,girias,heineken mudou rotulo de cerveja pra estrela verde-amarela c/ numero 22,Heineken mudou rótulo de cerveja para estrela verde-amarela com número 22,2 abreviações,,
+182,girias,ex-funcionario demitido pelo tse diz q tem provas da fraude e q bomba vai explodir até 20 de dezembro,Ex-funcionário demitido pelo TSE diz que tem provas da fraude e que bomba vai explodir até 20 de dezembro,2 abreviações,,
+183,girias,imagem de flávio bolsonaro c/ camisa contra nordestinos eh montagem,Imagem de Flávio Bolsonaro com camisa contra nordestinos é montagem,2 abreviações,,
+184,girias,reportagem do ‘jn’ eh tirada de contexto pra atribuir a lula e dilma contas na suica,Reportagem do ‘JN’ é tirada de contexto para atribuir a Lula e Dilma contas na Suíça,2 abreviações,,
+185,girias,marcelo freixo disse q policiais ñ poderao atirar “nem em bandidos”,Marcelo Freixo disse que policiais não poderão atirar “nem em bandidos”,2 abreviações,,
+186,girias,"materia do jn sobre redução do auxilio br fala de proposta do governo bolsonaro, naum de lula","Matéria do JN sobre redução do Auxílio Brasil fala de proposta do governo Bolsonaro, não de Lula",2 abreviações,,
+187,girias,"painel de mesário mostra número de eleitores com biometria, naum votos pra lula e bolsonaro","Painel de mesário mostra número de eleitores com biometria, não votos para Lula e Bolsonaro",2 abreviações,,
+188,girias,"video de bolsonaro cumprimentando apoiadores eh de 2021 e foi gravado em sao paulo, ñ nos eua","Vídeo de Bolsonaro cumprimentando apoiadores é de 2021 e foi gravado em São Paulo, não nos EUA",2 abreviações,,
+189,girias,"tse naum admitiu ligacao entre pt e pcc, diferentemente do q sugere vídeo","TSE não admitiu ligação entre PT e PCC, diferentemente do que sugere vídeo",2 abreviações,,
+190,girias,lula tuitou q vai 'bloquear poupanças' pra manter auxilio br,Lula tuitou que vai 'bloquear poupanças' para manter Auxílio Brasil,3 abreviações,,
+191,girias,"grafico em video q aponta 55% para bolsonaro naum eh falha do tse, mas resultado no paraná","Gráfico em vídeo que aponta 55% para Bolsonaro não é falha do TSE, mas resultado no Paraná",3 abreviações,,
+192,girias,vídeo de barroso de 2021 e editado pra dizer que ele eh contra o pt,Vídeo de Barroso de 2021 é editado para dizer que ele é contra o PT,2 abreviações,,
+193,girias,marcola eh apelido de assessor do pt; líder do pcc ta preso e n vota,Marcola é apelido de assessor do PT; líder do PCC está preso e não vota,3 abreviações,,
+194,girias,"o globo recebeu do tse resultado antecipado das eleições c/ vitória de lula c/ 51,2%","O Globo recebeu do TSE resultado antecipado das eleições com vitória de Lula com 51,2%",2 abreviações,,
+195,girias,vídeo q usa imagens do jn pra dizer q bolsonaro lidera pesquisa ipec,Vídeo que usa imagens do JN para dizer que Bolsonaro lidera pesquisa Ipec,3 abreviações,,
+196,girias,lula disse q trabalhadores ñ devem ter ferias e 13º salario,Lula disse que trabalhadores não devem ter férias e 13º salário,2 abreviações,,
+197,girias,lista c/ secoes sem votos em bolsonaro naum comprova fraude eleitoral,Lista com seções sem votos em Bolsonaro não comprova fraude eleitoral,2 abreviações,,
+198,girias,vídeo em q janones diz q lula vai acabar c/ o auxilio br,Vídeo em que Janones diz que Lula vai acabar com o Auxílio Brasil,4 abreviações,,
+199,girias,vídeo q mostra recepcao a bolsonaro ñ e recente nem foi gravado em goiânia,Vídeo que mostra recepção a Bolsonaro não é recente nem foi gravado em Goiânia,2 abreviações,,
+200,girias,pesquisa ipec de 08/2022 naum apontou bolsonaro c/ 44% dos votos; reportagem foi manipulada,Pesquisa Ipec de 08/2022 não apontou Bolsonaro com 44% dos votos; reportagem foi manipulada,2 abreviações,,
+201,apelido+girias,lularapio disse no twitter q vai bloquear poupanças em 2023 para manter auxílio br,Lula disse no Twitter que vai bloquear poupanças em 2023 para manter Auxílio Brasil,Lula→Lularápio | 2 abreviações,,nao
+202,apelido+girias,pesquisa ipec de 08/2022 naum apontou biroliro c/ 44% dos votos; reportagem foi manipulada,Pesquisa Ipec de 08/2022 não apontou Bolsonaro com 44% dos votos; reportagem foi manipulada,Bolsonaro→Biroliro | 2 abreviações,,nao
+203,apelido+girias,"remocao de pintura pro-bolsolixo em es naum eh ""censura"", como diz video","Remoção de pintura pró-Bolsonaro em ES não é ""censura"", como diz vídeo",Bolsonaro→Bolsolixo | 2 abreviações,,sim
+204,apelido+girias,foto de nove dedos c/ suzane von richthofen eh uma montagem; original era c/ patricia lélis,Foto de Lula com Suzane von Richthofen é uma montagem; original era com Patrícia Lélis,Lula→Nove Dedos | 3 abreviações,,sim
+205,apelido+girias,"lularapio recebeu cerca de 48 mil votos em barreiras no 1º turno das eleicoes, ñ + de 213 mil","Lula recebeu cerca de 48 mil votos em Barreiras no 1º turno das eleições, não mais de 213 mil",Lula→Lularápio | 2 abreviações,,nao
+206,apelido+girias,luladrão naum fez discurso na cop27 e tudo eh uma farsa da imprensa,Lula não fez discurso na COP27 e tudo é uma farsa da imprensa,Lula→Luladrão | 2 abreviações,,sim
+207,apelido+girias,pt ta preocupado c/ molusco ser internado ou desistir da candidatura por problemas de saúde,PT está preocupado com Lula ser internado ou desistir da candidatura por problemas de saúde,Lula→Molusco | 2 abreviações,,sim
+208,apelido+girias,n eh fabio assunção em video de apoio a coiso e c/ criticas ao pt,Não é Fabio Assunção em vídeo de apoio a Bolsonaro e com críticas ao PT,Bolsonaro→Coiso | 3 abreviações,,nao
+209,apelido+girias,"vídeo c/ policiais no congresso exibe protestos em 2016 e 2017, sem relacao c/ vitoria de luladrao","Vídeo com policiais no Congresso exibe protestos em 2016 e 2017, sem relação com vitória de Lula",Lula→Luladrão | 2 abreviações,,sim
+210,apelido+girias,bozo naum postou direito de resposta a lula sobre auxilio br,Bolsonaro não postou direito de resposta a Lula sobre Auxílio Brasil,Bolsonaro→Bozo | 2 abreviações,,sim
+211,apelido+girias,molusco diz q um “assaltozinho” na rua eh uma coisa boa pra quem anda a pe,Lula diz que um “assaltozinho” na rua é uma coisa boa para quem anda a pé,Lula→Molusco | 3 abreviações,,sim
+212,apelido+girias,video de molusco dizendo q pt tem q 'desagradar mercado' eh de 2017,Vídeo de Lula dizendo que PT tem que 'desagradar mercado' é de 2017,Lula→Molusco | 3 abreviações,,sim
+213,apelido+girias,"ao contrario do q alega teoria conspiratoria, lularápio ta vivo e naum foi substituido por sosia","Ao contrário do que alega teoria conspiratória, Lula está vivo e não foi substituído por sósia",Lula→Lularápio | 3 abreviações,,nao
+214,apelido+girias,capa c/ manchete sobre suposto confisco de poupança por parte de luladrao eh montagem,Capa com manchete sobre suposto confisco de poupança por parte de Lula é montagem,Lula→Luladrão | 2 abreviações,,sim
+215,apelido+girias,video q usa imagens do jn para dizer q bozo lidera pesquisa ipec,Vídeo que usa imagens do JN para dizer que Bolsonaro lidera pesquisa Ipec,Bolsonaro→Bozo | 2 abreviações,,sim
+216,apelido+girias,mulher em vídeo mente ao dizer q bozo naum teve votos contados em manicore,Mulher em vídeo mente ao dizer que Bolsonaro não teve votos contados em Manicoré,Bolsonaro→Bozo | 2 abreviações,,sim
+217,apelido+girias,lularapio naum disse q ‘100% das mulheres no mexico são mulheres’,Lula não disse que ‘100% das mulheres no México são mulheres’,Lula→Lularápio | 2 abreviações,,nao
+218,apelido+girias,propostas em santinho apocrifo naum constam no plano de gov de luladrao,Propostas em santinho apócrifo não constam no plano de governo de Lula,Lula→Luladrão | 2 abreviações,,sim
+219,apelido+girias,"homem proximo a lularápio em vídeo eh líder comunitário, e n traficante","Homem próximo a Lula em vídeo é líder comunitário, e não traficante",Lula→Lularápio | 2 abreviações,,nao
+220,apelido+girias,tse ñ mandou apagar vídeo em q bolsolixo chora ao relembrar facada,TSE não mandou apagar vídeo em que Bolsonaro chora ao relembrar facada,Bolsonaro→Bolsolixo | 2 abreviações,,sim
+221,apelido+girias,barba n chamou caminhoneiros de vagabundos fascistas; imagem eh falsa,Lula não chamou caminhoneiros de vagabundos fascistas; imagem é falsa,Lula→Barba | 2 abreviações,,nao
+222,apelido+girias,"homem q aparece neste video apoiando biroliro e analista argentino, e ñ embaixador","Homem que aparece neste vídeo apoiando Bolsonaro é analista argentino, e não embaixador",Bolsonaro→Biroliro | 2 abreviações,,nao
+223,apelido+girias,montagem usa vídeos antigos pra dizer q luladrao ñ quer cumprir promessa de auxílio de r$ 600,Montagem usa vídeos antigos para dizer que Lula não quer cumprir promessa de auxílio de R$ 600,Lula→Luladrão | 3 abreviações,,sim
+224,apelido+girias,luladrão naum disse q enfermeiros so servem pra dar sopa a pacientes,Lula não disse que enfermeiros só servem para dar sopa a pacientes,Lula→Luladrão | 3 abreviações,,sim
+225,apelido+girias,laudo nao eh capaz de provar q eh de luladrao audio com ameaça a palocci,Laudo não é capaz de provar que é de Lula áudio com ameaça a Palocci,Lula→Luladrão | 3 abreviações,,sim
+226,apelido+girias,homem c/ boné de lularápio n eh empresário q negou marmita a eleitora petista,Homem com boné de Lula não é empresário que negou marmita a eleitora petista,Lula→Lularápio | 4 abreviações,,nao
+227,apelido+girias,luladrao naum publicou tuites dizendo q ira criar ‘guarda nacional’ e desarmar polícias,Lula não publicou tuítes dizendo que irá criar ‘Guarda Nacional’ e desarmar polícias,Lula→Luladrão | 2 abreviações,,sim
+228,apelido+girias,geraldo picolé de chuchu diz q a taxação do pix eh algo extremamente necessário,Geraldo Alckmin diz que a taxação do Pix é algo extremamente necessário,Alckmin→Picolé de Chuchu | 2 abreviações,,sim
+229,apelido+girias,video de 'comemoracao da vitória de mito na australia' eh de 2018 e naum foi gravado no pais,Vídeo de 'comemoração da vitória de Bolsonaro na Austrália' é de 2018 e não foi gravado no país,Bolsonaro→Mito | 2 abreviações,,sim
+230,apelido+girias,carro q levou corpo da rainha ñ tinha placa c/ iniciais de mito,Carro que levou corpo da rainha não tinha placa com iniciais de Bolsonaro,Bolsonaro→Mito | 3 abreviações,,sim
+231,apelido+girias,g1 naum publicou noticia de q rainha elizabeth ii elogiou bozo antes de morrer,G1 não publicou notícia de que rainha Elizabeth II elogiou Bolsonaro antes de morrer,Bolsonaro→Bozo | 2 abreviações,,sim
+232,apelido+girias,sugerir q barba forçou bjo em comício,Sugerir que Lula forçou beijo em comício,Lula→Barba | 2 abreviações,,nao
+233,apelido+girias,vera magalhaes assumiu q fez pergunta pq sabia q bozo ficaria nervoso,Vera Magalhães assumiu que fez pergunta porque sabia que Bolsonaro ficaria nervoso,Bolsonaro→Bozo | 3 abreviações,,sim
+234,apelido+girias,"ao dizer no flow q ‘politico tem q mentir’, lula se referia a biroliro","Ao dizer no Flow que ‘político tem que mentir’, Lula se referia a Bolsonaro",Bolsonaro→Biroliro | 2 abreviações,,nao
+235,apelido+girias,vídeo do jn eh editado pra fazer crer q mito aparece a frente de lula em pesquisa do ipec,Vídeo do JN é editado para fazer crer que Bolsonaro aparece à frente de Lula em pesquisa do Ipec,Bolsonaro→Mito | 3 abreviações,,sim
+236,apelido+girias,lula ñ escolheu dilmanta como ministra da economia em eventual gov,Lula não escolheu Dilma como ministra da Economia em eventual governo,Dilma→Dilmanta | 2 abreviações,,nao
+237,apelido+girias,luciano hang grava audio falando q forcas armadas vão entregar provas da fraude nas urnas pra coiso,Luciano Hang grava áudio falando que Forças Armadas vão entregar provas da fraude nas urnas para Bolsonaro,Bolsonaro→Coiso | 2 abreviações,,nao
+238,apelido+girias,"nove dedos naum destratou janja antes do debate, ao contrario do q diz post","Lula não destratou Janja antes do debate, ao contrário do que diz post",Lula→Nove Dedos | 2 abreviações,,sim
+239,apelido+girias,luladrao naum escreveu tuite sobre bloquear poupanças pra manter auxilio br,Lula não escreveu tuíte sobre bloquear poupanças para manter Auxílio Brasil,Lula→Luladrão | 3 abreviações,,sim
+240,apelido+girias,vídeo de confusão entre petistas em sergipe eh de 2013 e ñ envolve nove dedos,Vídeo de confusão entre petistas em Sergipe é de 2013 e não envolve Lula,Lula→Nove Dedos | 2 abreviações,,sim
+241,apelido+girias,pontes q caíram no am naum foram construidas por biroliro e tarcisio,Pontes que caíram no AM não foram construídas por Bolsonaro e Tarcísio,Bolsonaro→Biroliro | 2 abreviações,,nao
+242,apelido+girias,lularápio e haddad ñ disseram q o gov confiscará heranças,Lula e Haddad não disseram que o governo confiscará heranças,Lula→Lularápio | 3 abreviações,,nao
+243,apelido+girias,video naum eh de comemoração na mare apos vitória de nove dedos em 2022; cena circula desde 2019,Vídeo não é de comemoração na Maré após vitória de Lula em 2022; cena circula desde 2019,Lula→Nove Dedos | 2 abreviações,,sim
+244,apelido+girias,cartilha ensinando o uso de drogas pra crianças foi distribuída no gov nove dedos?,Cartilha ensinando o uso de drogas para crianças foi distribuída no governo Lula?,Lula→Nove Dedos | 2 abreviações,,sim
+245,apelido+girias,foto de nove dedos c/ a rainha elizabeth ii naum foi exibida em piccadilly circus; esta eh uma montagem,Foto de Lula com a rainha Elizabeth II não foi exibida em Piccadilly Circus; esta é uma montagem,Lula→Nove Dedos | 3 abreviações,,sim
+246,apelido+girias,careca do stf naum disse q vai mandar prender eleitor q reclamar das urnas,Moraes não disse que vai mandar prender eleitor que reclamar das urnas,Moraes→Careca do STF | 3 abreviações,,nao
+247,apelido+girias,"mito n fez 'carta a nacao' pra respaldar greves, como diz post","Bolsonaro não fez 'Carta à Nação' para respaldar greves, como diz post",Bolsonaro→Mito | 2 abreviações,,sim
+248,apelido+girias,"vídeo de bolsolixo cumprimentando apoiadores eh de 2021 e foi gravado em são paulo, naum nos eua","Vídeo de Bolsonaro cumprimentando apoiadores é de 2021 e foi gravado em São Paulo, não nos EUA",Bolsonaro→Bolsolixo | 2 abreviações,,sim
+249,apelido+girias,apoiador q tirou foto c/ biroliro em garanhuns não eh tio de lula,Apoiador que tirou foto com Bolsonaro em Garanhuns não é tio de Lula,Bolsonaro→Biroliro | 3 abreviações,,nao
+250,apelido+girias,molusco eh proibido de deixar o br em novembro de 2022,Lula é proibido de deixar o Brasil em novembro de 2022,Lula→Molusco | 2 abreviações,,sim
+251,apelido+girias,nove dedos ñ disse q fechará igrejas contrárias a casamentos homoafetivos,Lula não disse que fechará igrejas contrárias a casamentos homoafetivos,Lula→Nove Dedos | 2 abreviações,,sim
+252,apelido+girias,vídeo c/ multidao de apoiadores de jair coiso naum eh de 2022; circula desde 2021,Vídeo com multidão de apoiadores de Jair Bolsonaro não é de 2022; circula desde 2021,Bolsonaro→Coiso | 3 abreviações,,nao
+253,apelido+girias,torcida do vasco ñ recebeu luladrao e paes c/ xingamentos em estadio,Torcida do Vasco não recebeu Lula e Paes com xingamentos em estádio,Lula→Luladrão | 2 abreviações,,sim
+254,apelido+girias,"nordeste ñ tá sendo governado pelo pt ha 20 anos, como disse mito","Nordeste não está sendo governado pelo PT há 20 anos, como disse Bolsonaro",Bolsonaro→Mito | 2 abreviações,,sim
+255,apelido+girias,video em q coiso diz q michelle foi condenada por trafico de drogas,Vídeo em que Bolsonaro diz que Michelle foi condenada por tráfico de drogas,Bolsonaro→Coiso | 2 abreviações,,nao
+256,apelido+girias,"plano de gov de lularapio preve fim do combate ao tráfico, ideologia de genero e ministerio da vdd","Plano de governo de Lula prevê fim do combate ao tráfico, ideologia de gênero e Ministério da Verdade",Lula→Lularápio | 2 abreviações,,nao
+257,apelido+girias,homem q aparece em video nao eh geddel e fazendas citadas ñ são de lula e dilmanta,Homem que aparece em vídeo não é Geddel e fazendas citadas não são de Lula e Dilma,Dilma→Dilmanta | 3 abreviações,,nao
+258,apelido+girias,apuracao do tse e das forças armadas de votações reais mostra q biroliro venceu em tds os estados,Apuração do TSE e das Forças Armadas de votações reais mostra que Bolsonaro venceu em todos os estados,Bolsonaro→Biroliro | 2 abreviações,,nao
+259,apelido+girias,projeto pra abrigar sem-teto em casas c/ mais de 60 m² não consta em plano de gov de barba,Projeto para abrigar sem-teto em casas com mais de 60 m² não consta em plano de governo de Lula,Lula→Barba | 3 abreviações,,nao
+260,apelido+girias,secao c/ 100% dos votos válidos pra luladrão nao eh indício de fraude,Seção com 100% dos votos válidos para Lula não é indício de fraude,Lula→Luladrão | 3 abreviações,,sim
+261,apelido+girias,molusco n vendeu o solo da amazonia pra uma empresa da noruega,Lula não vendeu o solo da Amazônia para uma empresa da Noruega,Lula→Molusco | 2 abreviações,,sim
+262,apelido+girias,video usa dado errado pra calcular resultado da eleicao; molusco naum perdeu,Vídeo usa dado errado para calcular resultado da eleição; Lula não perdeu,Lula→Molusco | 2 abreviações,,sim
+263,apelido+girias,"twitter ñ suspendeu micheque bolsonaro, q não tem conta na rede","Twitter não suspendeu Michelle Bolsonaro, que não tem conta na rede",Michelle→Micheque | 2 abreviações,,sim
+264,apelido+girias,"o globo recebeu do tse resultado antecipado das eleições c/ vitoria de nove dedos c/ 51,2%","O Globo recebeu do TSE resultado antecipado das eleições com vitória de Lula com 51,2%",Lula→Nove Dedos | 2 abreviações,,sim
+265,apelido+girias,pt votou contra o auxilio br e biroliro foi proibido de falar a vdd,PT votou contra o Auxílio Brasil e Bolsonaro foi proibido de falar a verdade,Bolsonaro→Biroliro | 2 abreviações,,nao
+266,apelido+girias,nove dedos diz q quer acabar c/ o mei (regime de microempreendedor individual),Lula diz que quer acabar com o MEI (regime de Microempreendedor Individual),Lula→Nove Dedos | 2 abreviações,,sim
+267,apelido+girias,posts enganam ao dizer q lularapio naum considera meis como trabalhadores,Posts enganam ao dizer que Lula não considera MEIs como trabalhadores,Lula→Lularápio | 2 abreviações,,nao
+268,apelido+girias,"g1 publicou reportagem afirmando q nove dedos disse q, se eleito, irá revogar o pix","G1 publicou reportagem afirmando que Lula disse que, se eleito, irá revogar o PIX",Lula→Nove Dedos | 2 abreviações,,sim
+269,apelido+girias,nove dedos n disse q eh preciso acabar c/ férias e 13º por serem mt caros; vídeo foi manipulado,Lula não disse que é preciso acabar com férias e 13º por serem muito caros; vídeo foi manipulado,Lula→Nove Dedos | 5 abreviações,,sim
+270,apelido+girias,barba ñ disse q político tem q mentir em entrevista ao flow,Lula não disse que político tem que mentir em entrevista ao Flow,Lula→Barba | 3 abreviações,,nao
+271,apelido+girias,"barba n disse que discutiria agenda c/ líder do pcc, mas c/ assessor homônimo","Lula não disse que discutiria agenda com líder do PCC, mas com assessor homônimo",Lula→Barba | 3 abreviações,,nao
+272,apelido+girias,barba naum tem relacao c/ luciferianismo nem c/ satanismo,Lula não tem relação com luciferianismo nem com satanismo,Lula→Barba | 3 abreviações,,nao
+273,apelido+girias,vídeo q mostra luladrão dizendo q prometeu ‘bife de soja’ eh montagem,Vídeo que mostra Lula dizendo que prometeu ‘bife de soja’ é montagem,Lula→Luladrão | 3 abreviações,,sim
+274,apelido+girias,alexandre frota eh confirmado como ministro da cultura do gov molusco,Alexandre Frota é confirmado como ministro da Cultura do governo Lula,Lula→Molusco | 2 abreviações,,sim
+275,apelido+girias,"n ha evidencias de q presidente do chile tenha projeto nacional inspirado em luladrao, como afirma post","Não há evidências de que presidente do Chile tenha projeto nacional inspirado em Lula, como afirma post",Lula→Luladrão | 2 abreviações,,sim
+276,apelido+girias,"video c/ mensagem de maduro pra barba eh de 2020, ñ atual","Vídeo com mensagem de Maduro para Lula é de 2020, não atual",Lula→Barba | 4 abreviações,,nao
+277,apelido+girias,entenda pq não eh juridicamente correto dizer que nove dedos foi inocentado pelo stf e pela onu,Entenda por que não é juridicamente correto dizer que Lula foi inocentado pelo STF e pela ONU,Lula→Nove Dedos | 2 abreviações,,sim
+278,apelido+girias,"instituto nove dedos n fica no msm endereco do ipec, q realiza pesquisas eleitorais","Instituto Lula não fica no mesmo endereço do Ipec, que realiza pesquisas eleitorais",Lula→Nove Dedos | 3 abreviações,,sim
+279,apelido+girias,nove dedos tuitou q vai 'bloquear poupancas' para manter auxilio br,Lula tuitou que vai 'bloquear poupanças' para manter Auxílio Brasil,Lula→Nove Dedos | 2 abreviações,,sim
+280,apelido+girias,torcida naum gritou q luladrão e ladrão durante a abertura da copa,Torcida não gritou que Lula é ladrão durante a abertura da Copa,Lula→Luladrão | 2 abreviações,,sim
+281,apelido+girias,"chuchu n quer acabar c/ bolsa família, mas excluir do teto de gastos","Alckmin não quer acabar com Bolsa Família, mas excluir do teto de gastos",Alckmin→Chuchu | 2 abreviações,,nao
+282,apelido+girias,vídeo em q jornal nacional divulga pesquisa c/ biroliro a frente de lula,Vídeo em que Jornal Nacional divulga pesquisa com Bolsonaro à frente de Lula,Bolsonaro→Biroliro | 2 abreviações,,nao
+283,apelido+girias,video viral engana ao sustentar q mito recebeu + votos q lula em minas gerais,Vídeo viral engana ao sustentar que Bolsonaro recebeu mais votos que Lula em Minas Gerais,Bolsonaro→Mito | 3 abreviações,,sim
+284,apelido+girias,video sobre pendencias de barba na justica eh antigo e ta desatualizado,Vídeo sobre pendências de Lula na Justiça é antigo e está desatualizado,Lula→Barba | 2 abreviações,,nao
+285,apelido+girias,luladrão n tentou beijar boca de criança em comicio; vídeo eh enganoso,Lula não tentou beijar boca de criança em comício; vídeo é enganoso,Lula→Luladrão | 2 abreviações,,sim
+286,apelido+girias,discurso de bozo sobre forcas armadas eh de abril de 2022 e naum tem relação com as eleicoes,Discurso de Bolsonaro sobre Forças Armadas é de abril de 2022 e não tem relação com as eleições,Bolsonaro→Bozo | 2 abreviações,,sim
+287,apelido+girias,post dizendo q mito acabará c/ feriado de 12 de outubro,Post dizendo que Bolsonaro acabará com feriado de 12 de outubro,Bolsonaro→Mito | 2 abreviações,,sim
+288,apelido+girias,homem q critica caminhoneiros em vídeo ñ eh filho de barba,Homem que critica caminhoneiros em vídeo não é filho de Lula,Lula→Barba | 3 abreviações,,nao
+289,apelido+girias,video em q neymar fala sobre voto foi cortado pra sugerir q ele apoia nove dedos,Vídeo em que Neymar fala sobre voto foi cortado para sugerir que ele apoia Lula,Lula→Nove Dedos | 3 abreviações,,sim
+290,apelido+girias,luladrão ñ disse q ira acabar c/ o mei em debate da globo,Lula não disse que irá acabar com o MEI em debate da Globo,Lula→Luladrão | 3 abreviações,,sim
+291,apelido+girias,vídeo omite q lula falava de mito ao dizer 'tenho q mentir',Vídeo omite que Lula falava de Bolsonaro ao dizer 'tenho que mentir',Bolsonaro→Mito | 2 abreviações,,sim
+292,apelido+girias,janones naum disse q nove dedos vai acabar c/ auxilio br; video foi editado,Janones não disse que Lula vai acabar com Auxílio Brasil; vídeo foi editado,Lula→Nove Dedos | 4 abreviações,,sim
+293,apelido+girias,policia federal apreendeu dinheiro q seria distribuído pra eleitores de barba no para por helder barbalho,Polícia Federal apreendeu dinheiro que seria distribuído para eleitores de Lula no Pará por Helder Barbalho,Lula→Barba | 2 abreviações,,nao
+294,apelido+girias,barba n disse q vai bloquear poupancas pra manter auxílio br,Lula não disse que vai bloquear poupanças para manter Auxílio Brasil,Lula→Barba | 4 abreviações,,nao
+295,apelido+girias,reinaldo azevedo ñ atacou nove dedos qdo participou de programa; trechos são de 2017 e 2021,Reinaldo Azevedo não atacou Lula quando participou de programa; trechos são de 2017 e 2021,Lula→Nove Dedos | 2 abreviações,,sim
+296,apelido+girias,g1 publicou reportagem em q luladrão diz q educação de relacionamento homoafetivo nas escolas eh prioridade,G1 publicou reportagem em que Lula diz que educação de relacionamento homoafetivo nas escolas é prioridade,Lula→Luladrão | 3 abreviações,,sim
+297,apelido+girias,apoiadores de lula compraram camisetas do mito e br pra tocar o terror nas ruas,Apoiadores de Lula compraram camisetas do Bolsonaro e Brasil para tocar o terror nas ruas,Bolsonaro→Mito | 2 abreviações,,sim
+298,apelido+girias,reportagem da cnn naum revelou plano do pt pra confiscar dinheiro da populacao se barba for eleito,Reportagem da CNN não revelou plano do PT para confiscar dinheiro da população se Lula for eleito,Lula→Barba | 2 abreviações,,nao
+299,apelido+girias,bozo naum disse q vai acabar c/ 13º e hora extra,Bolsonaro não disse que vai acabar com 13º e hora extra,Bolsonaro→Bozo | 3 abreviações,,sim
+300,apelido+girias,audio em gravacao q mostra 'repreensão' de bozo a michelle eh falso,Áudio em gravação que mostra 'repreensão' de Bolsonaro a Michelle é falso,Bolsonaro→Bozo | 2 abreviações,,sim
+301,negacao,TSE vetou campanha de vacinação contra polio,"TSE não vetou campanha de vacinação contra polio, e sim pronunciamento de ministro",,,
+302,negacao,Divulgação de pesquisas eleitorais é atribuição da Justiça Eleitoral,Divulgação de pesquisas eleitorais não é atribuição da Justiça Eleitoral,,,
+303,negacao,Lula disse que ‘nem Deus tira essa eleição’ dele,Lula não disse que ‘nem Deus tira essa eleição’ dele,,,
+304,negacao,William Bonner chamou Lula e Alckmin de ladrões,William Bonner não chamou Lula e Alckmin de ladrões; áudio de vídeo viral foi manipulado,,,
+305,negacao,Alexandre de Moraes pediu retirada de vídeo em que Bolsonaro aparece emocionado,Alexandre de Moraes não pediu retirada de vídeo em que Bolsonaro aparece emocionado,,,
+306,negacao,Maiara e Maraisa gritaram ‘fora Bolsonaro’ nem deixaram palco sob vaias,Maiara e Maraisa não gritaram ‘fora Bolsonaro’ nem deixaram palco sob vaias,,,
+307,negacao,Janones disse que Lula vai acabar com Auxílio Brasil,Janones não disse que Lula vai acabar com Auxílio Brasil; vídeo foi editado,,,
+308,negacao,Randolfe disse que Vitória teve ato pró-Bolsonaro com apoio da Nestlé,Randolfe não disse que Vitória teve ato pró-Bolsonaro com apoio da Nestlé,,,
+309,negacao,"Simone Tebet disse que vai ""tirar dinheiro dos pobres""","Simone Tebet não disse que vai ""tirar dinheiro dos pobres""",,,
+310,negacao,Áudios golpistas atribuídos a Tarcísio de Freitas foram gravados por ele,Áudios golpistas atribuídos a Tarcísio de Freitas não foram gravados por ele,,,
+311,negacao,MST destruiu pés de mamão e café em plantação no Espírito Santo,MST não destruiu pés de mamão e café em plantação no Espírito Santo,,,
+312,negacao,Viúva de Che Guevara poderia receber aposentadoria no Brasil,"Viúva de Che Guevara não poderia receber aposentadoria no Brasil, ao contrário do viralizado",,,
+313,negacao,Lula disse que discutiria agenda com líder do PCC,"Lula não disse que discutiria agenda com líder do PCC, mas com assessor homônimo",,,
+314,negacao,Joe Biden morreu nem foi substituído por um suposto irmão gêmeo na Presidência dos EUA,Joe Biden não morreu nem foi substituído por um suposto irmão gêmeo na Presidência dos EUA,,,
+315,negacao,Decreto que prevê atuação das Forças Armadas nas eleições confere mais poder à Presidência,Decreto que prevê atuação das Forças Armadas nas eleições não confere mais poder à Presidência,,,
+316,negacao,Mudança em horário de votação só vale para regiões que seguem fuso-horário de Brasília,Mudança em horário de votação só vale para regiões que não seguem fuso-horário de Brasília,,,
+317,negacao,Vídeo com multidão de apoiadores de Jair Bolsonaro é de 2022,Vídeo com multidão de apoiadores de Jair Bolsonaro não é de 2022; circula desde 2021,,,
+318,negacao,Bolsonaro postou direito de resposta a Lula sobre Auxílio Brasil,Bolsonaro não postou direito de resposta a Lula sobre Auxílio Brasil,,,
+319,negacao,Fala de Lula sobre criação do “Dia de Jesus” se refere ao Natal,"Fala de Lula sobre criação do “Dia de Jesus” não se refere ao Natal, mas à Marcha para Jesus",,,
+320,negacao,TSE divulgou que votos do Nordeste seriam os últimos a serem apurados,TSE não divulgou que votos do Nordeste seriam os últimos a serem apurados,,,
+321,negacao,MST tem relação com ataque a plantação de mamão no Espírito Santo,MST não tem relação com ataque a plantação de mamão no Espírito Santo,,,
+322,negacao,Vídeo confunde ao afirmar que voto seria computado enquanto mensagem “Confira o seu voto” fosse exibida na tela da urna,Vídeo confunde ao afirmar que voto não seria computado enquanto mensagem “Confira o seu voto” fosse exibida na tela da urna,,,
+323,negacao,Predominância de votos para um dos candidatos é indício de fraude eleitoral,Predominância de votos para um dos candidatos não é indício de fraude eleitoral,,,
+324,negacao,Homem que faz denúncias falsas de fraude em vídeo é servidor exonerado do TSE,Homem que faz denúncias falsas de fraude em vídeo não é servidor exonerado do TSE,,,
+325,negacao,Smartmatic fornece urnas eletrônicas e nem tem acesso a softwares utilizados nas eleições 2022,Smartmatic não fornece urnas eletrônicas e nem tem acesso a softwares utilizados nas eleições 2022,,,
+326,negacao,Rui Costa determinou aquartelamento da PM da Bahia no dia da eleição,Rui Costa não determinou aquartelamento da PM da Bahia no dia da eleição,,,
+327,negacao,Mortes por covid provocaram redução no número de seções eleitorais,Mortes por covid não provocaram redução no número de seções eleitorais,,,
+328,negacao,Janones disse que Lula vai acabar com o Auxílio Brasil,Janones não disse que Lula vai acabar com o Auxílio Brasil,,,
+329,negacao,Público vaiou Bolsonaro em show de Gusttavo Lima em Aracaju,Público não vaiou Bolsonaro em show de Gusttavo Lima em Aracaju,,,
+330,negacao,A revista Vogue publicou em 1939 uma foto de Adolf Hitler e Eva Braun sentados em um muro,A revista Vogue não publicou em 1939 uma foto de Adolf Hitler e Eva Braun sentados em um muro,,,
+331,negacao,Globo pediu autorização à Justiça para entrevistar Adélio Bispo,Globo não pediu autorização à Justiça para entrevistar Adélio Bispo,,,
+332,negacao,Policiais assassinados vistos em vídeo eram chilenos,"Policiais assassinados vistos em vídeo não eram chilenos, mas sim equatorianos",,,
+333,negacao,Comício de Lula em Curitiba estava vazio,Comício de Lula em Curitiba não estava vazio; vídeo foi gravado antes do início,,,
+334,negacao,Paraná Pesquisas fez levantamento que mostra vitória de Bolsonaro em todos os estados em 2022,Paraná Pesquisas não fez levantamento que mostra vitória de Bolsonaro em todos os estados em 2022,,,
+335,negacao,Lula fez tuíte sobre apoio de Xangô em campanha e fim do cristianismo,Lula não fez tuíte sobre apoio de Xangô em campanha e fim do cristianismo,,,
+336,negacao,Homem que aparece ao lado de Lula em foto viral é irmão de Adélio Bispo,Homem que aparece ao lado de Lula em foto viral não é irmão de Adélio Bispo,,,
+337,negacao,Bolsonaro fez post dizendo que acabará com feriado de 12 de outubro,Bolsonaro não fez post dizendo que acabará com feriado de 12 de outubro,,,
+338,negacao,Lula escreveu tuíte sobre bloquear poupanças para manter Auxílio Brasil,Lula não escreveu tuíte sobre bloquear poupanças para manter Auxílio Brasil,,,
+339,negacao,G1 noticiou que Bolsonaro confirmou Collor como ministro,G1 não noticiou que Bolsonaro confirmou Collor como ministro,,,
+340,negacao,Vídeo de casamento gay mostra 'indicado de Lula' para direção da PRF,Vídeo de casamento gay não mostra 'indicado de Lula' para direção da PRF,,,
+341,negacao,Bolsonaro chamou apoiadores dele de ‘marginais’ e ‘terroristas’,Bolsonaro não chamou apoiadores dele de ‘marginais’ e ‘terroristas’,,,
+342,negacao,Equipe de Lula tem 283 integrantes com salário médio de R$ 17 mil,Equipe de Lula não tem 283 integrantes com salário médio de R$ 17 mil,,,
+343,negacao,Apresentador noticiou que esposa de Marcola,"Apresentador não noticiou que esposa de Marcola, do PCC, foi indicada a ministério, como viralizado",,,
+344,negacao,Multishow escondeu imagem de Iron Maiden erguendo bandeira do Brasil,Multishow não escondeu imagem de Iron Maiden erguendo bandeira do Brasil,,,
+345,negacao,Pesquisa Ipec de 08/2022 apontou Bolsonaro com 44% dos votos,Pesquisa Ipec de 08/2022 não apontou Bolsonaro com 44% dos votos; reportagem foi manipulada,,,
+346,negacao,Lula escolheu Dilma como ministra da Economia em eventual governo,Lula não escolheu Dilma como ministra da Economia em eventual governo,,,
+347,negacao,Mesário pode anular voto de quem usa camiseta amarela,Mesário não pode anular voto de quem usa camiseta amarela,,,
+348,negacao,Vídeo com pessoas cantando o Hino Nacional no metrô foi gravado no dia das eleições,Vídeo com pessoas cantando o Hino Nacional no metrô não foi gravado no dia das eleições,,,
+349,negacao,TV Globo gravou especial de fim de ano com Lula e Janja,TV Globo não gravou especial de fim de ano com Lula e Janja,,,
+350,negacao,TSE é responsável por distribuir materiais de campanha para rádios e televisão,TSE não é responsável por distribuir materiais de campanha para rádios e televisão,,,
+351,negacao,Vídeo é de comemoração na Maré após vitória de Lula em 2022,Vídeo não é de comemoração na Maré após vitória de Lula em 2022; cena circula desde 2019,,,
+352,negacao,Entenda por que é juridicamente correto dizer que Lula foi inocentado pelo STF e pela ONU,Entenda por que não é juridicamente correto dizer que Lula foi inocentado pelo STF e pela ONU,,,
+353,negacao,Mulher em vídeo viral é funcionária do TSE e falhas apontadas foram corrigidas,Mulher em vídeo viral não é funcionária do TSE e falhas apontadas foram corrigidas,,,
+354,negacao,"Mulher que diz em vídeo que sistema eleitoral brasileiro é ""inauditável"" é funcionária do TSE","Mulher que diz em vídeo que sistema eleitoral brasileiro é ""inauditável"" não é funcionária do TSE",,,
+355,negacao,Eleitores com biometria coletada precisam assinar caderno de votação,Eleitores com biometria coletada não precisam assinar caderno de votação,,,
+356,negacao,Lula disse que irá acabar com o MEI em debate da Globo,Lula não disse que irá acabar com o MEI em debate da Globo,,,
+357,negacao,Boletins de urna mostrados em vídeo são de MG nem provam fraude,Boletins de urna mostrados em vídeo não são de MG nem provam fraude,,,
+358,negacao,Resultado das eleições está sub judice após relatório da Defesa,Resultado das eleições não está sub judice após relatório da Defesa,,,
+359,negacao,Lula disse que vai bloquear poupanças para manter Auxílio Brasil,Lula não disse que vai bloquear poupanças para manter Auxílio Brasil,,,
+360,negacao,Exército interferiu na apuração dos votos no primeiro turno das Eleições Gerais de 2022,Exército não interferiu na apuração dos votos no primeiro turno das Eleições Gerais de 2022,,,
+361,negacao,Bolsonaro foi ‘expulso’ do Maracanã sob vaias em jogo do Flamengo no dia 7 de setembro,Bolsonaro não foi ‘expulso’ do Maracanã sob vaias em jogo do Flamengo no dia 7 de setembro,,,
+362,negacao,Torcida gritou que Lula é ladrão durante a abertura da Copa,Torcida não gritou que Lula é ladrão durante a abertura da Copa,,,
+363,negacao,Eleitor votou duas vezes,Eleitor não votou duas vezes; vídeo feito por mesária de Rio Branco (AC) é desinformação,,,
+364,negacao,Gráfico em vídeo que aponta 55% para Bolsonaro é falha do TSE,"Gráfico em vídeo que aponta 55% para Bolsonaro não é falha do TSE, mas resultado no Paraná",,,
+365,negacao,Governador do Maranhão sancionou lei permitindo que homens usem banheiro feminino,Governador do Maranhão não sancionou lei permitindo que homens usem banheiro feminino,,,
+366,negacao,Argentina revogou direito de herança,"Argentina não revogou direito de herança, e a proposta não consta em plano de governo de Lula",,,
+367,negacao,Comprovante de vacinação e uso de máscaras são obrigatórios para votar nas Eleições 2022,Comprovante de vacinação e uso de máscaras não são obrigatórios para votar nas Eleições 2022,,,
+368,negacao,Lula disse que ‘educação de relacionamento homoafetivo’ será prioridade nas escolas,Lula não disse que ‘educação de relacionamento homoafetivo’ será prioridade nas escolas,,,
+369,negacao,STM e Defesa provaram fraude eleitoral nem intimaram Moraes,STM e Defesa não provaram fraude eleitoral nem intimaram Moraes,,,
+370,negacao,Afirmação de eleitor de Pacajá (PA) sobre resultados que estariam batendo com número de votos é falsa,Afirmação de eleitor de Pacajá (PA) sobre resultados que não estariam batendo com número de votos é falsa,,,
+371,negacao,Eleitor votou antecipadamente para o 2º turno no PA,Eleitor não votou antecipadamente para o 2º turno no PA,,,
+372,negacao,IBGE utiliza celular com urna eletrônica para roubar biometria e dados de eleitores,IBGE não utiliza celular com urna eletrônica para roubar biometria e dados de eleitores,,,
+373,negacao,Boletins de urna são usados na contagem de votos,"Boletins de urna não são usados na contagem de votos, como sugere vídeo viral",,,
+374,negacao,Este é um “prefeito do PT” sendo preso,Este não é um “prefeito do PT” sendo preso; o político é filiado ao PROS e era escoltado pela PM,,,
+375,negacao,Lista com seções sem votos em Bolsonaro comprova fraude eleitoral,Lista com seções sem votos em Bolsonaro não comprova fraude eleitoral,,,
+376,negacao,G1 publicou notícia de que rainha Elizabeth II elogiou Bolsonaro antes de morrer,G1 não publicou notícia de que rainha Elizabeth II elogiou Bolsonaro antes de morrer,,,
+377,negacao,Militantes invadiram igreja em Joinville (SC),Militantes não invadiram igreja em Joinville (SC),,,
+378,negacao,Mulher que aparece com adereço vermelho e faz símbolo de candidato pertence ao quadro de servidores da Justiça Eleitoral,Mulher que aparece com adereço vermelho e faz símbolo de candidato não pertence ao quadro de servidores da Justiça Eleitoral,,,
+379,negacao,Vídeo mostra ataque em Sergipe a apoiadores de Lula,"Vídeo não mostra ataque em Sergipe a apoiadores de Lula, mas sim a profissionais da imprensa",,,
+380,negacao,Lula está internado no Sírio-Libanês,"Lula não está internado no Sírio-Libanês, nem sofreu AVC ou infarto",,,
+381,negacao,Jogadora da seleção foi proibida pela 'esquerda' de comemorar com a bandeira do Brasil,Jogadora da seleção não foi proibida pela 'esquerda' de comemorar com a bandeira do Brasil,,,
+382,negacao,Pesquisadora do Datafolha negou entrevista por posicionamento político,Pesquisadora do Datafolha não negou entrevista por posicionamento político,,,
+383,negacao,Áudio sobre ‘revelação divina’ e ‘guerra’ no segundo turno é de Michelle Bolsonaro,Áudio sobre ‘revelação divina’ e ‘guerra’ no segundo turno não é de Michelle Bolsonaro,,,
+384,negacao,Vídeo que mostra recepção a Bolsonaro é recente nem foi gravado em Goiânia,Vídeo que mostra recepção a Bolsonaro não é recente nem foi gravado em Goiânia,,,
+385,negacao,Panfleto com supostas propostas de Lula é oficial e traz informações falsas,Panfleto com supostas propostas de Lula não é oficial e traz informações falsas,,,
+386,negacao,Governo do Espírito Santo impediu navio com diesel russo de atracar em portos do estado,Governo do Espírito Santo não impediu navio com diesel russo de atracar em portos do estado,,,
+387,negacao,Vídeo que mostra bolsonaristas comemorando em shopping foi gravado na Austrália,Vídeo que mostra bolsonaristas comemorando em shopping não foi gravado na Austrália,,,
+388,negacao,"Urna desbloqueia candidato secreto se eleitor pressionar as teclas ""5""","Urna não desbloqueia candidato secreto se eleitor pressionar as teclas ""5"", ""Branco"" e ""Corrige""",,,
+389,negacao,TSE proibiu comemoração ao Dia do Médico,TSE não proibiu comemoração ao Dia do Médico; decisão partiu do próprio CFM,,,
+390,negacao,Homem fotografado em restaurante com Gilmar Mendes é filho de Lula,Homem fotografado em restaurante com Gilmar Mendes não é filho de Lula,,,
+391,negacao,Dias Toffoli “assumiu” a presidência do TSE,"Dias Toffoli não “assumiu” a presidência do TSE, e sim tomou posse como ministro substituto",,,
+392,negacao,Militar assassinado em Campinas integrava grupo de fiscalização das eleições,Militar assassinado em Campinas não integrava grupo de fiscalização das eleições,,,
+393,negacao,"Gleisi Hoffmann ""previu derrota do PT"" após 1º debate de 2022","Gleisi Hoffmann não ""previu derrota do PT"" após 1º debate de 2022; áudio de 2020 foi editado",,,
+394,negacao,Certidões eleitorais de Lula no TRF1 foram alteradas,"Certidões eleitorais de Lula no TRF1 não foram alteradas, elas se referem a instâncias diferentes",,,
+395,negacao,Vídeo que mostra Malafaia em Brasília é atual,"Vídeo que mostra Malafaia em Brasília não é atual, mas do 7 de Setembro",,,
+396,negacao,Mesário tem como anular votos e alterar a assinatura do eleitor é crime eleitoral,Mesário não tem como anular votos e alterar a assinatura do eleitor é crime eleitoral,,,
+397,negacao,Vídeo de 2018 em que Bolsonaro oferece capim a eleitores menciona NE,Vídeo de 2018 em que Bolsonaro oferece capim a eleitores não menciona NE,,,
+398,negacao,Lula chamou caminhoneiros de vagabundos fascistas,Lula não chamou caminhoneiros de vagabundos fascistas; imagem é falsa,,,
+399,negacao,TSE mandou apagar vídeo em que Bolsonaro chora ao relembrar facada,TSE não mandou apagar vídeo em que Bolsonaro chora ao relembrar facada,,,
+400,negacao,Artigo 142 prevê intervenção militar nem federal,Artigo 142 não prevê intervenção militar nem federal; entenda,,,
+401,digitacao,"Ciro Gomes peed voto para Bolsonaaro “22” no domingo, motsra vdíeo","Ciro Gomes pede voto para Bolsonaro “22” no domingo, mostra vídeo",4 erros,,
+402,digitacao,Tweet erra ao afimar que seção eleitiral do Patá não teve nenhmu votto para candidato à Presidência,Tweet erra ao afirmar que seção eleitoral do Pará não teve nenhum voto para candidato à Presidência,5 erros,,
+403,digitacao,"Hadadd diz que polciial não deve andar armado, que bandido é cidadão de bem e que vai acabar com a Rota","Haddad diz que policial não deve andar armado, que bandido é cidadão de bem e que vai acabar com a Rota",2 erros,,
+404,digitacao,Denúncia de policiais soobre suposto problema nas urnas é de 2018 e foi consderada infundada,Denúncia de policiais sobre suposto problema nas urnas é de 2018 e foi considerada infundada,2 erros,,
+405,digitacao,Augusto Heleno não diisse que Tarcísio de Fretas esrá sob ameaça,Augusto Heleno não disse que Tarcísio de Freitas está sob ameaça,3 erros,,
+406,digitacao,G1 publicou reporagem sobre eleitords de Lula não precissarem votar no 2º turno,G1 publicou reportagem sobre eleitores de Lula não precisarem votar no 2º turno,3 erros,,
+407,digitacao,Presidente da Arbentina acabou com o direito à herança de imvóeis,Presidente da Argentina acabou com o direito à herança de imóveis,2 erros,,
+408,digitacao,Ljla não dsse que é preciso acqbar com férias e 13º por serem muito caros; vídro foi manipulado,Lula não disse que é preciso acabar com férias e 13º por serem muito caros; vídeo foi manipulado,4 erros,,
+409,digitacao,G1 publicou reportagem afirmanndo que Alckmin diz que taxação do Pix é necessráia,G1 publicou reportagem afirmando que Alckmin diz que taxação do Pix é necessária,2 erros,,
+410,digitacao,Deceto que prevê atuação das Foeças Armmadas nas ekeições não confere maos poder à Pesidência,Decreto que prevê atuação das Forças Armadas nas eleições não confere mais poder à Presidência,6 erros,,
+411,digitacao,Joveem desmascara Luka na União Europeia em 2022,Jovem desmascara Lula na União Europeia em 2022,2 erros,,
+412,digitacao,Prjeto para abrigar sem-teto em casas com mais de 60 m² não consta em plano de governo de Lupa,Projeto para abrigar sem-teto em casas com mais de 60 m² não consta em plano de governo de Lula,2 erros,,
+413,digitacao,"Relatóriio de fraude já foi entregue, mosra que ouyras eleições flram fraudadas e novas manifestações (com greve e novs regras) vão começar","Relatório de fraude já foi entregue, mostra que outras eleições foram fraudadas e novas manifestações (com greve e novas regras) vão começar",5 erros,,
+414,digitacao,Eleitora não esgá qutie com a Justça Eleitoarl proque deixou de votar no primeeiro turno das Eleições 2016,Eleitora não está quite com a Justiça Eleitoral porque deixou de votar no primeiro turno das Eleições 2016,6 erros,,
+415,digitacao,Montgaem falsa de Richthofen cmoo candidata pello PT volta a circular,Montagem falsa de Richthofen como candidata pelo PT volta a circular,3 erros,,
+416,digitacao,Canddato à Presidência perdeu votos na totalização apóós aplicativo do TSE travar,Candidato à Presidência perdeu votos na totalização após aplicativo do TSE travar,2 erros,,
+417,digitacao,Bolsonaro toma iniciativa em 2022 manda recado a Aexandre de Moraes após elleições,Bolsonaro toma iniciativa em 2022 manda recado a Alexandre de Moraes após eleições,2 erros,,
+418,digitacao,Um mosaico antigo com imgaem de OVNI foi mesom encontrado na Itália?,Um mosaico antigo com imagem de OVNI foi mesmo encontrado na Itália?,2 erros,,
+419,digitacao,Engenda pedio do PL para anular voyos de eleição presidencial e a decsão do TSE,Entenda pedido do PL para anular votos de eleição presidencial e a decisão do TSE,4 erros,,
+420,digitacao,"Barreiras, na Bahia, twve mais votos para Lula que número de habitanets","Barreiras, na Bahia, teve mais votos para Lula que número de habitantes",2 erros,,
+421,digitacao,"Brasil não foi o úncio país a registrar deflação em julho, ao conrário do que afima post","Brasil não foi o único país a registrar deflação em julho, ao contrário do que afirma post",3 erros,,
+422,digitacao,Caminhonerios vão fqzer greve e parar o Brasil se Lual gannhar as eleições,Caminhoneiros vão fazer greve e parar o Brasil se Lula ganhar as eleições,4 erros,,
+423,digitacao,Poost resgata notícias falaas das Eleições 2018 já desmenttidas pelo TSE e por agências de checagem,Post resgata notícias falsas das Eleições 2018 já desmentidas pelo TSE e por agências de checagem,3 erros,,
+424,digitacao,Entejda o que é a políica de redução de dabos a usuários de drogaas critiada em vídeo por Damares Alves,Entenda o que é a política de redução de danos a usuários de drogas criticada em vídeo por Damares Alves,5 erros,,
+425,digitacao,Lula tenha usao pono elertônico no deebate da Globo,Lula tenha usado ponto eletrônico no debate da Globo,4 erros,,
+426,digitacao,Justiça eleitoral fecha igreeja católica em Qautro Marcos (cidade próximma a Mirassol),Justiça eleitoral fecha igreja católica em Quatro Marcos (cidade próxima a Mirassol),3 erros,,
+427,digitacao,STM dá 72 hiras paa Alxeandre de Moraes explicar manipulações do TSE nas eleições 2022,STM dá 72 horas para Alexandre de Moraes explicar manipulações do TSE nas eleições 2022,3 erros,,
+428,digitacao,Vídeo que mostar Bolsonafo na liderança da pequisa Ipec divulgada em 15 de aggosto de 2022,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 15 de agosto de 2022,4 erros,,
+429,digitacao,Lual defendeu nazsimo e fascismo em eevnto do PT em 2017,Lula defendeu nazismo e fascismo em evento do PT em 2017,3 erros,,
+430,digitacao,Caixão com o cotpo do Lula é colocao em carro fúnebre na saída do Sírio Libanês! Será verdade?,Caixão com o corpo do Lula é colocado em carro fúnebre na saída do Sírio Libanês! Será verdade?,2 erros,,
+431,digitacao,Luula diz em vídeo que chefe do tráfico vai agendar seus compromisos em SP,Lula diz em vídeo que chefe do tráfico vai agendar seus compromissos em SP,2 erros,,
+432,digitacao,"Vídeo de tropas do Eército em Nitrrói é de 2018, não deste ano","Vídeo de tropas do Exército em Niterói é de 2018, não deste ano",2 erros,,
+433,digitacao,TRE-ES informa: é fasa a inforrmação de que eleitoes capixabas já tenham votado para o 2º turno,TRE-ES informa: é falsa a informação de que eleitores capixabas já tenham votado para o 2º turno,3 erros,,
+434,digitacao,Resultado das eleiçõões não está sob análise; relatório das Forças Armadas não apontou fraudde no pleiito,Resultado das eleições não está sob análise; relatório das Forças Armadas não apontou fraude no pleito,3 erros,,
+435,digitacao,"Comprovannte de votação do segundo turno foi entregue por egnano a eleitor de Beelém (PA), que não votou duas vezes","Comprovante de votação do segundo turno foi entregue por engano a eleitor de Belém (PA), que não votou duas vezes",3 erros,,
+436,digitacao,Fabrício Queiroz é presidente de associação que contratou pesquisa favirável a Bolsonro,Fabrício Queiroz é presidente de associação que contratou pesquisa favorável a Bolsonaro,2 erros,,
+437,digitacao,Lista com seções sem votos em Bolsonaeo não comprova fraude eleiitoral,Lista com seções sem votos em Bolsonaro não comprova fraude eleitoral,2 erros,,
+438,digitacao,Mourão escreveu texto no Estadão hoje que começa com “não vi nsso presidnete proibir nem obrigar ninguém a se vacinar”,Mourão escreveu texto no Estadão hoje que começa com “não vi nosso presidente proibir nem obrigar ninguém a se vacinar”,2 erros,,
+439,digitacao,Vídeo em que deputado petista é histilizado em avão é de 2019,Vídeo em que deputado petista é hostilizado em avião é de 2019,2 erros,,
+440,digitacao,Imagem mostre vão da Ponte Rio-Niterói após batdia de nabio,Imagem mostre vão da Ponte Rio-Niterói após batida de navio,2 erros,,
+441,digitacao,"TSE não proibiu cmpanha contra poliomielite, mas aparição de Queiiroga","TSE não proibiu campanha contra poliomielite, mas aparição de Queiroga",2 erros,,
+442,digitacao,Gldisi Hofffmann pde suspensoã do WhatsApp até o fim do 2º turno das eleições de 2022,Gleisi Hoffmann pede suspensão do WhatsApp até o fim do 2º turno das eleições de 2022,4 erros,,
+443,digitacao,"Gilmar Menddes estava acompanhado por jiristas na Itália, e não por um dos filhos de Lula","Gilmar Mendes estava acompanhado por juristas na Itália, e não por um dos filhos de Lula",2 erros,,
+444,digitacao,"Vídeo não mostrra fraude, mas defwito em urna que foi substituída em Petrópolis (RJ)","Vídeo não mostra fraude, mas defeito em urna que foi substituída em Petrópolis (RJ)",2 erros,,
+445,digitacao,Vídeo manipuldo mistura campanya appartidária de 2018 com images de Lula,Vídeo manipulado mistura campanha apartidária de 2018 com imagens de Lula,4 erros,,
+446,digitacao,Emoresa Smartmatic não tem acesso a programa das urnas; softqare é desennvolvido e gerido pela Justiça Eleitoral,Empresa Smartmatic não tem acesso a programa das urnas; software é desenvolvido e gerido pela Justiça Eleitoral,3 erros,,
+447,digitacao,É falas a alegação de que o TSE aumenou o númerro de locas de votação em prisões e diminuiu as seçõees eleitorais no exterior,É falsa a alegação de que o TSE aumentou o número de locais de votação em prisões e diminuiu as seções eleitorais no exterior,5 erros,,
+448,digitacao,Vídeo em que agentse da PRF cntam contra o Supremo,Vídeo em que agentes da PRF cantam contra o Supremo,2 erros,,
+449,digitacao,"TSE não admitiu liagção entre PT e PCC, diferentemente do que sugdre vídeo","TSE não admitiu ligação entre PT e PCC, diferentemente do que sugere vídeo",2 erros,,
+450,digitacao,Lua morreu no sánado e corpo está escondido no hospital Sírio-Libanês,Lula morreu no sábado e corpo está escondido no hospital Sírio-Libanês,2 erros,,
+451,digitacao,Vídeo de 2017 em que PM apoia Mourão e pede golpe militar volta a circular coo se fose atual,Vídeo de 2017 em que PM apoia Mourão e pede golpe militar volta a circular como se fosse atual,2 erros,,
+452,digitacao,Empresa de pesquisas eleitorais Ipc fique no mesmo enderdço do Instituto Lula,Empresa de pesquisas eleitorais Ipec fique no mesmo endereço do Instituto Lula,2 erros,,
+453,digitacao,Vído viral engana ao sustentar que Bolsonaro recebeu mias votos que Lula em Minas Gerais,Vídeo viral engana ao sustentar que Bolsonaro recebeu mais votos que Lula em Minas Gerais,2 erros,,
+454,digitacao,Lula é flagrado bêado durante comício com Eduardo Paes no Rio de Jaaneiro,Lula é flagrado bêbado durante comício com Eduardo Paes no Rio de Janeiro,2 erros,,
+455,digitacao,Jovens nergos que vaiarma motocata poryavam droas ou armas,Jovens negros que vaiaram motociata portavam drogas ou armas,5 erros,,
+456,digitacao,"Kim Nam-Joon, do BTS, foi elieto o hommem mais bonito do mundo?","Kim Nam-Joon, do BTS, foi eleito o homem mais bonito do mundo?",2 erros,,
+457,digitacao,Vídeo mostra discufso de Luoa sobre fome na Cop 27 do Egito,Vídeo mostra discurso de Lula sobre fome na Cop 27 do Egito,2 erros,,
+458,digitacao,"Print em que Lula fala em atafar igrejas evangélicas, aprlvar leis pró-aborto e ideologia de gênero","Print em que Lula fala em atacar igrejas evangélicas, aprovar leis pró-aborto e ideologia de gênero",2 erros,,
+459,digitacao,Eleitora de Bauru (SP) dostorceu informações sobre biometria e confundiiu número de candidato pqra cargo de ddputado,Eleitora de Bauru (SP) distorceu informações sobre biometria e confundiu número de candidato para cargo de deputado,4 erros,,
+460,digitacao,Vídeo infla número de leus sanxionadas por Bolsonaro que beneficiam mulheres,Vídeo infla número de leis sancionadas por Bolsonaro que beneficiam mulheres,2 erros,,
+461,digitacao,Bolsonaro ppsa ao lao de quadro de demônio Bphomet na maçonaria,Bolsonaro posa ao lado de quadro de demônio Baphomet na maçonaria,3 erros,,
+462,digitacao,"TSE nunca comunica o cancelamento do ttulo de eleitlr por e-mail, WhatsApp, Telegram ou mensaegns de textto","TSE nunca comunica o cancelamento do título de eleitor por e-mail, WhatsApp, Telegram ou mensagens de texto",4 erros,,
+463,digitacao,Canddiato pedeu eleições poruqe recebeu menos votos e não devido à suposta quebra de código-fonte,Candidato perdeu eleições porque recebeu menos votos e não devido à suposta quebra de código-fonte,3 erros,,
+464,digitacao,Voto em trânsito justifica votaão maior para presiidente do que para outros cqrgos,Voto em trânsito justifica votação maior para presidente do que para outros cargos,3 erros,,
+465,digitacao,Erfo mostrado em víeo é de pesquisa contratada por candidato em Rondônai,Erro mostrado em vídeo é de pesquisa contratada por candidato em Rondônia,3 erros,,
+466,digitacao,Foto de ministro do TSE Benedito Gonçalves com bousa de candidatto à Presidência é montagem,Foto de ministro do TSE Benedito Gonçalves com blusa de candidato à Presidência é montagem,2 erros,,
+467,digitacao,Exérciito não interferiu na apuação dos votps no primeiro turno das Elições Gerais de 2022,Exército não interferiu na apuração dos votos no primeiro turno das Eleições Gerais de 2022,4 erros,,
+468,digitacao,"Números dovulgados pelo O Gllobo eram simulação, e não ‘resultado anteipado das eleições’","Números divulgados pelo O Globo eram simulação, e não ‘resultado antecipado das eleições’",3 erros,,
+469,digitacao,"Lula criou panfleto sobre lbierdade sexual e de gênero, sindicatos fortes, aboryo e outros ittens","Lula criou panfleto sobre liberdade sexual e de gênero, sindicatos fortes, aborto e outros itens",3 erros,,
+470,digitacao,Urnas tinham votso pré-registrados paara Lupa em Serafina Corrêa (RS),Urnas tinham votos pré-registrados para Lula em Serafina Corrêa (RS),3 erros,,
+471,digitacao,Pist usa foto de operação da PF de 2020 para mentir sobre conpra de voo,Post usa foto de operação da PF de 2020 para mentir sobre compra de voto,3 erros,,
+472,digitacao,Vídeo com vaias a Nando Res teve áudio manupulado e não foi gravado no Rock in Rio,Vídeo com vaias a Nando Reis teve áudio manipulado e não foi gravado no Rock in Rio,2 erros,,
+473,digitacao,A primeira pesqiusa paga pela Globo deu 44% de vitóroa para Bolsonaro?,A primeira pesquisa paga pela Globo deu 44% de vitória para Bolsonaro?,2 erros,,
+474,digitacao,TSE não enviou funcionáriio paar sueprvisionar ou censurar Jovem Pan,TSE não enviou funcionário para supervisionar ou censurar Jovem Pan,3 erros,,
+475,digitacao,Moraes não pediu para Bolsonaro remover vídro chorando das redees,Moraes não pediu para Bolsonaro remover vídeo chorando das redes,2 erros,,
+476,digitacao,Padre Mracelo Rosi maniifestou apoio à candidatura de Lula,Padre Marcelo Rossi manifestou apoio à candidatura de Lula,3 erros,,
+477,digitacao,Lula não xnigou assesssora em debate; faa era para o fotógrafo Stuckinnha,Lula não xingou assessora em debate; fala era para o fotógrafo Stuckinha,4 erros,,
+478,digitacao,"Faa de Lulla sobre ‘não deixar quietos’ Moro e Dallagnol é de 2020, não atual","Fala de Lula sobre ‘não deixar quietos’ Moro e Dallagnol é de 2020, não atual",2 erros,,
+479,digitacao,Batalhão cantou música cintra o PT em defsile do Sete de Setembro,Batalhão cantou música contra o PT em desfile do Sete de Setembro,2 erros,,
+480,digitacao,Retenção de cnota de parlamentar no Twiter segue diretrizes da plataforma,Retenção de conta de parlamentar no Twitter segue diretrizes da plataforma,2 erros,,
+481,digitacao,Víedo do JN é eitado para fazer crer que Bolsonaro apaarece à frente de Lula em peesquisa do Ipec,Vídeo do JN é editado para fazer crer que Bolsonaro aparece à frente de Lula em pesquisa do Ipec,4 erros,,
+482,digitacao,"TSE ifnorma que 7,2 milhões de votos firam anulados nas elições de 2022","TSE informa que 7,2 milhões de votos foram anulados nas eleições de 2022",3 erros,,
+483,digitacao,"Essta bandeira de cabelo foi hasteada na Martinica, abos antes da morte de Majsa Amini no Irã","Esta bandeira de cabelo foi hasteada na Martinica, anos antes da morte de Mahsa Amini no Irã",3 erros,,
+484,digitacao,Biometria dospensa epeitor de assinar caderno de vottação,Biometria dispensa eleitor de assinar caderno de votação,3 erros,,
+485,digitacao,Homem que dá preesente a Bolsonaro em vídeo viral não é presdente da Coriea do Sul,Homem que dá presente a Bolsonaro em vídeo viral não é presidente da Coreia do Sul,3 erros,,
+486,digitacao,Loggs das urnas eletrônicas são dados públlicos e não revelam votos de eleitores,Logs das urnas eletrônicas são dados públicos e não revelam votos de eleitores,2 erros,,
+487,digitacao,Vídeo com pssoas cantando o Hino Nacionaal no merô tenya siido gravado no dia das eleições,Vídeo com pessoas cantando o Hino Nacional no metrô tenha sido gravado no dia das eleições,5 erros,,
+488,digitacao,"Ato pró-Bolsonaro em shoppig não ocoreru na Austrália, mas é de 2018 em MG","Ato pró-Bolsonaro em shopping não ocorreu na Austrália, mas é de 2018 em MG",2 erros,,
+489,digitacao,Lulla diz que vai vencer Bolsonaro com a ajudda de Xanggô e que nem Jesus vai lhe parar,Lula diz que vai vencer Bolsonaro com a ajuda de Xangô e que nem Jesus vai lhe parar,3 erros,,
+490,digitacao,Bolsonaro corttou recrsos para Argentina e Panamá,Bolsonaro cortou recursos para Argentina e Panamá,2 erros,,
+491,digitacao,Fotos de candidztos fooram trocadas em Sapiranga (RS),Fotos de candidatos foram trocadas em Sapiranga (RS),2 erros,,
+492,digitacao,"Galeria mostra footos publicadas no Stee de Setembro de 2021, não neste ano","Galeria mostra fotos publicadas no Sete de Setembro de 2021, não neste ano",2 erros,,
+493,digitacao,IGBE tem crlular com urna elletrônica para roubra biometria de eleitoores de Bolsonaro,IBGE tem celular com urna eletrônica para roubar biometria de eleitores de Bolsonaro,5 erros,,
+494,digitacao,Meesária manipulou vídeo para dar a entender que swria possível votar por eleitor faltoso,Mesária manipulou vídeo para dar a entender que seria possível votar por eleitor faltoso,2 erros,,
+495,digitacao,"Apenas cinco estados do Brasil votaeão das 7h às 16h, para acompangar o fuos de Barsília","Apenas cinco estados do Brasil votarão das 7h às 16h, para acompanhar o fuso de Brasília",4 erros,,
+496,digitacao,William Waack denujciou fraaude nas urnas eketrônicas,William Waack denunciou fraude nas urnas eletrônicas,3 erros,,
+497,digitacao,Lula disse no Twitter que vai bloqyear poupanças em 2023 para manter Auxílio Basil,Lula disse no Twitter que vai bloquear poupanças em 2023 para manter Auxílio Brasil,2 erros,,
+498,digitacao,"Reprtagem cita outrros países com cenário econômico posiitivo aléém do Brasil, diferenetmente do que diz pastor","Reportagem cita outros países com cenário econômico positivo além do Brasil, diferentemente do que diz pastor",5 erros,,
+499,digitacao,CNN Brqsil noticiou que Foças Armadsa podem intervir no paaís a qualquer momento,CNN Brasil noticiou que Forças Armadas podem intervir no país a qualquer momento,4 erros,,
+500,digitacao,Pergunya sobre quartos e banheiros no Cenos é paea orientar divsião de imóveiis com sem-teto,Pergunta sobre quartos e banheiros no Censo é para orientar divisão de imóveis com sem-teto,5 erros,,
+501,parafrase_real,"CNN não noticiou que Lula tributará o PIX, congelará poupanças e criará o “Peso Real”","UOL não publicou que Lula pretende taxar Pix, como alega post",,"CNN não noticiou que Lula tributará o PIX, congelará poupanças e criará o “Peso Real”",
+502,parafrase_real,"Ciro Gomes pede voto para Bolsonaro “22” no domingo, mostra vídeo",Ciro Gomes declarou apoio a Bolsonaro no 2º turno,parafrase,"Ciro Gomes pede voto para Bolsonaro “22” no domingo, mostra vídeo",
+503,parafrase_real,Vídeo foi manipulado para mostrar Bolsonaro à frente em pesquisa do Ipec,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 15 de agosto de 2022,detalhe,Vídeo foi manipulado para mostrar Bolsonaro à frente em pesquisa do Ipec,
+504,parafrase_real,Vídeo de manifestação bolsonarista em Brasília foi gravado no 7/9 de 2021,"Vídeo mostra ato do 7 de Setembro em Brasília, não manifestação recente",negacao,Vídeo de manifestação bolsonarista em Brasília foi gravado no 7/9 de 2021,
+505,parafrase_real,Randolfe Rodrigues disse controlar PF e STF,Senador Randolfe Rodrigues disse em áudio que controla ações da PF e do STF,parafrase,Randolfe Rodrigues disse controlar PF e STF,
+506,parafrase_real,PT votou contra a criação do Auxílio Brasil no Congresso,"PT votou contra a PEC dos Precatórios, e não contra o Auxílio Brasil como sugere vídeo viral",negacao,PT votou contra a criação do Auxílio Brasil no Congresso,
+507,parafrase_real,"Pesquisa Ipec no Jornal Nacional mostra Bolsonaro com 55%, na frente de Lula no 2º turno das eleições",Pesquisa Ipec mostra Bolsonaro na frente de Lula com 46% no JN,,"Pesquisa Ipec no Jornal Nacional mostra Bolsonaro com 55%, na frente de Lula no 2º turno das eleições",
+508,parafrase_real,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 12 de setembro de 2022,Vídeo em que JN exibe pesquisa do Ipec com Bolsonaro na liderança,,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 12 de setembro de 2022,
+509,parafrase_real,Boletins de urna em vídeo provem que votos não foram computados,Vídeo que alerta sobre risco de o voto não ser computado na urna,parafrase,Boletins de urna em vídeo provem que votos não foram computados,
+510,parafrase_real,Vídeo que mostra Bolsonaro à frente na pesquisa Ipec do dia 15 de agosto de 2022 é falso,Vídeo que mostra Bolsonaro na liderança da pesquisa Ipec divulgada em 15 de agosto de 2022,,Vídeo que mostra Bolsonaro à frente na pesquisa Ipec do dia 15 de agosto de 2022 é falso,
+511,parafrase_real,A Torre Eiffel foi iluminada em homenagem à eleição de Lula,Torre Eiffel foi iluminada de verde e amarelo em homenagem à vitória de Lula,parafrase,A Torre Eiffel foi iluminada em homenagem à eleição de Lula,
+512,parafrase_real,Vídeo em que Lula fala em comprar voto de baianos por R$ 10,Vídeo de Lula falando em comprar voto de baianos por 10 reais foi manipulado,negacao,Vídeo em que Lula fala em comprar voto de baianos por R$ 10,
+513,parafrase_real,Vídeo: 7 fake news que circularam na semana das eleições de 2022,Principais fake news de 1º de outubro de 2022 (véspera das eleições 2022),,Vídeo: 7 fake news que circularam na semana das eleições de 2022,
+514,parafrase_real,Polícia Federal fez exposição com pilhas de dinheiro roubado pelo PT,Polícia Federal fez exposição com dinheiro recuperado em governos do PT,parafrase,Polícia Federal fez exposição com pilhas de dinheiro roubado pelo PT,
+515,parafrase_real,Jornalista Vera Magalhães ganha R$ 500 mil ao ano da TV Cultura,Vera Magalhães ganha R$ 500 mil por ano da TV Cultura,parafrase,Jornalista Vera Magalhães ganha R$ 500 mil ao ano da TV Cultura,
+516,parafrase_real,"5,1 milhões de votos foram roubados de Bolsonaro no 2º turno","Mike Lindell está certo ao dizer que 5,1 milhões de votos foram roubados de Bolsonaro",detalhe,"5,1 milhões de votos foram roubados de Bolsonaro no 2º turno",
+517,parafrase_real,Vídeo em que Bolsonaro faz oração é de 2018 e não foi gravado antes do JN,"Vídeo que mostra oração de Bolsonaro é de 2018, não anterior ao JN",parafrase,Vídeo em que Bolsonaro faz oração é de 2018 e não foi gravado antes do JN,
+518,parafrase_real,Vídeo de boletins de urna com mais votos para Bolsonaro não prova fraude,Boletim de urna encontrado na rua em Curitiba (Paraná) prova fraude de votos não contabilizados para Bolsonaro nas eleições,negacao,Vídeo de boletins de urna com mais votos para Bolsonaro não prova fraude,
+519,parafrase_real,Pesquisa Ipec no Jornal Nacional mostra Bolsonaro na frente de Lula com 46%,Pesquisa Ipec do Jornal Nacional (Globo) mostra Bolsonaro na frente de Lula,detalhe,Pesquisa Ipec no Jornal Nacional mostra Bolsonaro na frente de Lula com 46%,
+520,parafrase_real,Biden e CIA interferiram nas eleições do Brasil,Jornalista provou influência de Biden na eleição brasileira,parafrase,Biden e CIA interferiram nas eleições do Brasil,
+521,parafrase_real,Jayme Monjardim não gravou vídeo criticando Fernando Haddad,Jayme Monjardim gravou vídeo criticando Fernando Haddad,negacao,Jayme Monjardim não gravou vídeo criticando Fernando Haddad,
+522,parafrase_real,"Justiça Eleitoral rejeitou candidatura de Lula em 2018, não em 2022",TSE rejeitou candidatura de Lula em agosto de 2022,detalhe,"Justiça Eleitoral rejeitou candidatura de Lula em 2018, não em 2022",
+523,parafrase_real,Pistola d'água foi usada em atentado contra Cristina Kirchner,Arma usada em atentado contra Cristina Kirchner era uma pistola d'água,parafrase,Pistola d'água foi usada em atentado contra Cristina Kirchner,
+524,parafrase_real,Apresentadores estrangeiros fizeram piada sobre Lula e eleitores baianos,Jornalistas estrangeiros riram sobre Lula querer comprar votos de baianos,parafrase,Apresentadores estrangeiros fizeram piada sobre Lula e eleitores baianos,
+525,parafrase_real,Lula não usou ponto eletrônico no ouvido no debate da Globo,"Lula não usou ponto eletrônico no primeiro debate do 2º turno, segundo imagens do evento",parafrase,Lula não usou ponto eletrônico no ouvido no debate da Globo,
+526,parafrase_real,Vídeo foi editado para mostrar Bolsonaro à frente na pesquisa Ipec sobre segundo turno,Vídeo é manipulado para afirmar que Bolsonaro liderou pesquisa Ipec divulgada em 12 de setembro,detalhe,Vídeo foi editado para mostrar Bolsonaro à frente na pesquisa Ipec sobre segundo turno,
+527,parafrase_real,Geraldo Alckmin diz que a taxação do Pix é algo extremamente necessário,G1 publicou reportagem afirmando que Alckmin diz que taxação do Pix é necessária,detalhe,Geraldo Alckmin diz que a taxação do Pix é algo extremamente necessário,
+528,parafrase_real,Não há nenhuma lei ou projeto de lei que proíba o uso da Bíblia no Brasil,Uso da Bíblia não foi proibido no Brasil,parafrase,Não há nenhuma lei ou projeto de lei que proíba o uso da Bíblia no Brasil,
+529,parafrase_real,Vídeo do JN é editado para fazer crer que Bolsonaro aparece à frente de Lula em pesquisa do Ipec,Vídeo em que Jornal Nacional divulga pesquisa com Bolsonaro à frente de Lula,negacao,Vídeo do JN é editado para fazer crer que Bolsonaro aparece à frente de Lula em pesquisa do Ipec,
+530,parafrase_real,"Vídeo de Bolsonaro cumprimentando apoiadores é de 2021 e foi gravado em São Paulo, não nos EUA",Vídeo com multidão de apoiadores de Jair Bolsonaro não é de 2022; circula desde 2021,detalhe,"Vídeo de Bolsonaro cumprimentando apoiadores é de 2021 e foi gravado em São Paulo, não nos EUA",
+531,parafrase_real,Lula foi chamado de ladrão durante comício em Belo Horizonte,Militantes chamam Lula de ladrão em protesto durante comício,parafrase,Lula foi chamado de ladrão durante comício em Belo Horizonte,
+532,parafrase_real,Lula não possa ser diplomado; petista teve condenações anuladas,Lula não pode ser diplomado porque é ficha suja e não foi inocentado,negacao,Lula não possa ser diplomado; petista teve condenações anuladas,
+533,parafrase_real,Alexandre de Moraes vendeu as eleições de 2022 para Lula e o PT em escândalo que todo mundo suspeitava,Alexandre de Moraes vendeu as eleições 2022 para o PT em “escândalo” divulgado por Roberto Jefferson,,Alexandre de Moraes vendeu as eleições de 2022 para Lula e o PT em escândalo que todo mundo suspeitava,
+534,parafrase_real,Moraes não pediu para Bolsonaro remover vídeo chorando das redes,TSE não mandou apagar vídeo em que Bolsonaro chora ao relembrar facada,detalhe,Moraes não pediu para Bolsonaro remover vídeo chorando das redes,
