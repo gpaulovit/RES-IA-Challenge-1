@@ -179,6 +179,14 @@ logo; **nenhum limite da Decisão 4 muda** e a regra de agregação é a mesma.
   - *Separação temporal:* `assert` de que nenhum ano e nenhum texto (após limpeza, sem diferenciar
     caixa) do período de avaliação aparece no treino; textos repetidos entre os períodos saem da
     avaliação.
+  - *Pontuação final:* o ponto final do texto é tirado em todas as fontes (só o Fake.br termina em
+    ponto; seria pista de fonte).
+  - *Hiperparâmetros:* nenhum ajuste. Regressão logística padrão do scikit-learn (`C = 1`); TF-IDF
+    com `strip_accents="unicode"`, unigramas e bigramas, `min_df = 2`, `sublinear_tf`.
+  - *Critério de gíria por classe:* média e fração > 0,25 são medidas separadamente em falsas e em
+    verdadeiras, e vale a pior das duas (um falso alarme criado pela gíria e um boato escondido por
+    ela pesam igual).
+  - *Implementação:* `experiments/gate.py`; resultados em `experiments/results/gate_*.csv`.
 
 ### 6. Calibração e faixas
 
