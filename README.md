@@ -119,7 +119,7 @@ para entender o que foi conferido e o que ainda depende de dados reais.
 - [openspec/](openspec/) — propostas e specs geridas pelo [OpenSpec](https://openspec.dev).
 - [refs/](refs/) — material de referência (PDFs, papers).
 
-## Resumo
+## Resumo do projeto
 
 **Já é possível enviar um texto para uma API local e receber checagens fictícias
 parecidas. Os guias explicam como executar, testar e apresentar. A base real,
