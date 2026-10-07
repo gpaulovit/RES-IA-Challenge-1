@@ -1,13 +1,8 @@
 # Perguntas Orientadas ao Problema
 
-> **Reenquadramento (2026-10-06).** A primeira versão destas perguntas defendia um produto de
-> **recuperação** da checagem já existente para cada alegação. A equipe descartou essa ideia:
-> os gates mostraram que a mesma alegação quase não volta, mas a mesma **narrativa** volta com
-> frequência. O produto passou a ser um bot que estima a **chance de uma notícia nova ser
-> falsa** a partir desses padrões. A versão anterior está no histórico do git e na change
-> [`add-recycled-claim-semantic-retrieval`](https://github.com/gpaulovit/RES-IA-Challenge-1/tree/main/openspec/changes/add-recycled-claim-semantic-retrieval);
-> a nova está na change
-> [`add-fake-news-pattern-scoring`](https://github.com/gpaulovit/RES-IA-Challenge-1/tree/main/openspec/changes/add-fake-news-pattern-scoring).
+> Responsável: Ana Júlia (`papel: produto-decisao`). Atualizado em 07/10/2026.
+> As perguntas levam ao produto descrito em [Requisitos](requisitos.md): um bot no Telegram que
+> mostra checagens já publicadas e, quando não há, uma faixa de sinais de alerta.
 
 ## Natureza e causa raiz do problema
 
@@ -38,61 +33,105 @@
 
 ## Norteadora do Problema
 
-O padrão semântico das notícias falsas sobre política no Brasil se repete ao longo do tempo a ponto de um modelo treinado com boatos já checados de um período estimar, com confiabilidade, a chance de uma notícia nova de um período posterior ser falsa — sem que o que ele aprendeu seja só o veículo, a época ou o formato do texto?
+Um bot no Telegram consegue ajudar o eleitor a conferir, antes de repassar, uma mensagem sobre as
+eleições de 2026 — mostrando a checagem de agência quando ela existe e um alerta honesto quando
+não existe — sem afirmar por conta própria que algo é verdadeiro ou falso?
 
-- A unidade que se repete é a **narrativa** (o mesmo enredo com outros personagens, datas e números), e não a alegação idêntica? Evidência herdada: dentro de 2022, 62 de 71 pares rotulados foram `mesma` ou `tema`; entre 2013–2021 e 2022, 53 de 59. A mesma alegação, sozinha, voltou em só 1,4% (dentro do ciclo) e 1,6% (entre ciclos).
-- Um modelo treinado até um ano separa falsas de verdadeiras no ano seguinte? E quando, além do ano, muda também a fonte? (Gate de generalização temporal, testes A e B do design.)
-- O que o modelo aprende é narrativa ou atalho? Quanto fonte e ano, sozinhos, já predizem o rótulo?
-- Usando os embeddings, é possível identificar clusters temáticos latentes (ex.: urnas eletrônicas, saúde, segurança pública) e acompanhar quais deles voltam a cada ciclo? Os clusters deste corpus se mostraram instáveis entre execuções, então servem para descrever, não para decidir.
-- Existe sazonalidade nos boatos (picos em datas de debate, véspera de votação, resultado) que se correlacione com o tipo de narrativa?
+- Boa parte do que circula já foi checado de alguma forma? Nos testes do projeto, a mesma
+  alegação voltou pouco (1,4% dentro de 2022; 1,6% entre ciclos), mas a mesma **narrativa** voltou
+  com frequência (62 de 71 pares em 2022; 53 de 59 entre 2013–2021 e 2022). Por isso a busca
+  procura checagens **parecidas**, não idênticas.
+- Quando não há checagem, um classificador de texto distingue falsas de verdadeiras em textos de
+  outra fonte ou época, ou só aprende o estilo do veículo? (RN-04 e RNF-02.)
+- Como responder sem que o eleitor leia a resposta como sentença? (RN-01, RNF-06.)
+
+## Do problema de negócio ao problema de ML
+
+Seguindo os passos 1 a 5 da Zona A de Kreuzberger, Kühl e Hirschl (2023):
+
+1. **Problema de negócio (R1):** eleitores recebem em grupos notícias e frases sobre as eleições
+   de 2026 e repassam sem conferir, porque checar dá trabalho e a checagem humana demora.
+2. **Arquitetura (R2):** bot do Telegram em Python → extração de texto → busca na base de
+   checagens → classificador → resposta. Um único serviço, sem infraestrutura paga.
+3. **Problema de ML (R3):** são dois.
+    - **Busca por similaridade:** dado um texto, achar as checagens mais parecidas.
+    - **Classificação binária supervisionada:** falsa × verdadeira, com a probabilidade
+      convertida em três faixas de alerta.
+4. **Quais dados (R3 + R4):** checagens de agências para a busca; notícias rotuladas para o
+   classificador.
+5. **Qualidade e rótulos (R3 + R4):** normalizar vereditos das agências, tirar carimbos como
+   "FALSO" do texto, igualar o tamanho dos textos e testar com fonte ou época diferentes das do
+   treino.
+
+## Eixo 1 — Dados e Contexto Eleitoral
 
 ### Pergunta norteadora (Eixo 1)
 
-As bases disponíveis — FactPolCheckBr e Central de Fatos como exemplos falsos, Fake.br e FakeRecogna como exemplos verdadeiros — têm volume, cobertura temporal e equilíbrio entre classes suficientes, no recorte político, para treinar e testar um modelo em períodos diferentes, e quanto do rótulo é explicado só pela fonte e pela época?
+As bases disponíveis têm volume e equilíbrio entre classes suficientes para (a) montar uma base
+de checagens para a busca e (b) treinar e testar um classificador com fonte ou época diferentes,
+sem que o rótulo seja explicado só pela fonte?
 
-- Ponto crítico conhecido: os corpora de checagem são quase só de boatos (FactPolCheckBr: 1.815 falsas, 9 verdadeiras; Central de Fatos: 10.286 e 141), e não há notícias verdadeiras de 2022 em volume.
+### Uso de cada dataset
+
+| Dataset | Uso | Atenção |
+| --- | --- | --- |
+| [FactPolCheckBr](https://github.com/Interfaces-UFSCAR/Dataset-FactPolCheckBr) | busca (camada 1) | já tem pipeline no repositório |
+| [FACTCK.BR](https://github.com/jghm-f/FACTCK.BR) | busca (camada 1) | checagens com veredito e link |
+| [FactChecks.br](https://github.com/fake-news-UFG/FactChecks.br) | busca (camada 1) | conferir sobreposição com os outros dois |
+| [Fake.br-Corpus](https://github.com/roneysco/Fake.br-Corpus) | treino do classificador | usar a versão com textos de tamanho igualado; falsas e verdadeiras vêm de sites diferentes |
+| [FakeWhatsApp.Br](https://github.com/cabrau/FakeWhatsApp.Br) | treino e teste do classificador | mensagens de grupos, parecidas com o que o bot vai receber |
+| [FakeTweet.Br](https://github.com/prc992/FakeTweet.Br) | teste extra do classificador | textos curtos |
+| [BRACIS2019_FAKENEWS](https://github.com/phfaustini/BRACIS2019_FAKENEWS) | opcional | conferir se repete o Fake.br |
+| [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) | não usar | em inglês |
+
+Antes de treinar, Domínio de dados confirma tamanho, período e licença de cada base.
+
+### O que já sabemos do FactPolCheckBr
 
 - **Parcialmente.** O volume (1.882 checagens, 9 agências com 50 a 315 registros cada) é suficiente para um MVP e para o gate. A cobertura, porém, é de **uma única campanha presidencial (ago–dez/2022)**, com 97% dos vereditos `falso` e forte concentração no tema urnas/sistema eleitoral.
 - O índice é representativo da **desinformação da eleição presidencial de 2022**, não do "universo de boatos políticos brasileiros". Para o gate, a reciclagem deve ser medida dentro dessa campanha. Medir entre eleições exige suplementar a base com outros anos (a avaliar na issue #6).
 - Os vereditos já vêm consolidados pela fonte (Falsa, Verdadeira, Parcialmente verdadeira e 50 vazios). A taxonomia do projeto mapeia esses quatro valores; os 50 vazios são, na maioria, checagens com várias alegações e não devem entrar no índice como alegação única.
 
-## Eixo 2 — IA e NLP
+- Como a base de checagens é quase toda `falso`, ela serve para a busca, não para treinar o
+  classificador. As notícias verdadeiras do treino vêm do Fake.br e do FakeWhatsApp.Br.
 
-Este eixo é o núcleo técnico: o modelo precisa aprender o padrão da narrativa, generalizar para o futuro e não se deixar enganar por reescrita de superfície.
+## Eixo 2 — IA e NLP
 
 ### Expansão
 
-- Um classificador simples sobre embeddings de frase (regressão logística) ou um score por vizinhos rotulados já separa falsas de verdadeiras fora do período de treino? Qual dos modelos de embeddings candidatos (multilíngues, BERTimbau) generaliza melhor?
-- O score muda quando a notícia é reescrita com apelidos, gírias ou erros ortográficos propositais (comuns em corrente de WhatsApp)? Ele deveria se manter.
-- A negação ("X fez" vs. "X não fez") inverte o sentido. Como o modelo se comporta? Embeddings tendem a captar o tema e não a polaridade, o que aqui é um risco, e não uma qualidade.
-- O carimbo da agência ("É #FAKE", "#boato") e o estilo do veículo vazam o rótulo? Quanto o desempenho cai quando eles são removidos?
-- Um modelo ajustado (fine-tuned) só vale a pena se as linhas de base mostrarem sinal e faltar capacidade, e não dados?
+- A busca por embeddings acha a checagem certa quando a mensagem vem com gíria, apelido ou erro
+  de digitação? (Benchmark `data/testes_benchmark.json`, RNF-04.)
+- A negação ("X fez" × "X NÃO fez") inverte o sentido, mas embeddings tendem a captar o tema e não
+  a polaridade. Como evitar mostrar uma checagem do sentido oposto? (RN-06.)
+- Um baseline simples (TF-IDF + regressão logística) já separa falsas de verdadeiras em textos de
+  outra fonte ou época? Algo mais complexo só vale se o baseline mostrar sinal.
+- O carimbo da agência ("É #FAKE", "#boato") e o estilo do veículo vazam o rótulo? Quanto o
+  desempenho cai quando eles são removidos?
 
 ### Pergunta norteadora (Eixo 2)
 
-Dentro do escopo de um MVP, é possível treinar um modelo sobre embeddings que estime de forma calibrada a chance de uma notícia política ser falsa em um período posterior ao do treino, estável a reescritas de superfície, e cujo desempenho não seja explicado pela fonte ou pela época?
+Dentro do prazo do MVP, é possível ter uma busca que encontra a checagem certa mesmo com a
+mensagem reescrita, e um classificador simples que separa falsas de verdadeiras em textos de
+outra fonte ou época com qualidade mínima (RNF-02, RNF-03)?
 
 ## Eixo 3 — Decisão, Validação e Produto
 
-Aqui a expansão é sobre o que o bot pode e não pode afirmar. Um score errado sobre uma notícia verdadeira causa dano direto, então a forma de apresentar importa tanto quanto o modelo.
-
 ### Expansão
 
-- Como apresentar a estimativa sem que ela vire veredito?
-  - Em faixas: compatível com narrativas falsas conhecidas / incerto / pouco compatível / fora dos padrões conhecidos.
-  - As faixas saem de probabilidades **calibradas** (o que o modelo chama de 80% acontece em cerca de 80% dos casos), e não das probabilidades brutas.
-  - A resposta nunca diz "é falsa" ou "é fake"; diz que a notícia se parece (ou não) com narrativas falsas já checadas, e aponta as agências para o veredito.
-- O que fazer quando a notícia não se parece com nada que o modelo conhece?
-  - Responder "fora dos padrões conhecidos" e dizer que o modelo não tem base para avaliar, independente da probabilidade.
-- Como explicar o score?
-  - Mostrar as notícias já checadas mais próximas, com fonte, data e o rótulo publicado pela agência. O usuário vê de onde vem a semelhança.
-- Como testar falsos alarmes antes de ir a campo?
-  - Usar notícias verdadeiras que o modelo nunca viu (as 32 manchetes do g1 já reunidas e o período de teste dos holdouts) e medir quantas caem em "compatível com narrativas falsas".
-  - Relatar o score por figura pública mencionada: se uma pessoa concentra boatos no treino, notícias verdadeiras sobre ela podem ser marcadas injustamente.
+- Quando mostrar uma checagem como "já checado" e quando como "relacionada"? (Faixas de
+  semelhança, RN-05.)
+- Como apresentar o alerta sem que ele vire veredito? Em três faixas (muitos sinais / incerto /
+  poucos sinais), sem porcentagem, com os sinais que pesaram e com aviso de limitação. A resposta
+  nunca diz "é falsa" ou "é fake".
+- Como testar falsos alarmes antes de apresentar? Com as 32 notícias reais do benchmark (g1, UOL,
+  CNN, Folha) e com notícias verdadeiras que o classificador nunca viu.
+- O que o eleitor faz depois? Toda resposta indica agências e o canal do TSE.
 
 ### Pergunta norteadora (Eixo 3)
 
-É possível definir faixas de resposta e uma linguagem que comuniquem a chance de uma notícia ser falsa sem afirmar veredito, com taxa de falso alarme sobre notícias verdadeiras dentro de uma margem tolerável para uso público, e com uma saída honesta para o que o modelo não conhece?
+É possível definir regras de resposta que mostrem a checagem certa quando ela existe, alertem
+sem afirmar veredito quando não existe, e mantenham o falso alarme sobre notícias verdadeiras
+dentro de uma margem tolerável?
 
 ## Eixo 4 — Impacto Social e Cidadania
 
@@ -108,3 +147,40 @@ Este é o eixo onde preciso ser direto: as perguntas originais (redução de com
 ### Pergunta norteadora (Eixo 4) — reformulada
 
 É possível, com os dados e a literatura correlata disponíveis nesta fase, projetar indicadores mensuráveis de impacto social (concentração temática de vulnerabilidade, padrões por canal) que sirvam de baseline, deixando explícito que a validação causal do efeito sobre o comportamento do eleitor depende de dados de uso pós-lançamento e não é resolvível na etapa de concepção?
+
+## Perguntas de MLOps da disciplina
+
+**1. Papéis (R1–R7).** R1 Produto: Ana Júlia · R3 Modelos de IA: Paulo · R4 Domínio de dados:
+Cibelly · R6/R7 DevOps e MLOps: Ingrid · R2/R5 Engenharia: a confirmar.
+
+**2. Problema de negócio → problema de ML.** Ver a seção "Do problema de negócio ao problema
+de ML".
+
+**3. Componentes que o sistema realmente precisa:**
+
+| Componente | Usa? | Como |
+| --- | --- | --- |
+| C1 CI/CD | sim | GitHub Actions rodando `pytest` a cada push |
+| C2 Repositório | sim | este repositório |
+| C3 Orquestração | não | um script de treino basta neste tamanho |
+| C4 Feature store | não | features calculadas no próprio pipeline |
+| C5 Infra de treino | sim, mínima | máquina local ou Colab |
+| C6 Model registry | simplificado | modelo versionado com DVC (já configurado) |
+| C7 Metadata store | simplificado | arquivo de métricas e parâmetros salvo junto do modelo |
+| C8 Serving | sim | o próprio bot carrega o modelo e faz inferência online |
+| C9 Monitoramento | simplificado | registros anônimos e votos 👍/👎 |
+
+**4. Gatilho de retreino.** Agenda manual. O índice de checagens é atualizado quando novas
+checagens forem baixadas, sem retreinar (RNF-11). O classificador é retreinado quando houver 👎
+revisados ou nova base rotulada.
+
+**5. O que é monitorado e para onde vai o feedback.** Tempo de resposta, camada usada,
+distribuição das faixas e votos. 👎 na camada 1 volta para o ajuste do limiar; 👎 na camada 2
+vira exemplo para revisão e retreino; queda da semelhança média indica base de checagens
+desatualizada.
+
+## Referência
+
+Kreuzberger, D.; Kühl, N.; Hirschl, S. *Machine Learning Operations (MLOps): Overview,
+Definition, and Architecture.* IEEE Access, v. 11, p. 31866–31879, 2023.
+[doi:10.1109/ACCESS.2023.3262138](https://doi.org/10.1109/ACCESS.2023.3262138)
