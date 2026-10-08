@@ -3,6 +3,8 @@
 - [Requisitos](requisitos.md)
 - [Histórias de usuário](historias.md)
 - [Referências](refs.md)
+- Domínio de dados
+  - [Dados do bot](dados.md)
 - Engenharia
   - [Guia da arquiteta](guia-arquiteta.md)
   - [Testes e benchmark](testes.md)
