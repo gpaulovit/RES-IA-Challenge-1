@@ -1,0 +1,105 @@
+schema: '2.0'
+stages:
+  baixar:
+    cmd: python -m checagens.bases.baixar
+    deps:
+    - path: src/checagens/bases/baixar.py
+      hash: md5
+      md5: a9adcf26044bee0140bf2a2c23c15536
+      size: 2640
+    - path: src/checagens/bases/fontes.py
+      hash: md5
+      md5: 4ff25ecd46215620a0090b765d79556b
+      size: 2688
+    outs:
+    - path: data/brutos
+      hash: md5
+      md5: 19e038189277af9946fbe163d55c10c6.dir
+      size: 138706672
+      nfiles: 7
+  checagens:
+    cmd: python -m checagens.bases.checagens
+    deps:
+    - path: data/brutos/factchecksbr
+      hash: md5
+      md5: 24eaf4df211dbd1210a351121622750f.dir
+      size: 40450581
+      nfiles: 1
+    - path: data/brutos/factckbr
+      hash: md5
+      md5: 6e0096c701a6b1242ca33f58f393904b.dir
+      size: 721314
+      nfiles: 1
+    - path: data/brutos/factpolcheckbr
+      hash: md5
+      md5: b55f96d8e399c9eed551fcda6ee4cc15.dir
+      size: 5035762
+      nfiles: 1
+    - path: src/checagens/bases/checagens.py
+      hash: md5
+      md5: 1058e495bed149195dc0ef642f5e1d02
+      size: 12971
+    - path: src/checagens/bases/texto.py
+      hash: md5
+      md5: 65a8c97d35f7cd3518b1c3bcece134e0
+      size: 5965
+    - path: src/checagens/bases/vereditos.py
+      hash: md5
+      md5: 7f07e32abf331c930c0d04745e21e828
+      size: 5423
+    outs:
+    - path: data/processados/checagens/amostra_teste_30.json
+      hash: md5
+      md5: 7ad5bcc58f4471726728f875b3582310
+      size: 12780
+    - path: data/processados/checagens/checagens.json
+      hash: md5
+      md5: 0b8a3f5d447e50c95cf0b38e5b441d2b
+      size: 4424617
+    - path: data/relatorios/checagens.json
+      hash: md5
+      md5: f38bc58863c43f824f0c44ed3b09db8e
+      size: 14723
+  treino:
+    cmd: python -m checagens.bases.treino --corte 2018-09-15
+    deps:
+    - path: data/brutos/fakebr
+      hash: md5
+      md5: 1293584341f6724490b1551167378211.dir
+      size: 31825189
+      nfiles: 1
+    - path: data/brutos/faketweetbr
+      hash: md5
+      md5: 557f889baa92436bdbf3c48f5f3ae920.dir
+      size: 103474
+      nfiles: 2
+    - path: data/brutos/fakewhatsappbr
+      hash: md5
+      md5: a833edbf609d74166e1b08a8f25d7edb.dir
+      size: 60570352
+      nfiles: 1
+    - path: src/checagens/bases/texto.py
+      hash: md5
+      md5: 65a8c97d35f7cd3518b1c3bcece134e0
+      size: 5965
+    - path: src/checagens/bases/treino.py
+      hash: md5
+      md5: d9263a1c3595d3cccd348fc3d95a6ab2
+      size: 14886
+    outs:
+    - path: data/processados/treino/teste.csv
+      hash: md5
+      md5: 559d8bb466f4eef4539858010c1786c2
+      size: 2494995
+    - path: data/processados/treino/teste_curtos.csv
+      hash: md5
+      md5: 08df6c4d9a9c2bcbc74e64dcd69adbf0
+      size: 70337
+    - path: data/processados/treino/treino.csv
+      hash: md5
+      md5: eb612d40cb5c34a93664e00dce0bafee
+      size: 10461770
+    - path: data/relatorios/treino.json
+      hash: md5
+      md5: bec3ecc88dde1a061916646c29944370
+      size: 39367
