@@ -6,7 +6,7 @@
   colunas nesses arquivos) e limpos com a mesma `limpar_titulo()`.
 
 Regras de ano, texto, recorte político, rótulo e fonte: design.md da change
-`add-fake-news-pattern-scoring`, Decisão 5, "1ª rodada do gate".
+`archive/openspec/add-fake-news-pattern-scoring` (descartada), Decisão 5, "1ª rodada do gate".
 """
 import csv
 import io

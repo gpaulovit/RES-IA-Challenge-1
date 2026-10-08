@@ -1,32 +1,33 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+# Contexto mostrado à IA ao criar artefatos.
+context: |
+  Produto: bot no Telegram para eleitores conferirem mensagens ou links sobre as eleições de 2026
+  antes de repassar. O bot nunca dá veredito próprio (RN-01).
+  - Camada 1: busca de checagens de agências parecidas com a mensagem (embeddings + cosseno).
+  - Camada 2: classificador TF-IDF + regressão logística que devolve uma faixa de alerta
+    (muitos_sinais / incerto / poucos_sinais) com 2 ou 3 termos; só vai ao ar com go (RN-04).
+  Fonte única de verdade: docs/requisitos.md e docs/historias.md. Se algo contradizer esses
+  arquivos, valem eles.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  NÃO use nada em /archive: são produtos descartados (reciclagem de alegação, scoring de fake news,
+  modelo de reincidência). Eles não descrevem o produto atual.
 
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+  Stack: Python 3.11+, scikit-learn, sentence-transformers (MiniLM multilíngue com revisão fixada),
+  DVC para dados, modelo e métricas, pytest. Custo zero de infraestrutura (R-02).
+  Código novo nasce em experiments/ como protótipo e sobe para src/checagens/ depois de validado.
+
+rules:
+  proposal:
+    - Cite IDs de requisitos (RF-xx, RN-xx, RNF-xx, US-xx) em vez de copiar o texto deles
+  design:
+    - Toda métrica aponta para o arquivo que a gerou
+    - Critérios de go/no-go são escritos antes de rodar no conjunto de teste
+  tasks:
+    - Cada tarefa diz como verificar que ficou pronta
+
+operations:
+  apply:
+    guidance:
+      - Commits citam o requisito atendido, ex. "feat(busca): faixas de semelhança (RN-05)"
+      - Sem linhas Co-Authored-By nos commits
