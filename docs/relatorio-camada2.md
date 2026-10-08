@@ -71,8 +71,20 @@ Para interpretar o resultado, o relatório traz também:
 - a distribuição das três faixas por classe;
 - duas linhas de base: a classe majoritária e um modelo que só vê a fonte.
 
-A segunda linha de base mede o atalho de fonte. O gate anterior mostrou que a fonte sozinha prevê o
-rótulo (registro em `archive/experiments/`).
+**Como ler o atalho de estilo do veículo.** O gate anterior mostrou que a fonte sozinha prevê o
+rótulo (registro em `archive/experiments/`). Por isso, o modelo pode estar reconhecendo o estilo de
+escrita de um veículo, e não sinais de desinformação. São duas leituras, das mais fracas às mais
+fortes:
+
+1. **Modelo que só vê a fonte:** mede quanto o rótulo é previsível só pela origem. Se ele chegar
+   perto do nosso modelo, o resultado é suspeito. Superá-lo não basta para descartar o atalho,
+   porque o estilo de escrita é uma pista mais rica que o nome da fonte.
+2. **F1 macro dentro de cada fonte com as duas classes no teste** (com pelo menos 30 itens por
+   classe): dentro de uma mesma fonte, o estilo é constante. F1 perto de 0,5 ali indica que o
+   modelo separa as classes pela fonte, não pelo conteúdo. Este é o teste direto do atalho.
+
+Essas leituras não mudam a decisão de `go`/`no-go`. Elas acompanham o resultado para dizer **por
+que** o modelo acerta ou erra.
 
 ## Reprodução
 
