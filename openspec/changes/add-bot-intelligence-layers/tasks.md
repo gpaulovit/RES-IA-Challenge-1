@@ -1,8 +1,8 @@
 ## 1. Limpeza
 
 - [x] 1.1 Mover as changes descartadas para `/archive/openspec/` e contextualizar `openspec/config.yaml`; verificar com `git grep "openspec/changes/add-"` fora de `/archive`
-- [ ] 1.2 Remover os notebooks 03/04 e os CSVs deles; mover `gate.py` e `historico-gates.md` para `/archive/experiments/`; reescrever `experiments/README.md` por assunto; verificar que o `pytest` passa
-- [ ] 1.3 `docs/refs.md` com datasets e Kreuzberger et al. (2023); atualizar `docs/_sidebar.md` e `docs/README.md`
+- [x] 1.2 Mover os notebooks 03/04, os CSVs deles, `gate.py` e `historico-gates.md` para `/archive/experiments/`; reescrever `experiments/README.md` por assunto; verificar que o `pytest` passa
+- [x] 1.3 `docs/refs.md` com datasets e Kreuzberger et al. (2023); atualizar `docs/_sidebar.md` e `docs/README.md`
 
 ## 2. Critério antes do teste
 
