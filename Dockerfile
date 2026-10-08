@@ -23,6 +23,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # Copia o código da aplicação
 COPY src/ ./src/
+COPY experiments/*.py ./experiments/
 COPY data/ ./data/
 COPY tests/ ./tests/
 

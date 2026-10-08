@@ -127,6 +127,37 @@ variação da probabilidade (limites 0,10 / 0,15 / 0,25 / 5% / 10%, sugeridos na
 pela frente de Modelos), e a estabilidade de faixa (≥ 92%) foi movida para depois da definição das
 faixas (Decisão 6).
 
+**Resultado da 1ª rodada (2026-10-06): NO-GO.** Rodado com `experiments/gate.py` no commit
+`34332ae`, posterior ao pré-registro (`1f63886` e `34332ae`). Números de
+`experiments/results/gate_criterios.csv` e `gate_temporal.csv`; contagens e SHA-256 dos conjuntos
+em `gate_conjuntos.csv`.
+
+| Critério | Teste A (FakeRecogna 2020 → 2021) | Teste B (Fake.br + CdF ≤ 2018 → FakeRecogna + CdF 2020–21) |
+|---|---|---|
+| AUC do modelo principal (MiniLM + reg. logística) | 0,835 — inconclusivo | 0,651 — **NO-GO** |
+| ECE | 0,050 — GO | 0,188 — **NO-GO** |
+| Brier skill score | 0,317 — GO | 0,028 — GO |
+| Ganho sobre TF-IDF (AUC 0,856 / 0,690) | −0,021 — **NO-GO** | −0,039 — **NO-GO** |
+| Distância ao controle fonte+ano (AUC 0,921 / 0,859) | −0,086 — **NO-GO** | −0,207 — **NO-GO** |
+| Gíria e apelido (pior classe: média; % > 0,25) | 0,097; 8,0% — inconclusivo | 0,094; 7,0% — inconclusivo |
+
+n de avaliação: A = 1.129 (322 falsas); B = 3.468 (1.330 falsas).
+
+**Leitura:**
+
+- **O que separa falsas de verdadeiras nesses dados é o veículo, não a narrativa.** Só o domínio
+  e o ano preveem o rótulo melhor que o modelo: AUC 0,92 em A e 0,86 em B. Isso vale dentro do
+  FakeRecogna, porque UOL e Globo publicam verdadeiras e as agências publicam falsas.
+- **Os embeddings não superam o TF-IDF** em nenhum dos testes.
+- **Quando a fonte muda (B), a separação cai para 0,65** e as probabilidades deixam de ser
+  calibradas.
+- **A hipótese "o padrão narrativo aprendido num período se transfere para o seguinte" não tem
+  apoio com estas bases.** Pela regra de agregação e pela tarefa 4.3, a change para aqui. Nada
+  das Seções 5–8 é construído antes de o grupo rediscutir o escopo.
+- **Ressalva:** é uma rodada com um modelo, sem k-NN e sem ajuste. Esses itens adiados não
+  mudariam o critério de atalho, que é o que mais falha: o controle fonte+ano não depende do
+  modelo de texto.
+
 ### 5. Modelos: linhas de base antes de qualquer coisa maior
 
 1. Regressão logística sobre embeddings de frase (os candidatos e revisões do notebook
@@ -140,6 +171,53 @@ faixas (Decisão 6).
 Fine-tuning só se nenhuma linha de base passar no gate e houver indício de que falta capacidade,
 não dados. **Por quê:** com milhares de exemplos e um risco alto de atalho, um modelo simples e
 inspecionável mostra mais cedo se o sinal existe.
+
+**1ª rodada do gate (2026-10-06, antes de qualquer avaliação).** Corte de esforço para o gate rodar
+logo; **nenhum limite da Decisão 4 muda** e a regra de agregação é a mesma.
+
+- **Roda agora:** testes A e B; modelo principal = regressão logística sobre embeddings do
+  `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, revisão
+  `e8f8c211226b894fcb81acc59f3b34ba3efd5f42` (o modelo dos gates anteriores); linha de base léxica
+  (item 4); controle de atalho (item 3). Os sete critérios são medidos sobre esse modelo principal.
+- **Adiado:** os demais modelos do notebook 06, o score por vizinhos (item 2) e o teste C. Um GO
+  nesta rodada já basta para seguir à Seção 5; os adiados entram antes da escolha final do modelo.
+- **Regras operacionais**, fixadas aqui porque o desenho não as definia:
+  - *Ano:* primeiro `20[0-2]\d` encontrado no campo de data (as datas misturam vários formatos).
+    Sem ano, o item sai. Com essa leitura, as contagens de Fake.br e FakeRecogna por ano diferem da
+    tabela do Context (que perdeu as datas fora de `dd/mm/aaaa`); valem as impressas pelo
+    `experiments/gate.py`, com o hash de cada conjunto.
+  - *Unidade de texto (Decisão 1):* FakeRecogna e Central de Fatos, 1ª linha do texto; Fake.br não
+    tem título separado, então vale o trecho antes da 1ª quebra de linha, tabulação ou `..` e,
+    dentro dele, só a 1ª frase. Depois, `limpar_titulo()` e descarte de `eh_multi_alegacao()` e de
+    textos vazios.
+  - *Carimbos (Decisão 1):* além dos já previstos, a limpeza passa a tirar "É verdadeiro/a", "É
+    falsa", "É enganosa", "É #FATO", e corrige o padrão que cortava "É verdade" no meio de "É
+    verdadeiro" (deixava "iro que…").
+  - *Recorte político (Decisão 2):* Fake.br `politica`; FakeRecogna `política`; Central de Fatos
+    `política`, `eleições`, `eleições 2018`, `eleições 2020` e `políticas públicas` (as linhas sem
+    categoria, todas do UOL, ficam fora).
+  - *Rótulo (Decisão 9):* `is_fake` 1 → falsa, −1 → verdadeira; 0 (34 itens da Central de Fatos)
+    fica fora e é contado.
+  - *Fonte (controle de atalho):* domínio do veículo (`review_domain`; no Fake.br, o domínio de
+    `claim_url`, sem subdomínio). O controle é uma regressão logística sobre fonte (one-hot,
+    categoria nova → zeros) e ano.
+  - *Probabilidades:* as do modelo, sem recalibração (a calibração é a Seção 5, depois do gate). O
+    Brier skill score usa como referência a proporção de falsas do **período de treino**.
+  - *Gíria e apelido:* pares gerados por `experiments/reescrita.py` (`trocar_apelido`, `internetes`,
+    `erro_digitacao`; semente 50) sobre até 200 falsas e 200 verdadeiras do período de avaliação de
+    cada teste, mais as categorias `apelido`, `girias`, `apelido+girias` e `digitacao` de
+    `experiments/results/teste_reescrita.csv`.
+  - *Separação temporal:* `assert` de que nenhum ano e nenhum texto (após limpeza, sem diferenciar
+    caixa) do período de avaliação aparece no treino; textos repetidos entre os períodos saem da
+    avaliação.
+  - *Pontuação final:* o ponto final do texto é tirado em todas as fontes (só o Fake.br termina em
+    ponto; seria pista de fonte).
+  - *Hiperparâmetros:* nenhum ajuste. Regressão logística padrão do scikit-learn (`C = 1`); TF-IDF
+    com `strip_accents="unicode"`, unigramas e bigramas, `min_df = 2`, `sublinear_tf`.
+  - *Critério de gíria por classe:* média e fração > 0,25 são medidas separadamente em falsas e em
+    verdadeiras, e vale a pior das duas (um falso alarme criado pela gíria e um boato escondido por
+    ela pesam igual).
+  - *Implementação:* `experiments/gate.py`; resultados em `experiments/results/gate_*.csv`.
 
 ### 6. Calibração e faixas
 
@@ -156,7 +234,8 @@ as faixas ou o modelo voltam para revisão antes do uso público. É a "tolerate
 ### 7. Explicação por vizinhos
 
 A resposta mostra os itens rotulados mais próximos (fonte, data e rótulo publicado pela agência),
-reaproveitando a busca k-NN exata da change anterior (`src/checagens/retrieval.py`). A busca deixa
+com busca k-NN exata (`Q @ E.T` sobre embeddings normalizados, como em `experiments/avaliacao.py`;
+o protótipo `src/checagens/retrieval.py` foi removido e está na tag `legado-busca`). A busca deixa
 de ser o produto e passa a ser a explicação do score.
 
 ### 8. Robustez
@@ -196,9 +275,9 @@ relatório de cobertura.
 
 ## Migration Plan
 
-Não há sistema em produção. A change anterior fica como histórico; o protótipo em `src/checagens/`
-troca o contrato `POST /buscar` por um endpoint de score depois do gate (tarefa da Seção 8 de
-`tasks.md`).
+Não há sistema em produção. A change anterior fica como histórico; o protótipo de busca
+(`src/checagens/`) foi removido e está na tag `legado-busca`. A API do score é criada só depois do
+GO (tarefa da Seção 8 de `tasks.md`).
 
 ## Open Questions
 
