@@ -15,12 +15,13 @@ Regra de escolha (fixada antes de rodar com a base real):
 3. Desempates, nesta ordem: mais casos `match_confirmado` em `ja_checado`; limite alto maior;
    limite médio maior (na dúvida, o mais conservador).
 
-O top-3 (RNF-04) não depende dos limites: é relatado à parte. A checagem certa é achada pelo
+O top-3 (RNF-04) não depende dos limites: é relatado à parte, com e sem a normalização da consulta
+(normalizacao.py), para mostrar quanto do resultado vem dos dicionários. A checagem certa é achada pelo
 texto da alegação, normalizado (sem "#boato", caixa, acento e pontuação). Uma alegação de
 referência que não está na base é relatada como "alvo ausente" e conta como erro.
 
 Saídas:
-- results/calibracao_busca.csv: uma linha por par de limites da grade.
+- results/calibracao_camada1.csv: uma linha por par de limites da grade.
 - results/calibracao_camada1_casos.csv: os 62 casos com o par escolhido, para revisão linha a linha.
 - com --gravar, o par escolhido vai para params.yaml.
 
@@ -62,7 +63,7 @@ def preparar(buscador: busca.Buscador, casos: list[dict]) -> pd.DataFrame:
         linha = {"id_teste": c["id_teste"], "tipo": c["tipo"], "esperado": c["resultado_esperado"],
                  "texto": c["texto_testado"], "s_topo": float(s[topo]),
                  "alegacao_topo": buscador.registros[topo]["alegacao"],
-                 "negacao_diverge_topo": busca.tem_negacao(c["texto_testado"])
+                 "negacao_diverge_topo": busca.tem_negacao(buscador.preparar_consulta(c["texto_testado"]))
                                          != busca.tem_negacao(buscador.registros[topo]["alegacao"]),
                  "posicao_certa": np.nan, "s_certa": np.nan, "alvo_ausente": False}
         if c["alegacao_ref_original"]:
@@ -139,15 +140,18 @@ def main() -> None:
     casos = json.loads(BENCHMARK.read_text(encoding="utf-8"))
     vetores, registros = busca.carregar_indice(a.indice)
     d = preparar(busca.Buscador(vetores, registros, 1.0, 0.0), casos)
+    d_cru = preparar(busca.Buscador(vetores, registros, 1.0, 0.0, normalizar=None), casos)
     g = grade(d)
     a.saida.mkdir(parents=True, exist_ok=True)
-    g.to_csv(a.saida / "calibracao_busca.csv", index=False)
+    g.to_csv(a.saida / "calibracao_camada1.csv", index=False)
 
     ausentes = d.loc[d["alvo_ausente"], "id_teste"].tolist()
     top3 = g["reescritas_top3"].iloc[0]
+    top3_cru = avaliar(d_cru, 1.0, 0.0)["reescritas_top3"]
     print(f"Base: {len(registros)} checagens. Alvos ausentes da base: {ausentes or 'nenhum'}")
     print(f"RNF-04 top-3 nas {d['tipo'].isin(REESCRITAS).sum()} reescritas: {top3:.0%} "
-          f"(meta ≥ {META_TOP3:.0%}) → {'atende' if top3 >= META_TOP3 else 'NÃO atende'}")
+          f"(meta ≥ {META_TOP3:.0%}) → {'atende' if top3 >= META_TOP3 else 'NÃO atende'}; "
+          f"sem a normalização da consulta: {top3_cru:.0%}")
     par = escolher(g)
     if par is None:
         print(f"Nenhum par de limites deixa ≤ {MAX_CONTROLES_JA_CHECADO} controles em 'ja_checado' (RNF-05) "

@@ -12,6 +12,7 @@
 
 - [x] 3.1 `experiments/camada1.py`: índice com hash, `buscar()`, faixas e negação; testes com corpus fictício
 - [x] 3.2 `experiments/calibrar_limiares.py`: RNF-04/RNF-05 no benchmark, `calibracao_camada1.csv` e `params.yaml`
+- [x] 3.4 Normalização da consulta por dicionário (apelidos, internetês), antes da calibração oficial; top-3 relatado com e sem
 - [ ] 3.3 Rodar com a base da Cibelly e registrar o resultado
 
 ## 4. Camada 2 (protótipo em `experiments/`)

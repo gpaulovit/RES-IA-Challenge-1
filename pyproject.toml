@@ -23,6 +23,9 @@ busca = ["sentence-transformers>=3,<7"]   # camada 1: modelo de embeddings
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+inteligencia = ["dicionarios/*.csv"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src", "experiments"]

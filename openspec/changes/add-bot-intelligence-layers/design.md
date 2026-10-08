@@ -44,6 +44,10 @@ validação fica numa função só, para que uma mudança de esquema mexa num lu
 
   O script imprime o resultado com e sem o teto, para o custo ficar visível a cada execução. A
   decisão deve ser comunicada a Produto (Ana).
+- Normalização da consulta (RF-05): dicionários de apelidos e internetês (`src/inteligencia/normalizacao.py`),
+  sem Enelvo. Os dicionários são posteriores ao benchmark e podem ter sido montados olhando para ele,
+  então o ganho em apelidos é otimista. A calibração relata o top-3 com e sem a normalização, e
+  nenhuma entrada nova deve ser criada a partir do benchmark.
 - Negação (RN-06): uma lista de palavras de negação, depois de normalizar caixa e acento. Se só um
   dos dois textos (consulta ou checagem) tiver negação, a faixa máxima é `relacionada`.
 

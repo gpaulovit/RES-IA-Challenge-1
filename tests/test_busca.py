@@ -119,3 +119,9 @@ def test_teto_conta_todo_controle_que_recebe_checagem():
     ])
     assert escolher(g)["limite_media"] == 0.70                       # com o teto (regra 1b)
     assert escolher(g, max_mostrados=None)["limite_media"] == 0.50   # sem o teto, só para comparação
+
+
+def test_negacao_em_internetes_e_reconhecida_depois_da_normalizacao(buscador):
+    # "ñ" só vira "não" na normalização: sem ela, o filtro da RN-06 não veria a negação
+    r = buscador.buscar("Anitta ñ retira apoio à candidatura de Lula")
+    assert r[0]["id"] == "t:1" and r[0]["faixa"] != "ja_checado"

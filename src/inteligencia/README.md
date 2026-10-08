@@ -1,7 +1,5 @@
 # `inteligencia`: camadas 1 e 2 do bot
-
-Contrato entre a frente de Modelos de IA e o bot. **Se uma assinatura ou um campo mudar, avise a
-Engenharia no grupo.** Desenho e decisões:
+** Desenho e decisões:
 [`add-bot-intelligence-layers`](../../openspec/changes/add-bot-intelligence-layers/design.md).
 
 ```python
@@ -27,6 +25,7 @@ Devolve as `k` checagens mais parecidas, da mais parecida para a menos:
 | `baixa` | — | roda a camada 2 |
 
 - `semelhanca` é de uso interno (registro, RF-13). Não mostre o número ao usuário (RNF-06).
+- A consulta passa por um dicionário de apelidos e internetês antes da busca ("Xandão" → "Alexandre de Moraes", "ñ" → "não"). O bot pode mandar o texto como chegou.
 - A negação (RN-06) já vem aplicada: "X NÃO fez Y" contra "X fez Y" nunca sai como `ja_checado`.
 - Pré-requisito: o índice em `data/indices/camada1/` (`dvc repro indice`) e o pacote instalado com
   `pip install -e '.[busca]'`. A 1ª chamada carrega o modelo (alguns segundos); depois, cerca de
@@ -58,4 +57,5 @@ ausente e índice alterado depois de gerado. O bot deve capturar e responder com
 | `calibracao.py` | calibra os limites da RN-05 no `data/testes_benchmark.json` |
 | `classificador.py` | camada 2: modelo, faixas e sinais |
 | `treino.py` | treino com um comando (RF-14) e critério de go/no-go |
+| `normalizacao.py` | desfaz apelidos e internetês da consulta antes da busca (RF-05); dicionários em `dicionarios/` |
 | `texto.py` | normalização de texto compartilhada |

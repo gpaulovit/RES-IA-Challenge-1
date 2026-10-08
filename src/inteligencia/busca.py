@@ -21,6 +21,7 @@ from pathlib import Path
 
 import numpy as np
 
+from inteligencia.normalizacao import normalizar_consulta
 from inteligencia.texto import tirar_acento
 
 RAIZ = Path(__file__).resolve().parents[2]
@@ -40,7 +41,7 @@ VEREDITOS = {"falso", "enganoso", "verdadeiro", "outro"}   # RN-02
 NEGACAO = re.compile(r"\b(nao|nunca|jamais|nem|nenhum|nenhuma|falso que|mentira que)\b")
 
 
-# ---------------------------------------------------------------- base de checagens
+# base de checagens
 
 def _validar_registro(registro, posicao: int) -> dict:
     """Único lugar que conhece o esquema da base: se a frente de Dados mudar o formato, muda só aqui."""
@@ -76,7 +77,7 @@ def carregar_base(caminho: Path = BASE_PADRAO) -> list[dict]:
     return registros
 
 
-# ---------------------------------------------------------------- índice
+# índice
 
 @cache
 def _modelo():
@@ -155,20 +156,26 @@ def faixa(semelhanca: float, consulta: str, alegacao: str, alta: float, media: f
     return "relacionada" if semelhanca >= media else "baixa"
 
 
-# ---------------------------------------------------------------- busca
+# busca
 
 class Buscador:
     def __init__(self, vetores: np.ndarray, registros: list[dict], alta: float, media: float,
-                 vetorizar=vetorizar):
+                 vetorizar=vetorizar, normalizar=normalizar_consulta):
+        """`normalizar=None` desliga a normalização da consulta (só para comparar na calibração)."""
         if not 0 <= media <= alta <= 1:
             raise ValueError("Os limites devem respeitar 0 ≤ média ≤ alta ≤ 1.")
         self.vetores, self.registros = vetores, registros
         self.alta, self.media = alta, media
         self._vetorizar = vetorizar
+        self._normalizar = normalizar or (lambda t: t)
+
+    def preparar_consulta(self, texto: str) -> str:
+        """Apelidos e internetês desfeitos (RF-05). A negação (RN-06) é conferida neste texto."""
+        return self._normalizar(texto.strip())
 
     def semelhancas(self, textos: list[str]) -> np.ndarray:
         """Matriz consultas × checagens, cortada em [0, 1] (cosseno negativo = nada parecido)."""
-        Q = self._vetorizar(textos)
+        Q = self._vetorizar([self.preparar_consulta(t) for t in textos])
         return np.clip(Q @ self.vetores.T, 0.0, 1.0)
 
     def buscar(self, texto: str, k: int = 3) -> list[dict]:
@@ -176,8 +183,8 @@ class Buscador:
             raise ValueError("Informe um texto com conteúdo para buscar.")
         if type(k) is not int or not 1 <= k <= len(self.registros):
             raise ValueError(f"k deve ser um inteiro de 1 a {len(self.registros)}.")
-        texto = texto.strip()
         s = self.semelhancas([texto])[0]
+        texto = self.preparar_consulta(texto)
         ordem = np.argsort(-s, kind="stable")[:k]
         return [{**self.registros[i], "semelhanca": round(float(s[i]), 4),
                  "faixa": faixa(float(s[i]), texto, self.registros[i]["alegacao"], self.alta, self.media)}
