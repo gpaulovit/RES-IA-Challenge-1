@@ -1,0 +1,54 @@
+name: CI - Testes e Validação MLOps
+
+on:
+  push:
+    branches:
+      - main
+      - 'feat/**'
+      - 'ci/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Testes e Pipeline de Amostra (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Atualizar pip e instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '.[test]'
+
+      - name: Executar suíte de testes (pytest)
+        run: |
+          python -m pytest -v
+
+      - name: Testar pipeline de embeddings com amostra (MLOps Smoke Test)
+        run: |
+          python -m checagens.embeddings \
+            --corpus data/amostras/corpus-organizado-exemplo.json \
+            --saida data/indices/amostra \
+            --modelo baseline-hashing
+
+      - name: Testar busca semântica k-NN na amostra
+        run: |
+          python -m checagens.retrieval \
+            --indice data/indices/amostra \
+            --modelo baseline-hashing \
+            --texto "Vídeo antigo não mostra o evento desta semana" \
+            --top-k 3
