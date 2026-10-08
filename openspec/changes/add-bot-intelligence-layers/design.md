@@ -27,6 +27,23 @@ validação fica numa função só, para que uma mudança de esquema mexa num lu
 - O índice é salvo com hash SHA-256 dos arquivos e conferido ao carregar.
 - Limites iniciais 0,85 / 0,60 (RN-05), recalibrados no benchmark. O resultado fica em
   `params.yaml` e o arquivo de origem em `experiments/results/calibracao_camada1.csv`.
+- **Critério interno na calibração:** no máximo 8 dos 32 controles (25%) recebem alguma checagem
+  (`ja_checado` + `relacionada`), além da RNF-05 (no máximo 2 em `ja_checado`). Contar só
+  `relacionada` permitiria cumprir o teto empurrando controles para `ja_checado`. Esse critério não está nos requisitos. Ele existe porque, no
+  teste de fumaça com o FactPolCheckBr, a regra sem teto escolheu limite médio 0,50, e 26 de 32
+  notícias reais receberiam uma checagem "relacionada" sem relação.
+  **Onde impacta:**
+  - limite médio mais alto em `params.yaml`;
+  - menos reescritas com a checagem certa mostrada (`reescritas_mostradas`: 71% → cerca de 25% no
+    teste de fumaça). O top-3 da RNF-04 não muda, porque não depende dos limites;
+  - mais mensagens vão direto para a camada 2 sem checagem mostrada. Se a camada 2 for `no-go`,
+    essas mensagens recebem só "não encontrei" e os links das agências (RN-04);
+  - a faixa `relacionada` pode sumir (limite médio = limite alto) quando ela não acrescenta
+    nenhuma checagem certa além das que custam controles. Isso aconteceu no teste de fumaça, e o
+    fluxo "relacionada + camada 2" da RN-05 fica sem uso.
+
+  O script imprime o resultado com e sem o teto, para o custo ficar visível a cada execução. A
+  decisão deve ser comunicada a Produto (Ana).
 - Negação (RN-06): uma lista de palavras de negação, depois de normalizar caixa e acento. Se só um
   dos dois textos (consulta ou checagem) tiver negação, a faixa máxima é `relacionada`.
 

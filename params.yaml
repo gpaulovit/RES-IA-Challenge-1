@@ -1,0 +1,8 @@
+# Parâmetros versionados junto com modelo e métricas (RF-14). Lidos pelo código e pelo dvc.yaml.
+
+semente: 42
+
+camada1:
+  # RN-05: ponto de partida. Recalibrados por experiments/calibrar_limiares.py --gravar
+  limite_alta: 0.85
+  limite_media: 0.60
