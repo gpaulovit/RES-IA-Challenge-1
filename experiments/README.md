@@ -5,9 +5,24 @@ Protótipos da frente **Modelos de IA** para as duas camadas do bot (ver
 [`add-bot-intelligence-layers`](../openspec/changes/add-bot-intelligence-layers/design.md)).
 Cada camada nasce aqui e, depois de validada, sobe para `src/checagens/`.
 
-- **Camada 1, busca de checagens** (RF-06, RN-05, RN-06): a construir em `camada1.py`.
-- **Camada 2, classificador de sinais de alerta** (RF-08, RF-14): a construir em
-  `classificador.py`.
+| Camada | Contrato com o bot | Arquivos | Saídas |
+|---|---|---|---|
+| 1. Busca de checagens (RF-06, RN-05, RN-06) | `buscar(texto, k=3) -> list[dict]` | `camada1.py`, `calibrar_limiares.py` | `data/indices/camada1/`, `results/calibracao_camada1*.csv` |
+| 2. Sinais de alerta (RF-08, RF-14) | `classificar(texto) -> {"faixa", "sinais"}` | `classificador.py`, `treino.py` | `models/classificador.joblib`, `results/metricas_camada2.json`, `results/params_camada2.json` |
+
+Tudo roda pelo [`dvc.yaml`](../dvc.yaml) da raiz, com os parâmetros em [`params.yaml`](../params.yaml):
+
+```bash
+source .venv/bin/activate
+dvc repro                 # índice → calibração, e treino da camada 2
+dvc repro treinar         # só a camada 2
+python experiments/calibrar_limiares.py --gravar   # depois de revisar a calibração: grava os limites
+```
+
+As bases de entrada vêm da frente de Dados: `data/processados/checagens/checagens.json` (camada 1)
+e `data/processados/treino/treino.json` (camada 2). O formato de cada uma é conferido num lugar só:
+`_validar_registro()` em `camada1.py` e `_validar_item()` em `treino.py`. O critério de go/no-go da
+camada 2 está em [docs/relatorio-camada2.md](../docs/relatorio-camada2.md).
 
 Os produtos descartados (reciclagem de alegação e scoring de fake news) e o gate deles estão em
 [`/archive`](../archive/README.md).

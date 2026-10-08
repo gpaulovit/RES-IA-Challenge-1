@@ -10,14 +10,14 @@
 
 ## 3. Camada 1 (protótipo em `experiments/`)
 
-- [ ] 3.1 `experiments/camada1.py`: índice com hash, `buscar()`, faixas e negação; testes com corpus fictício
-- [ ] 3.2 `experiments/calibrar_limiares.py`: RNF-04/RNF-05 no benchmark, `calibracao_camada1.csv` e `params.yaml`
+- [x] 3.1 `experiments/camada1.py`: índice com hash, `buscar()`, faixas e negação; testes com corpus fictício
+- [x] 3.2 `experiments/calibrar_limiares.py`: RNF-04/RNF-05 no benchmark, `calibracao_camada1.csv` e `params.yaml`
 - [ ] 3.3 Rodar com a base da Cibelly e registrar o resultado
 
 ## 4. Camada 2 (protótipo em `experiments/`)
 
-- [ ] 4.1 `experiments/classificador.py`: treino com semente fixa, faixas e sinais; testes
-- [ ] 4.2 `experiments/treino.py` + `dvc.yaml`: `dvc repro` gera modelo, métricas e params; duas execuções iguais
+- [x] 4.1 `experiments/classificador.py`: treino com semente fixa, faixas e sinais; testes
+- [x] 4.2 `experiments/treino.py` + `dvc.yaml`: `dvc repro` gera modelo, métricas e params; duas execuções iguais
 - [ ] 4.3 Rodar no teste, preencher o relatório e registrar `go`/`no-go`; avisar Produto
 
 ## 5. Subida para `src/checagens/`

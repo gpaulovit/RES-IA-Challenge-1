@@ -26,7 +26,7 @@ from reescrita import tirar_acento
 
 RAIZ = Path(__file__).resolve().parent.parent
 BASE_PADRAO = RAIZ / "data" / "processados" / "checagens" / "checagens.json"
-INDICE_PADRAO = Path(__file__).resolve().parent / "data" / "indice_camada1"
+INDICE_PADRAO = RAIZ / "data" / "indices" / "camada1"   # fora de experiments/data, que é uma pasta DVC inteira
 PARAMS_PADRAO = RAIZ / "params.yaml"
 
 CAMPOS = ("id", "alegacao", "veredito_original", "veredito_normalizado", "agencia", "data", "link",

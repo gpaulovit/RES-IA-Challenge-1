@@ -6,3 +6,13 @@ camada1:
   # RN-05: ponto de partida. Recalibrados por experiments/calibrar_limiares.py --gravar
   limite_alta: 0.85
   limite_media: 0.60
+
+camada2:
+  # Protocolo pré-registrado em docs/relatorio-camada2.md. Não ajustar olhando o teste.
+  ano_corte: 2020          # treino: ano ≤ 2020; teste: ano ≥ 2021 (RN-04)
+  ngram_range: [1, 2]
+  min_df: 2
+  C: 1.0
+  max_iter: 1000
+  folds: 5                 # validação cruzada no treino, para os cortes das faixas
+  margem_faixas: 0.10      # no máximo 10% das verdadeiras do treino em muitos_sinais

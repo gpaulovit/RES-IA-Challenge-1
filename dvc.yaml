@@ -1,0 +1,43 @@
+# Pipeline das duas camadas (RF-14). Comando único: `dvc repro` (ou um estágio: `dvc repro treinar`).
+# Rode com o ambiente ativado (source .venv/bin/activate). Resultados pequenos (CSV/JSON) ficam no git
+# (cache: false); modelo e índice ficam no cache do DVC.
+stages:
+  indice:
+    cmd: python experiments/camada1.py --construir
+    deps:
+      - data/processados/checagens/checagens.json
+      - experiments/camada1.py
+      - experiments/modelos.py
+    outs:
+      - data/indices/camada1
+
+  calibrar:
+    # Não grava params.yaml sozinho: revise calibracao_camada1_casos.csv e rode com --gravar à mão.
+    cmd: python experiments/calibrar_limiares.py
+    deps:
+      - data/indices/camada1
+      - data/testes_benchmark.json
+      - experiments/calibrar_limiares.py
+      - experiments/camada1.py
+    outs:
+      - experiments/results/calibracao_camada1.csv:
+          cache: false
+      - experiments/results/calibracao_camada1_casos.csv:
+          cache: false
+
+  treinar:
+    cmd: python experiments/treino.py
+    deps:
+      - data/processados/treino/treino.json
+      - experiments/treino.py
+      - experiments/classificador.py
+    params:
+      - semente
+      - camada2
+    outs:
+      - models/classificador.joblib
+      - experiments/results/params_camada2.json:
+          cache: false
+    metrics:
+      - experiments/results/metricas_camada2.json:
+          cache: false
