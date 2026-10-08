@@ -1,0 +1,272 @@
+[
+  {
+    "id": "msg-001",
+    "tipo": "texto",
+    "conteudo": "URGENTE: TSE confirma que código-fonte da urna eletrônica foi alterado secretamente durante a madrugada!",
+    "categoria": "boato_eleicoes",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Boato clássico sobre urnas e código-fonte alterado"
+  },
+  {
+    "id": "msg-002",
+    "tipo": "texto",
+    "conteudo": "Gente repassa isso nos grupos! O voto de quem tem mais de 70 anos não vai ser contabilizado em 2026 se não fizer novo recadastramento biométrico até sexta-feira!",
+    "categoria": "boato_eleicoes",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Desinformação sobre biometria e perda de voto de idosos"
+  },
+  {
+    "id": "msg-003",
+    "tipo": "texto",
+    "conteudo": "TSE divulga edital de concurso público unificado para os tribunais regionais eleitorais em todo o país.",
+    "categoria": "controle_noticia_real",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Notícia factual e neutra sobre concurso do TSE (controle negativo)"
+  },
+  {
+    "id": "msg-004",
+    "tipo": "texto",
+    "conteudo": "ATENÇÃO PATRIOTAS: Se você votar em branco o seu voto vai automaticamente para o candidato do partido governista!",
+    "categoria": "boato_eleicoes",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Mito recorrente sobre destinação de voto em branco"
+  },
+  {
+    "id": "msg-005",
+    "tipo": "texto",
+    "conteudo": "BOMBA! Imagens de satélite revelam fraude em galpão de apuração das eleições no interior!",
+    "categoria": "boato_alarmista",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Afirmação sensacionalista sem checagem exata catalogada (Camada 2 alerta alto)"
+  },
+  {
+    "id": "msg-006",
+    "tipo": "texto",
+    "conteudo": "Tribunal Superior Eleitoral realiza teste público de segurança das urnas eletrônicas com participação de especialistas e peritos.",
+    "categoria": "controle_noticia_real",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Notícia real sobre o TPS do TSE"
+  },
+  {
+    "id": "msg-007",
+    "tipo": "texto",
+    "conteudo": "O candidato fulano NÃO foi condenado em segunda instância e pode concorrer livremente.",
+    "categoria": "negacao_sensivel",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Frase com operador de negação para validar a regra RN-06"
+  },
+  {
+    "id": "msg-008",
+    "tipo": "texto",
+    "conteudo": "Vaza áudio onde presidente do TSE admite que sistema eleitoral foi invadido por hackers estrangeiros.",
+    "categoria": "boato_eleicoes",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Falso áudio vazado sobre invasão de hackers"
+  },
+  {
+    "id": "msg-009",
+    "tipo": "texto",
+    "conteudo": "Eleitores que estiverem fora do seu domicílio eleitoral podem solicitar o voto em trânsito dentro do prazo fixado pelo calendário eleitoral.",
+    "categoria": "controle_noticia_real",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Informação de serviço pública oficial do TSE"
+  },
+  {
+    "id": "msg-010",
+    "tipo": "texto",
+    "conteudo": "Acabou de sair na JP: Exército assumiu a apuração paralela de todos os votos em Brasília!",
+    "categoria": "boato_eleicoes",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Falsa alegação de apuração paralela pelas forças armadas"
+  },
+  {
+    "id": "msg-011",
+    "tipo": "texto",
+    "conteudo": "Vc viu isso man? Ta rolando que a caneta da urna apaga a tinta depois de 5 minutos slk",
+    "categoria": "giria_reescrita",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Boato com gíria e abreviações sobre caneta que apaga o voto"
+  },
+  {
+    "id": "msg-012",
+    "tipo": "texto",
+    "conteudo": "Fraude descarada nas urnas eletronicas de 2026 tdos os votos foram anulados",
+    "categoria": "ortografia_ruim",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Texto com erro de digitação e falta de pontuação"
+  },
+  {
+    "id": "msg-013",
+    "tipo": "texto",
+    "conteudo": "Pesquisa do instituto Datafolha divulgada hoje indica empate técnico entre os primeiros colocados.",
+    "categoria": "controle_noticia_real",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Notícia jornalística padrão de pesquisa eleitoral"
+  },
+  {
+    "id": "msg-014",
+    "tipo": "texto",
+    "conteudo": "CONFIRMADO: TSE vai proibir uso de camisetas verdes e amarelas no dia da votação sob pena de prisão imediata!",
+    "categoria": "boato_eleicoes",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Desinformação sobre proibição de cores de vestimenta na votação"
+  },
+  {
+    "id": "msg-015",
+    "tipo": "texto",
+    "conteudo": "Ministros do STF assinaram documento secreto com a ONU para intervir no resultado da eleição.",
+    "categoria": "boato_conspiratorio",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Teoria conspiratória sem checagem prévia exata"
+  },
+  {
+    "id": "msg-016",
+    "tipo": "texto",
+    "conteudo": "Justiça Eleitoral disponibiliza aplicativo e-Título para consulta de local de votação e justificativa eleitoral.",
+    "categoria": "controle_noticia_real",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Notícia informativa verdadeira sobre e-Título"
+  },
+  {
+    "id": "msg-017",
+    "tipo": "texto",
+    "conteudo": "🚨🚨🚨 REPASSEM ANTES QUE DERRUBEM! ÁUDIO PROVA FRAUDE GIGANTESCA! 🚨🚨🚨",
+    "categoria": "alarmista_extremo",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Texto repleto de emojis de alarme e chamadas típicas de golpe"
+  },
+  {
+    "id": "msg-018",
+    "tipo": "texto",
+    "conteudo": "O presidente do tribunal participou da sessão plenária desta manhã para deliberar sobre as resoluções da propaganda eleitoral gratuita.",
+    "categoria": "controle_noticia_real",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 5.0,
+    "descricao": "Texto institucional factual de controle"
+  },
+  {
+    "id": "msg-019",
+    "tipo": "link",
+    "conteudo": "https://www.tse.jus.br/fato-ou-boato/checagens/e-falso-que-codigo-fonte-da-urna-eletronica-foi-alterado",
+    "categoria": "link_checagem_tse",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Link oficial de desmentido do TSE Fato ou Boato"
+  },
+  {
+    "id": "msg-020",
+    "tipo": "link",
+    "conteudo": "https://lupa.uol.com.br/jornalismo/2022/10/25/e-falso-que-urnas-foram-encontradas-em-lixao",
+    "categoria": "link_checagem_lupa",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Link de checagem da Agência Lupa"
+  },
+  {
+    "id": "msg-021",
+    "tipo": "link",
+    "conteudo": "https://g1.globo.com/fato-ou-fake/noticia/2022/10/30/e-fake-que-tse-proibiu-eleitor-de-levar-celular-na-cabine-de-votacao.ghtml",
+    "categoria": "link_checagem_g1",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Link de checagem do Fato ou Fake (G1)"
+  },
+  {
+    "id": "msg-022",
+    "tipo": "link",
+    "conteudo": "https://www.aosfatos.org/noticias/tse-nao-adulterou-resultado-apuracao-eleicoes/",
+    "categoria": "link_checagem_aosfatos",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Link de checagem do Aos Fatos"
+  },
+  {
+    "id": "msg-023",
+    "tipo": "link",
+    "conteudo": "https://noticias.uol.com.br/eleicoes/2024/09/20/eleitor-pode-justificar-voto-pelo-app-e-titulo.htm",
+    "categoria": "link_noticia_real_uol",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Notícia real de portal de grande circulação"
+  },
+  {
+    "id": "msg-024",
+    "tipo": "link",
+    "conteudo": "https://agenciabrasil.ebc.com.br/geral/noticia/2024-10/eleicoes-veja-as-regras-para-o-dia-da-votacao",
+    "categoria": "link_noticia_real_ebc",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Notícia real da Agência Brasil sobre regras eleitorais"
+  },
+  {
+    "id": "msg-025",
+    "tipo": "link",
+    "conteudo": "https://www.tse.jus.br/comunicacao/noticias/2024/Outubro/tse-reforca-orientacoes-sobre-voto-em-transito",
+    "categoria": "link_oficial_tse",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Portal institucional do TSE"
+  },
+  {
+    "id": "msg-026",
+    "tipo": "link",
+    "conteudo": "https://g1.globo.com/politica/eleicoes/2024/noticia/2024/10/06/apuracao-eleicoes-tempo-real.ghtml",
+    "categoria": "link_noticia_tempo_real",
+    "camada_esperada": 2,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Página jornalística de cobertura em tempo real"
+  },
+  {
+    "id": "msg-027",
+    "tipo": "link",
+    "conteudo": "https://site-inexistente-de-noticias-falsas-eleicoes-2026.org/noticia-bomba-fraude.html",
+    "categoria": "link_quebrado_404",
+    "camada_esperada": 0,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Link de domínio inexistente para validar fallback de link quebrado (RF-04)"
+  },
+  {
+    "id": "msg-028",
+    "tipo": "link",
+    "conteudo": "https://httpbin.org/status/500",
+    "categoria": "link_erro_servidor",
+    "camada_esperada": 0,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Link retornando erro HTTP 500 para validar resiliência do extrator (RF-04)"
+  },
+  {
+    "id": "msg-029",
+    "tipo": "link",
+    "conteudo": "https://www.boatos.org/politica/urgente-fraude-comprovada-em-urnas-de-curitiba-em-2026.html",
+    "categoria": "link_checagem_boatos_org",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Link do site Boatos.org desmentindo desinformação"
+  },
+  {
+    "id": "msg-030",
+    "tipo": "link",
+    "conteudo": "https://projetocomprova.com.br/publicacoes/video-antigo-nao-mostra-candidato-sendo-vaiado/",
+    "categoria": "link_checagem_comprova",
+    "camada_esperada": 1,
+    "alvo_tempo_segundos": 10.0,
+    "descricao": "Link de checagem do Projeto Comprova"
+  }
+]
