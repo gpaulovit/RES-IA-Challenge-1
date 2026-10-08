@@ -1,1 +1,1 @@
-"""Protótipo educacional de busca em checagens fictícias."""
+"""Regras de mensagens do bot e registros anônimos de consultas."""
