@@ -1,84 +1,102 @@
-# Engenharia
+# Organização da Engenharia
 
-Como as peças do projeto se conectam, onde cada coisa fica e como conferir uma entrega.
-O que o produto deve fazer está em [Requisitos](requisitos.md); o porquê, em [Perguntas](perguntas.md).
+A Engenharia conecta as entregas do grupo para que o programa funcione do começo
+ao fim. Hoje, essa conexão usa três exemplos fictícios e uma comparação simples.
 
-## Situação (2026-10-06)
-
-O gate de generalização temporal rodou pela primeira vez e deu **NO-GO**. Fonte e ano sozinhos
-preveem se a notícia é falsa melhor que o modelo de texto (AUC 0,92 contra 0,83 no teste A). Os
-números estão no
-[design.md da change](https://github.com/gpaulovit/RES-IA-Challenge-1/blob/main/openspec/changes/add-fake-news-pattern-scoring/design.md).
-Pela tarefa 4.3, nada de calibração, faixas ou API é construído antes de o grupo rediscutir o
-escopo.
-
-O protótipo de busca das semanas 1–3 (API com exemplos fictícios, pipeline de embeddings e
-retrieval) foi removido do repositório e pode ser recuperado pela tag git `legado-busca`.
-
-## Fluxo
+## Caminho de uma consulta
 
 ```text
-Fontes (FactPolCheckBr, Central de Fatos, Fake.br, FakeRecogna)
-  → limpeza (carimbos de agência, multi-alegação)
-  → conjuntos A e B (treino num período, avaliação no seguinte)
-  → embeddings (MiniLM) e linhas de base (TF-IDF, controle fonte+ano)
-  → gate (critérios pré-registrados) → GO / inconclusivo / NO-GO
-  → [só depois de GO] calibração, faixas, API do score
+Texto enviado --> API --> Transformação em números --> Busca --> Resposta
+                                  ^                     ^
+                                  |                     |
+                       Vocabulário dos exemplos     Base preparada
 ```
 
-Cada seta é um acordo entre frentes: Dados define as fontes e os rótulos; Modelos define os
-modelos e os critérios; Produto define o que a resposta mostra; Engenharia e DevOps garantem
-que tudo roda de novo com o mesmo resultado.
+Ao iniciar, o programa lê os exemplos e prepara seus números uma única vez.
+Quando chega uma consulta, usa o mesmo vocabulário e compara com todos os exemplos.
+Nenhum arquivo é alterado pela consulta e nenhum texto é enviado a serviços externos.
 
 ## Onde cada coisa fica
 
 | Local | Responsabilidade |
 | --- | --- |
-| `experiments/` | Código, notebooks e resultados. Módulos descritos no [README de experiments](https://github.com/gpaulovit/RES-IA-Challenge-1/blob/main/experiments/README.md). |
-| `experiments/gate.py` | Gate temporal: monta os conjuntos, treina as linhas de base e aplica os critérios. |
-| `experiments/results/` | Tabelas pequenas e rótulos manuais (no git, revisáveis linha a linha). |
-| `experiments/data/` | Dados brutos e embeddings (DVC; `dvc pull`). |
-| `tests/` | Testes automáticos da limpeza e das regras do gate. |
-| `openspec/changes/` | Proposta, design (com critérios pré-registrados), spec e tarefas de cada mudança. |
-| `docs/` | Esta documentação (GitHub Pages). |
+| `src/checagens/dados.py` | Ler o JSON e conferir campos, textos e identificadores. |
+| `src/checagens/representacao.py` | Transformar palavras em números usando TF-IDF. |
+| `src/checagens/busca.py` | Comparar os números e ordenar os resultados. |
+| `src/checagens/api.py` | Receber consultas e devolver respostas e erros em português. |
+| `data/exemplos.json` | Guardar os três exemplos inteiramente fictícios. |
+| `tests/` | Conferir automaticamente se o comportamento esperado continua funcionando. |
+| `openspec/` | Registrar requisitos, decisões e tarefas antes de alterar o programa. |
 
-## Como executar e conferir
+## Ferramentas e escolhas
 
-```sh
-python3 -m venv .venv
-.venv/bin/pip install -r experiments/requirements.txt
-.venv/bin/dvc pull
-.venv/bin/python -m pytest -q
-cd experiments && ../.venv/bin/python gate.py
-```
+| Ferramenta | Para que serve aqui |
+| --- | --- |
+| Python | Linguagem em que o programa foi escrito. |
+| FastAPI | Define os endereços que recebem consultas e gera a página interativa. |
+| Uvicorn | Mantém o servidor local ligado para atender às consultas. |
+| scikit-learn | Calcula TF-IDF e semelhança por cosseno. |
+| Pydantic | Confere os campos recebidos e os dados dos exemplos. |
+| pytest e HTTPX | Executam testes, incluindo chamadas à API sem abrir um servidor externo. |
 
-`passed` no pytest indica que a limpeza e as regras do gate se comportam como o design.md
-descreve. O `gate.py` imprime as contagens de cada conjunto, as métricas de cada modelo e o
-veredito, e grava os três CSVs `results/gate_*.csv`.
+TF-IDF dá peso às palavras conforme sua presença nos exemplos. O cosseno compara
+os conjuntos de números produzidos. Palavras comuns como “de” também podem gerar
+semelhança: esta versão não decide se duas frases dizem a mesma coisa. Negação,
+sinônimos, gírias e afirmações misturadas ainda exigem trabalho futuro.
 
-**Regra de ordem:** um critério de avaliação só vale se o commit que o define for anterior ao
-commit dos resultados. Confira com `git log --format='%h %ci %s' -- <arquivos>`.
+## Como receber novas entregas
 
-## Dependências entre frentes
+Cada exemplo contém cinco textos obrigatórios: `id`, `alegacao`, `checagem`,
+`agencia` e `veredito_original`. Os ids não podem se repetir. Mudanças nos
+exemplos exigem reiniciar o servidor para preparar novamente a busca.
 
-| Frente | O que Engenharia precisa receber | O que Engenharia devolve |
-| --- | --- | --- |
-| Domínio de dados | Fontes, significado dos rótulos, recorte político | Leitores das fontes e contagens por ano e classe |
-| Modelos de IA | Modelos candidatos e critérios do gate | Gate executável e resultados reproduzíveis |
-| Produto e decisão | Cenários e o que a resposta deve mostrar | Fluxo demonstrável e limites conhecidos |
-| DevOps e MLOps | Ambiente, remote do DVC, automação | Dependências fixadas e comandos de execução |
+A parte que representa textos oferece três pontos de ligação: `metodo`
+(nome da técnica), `preparar(textos)` (prepara a base) e `transformar(textos)`
+(prepara consultas). Os dois últimos devolvem matrizes numéricas compatíveis
+com a comparação por cosseno. Um teste mostra a troca dessa parte sem mudar a API.
 
-Um bloqueio deve dizer: **o que falta, quem resolve, qual entrega está parada e até quando.**
+Esse formato é um ponto de partida para integração. A base real pode precisar
+de campos adicionais, como data e origem; isso será alinhado com a frente de dados
+no OpenSpec antes da integração. Não basta colocar dados reais no arquivo de
+exemplos: a autorização atual cobre apenas a demonstração fictícia.
 
-## Registro semanal (issue ou PR com `papel: engenharia`)
+## Ciclo semanal
+
+1. Consultar as issues e PRs do repositório por frente e identificar entregas disponíveis.
+2. Combinar o que entra e o que sai de cada parte: dados com Domínio de dados,
+   técnica de comparação com Modelos de IA e comportamento com Produto e decisão.
+3. Conferir se a mudança cabe na proposta; atualizar os documentos se necessário.
+4. Conectar a entrega e executar os testes e as consultas de demonstração.
+5. Registrar resultado, limitações e dependências em issue ou PR com `papel: engenharia`.
+6. Atualizar guias e preparar uma demonstração do que realmente está funcionando.
+
+Modelo curto para esse registro:
 
 ```text
 Entrega da semana:
-Issue:
-Entradas recebidas (de quem):
-Decisões tomadas e onde estão registradas:
-Como executar e conferir:
-Resultado:
-Bloqueios, responsável e prazo:
-Próximo passo:
+Frente de origem e link:
+O que mudou para quem usa:
+Como executar ou demonstrar:
+O que foi testado e resultado:
+O que falta e de quem depende:
+Documento OpenSpec relacionado:
 ```
+
+## Próximos passos
+
+A demonstração é uma exceção limitada à etapa de validação, chamada de *gate*.
+As seções 1–4 da proposta continuam pendentes: validar recorrência nos dados reais,
+escolher o modelo e definir regras de confiança. O protótipo não prova essas hipóteses.
+
+## Resumo
+
+**A Engenharia liga dados, comparação, busca e API. Cada peça tem uma função
+separada, testes e documentação para facilitar a integração das entregas do grupo.**
+
+## Experimento: gate temporal (2026-10-06)
+
+Antes da mudança de hipótese do produto, o grupo testou se um modelo treinado com notícias de um
+período separa falsas de verdadeiras num período posterior. A 1ª rodada deu **NO-GO**: fonte e
+ano sozinhos preveem o rótulo melhor que o modelo de texto. Código e resultados ficam em
+`experiments/` (histórico em `experiments/historico-gates.md`) e os critérios pré-registrados na
+change `openspec/changes/add-fake-news-pattern-scoring/`.
