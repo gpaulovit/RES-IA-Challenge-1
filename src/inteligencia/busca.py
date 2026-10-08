@@ -7,9 +7,9 @@ Busca = k-NN exato por cosseno: os vetores são normalizados, então cosseno = p
 O índice guarda o hash SHA-256 de cada arquivo e é conferido ao carregar, para nunca buscar num
 índice que não corresponde à base ou ao modelo.
 
-Uso (a partir da raiz do repositório):
-    .venv/bin/python experiments/camada1.py --construir
-    .venv/bin/python experiments/camada1.py "texto da mensagem"
+Uso (a partir da raiz do repositório, com o ambiente ativado):
+    python -m inteligencia.busca --construir
+    python -m inteligencia.busca "texto da mensagem"
 """
 import argparse
 import hashlib
@@ -21,12 +21,15 @@ from pathlib import Path
 
 import numpy as np
 
-from modelos import MINILM, embeddings
-from reescrita import tirar_acento
+from inteligencia.texto import tirar_acento
 
-RAIZ = Path(__file__).resolve().parent.parent
+RAIZ = Path(__file__).resolve().parents[2]
 BASE_PADRAO = RAIZ / "data" / "processados" / "checagens" / "checagens.json"
-INDICE_PADRAO = RAIZ / "data" / "indices" / "camada1"   # fora de experiments/data, que é uma pasta DVC inteira
+INDICE_PADRAO = RAIZ / "data" / "indices" / "camada1"
+
+# Mesmo modelo e revisão de experiments/modelos.py (MINILM), escolhido no notebook 06
+MODELO = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+REVISAO = "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
 PARAMS_PADRAO = RAIZ / "params.yaml"
 
 CAMPOS = ("id", "alegacao", "veredito_original", "veredito_normalizado", "agencia", "data", "link",
@@ -75,10 +78,21 @@ def carregar_base(caminho: Path = BASE_PADRAO) -> list[dict]:
 
 # ---------------------------------------------------------------- índice
 
-def vetorizar(textos: list[str], usar_cache: bool = True) -> np.ndarray:
-    """Embeddings normalizados do MiniLM multilíngue, na revisão fixada em modelos.py."""
-    _, nome, revisao, prefixo = MINILM
-    E, _ = embeddings(list(textos), nome, revisao, prefixo, usar_cache=usar_cache)
+@cache
+def _modelo():
+    try:
+        from sentence_transformers import SentenceTransformer
+    except ImportError as erro:
+        raise ValueError("Instale as dependências da busca: pip install -e '.[busca]'") from erro
+    modelo = SentenceTransformer(MODELO, revision=REVISAO)
+    modelo.max_seq_length = 128   # igual a experiments/modelos.py: mesmos vetores do índice
+    return modelo
+
+
+def vetorizar(textos: list[str]) -> np.ndarray:
+    """Embeddings normalizados do MiniLM multilíngue, na revisão fixada."""
+    E = _modelo().encode(list(textos), normalize_embeddings=True, batch_size=32,
+                         show_progress_bar=len(textos) > 1000)
     return np.asarray(E, dtype="float32")
 
 
@@ -95,9 +109,8 @@ def construir_indice(base: Path = BASE_PADRAO, saida: Path = INDICE_PADRAO, veto
     np.save(saida / "vetores.npy", E, allow_pickle=False)
     (saida / "checagens.json").write_text(json.dumps(registros, ensure_ascii=False, indent=1) + "\n",
                                           encoding="utf-8")
-    _, nome, revisao, _ = MINILM
     manifesto = {
-        "modelo": nome, "revisao": revisao, "quantidade": len(registros), "dimensoes": int(E.shape[1]),
+        "modelo": MODELO, "revisao": REVISAO, "quantidade": len(registros), "dimensoes": int(E.shape[1]),
         "sha256_base": _sha256(Path(base)),
         "arquivos": {n: _sha256(saida / n) for n in ("vetores.npy", "checagens.json")},
     }
@@ -111,8 +124,7 @@ def carregar_indice(pasta: Path = INDICE_PADRAO) -> tuple[np.ndarray, list[dict]
         manifesto = json.loads((pasta / "manifesto.json").read_text(encoding="utf-8"))
     except OSError as erro:
         raise ValueError(f"Índice não encontrado em {pasta}. Rode com --construir.") from erro
-    _, nome, revisao, _ = MINILM
-    if (manifesto.get("modelo"), manifesto.get("revisao")) != (nome, revisao):
+    if (manifesto.get("modelo"), manifesto.get("revisao")) != (MODELO, REVISAO):
         raise ValueError("O índice foi gerado com outro modelo ou revisão. Reconstrua o índice.")
     for arquivo, esperado in manifesto["arquivos"].items():
         if _sha256(pasta / arquivo) != esperado:
@@ -156,7 +168,7 @@ class Buscador:
 
     def semelhancas(self, textos: list[str]) -> np.ndarray:
         """Matriz consultas × checagens, cortada em [0, 1] (cosseno negativo = nada parecido)."""
-        Q = self._vetorizar(textos, usar_cache=False)
+        Q = self._vetorizar(textos)
         return np.clip(Q @ self.vetores.T, 0.0, 1.0)
 
     def buscar(self, texto: str, k: int = 3) -> list[dict]:

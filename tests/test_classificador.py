@@ -2,8 +2,8 @@
 import numpy as np
 import pytest
 
-import classificador as c2
-import treino
+from inteligencia import classificador as c2
+from inteligencia import treino
 
 PARAMS = {"semente": 42, "camada2": {"ano_corte": 2020, "ngram_range": [1, 2], "min_df": 1, "C": 1.0,
                                      "max_iter": 1000, "folds": 3, "margem_faixas": 0.10}}
@@ -47,6 +47,11 @@ def test_sinais_saem_como_o_usuario_escreveu(treinado):
     texto = "URGENTE: Mídia esconde a FRAUDE nas urnas"
     sinais = treinado[0].classificar(texto)["sinais"]
     assert sinais and all(s in texto for s in sinais)   # "Mídia", não "midia"
+
+
+def test_sinais_nao_mostram_palavras_vazias(treinado):
+    sinais = treinado[0].classificar("a mídia esconde a fraude nas urnas e no voto")["sinais"]
+    assert not any(s.lower() in c2.PALAVRAS_VAZIAS for s in sinais)
 
 
 def test_texto_vazio(treinado):

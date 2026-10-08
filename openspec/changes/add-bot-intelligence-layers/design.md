@@ -7,10 +7,10 @@
 
 ## Decisions
 
-### 1. Protótipo em `experiments/`, depois `src/checagens/`
+### 1. Protótipo em `experiments/`, depois `src/inteligencia/`
 
 Cada camada nasce em `experiments/` e é validada com a base real. Só então sobe para
-`src/checagens/`, com testes que não baixam modelo. O código de busca antigo foi removido no
+`src/inteligencia/` (pacote separado do `src/checagens/` da Engenharia), com testes que não baixam modelo. O código de busca antigo foi removido no
 refactor e não é reaproveitado.
 
 ### 2. Esquema da base de checagens

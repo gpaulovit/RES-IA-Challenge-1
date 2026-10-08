@@ -33,6 +33,10 @@ cd experiments && ../.venv/bin/jupyter lab
 
 ## Código do bot: `src/`
 
+[src/inteligencia/](src/inteligencia/README.md) tem as duas camadas que o bot chama:
+`buscar()` (checagens parecidas) e `classificar()` (sinais de alerta). O contrato está no README
+dele.
+
 [src/checagens/](src/checagens/) guarda as regras que o bot aplica:
 
 - `mensagens.py`: formatação, robustez e transparência das respostas.
@@ -49,6 +53,7 @@ make latency               # tempo de resposta nas 30 mensagens de teste (RNF-01
 ## Estrutura
 
 - [experiments/](experiments/): notebooks, módulos e resultados dos modelos.
+- [src/inteligencia/](src/inteligencia/README.md): camadas 1 e 2 (busca e sinais de alerta).
 - [src/checagens/](src/checagens/): regras de mensagens e registros do bot.
 - [tests/](tests/): verificações automáticas (rodam no CI).
 - [scripts/](scripts/): medição de latência.

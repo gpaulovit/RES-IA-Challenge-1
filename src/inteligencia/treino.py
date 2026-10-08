@@ -10,12 +10,11 @@ Saídas:
 
 Os arquivos não têm data nem hora: rodar duas vezes com os mesmos dados deve dar o mesmo resultado (RNF-10).
 
-Uso (a partir da raiz):  .venv/bin/python experiments/treino.py    (ou: dvc repro treinar)
+Uso (a partir da raiz, com o ambiente ativado):  python -m inteligencia.treino    (ou: dvc repro treinar)
 """
 import argparse
 import hashlib
 import json
-import re
 from pathlib import Path
 
 import numpy as np
@@ -24,13 +23,13 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, f1_score
 from sklearn.preprocessing import OneHotEncoder
 
-from classificador import FAIXAS, MODELO_PADRAO, RAIZ, Classificador, criar_pipeline, escolher_cortes, \
-    faixa, probabilidades_fora_da_amostra
-from reescrita import tirar_acento
+from inteligencia.classificador import FAIXAS, MODELO_PADRAO, RAIZ, Classificador, criar_pipeline, \
+    escolher_cortes, faixa, probabilidades_fora_da_amostra
+from inteligencia.texto import normalizar
 
 BASE_PADRAO = RAIZ / "data" / "processados" / "treino" / "treino.json"
 PARAMS_PADRAO = RAIZ / "params.yaml"
-RESULTADOS = Path(__file__).resolve().parent / "results"
+RESULTADOS = RAIZ / "experiments" / "results"
 
 # Critério pré-registrado (docs/relatorio-camada2.md, "Critério de decisão"). Não mudar depois do teste.
 F1_MINIMO = 0.75          # RNF-02
@@ -61,10 +60,6 @@ def carregar_base(caminho: Path) -> list[dict]:
     if not isinstance(bruto, list) or not bruto:
         raise ValueError("A base de treino deve ser uma lista não vazia.")
     return [_validar_item(item, i) for i, item in enumerate(bruto, 1)]
-
-
-def normalizar(texto: str) -> str:
-    return " ".join(re.sub(r"[^\w\s]", " ", tirar_acento(texto).lower()).split())
 
 
 def dividir(itens: list[dict], ano_corte: int) -> tuple[list[dict], list[dict], int]:

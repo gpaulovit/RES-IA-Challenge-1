@@ -20,7 +20,7 @@
 - [x] 4.2 `experiments/treino.py` + `dvc.yaml`: `dvc repro` gera modelo, métricas e params; duas execuções iguais
 - [ ] 4.3 Rodar no teste, preencher o relatório e registrar `go`/`no-go`; avisar Produto
 
-## 5. Subida para `src/checagens/`
+## 5. Subida para `src/inteligencia/`
 
-- [ ] 5.1 `busca.py` e `classificador.py` com as mesmas assinaturas; testes sem download de modelo
+- [x] 5.1 `src/inteligencia/` (`busca.py`, `calibracao.py`, `classificador.py`, `treino.py`) com as mesmas assinaturas; testes sem download de modelo
 - [ ] 5.2 Avisar a Engenharia com as assinaturas e o formato do retorno

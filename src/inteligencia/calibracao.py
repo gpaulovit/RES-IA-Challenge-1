@@ -20,11 +20,11 @@ texto da alegação, normalizado (sem "#boato", caixa, acento e pontuação). Um
 referência que não está na base é relatada como "alvo ausente" e conta como erro.
 
 Saídas:
-- results/calibracao_camada1.csv: uma linha por par de limites da grade.
+- results/calibracao_busca.csv: uma linha por par de limites da grade.
 - results/calibracao_camada1_casos.csv: os 62 casos com o par escolhido, para revisão linha a linha.
 - com --gravar, o par escolhido vai para params.yaml.
 
-Uso (a partir da raiz):  .venv/bin/python experiments/calibrar_limiares.py [--gravar]
+Uso (a partir da raiz, com o ambiente ativado):  python -m inteligencia.calibracao [--gravar]
 """
 import argparse
 import json
@@ -34,12 +34,12 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-import camada1
-from reescrita import tirar_acento
+from inteligencia import busca
+from inteligencia.texto import tirar_acento
 
-RAIZ = camada1.RAIZ
+RAIZ = busca.RAIZ
 BENCHMARK = RAIZ / "data" / "testes_benchmark.json"
-RESULTADOS = Path(__file__).resolve().parent / "results"
+RESULTADOS = RAIZ / "experiments" / "results"
 REESCRITAS = {"giria", "apelido", "erro_ortografico", "recorrencia_temporal"}
 MAX_CONTROLES_JA_CHECADO = 2   # RNF-05
 MAX_CONTROLES_MOSTRADOS = 8    # critério interno (25% dos 32 controles); ver regra 1b no topo
@@ -52,7 +52,7 @@ def chave(texto: str) -> str:
     return " ".join(re.sub(r"[^\w\s]", " ", t).split())
 
 
-def preparar(buscador: camada1.Buscador, casos: list[dict]) -> pd.DataFrame:
+def preparar(buscador: busca.Buscador, casos: list[dict]) -> pd.DataFrame:
     """Uma linha por caso: semelhança do 1º colocado, posição e semelhança da checagem certa."""
     S = buscador.semelhancas([c["texto_testado"] for c in casos])
     chaves = np.array([chave(r["alegacao"]) for r in buscador.registros])
@@ -62,8 +62,8 @@ def preparar(buscador: camada1.Buscador, casos: list[dict]) -> pd.DataFrame:
         linha = {"id_teste": c["id_teste"], "tipo": c["tipo"], "esperado": c["resultado_esperado"],
                  "texto": c["texto_testado"], "s_topo": float(s[topo]),
                  "alegacao_topo": buscador.registros[topo]["alegacao"],
-                 "negacao_diverge_topo": camada1.tem_negacao(c["texto_testado"])
-                                         != camada1.tem_negacao(buscador.registros[topo]["alegacao"]),
+                 "negacao_diverge_topo": busca.tem_negacao(c["texto_testado"])
+                                         != busca.tem_negacao(buscador.registros[topo]["alegacao"]),
                  "posicao_certa": np.nan, "s_certa": np.nan, "alvo_ausente": False}
         if c["alegacao_ref_original"]:
             certas = np.flatnonzero(chaves == chave(c["alegacao_ref_original"]))
@@ -115,14 +115,14 @@ def escolher(g: pd.DataFrame, max_mostrados: int | None = MAX_CONTROLES_MOSTRADO
 
 
 def casos_com_faixa(d: pd.DataFrame, alta: float, media: float) -> pd.DataFrame:
-    """Mesma regra de camada1.faixa(), aplicada ao 1º colocado de cada caso."""
+    """Mesma regra de busca.faixa(), aplicada ao 1º colocado de cada caso."""
     d = d.copy()
     ja = (d["s_topo"] >= alta) & ~d["negacao_diverge_topo"]
     d["faixa_topo"] = np.select([ja, d["s_topo"] >= media], ["ja_checado", "relacionada"], "baixa")
     return d
 
 
-def gravar_params(alta: float, media: float, caminho: Path = camada1.PARAMS_PADRAO) -> None:
+def gravar_params(alta: float, media: float, caminho: Path = busca.PARAMS_PADRAO) -> None:
     texto = caminho.read_text(encoding="utf-8")
     texto = re.sub(r"(limite_alta:\s*)[\d.]+", rf"\g<1>{alta:.2f}", texto)
     texto = re.sub(r"(limite_media:\s*)[\d.]+", rf"\g<1>{media:.2f}", texto)
@@ -131,17 +131,17 @@ def gravar_params(alta: float, media: float, caminho: Path = camada1.PARAMS_PADR
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--indice", type=Path, default=camada1.INDICE_PADRAO)
+    parser.add_argument("--indice", type=Path, default=busca.INDICE_PADRAO)
     parser.add_argument("--saida", type=Path, default=RESULTADOS)
     parser.add_argument("--gravar", action="store_true", help="grava o par escolhido em params.yaml")
     a = parser.parse_args()
 
     casos = json.loads(BENCHMARK.read_text(encoding="utf-8"))
-    vetores, registros = camada1.carregar_indice(a.indice)
-    d = preparar(camada1.Buscador(vetores, registros, 1.0, 0.0), casos)
+    vetores, registros = busca.carregar_indice(a.indice)
+    d = preparar(busca.Buscador(vetores, registros, 1.0, 0.0), casos)
     g = grade(d)
     a.saida.mkdir(parents=True, exist_ok=True)
-    g.to_csv(a.saida / "calibracao_camada1.csv", index=False)
+    g.to_csv(a.saida / "calibracao_busca.csv", index=False)
 
     ausentes = d.loc[d["alvo_ausente"], "id_teste"].tolist()
     top3 = g["reescritas_top3"].iloc[0]

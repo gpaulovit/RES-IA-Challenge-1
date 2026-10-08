@@ -60,7 +60,8 @@ As probabilidades fora da amostra vêm de validação cruzada estratificada em 5
 
 Para cada termo do texto, a contribuição é o valor TF-IDF × o coeficiente do modelo. O bot mostra
 os 3 termos de maior contribuição na direção da faixa (para `incerto`, os de maior valor
-absoluto). A probabilidade nunca é exposta (RNF-06).
+absoluto). A probabilidade nunca é exposta (RNF-06). Palavras vazias ("no", "vai", "das") não são
+exibidas. O filtro vale só para a exibição: o modelo e as métricas usam todas as palavras.
 
 ### Relato complementar (não entra no critério)
 

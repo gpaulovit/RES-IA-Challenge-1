@@ -5,7 +5,7 @@ Contrato com o bot: `classificar(texto)` devolve `{"faixa": ..., "sinais": [...]
 - sinais: 2 ou 3 termos do próprio texto que mais pesaram na direção da faixa.
 
 Modelo, divisão, faixas e critério de go/no-go seguem o protocolo pré-registrado em
-docs/relatorio-camada2.md. O treino fica em treino.py.
+docs/relatorio-camada2.md. O treino fica em treino.py (python -m inteligencia.treino).
 """
 import re
 from functools import cache
@@ -18,9 +18,17 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold, cross_val_predict
 from sklearn.pipeline import Pipeline
 
-RAIZ = Path(__file__).resolve().parent.parent
+RAIZ = Path(__file__).resolve().parents[2]
 MODELO_PADRAO = RAIZ / "models" / "classificador.joblib"
 FAIXAS = ("muitos_sinais", "incerto", "poucos_sinais")
+
+# Só para a EXIBIÇÃO dos sinais: o modelo e as métricas continuam usando todas as palavras.
+# Palavras vazias ("no", "vai", "das") não explicam nada ao usuário.
+PALAVRAS_VAZIAS = frozenset("""
+a ao aos as com como da das de dela dele do dos e ela ele em entre era essa esse esta este eu foi
+for ha isso isto ja la lhe mais mas me mesmo meu muito na nas nem no nos o os ou para pela pelo
+por qual quando que quem se sem ser seu sua sao so tambem tem ter um uma umas uns vai vao voce
+""".split())
 
 
 def criar_pipeline(params: dict) -> Pipeline:
@@ -64,6 +72,8 @@ def faixa(p: float, corte_alto: float, corte_baixo: float) -> str:
 def sinais(pipeline: Pipeline, texto: str, faixa_: str, n: int = 3) -> list[str]:
     """Termos do texto com maior contribuição (TF-IDF × coeficiente) na direção da faixa (RF-08).
 
+    Palavras vazias (PALAVRAS_VAZIAS) não são exibidas.
+
     muitos_sinais → os que mais empurram para "falsa"; poucos_sinais → os que mais empurram para
     "verdadeira"; incerto → os de maior peso absoluto. Se faltarem termos na direção da faixa, completa
     com os de maior peso absoluto, para chegar a 2 ou 3 quando o texto tiver vocabulário suficiente.
@@ -74,12 +84,14 @@ def sinais(pipeline: Pipeline, texto: str, faixa_: str, n: int = 3) -> list[str]
         return []
     termos = tfidf.get_feature_names_out()[x.col]
     contrib = x.data * lr.coef_[0][x.col]
+    # termo exibível: tem ao menos uma palavra que não é vazia ("das eleicoes" sim, "no" não)
+    exibivel = np.array([any(w not in PALAVRAS_VAZIAS for w in t.split()) for t in termos])
     sentido = {"muitos_sinais": contrib, "poucos_sinais": -contrib}.get(faixa_, np.abs(contrib))
-    escolhidos = [i for i in np.argsort(-sentido, kind="stable") if sentido[i] > 0][:n]
+    escolhidos = [i for i in np.argsort(-sentido, kind="stable") if sentido[i] > 0 and exibivel[i]][:n]
     for i in np.argsort(-np.abs(contrib), kind="stable"):
         if len(escolhidos) >= 2:
             break
-        if i not in escolhidos:
+        if i not in escolhidos and exibivel[i]:
             escolhidos.append(i)
     return [_forma_original(str(termos[i]), texto) for i in escolhidos]
 

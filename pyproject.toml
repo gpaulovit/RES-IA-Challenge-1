@@ -5,17 +5,20 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "checagens-demo"
 version = "0.1.0"
-description = "Regras de mensagens do bot e registros anônimos de consultas"
+description = "Bot de checagens: mensagens, registros e inteligência (busca e sinais de alerta)"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "numpy>=2,<3",
     "pandas>=2.2,<4",
     "scikit-learn>=1.6,<2",
+    "joblib>=1.3",
+    "pyyaml>=6",
 ]
 
 [project.optional-dependencies]
 test = ["pytest>=8,<10"]
+busca = ["sentence-transformers>=3,<7"]   # camada 1: modelo de embeddings
 
 [tool.setuptools.packages.find]
 where = ["src"]

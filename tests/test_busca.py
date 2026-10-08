@@ -1,12 +1,12 @@
-"""Camada 1 com vetores falsos: testa contrato, faixas e negação sem baixar modelo (roda no CI)."""
+"""Camada 1 (inteligencia.busca) com vetores falsos: testa contrato, faixas e negação sem baixar modelo (roda no CI)."""
 import json
 
 import numpy as np
 import pandas as pd
 import pytest
 
-import camada1
-from calibrar_limiares import MAX_CONTROLES_MOSTRADOS, avaliar, chave, escolher, grade, preparar
+from inteligencia import busca
+from inteligencia.calibracao import MAX_CONTROLES_MOSTRADOS, avaliar, chave, escolher, grade, preparar
 
 
 def checagem(numero, alegacao, **extra):
@@ -20,24 +20,24 @@ BASE = [checagem(1, "Anitta retira apoio à candidatura de Lula"),
         checagem(3, "Vídeo mostra fila de votação em 2018")]
 
 
-def vetorizar_falso(textos, usar_cache=True):
+def vetorizar_falso(textos):
     """Bolsa de palavras normalizada: textos com as mesmas palavras ficam parecidos."""
-    vocab = sorted({p for t in [b["alegacao"] for b in BASE] for p in camada1.tirar_acento(t).lower().split()})
-    E = np.array([[camada1.tirar_acento(t).lower().split().count(p) for p in vocab] for t in textos], dtype="float32")
+    vocab = sorted({p for t in [b["alegacao"] for b in BASE] for p in busca.tirar_acento(t).lower().split()})
+    E = np.array([[busca.tirar_acento(t).lower().split().count(p) for p in vocab] for t in textos], dtype="float32")
     normas = np.linalg.norm(E, axis=1, keepdims=True)
     return E / np.where(normas == 0, 1, normas)
 
 
 @pytest.fixture
 def buscador():
-    return camada1.Buscador(vetorizar_falso([b["alegacao"] for b in BASE]), BASE, alta=0.85, media=0.60,
+    return busca.Buscador(vetorizar_falso([b["alegacao"] for b in BASE]), BASE, alta=0.85, media=0.60,
                             vetorizar=vetorizar_falso)
 
 
 def test_contrato_k_padrao_campos_e_ordem(buscador):
     r = buscador.buscar("Anitta retira apoio à candidatura de Lula")
     assert len(r) == 3
-    assert set(r[0]) == set(camada1.CAMPOS) | {"semelhanca", "faixa"}
+    assert set(r[0]) == set(busca.CAMPOS) | {"semelhanca", "faixa"}
     assert [x["semelhanca"] for x in r] == sorted((x["semelhanca"] for x in r), reverse=True)
     assert all(0 <= x["semelhanca"] <= 1 for x in r)
     assert r[0]["id"] == "t:1" and r[0]["faixa"] == "ja_checado"
@@ -53,40 +53,40 @@ def test_texto_vazio_e_k_invalido(buscador):
 @pytest.mark.parametrize("s, esperado", [(0.85, "ja_checado"), (0.84, "relacionada"),
                                          (0.60, "relacionada"), (0.59, "baixa")])
 def test_faixas_nos_limites(s, esperado):
-    assert camada1.faixa(s, "a b", "a b", alta=0.85, media=0.60) == esperado
+    assert busca.faixa(s, "a b", "a b", alta=0.85, media=0.60) == esperado
 
 
 def test_negacao_rebaixa_ja_checado_para_relacionada():
-    assert camada1.faixa(0.95, "Anitta NÃO retirou o apoio", "Anitta retira apoio", 0.85, 0.60) == "relacionada"
-    assert camada1.faixa(0.95, "Anitta nao retirou", "Anitta não retirou", 0.85, 0.60) == "ja_checado"
-    assert camada1.faixa(0.50, "Anitta NÃO retirou", "Anitta retira", 0.85, 0.60) == "baixa"
+    assert busca.faixa(0.95, "Anitta NÃO retirou o apoio", "Anitta retira apoio", 0.85, 0.60) == "relacionada"
+    assert busca.faixa(0.95, "Anitta nao retirou", "Anitta não retirou", 0.85, 0.60) == "ja_checado"
+    assert busca.faixa(0.50, "Anitta NÃO retirou", "Anitta retira", 0.85, 0.60) == "baixa"
 
 
 def test_negacao_ignora_acento_e_caixa_e_nao_pega_pedaco_de_palavra():
-    assert camada1.tem_negacao("NÃO é verdade") and camada1.tem_negacao("é mentira que choveu")
-    assert not camada1.tem_negacao("Nação e nenhures")   # "nao" dentro de "nacao" não conta
+    assert busca.tem_negacao("NÃO é verdade") and busca.tem_negacao("é mentira que choveu")
+    assert not busca.tem_negacao("Nação e nenhures")   # "nao" dentro de "nacao" não conta
 
 
 def test_base_valida_esquema(tmp_path):
     caminho = tmp_path / "checagens.json"
     caminho.write_text(json.dumps(BASE), encoding="utf-8")
-    assert len(camada1.carregar_base(caminho)) == 3
+    assert len(busca.carregar_base(caminho)) == 3
     for ruim in ([{**BASE[0], "data": "01/10/2022"}], [{**BASE[0], "veredito_normalizado": "fake"}],
                  [BASE[0], BASE[0]], [{k: v for k, v in BASE[0].items() if k != "link"}]):
         caminho.write_text(json.dumps(ruim), encoding="utf-8")
         with pytest.raises(ValueError):
-            camada1.carregar_base(caminho)
+            busca.carregar_base(caminho)
 
 
 def test_indice_ida_e_volta_e_deteccao_de_alteracao(tmp_path):
     base = tmp_path / "checagens.json"
     base.write_text(json.dumps(BASE), encoding="utf-8")
-    camada1.construir_indice(base, tmp_path / "indice", vetorizar=vetorizar_falso)
-    E, registros = camada1.carregar_indice(tmp_path / "indice")
+    busca.construir_indice(base, tmp_path / "indice", vetorizar=vetorizar_falso)
+    E, registros = busca.carregar_indice(tmp_path / "indice")
     assert E.shape[0] == len(registros) == 3
     np.save(tmp_path / "indice" / "vetores.npy", E * 2)
     with pytest.raises(ValueError, match="alterado"):
-        camada1.carregar_indice(tmp_path / "indice")
+        busca.carregar_indice(tmp_path / "indice")
 
 
 def test_calibracao_respeita_rnf05_e_acha_alvo_por_texto_normalizado(buscador):
