@@ -6,7 +6,7 @@
 
 ## 2. Critério antes do teste
 
-- [ ] 2.1 Commitar `docs/relatorio-camada2.md` com critério, divisão e semente; verificar com `git log` que o commit é anterior a qualquer `metricas_camada2.json`
+- [x] 2.1 Commitar `docs/relatorio-camada2.md` com critério, divisão e semente; verificar com `git log` que o commit é anterior a qualquer `metricas_camada2.json`
 
 ## 3. Camada 1 (protótipo em `experiments/`)
 

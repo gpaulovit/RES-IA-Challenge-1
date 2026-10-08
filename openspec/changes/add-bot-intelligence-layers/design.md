@@ -34,15 +34,16 @@ validação fica numa função só, para que uma mudança de esquema mexa num lu
 
 - `TfidfVectorizer` seguido de `LogisticRegression(class_weight="balanced")`, com semente fixa
   (RNF-10).
-- Divisão por época: treino até 2019, validação 2020 (só para escolher os cortes das faixas),
-  teste 2021–2022 (RN-04).
+- Divisão por época: treino com ano ≤ 2020, teste com ano ≥ 2021 (RN-04). Os cortes das faixas
+  saem de validação cruzada em 5 partes dentro do treino. Com treino até 2019, quase todas as
+  verdadeiras viriam só do Fake.br, o que reforçaria o atalho de fonte.
 - Sinais: os termos presentes no texto com maior contribuição (`tfidf × coeficiente`) na direção
   da faixa.
 
 ### 5. Critério de go/no-go (escrito antes do teste)
 
 `go` ⇔ F1 macro ≥ 0,75 (RNF-02) **e** no máximo 15% das notícias verdadeiras do teste em
-`muitos_sinais` (RNF-03). O critério é registrado em `docs/relatorio-camada2.md` antes da primeira
+`muitos_sinais` (RNF-03) **e** ao menos 100 itens de cada classe no teste. O critério é registrado em `docs/relatorio-camada2.md` antes da primeira
 execução no teste. Com `no-go`, o bot vai ao ar só com a camada 1.
 
 ### 6. Versionamento (RF-14)
