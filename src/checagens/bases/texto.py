@@ -105,7 +105,9 @@ def ler_data_factpolcheckbr(texto) -> tuple[str | None, str]:
     a, b, ano = int(m[1]), int(m[2]), int(m[3])
     if a > 12:
         return data_iso(ano, b, a), "dia_mes"
-    return data_iso(ano, a, b), "mes_dia" if b > 12 else "ambigua_lida_mes_dia"
+    if b > 12 or a == b:   # dia igual ao mês (ex.: 9/9/2022) dá a mesma data nas duas leituras
+        return data_iso(ano, a, b), "mes_dia"
+    return data_iso(ano, a, b), "ambigua_lida_mes_dia"
 
 
 MESES = {m: i for i, m in enumerate(["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto",
