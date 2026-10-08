@@ -11,7 +11,7 @@ Recuperação semântica de checagens de boatos políticos reciclados.
 - [Semana 3 — retrieval k-NN](semana-3-engenharia.md) — busca exata, amostras, bloqueios e dependências.
 - [Organização da Engenharia](engenharia.md) — como as peças se conectam e como acompanhar as entregas.
 - [Funcionalidades](funcionalidades.md) — o que o protótipo faz e o que ainda está planejado.
-- [Testes e exemplos](testes.md) — como conferir o funcionamento (harness).
+- [Testes e benchmark](testes.md) — suíte de testes automatizados, robustez, transparência e avaliação de benchmark de MLOps.
 - [Apresentação](apresentacao.md) — roteiro de demonstração em cinco minutos.
 - [Glossário](glossario.md) — termos técnicos em linguagem simples.
 - [Cronograma](cronograma.md) — planejamento das 5 semanas do projeto, do estudo à entrega do produto.

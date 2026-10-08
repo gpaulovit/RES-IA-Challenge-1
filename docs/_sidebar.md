@@ -13,6 +13,6 @@
   - [Semana 3 — retrieval k-NN](semana-3-engenharia.md)
   - [Organização](engenharia.md)
   - [Funcionalidades](funcionalidades.md)
-  - [Testes e exemplos](testes.md)
+  - [Testes e benchmark](testes.md)
   - [Apresentação](apresentacao.md)
   - [Glossário](glossario.md)
