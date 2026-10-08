@@ -1,0 +1,44 @@
+# Bases de dados do bot (docs/dados.md). Regenerar tudo: `dvc repro` com o .venv ativo.
+stages:
+  baixar:
+    cmd: python -m checagens.bases.baixar
+    deps:
+      - src/checagens/bases/baixar.py
+      - src/checagens/bases/fontes.py
+    outs:
+      # persist: o DVC não apaga os brutos antes de rodar; o script só baixa o que falta ou mudou.
+      - data/brutos:
+          persist: true
+
+  checagens:
+    cmd: python -m checagens.bases.checagens
+    deps:
+      - src/checagens/bases/checagens.py
+      - src/checagens/bases/texto.py
+      - src/checagens/bases/vereditos.py
+      - data/brutos/factpolcheckbr
+      - data/brutos/factckbr
+      - data/brutos/factchecksbr
+    outs:
+      - data/processados/checagens/checagens.json
+      - data/processados/checagens/amostra_teste_30.json
+    metrics:
+      - data/relatorios/checagens.json:
+          cache: false
+
+  treino:
+    # --corte: último dia do FakeWhatsApp.Br no treino; o teste é o que vem depois.
+    cmd: python -m checagens.bases.treino --corte 2018-09-15
+    deps:
+      - src/checagens/bases/treino.py
+      - src/checagens/bases/texto.py
+      - data/brutos/fakebr
+      - data/brutos/fakewhatsappbr
+      - data/brutos/faketweetbr
+    outs:
+      - data/processados/treino/treino.csv
+      - data/processados/treino/teste.csv
+      - data/processados/treino/teste_curtos.csv
+    metrics:
+      - data/relatorios/treino.json:
+          cache: false
