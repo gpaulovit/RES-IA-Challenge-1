@@ -51,6 +51,8 @@ __pycache__/
 .coverage
 
 # Dados gerados localmente e registros de auditoria
-data/indices/
-data/registros/
+**/data/indices/
+**/data/registros/
+entrega/models/*.pkl
+entrega/models/*.joblib
 entrega_*.zip
