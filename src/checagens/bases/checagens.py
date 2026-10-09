@@ -1,6 +1,6 @@
-#Junta as 3 bases, descarta sem link, data ou veredito, deduplica, valida o contrato e grava checagens.json, a amostra de 30 e o relatório.
+#Junta as 4 fontes, descarta sem link, data ou veredito, deduplica, valida o contrato e grava checagens.json, a amostra de 30 e o relatório.
 
-"""Base de checagens da camada 1: FactPolCheckBr + FACTCK.BR + FactChecks.br.
+"""Base de checagens da camada 1: FactPolCheckBr + FACTCK.BR + FactChecks.br + Google Fact Check Tools.
 
     python -m checagens.bases.checagens
 
@@ -28,7 +28,10 @@ CAMPOS = ["id", "alegacao", "veredito_original", "veredito_normalizado", "agenci
 TAMANHO_AMOSTRA = 30
 MAXIMO_POR_AGENCIA = 4
 # Em duplicata, fica o registro da base com o rótulo mais rico (rótulo da agência em coluna própria).
-PRIORIDADE = ["FACTCK.BR", "FactPolCheckBr", "FactChecks.br/Central de Fatos", "FactChecks.br/FakeRecogna"]
+PRIORIDADE = ["FACTCK.BR", "FactPolCheckBr", "FactChecks.br/Central de Fatos", "FactChecks.br/FakeRecogna",
+              "Google Fact Check Tools"]
+# Checagens recentes baixadas por scripts/atualizar_checagens_factcheck.py (versionadas no git).
+GOOGLE_FACTCHECK = Path("data/externos/google_factcheck.json")
 
 
 def _base(fonte: str, ids, titulos, vereditos, agencias, datas, links) -> pd.DataFrame:
@@ -110,6 +113,16 @@ def carregar_central_de_fatos() -> pd.DataFrame:
 
 def carregar_fakerecogna() -> pd.DataFrame:
     return _carregar_factchecksbr("FakeRecogna.tsv", "FactChecks.br/FakeRecogna", "fakerecogna-", True)
+
+
+def carregar_google_factcheck() -> pd.DataFrame:
+    """Checagens recentes (Google Fact Check Tools). Sem o arquivo, a fonte entra vazia."""
+    if not GOOGLE_FACTCHECK.exists():
+        return _base("Google Fact Check Tools", [], [], [], [], [], [])
+    b = pd.DataFrame(json.loads(GOOGLE_FACTCHECK.read_text(encoding="utf-8")))
+    d = _base("Google Fact Check Tools", [f"googlefc-{i:05d}" for i in range(len(b))], b["alegacao"],
+              b["veredito_original"], [nome_agencia(u) for u in b["link"]], b["data"].map(ler_data), b["link"])
+    return _filtros_comuns(d)
 
 
 def deduplicar(d: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -221,7 +234,7 @@ def _gravar_json(caminho: Path, dados) -> None:
 
 def main() -> None:
     todos = pd.concat([carregar_factpolcheckbr(), carregar_factckbr(), carregar_central_de_fatos(),
-                       carregar_fakerecogna()], ignore_index=True)
+                       carregar_fakerecogna(), carregar_google_factcheck()], ignore_index=True)
     mantidos, removidos = deduplicar(todos[todos["motivo"].isna()])
     mantidos = mantidos.sort_values(["data", "id"], ascending=[False, True])
     amostra = amostra_recente(mantidos)

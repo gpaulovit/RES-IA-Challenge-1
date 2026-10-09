@@ -3,7 +3,8 @@
     "FACTCK.BR": 1313,
     "FactChecks.br/Central de Fatos": 10461,
     "FactChecks.br/FakeRecogna": 11773,
-    "FactPolCheckBr": 1882
+    "FactPolCheckBr": 1882,
+    "Google Fact Check Tools": 1820
   },
   "descartes_por_fonte_e_motivo": {
     "FACTCK.BR": {
@@ -25,19 +26,24 @@
       "multi_alegacao": 4,
       "sem_link": 1,
       "sem_veredito": 50
+    },
+    "Google Fact Check Tools": {
+      "agencia_desconhecida": 590,
+      "alegacao_vazia_ou_curta": 1
     }
   },
   "validos_por_fonte": {
     "FACTCK.BR": 889,
     "FactChecks.br/Central de Fatos": 7282,
     "FactChecks.br/FakeRecogna": 3196,
-    "FactPolCheckBr": 1827
+    "FactPolCheckBr": 1827,
+    "Google Fact Check Tools": 1229
   },
   "duplicatas_removidas": {
-    "criterio": "primeiro saem todos os registros de um link com vereditos normalizados diferentes; depois, duplicatas por link normalizado (https, sem www, sem utm_*/fbclid/gclid/igshid/amp, sem fragmento nem barra final, caminho decodificado) e por alegação normalizada (NFKC, caixa, pontuação e espaços); fica o registro da fonte mais prioritária: FACTCK.BR > FactPolCheckBr > FactChecks.br/Central de Fatos > FactChecks.br/FakeRecogna",
-    "total": 2752,
+    "criterio": "primeiro saem todos os registros de um link com vereditos normalizados diferentes; depois, duplicatas por link normalizado (https, sem www, sem utm_*/fbclid/gclid/igshid/amp, sem fragmento nem barra final, caminho decodificado) e por alegação normalizada (NFKC, caixa, pontuação e espaços); fica o registro da fonte mais prioritária: FACTCK.BR > FactPolCheckBr > FactChecks.br/Central de Fatos > FactChecks.br/FakeRecogna > Google Fact Check Tools",
+    "total": 2757,
     "por_criterio": {
-      "mesma_alegacao": 55,
+      "mesma_alegacao": 60,
       "mesmo_link": 2689,
       "veredito_conflitante_no_mesmo_link": 8
     },
@@ -45,7 +51,8 @@
       "FACTCK.BR": 4,
       "FactChecks.br/Central de Fatos": 247,
       "FactChecks.br/FakeRecogna": 2478,
-      "FactPolCheckBr": 23
+      "FactPolCheckBr": 23,
+      "Google Fact Check Tools": 5
     },
     "por_par_removida_mantida": {
       "FACTCK.BR -> (nenhuma)": 4,
@@ -54,7 +61,8 @@
       "FactChecks.br/Central de Fatos -> FactChecks.br/Central de Fatos": 15,
       "FactChecks.br/FakeRecogna -> FactChecks.br/Central de Fatos": 2467,
       "FactChecks.br/FakeRecogna -> FactChecks.br/FakeRecogna": 11,
-      "FactPolCheckBr -> FactPolCheckBr": 23
+      "FactPolCheckBr -> FactPolCheckBr": 23,
+      "Google Fact Check Tools -> Google Fact Check Tools": 5
     }
   },
   "factckbr_links_com_varias_alegacoes": {
@@ -63,18 +71,19 @@
     "links_com_rotulos_diferentes": 61
   },
   "final": {
-    "total": 10442,
+    "total": 11666,
     "por_fonte": {
       "FACTCK.BR": 885,
       "FactChecks.br/Central de Fatos": 7035,
       "FactChecks.br/FakeRecogna": 718,
-      "FactPolCheckBr": 1804
+      "FactPolCheckBr": 1804,
+      "Google Fact Check Tools": 1224
     },
     "por_agencia": {
-      "AFP Checamos": 198,
+      "AFP Checamos": 749,
       "Agência Lupa": 1352,
       "Agência Pública": 135,
-      "Aos Fatos": 967,
+      "Aos Fatos": 1541,
       "Boatos.org": 5693,
       "CNJ": 1,
       "E-farsas": 48,
@@ -82,15 +91,15 @@
       "Fato ou Boato (Justiça Eleitoral)": 171,
       "Fato ou Fake": 1214,
       "Folha de S. Paulo": 2,
-      "Projeto Comprova": 309,
+      "Projeto Comprova": 364,
       "UOL": 1,
-      "UOL Confere": 250
+      "UOL Confere": 294
     },
     "por_veredito_normalizado": {
-      "enganoso": 115,
-      "falso": 10244,
-      "outro": 21,
-      "verdadeiro": 62
+      "enganoso": 275,
+      "falso": 11267,
+      "outro": 61,
+      "verdadeiro": 63
     },
     "periodo_por_fonte": {
       "FACTCK.BR": [
@@ -108,11 +117,15 @@
       "FactPolCheckBr": [
         "2022-08-01",
         "2022-12-01"
+      ],
+      "Google Fact Check Tools": [
+        "2025-10-10",
+        "2026-10-08"
       ]
     },
     "periodo": [
       "2013-07-02",
-      "2022-12-01"
+      "2026-10-08"
     ],
     "por_ano": {
       "2013": 49,
@@ -124,7 +137,9 @@
       "2019": 1848,
       "2020": 2514,
       "2021": 1064,
-      "2022": 1804
+      "2022": 1804,
+      "2025": 296,
+      "2026": 928
     }
   },
   "por_fonte_e_veredito": {
@@ -147,6 +162,12 @@
       "enganoso": 3,
       "falso": 1792,
       "verdadeiro": 9
+    },
+    "Google Fact Check Tools": {
+      "enganoso": 160,
+      "falso": 1023,
+      "outro": 40,
+      "verdadeiro": 1
     }
   },
   "cobertura_2022": {
@@ -435,6 +456,60 @@
       "veredito_original": "Verdadeira",
       "veredito_normalizado": "verdadeiro",
       "registros": 9
+    },
+    {
+      "fonte_dataset": "Google Fact Check Tools",
+      "veredito_original": "Comprovado",
+      "veredito_normalizado": "outro",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "Google Fact Check Tools",
+      "veredito_original": "Distorcido",
+      "veredito_normalizado": "enganoso",
+      "registros": 7
+    },
+    {
+      "fonte_dataset": "Google Fact Check Tools",
+      "veredito_original": "Enganoso",
+      "veredito_normalizado": "enganoso",
+      "registros": 153
+    },
+    {
+      "fonte_dataset": "Google Fact Check Tools",
+      "veredito_original": "Falso",
+      "veredito_normalizado": "falso",
+      "registros": 475
+    },
+    {
+      "fonte_dataset": "Google Fact Check Tools",
+      "veredito_original": "Falta contexto",
+      "veredito_normalizado": "outro",
+      "registros": 11
+    },
+    {
+      "fonte_dataset": "Google Fact Check Tools",
+      "veredito_original": "Sátira",
+      "veredito_normalizado": "outro",
+      "registros": 2
+    },
+    {
+      "fonte_dataset": "Google Fact Check Tools",
+      "veredito_original": "Verdadeiro",
+      "veredito_normalizado": "verdadeiro",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "Google Fact Check Tools",
+      "veredito_original": "falso",
+      "veredito_normalizado": "falso",
+      "registros": 548
+    },
+    {
+      "fonte_dataset": "Google Fact Check Tools",
+      "veredito_original": "não_é_bem_assim",
+      "veredito_normalizado": "outro",
+      "registros": 26
     }
   ],
   "factchecksbr_carimbo_por_agencia": [
@@ -548,15 +623,15 @@
       "Agência Lupa": 4,
       "Aos Fatos": 4,
       "Boatos.org": 4,
-      "E-farsas": 3,
+      "E-farsas": 1,
       "Fato ou Boato (Justiça Eleitoral)": 4,
-      "Fato ou Fake": 2,
+      "Fato ou Fake": 1,
       "Projeto Comprova": 4,
-      "UOL Confere": 1
+      "UOL Confere": 4
     },
     "periodo": [
-      "2022-11-29",
-      "2022-12-01"
+      "2022-11-30",
+      "2026-10-08"
     ]
   }
 }
