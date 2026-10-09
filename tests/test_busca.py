@@ -125,3 +125,12 @@ def test_negacao_em_internetes_e_reconhecida_depois_da_normalizacao(buscador):
     # "ñ" só vira "não" na normalização: sem ela, o filtro da RN-06 não veria a negação
     r = buscador.buscar("Anitta ñ retira apoio à candidatura de Lula")
     assert r[0]["id"] == "t:1" and r[0]["faixa"] != "ja_checado"
+
+
+def test_desempate_prefere_menos_noticias_reais_em_ja_checado():
+    base = {"controles_mostrados": 2, "reescritas_mostradas": 0.375}
+    g = pd.DataFrame([
+        {**base, "limite_alta": 0.76, "limite_media": 0.76, "controles_ja_checado": 2, "confirmados_ja_checado": 9},
+        {**base, "limite_alta": 0.82, "limite_media": 0.76, "controles_ja_checado": 0, "confirmados_ja_checado": 4},
+    ])
+    assert escolher(g)["limite_alta"] == 0.82

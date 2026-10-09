@@ -69,6 +69,8 @@ stages:
     cmd: python -m inteligencia.treino
     deps:
       - data/processados/treino/treino.csv
+      - data/processados/treino/teste.csv
+      - data/processados/treino/teste_curtos.csv
       - src/inteligencia/treino.py
       - src/inteligencia/classificador.py
     params:

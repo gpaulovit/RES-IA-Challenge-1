@@ -5,7 +5,7 @@ import pytest
 from inteligencia import classificador as c2
 from inteligencia import treino
 
-PARAMS = {"semente": 42, "camada2": {"ano_corte": 2020, "ngram_range": [1, 2], "min_df": 1, "C": 1.0,
+PARAMS = {"semente": 42, "camada2": {"ngram_range": [1, 2], "min_df": 1, "C": 1.0,
                                      "max_iter": 1000, "folds": 3, "margem_faixas": 0.10}}
 
 FALSAS = ["urgente compartilhe antes que apaguem a verdade escondida", "bomba exclusivo a mídia esconde fraude",
@@ -14,18 +14,18 @@ VERDADEIRAS = ["tribunal publica resultado oficial da eleição", "ministério d
                "câmara aprova projeto em votação no plenário", "governo anuncia calendário oficial de vacinação"]
 
 
-def base(anos=(2019, 2020, 2021), repeticoes=4):
+def base(prefixo, repeticoes=4):
     itens = []
-    for ano in anos:
-        for r in range(repeticoes):
-            itens += [{"texto": f"{t} {ano} caso {r}", "rotulo": True, "ano": ano, "fonte": "a"} for t in FALSAS]
-            itens += [{"texto": f"{t} {ano} caso {r}", "rotulo": False, "ano": ano, "fonte": "b"} for t in VERDADEIRAS]
+    for r in range(repeticoes):
+        itens += [{"texto": f"{t} {prefixo} caso {r}", "rotulo": True, "fonte": "a", "data": ""} for t in FALSAS]
+        itens += [{"texto": f"{t} {prefixo} caso {r}", "rotulo": False, "fonte": "b", "data": ""} for t in VERDADEIRAS]
     return itens
 
 
 @pytest.fixture(scope="module")
 def treinado():
-    return treino.treinar(base(), PARAMS)
+    tr, te = base("treino", 8), base("teste", 4)
+    return treino.treinar(tr, PARAMS), tr, te
 
 
 def test_contrato_faixa_e_sinais_sem_probabilidade(treinado):
@@ -59,13 +59,12 @@ def test_texto_vazio(treinado):
         treinado[0].classificar("  ")
 
 
-def test_divisao_por_epoca_remove_repetidos_do_teste():
-    itens = [{"texto": "A notícia", "rotulo": True, "ano": 2020, "fonte": "a"},
-             {"texto": "a  NOTÍCIA!", "rotulo": True, "ano": 2021, "fonte": "a"},
-             {"texto": "outra", "rotulo": False, "ano": 2021, "fonte": "b"}]
-    tr, te, repetidos = treino.dividir(itens, 2020)
-    assert [i["ano"] for i in tr] == [2020]
-    assert [i["texto"] for i in te] == ["outra"] and repetidos == 1
+def test_teste_perde_textos_repetidos_do_treino():
+    tr = [{"texto": "A notícia", "rotulo": True, "fonte": "a", "data": ""}]
+    te = [{"texto": "a  NOTÍCIA!", "rotulo": True, "fonte": "a", "data": ""},
+          {"texto": "outra", "rotulo": False, "fonte": "b", "data": ""}]
+    limpo, repetidos = treino.remover_repetidos(tr, te)
+    assert [i["texto"] for i in limpo] == ["outra"] and repetidos == 1
 
 
 def test_cortes_respeitam_a_margem():
@@ -87,18 +86,18 @@ def test_criterio_go_no_go_nas_fronteiras(f1, fa, nf, nv, esperado):
 
 
 def test_mesma_semente_mesmas_metricas(treinado):
-    outro = treino.treinar(base(), PARAMS)
-    m1 = treino.avaliar(treinado[0], treinado[1], treinado[2], 42)
-    m2 = treino.avaliar(outro[0], outro[1], outro[2], 42)
-    assert m1 == m2
+    clf, tr, te = treinado
+    outro = treino.treinar(tr, PARAMS)
+    assert treino.avaliar(clf, tr, te, 42) == treino.avaliar(outro, tr, te, 42)
 
 
-def test_base_valida_esquema(tmp_path):
-    caminho = tmp_path / "treino.json"
-    for ruim in ('[{"texto": "x", "rotulo": 1, "ano": 2020, "fonte": "a"}]',
-                 '[{"texto": "x", "rotulo": true, "ano": "2020", "fonte": "a"}]',
-                 '[{"texto": "", "rotulo": true, "ano": 2020, "fonte": "a"}]',
-                 '[{"texto": "x", "ano": 2020, "fonte": "a"}]'):
+def test_csv_valida_esquema_e_converte_rotulo(tmp_path):
+    caminho = tmp_path / "treino.csv"
+    caminho.write_text("texto,rotulo,fonte,data\nurna fraudada,falso,X,2018-09-01\ncenso oficial,verdadeiro,X,\n",
+                       encoding="utf-8")
+    assert [i["rotulo"] for i in treino.carregar_csv(caminho)] == [True, False]
+    for ruim in ("texto,rotulo,fonte,data\nx,fake,X,\n", "texto,rotulo,fonte\nx,falso,X\n",
+                 "texto,rotulo,fonte,data\n ,falso,X,\n", "texto,rotulo,fonte,data\n"):
         caminho.write_text(ruim, encoding="utf-8")
         with pytest.raises(ValueError):
-            treino.carregar_base(caminho)
+            treino.carregar_csv(caminho)

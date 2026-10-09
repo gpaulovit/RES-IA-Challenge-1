@@ -103,3 +103,49 @@ stages:
       hash: md5
       md5: bec3ecc88dde1a061916646c29944370
       size: 39367
+  indice:
+    cmd: python -m inteligencia.busca --construir
+    deps:
+    - path: data/processados/checagens/checagens.json
+      hash: md5
+      md5: 0b8a3f5d447e50c95cf0b38e5b441d2b
+      size: 4424617
+    - path: src/inteligencia/busca.py
+      hash: md5
+      md5: 457b84f534e6501de8f75cdce8423272
+      size: 10448
+    outs:
+    - path: data/indices/camada1
+      hash: md5
+      md5: 330bf6e57f4e3d18f822554a15d4c130.dir
+      size: 20276150
+      nfiles: 3
+  calibrar:
+    cmd: python -m inteligencia.calibracao
+    deps:
+    - path: data/indices/camada1
+      hash: md5
+      md5: 330bf6e57f4e3d18f822554a15d4c130.dir
+      size: 20276150
+      nfiles: 3
+    - path: data/testes_benchmark.json
+      hash: md5
+      md5: 2b1475b26c00c474c95af088a9022ee5
+      size: 17548
+    - path: src/inteligencia/busca.py
+      hash: md5
+      md5: 457b84f534e6501de8f75cdce8423272
+      size: 10448
+    - path: src/inteligencia/calibracao.py
+      hash: md5
+      md5: 4787c74e222ebab30384c58f8587b19e
+      size: 9591
+    outs:
+    - path: experiments/results/calibracao_camada1.csv
+      hash: md5
+      md5: 56e37e53344666d91e08d705d4e1405e
+      size: 56804
+    - path: experiments/results/calibracao_camada1_casos.csv
+      hash: md5
+      md5: 3c5b18f5559ed2d6a1236e2fcf4cd3fc
+      size: 14331

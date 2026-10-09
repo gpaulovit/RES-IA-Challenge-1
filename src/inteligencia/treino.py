@@ -3,6 +3,10 @@
 Segue o protocolo pré-registrado em docs/relatorio-camada2.md. Nada aqui é ajustado olhando o teste:
 hiperparâmetros vêm de params.yaml, e os cortes das faixas saem só do treino (validação cruzada).
 
+A divisão treino/teste vem pronta da frente de Dados (docs/dados.md, `--corte` no dvc.yaml):
+treino.csv até 15/09/2018, teste.csv com o WhatsApp de 16/09 a 28/10/2018. O teste_curtos.csv
+(tweets) entra só no relato complementar.
+
 Saídas:
 - models/classificador.joblib: pipeline + cortes das faixas;
 - experiments/results/metricas_camada2.json: critério, decisão go/no-go e relato complementar;
@@ -13,6 +17,7 @@ Os arquivos não têm data nem hora: rodar duas vezes com os mesmos dados deve d
 Uso (a partir da raiz, com o ambiente ativado):  python -m inteligencia.treino    (ou: dvc repro treinar)
 """
 import argparse
+import csv
 import hashlib
 import json
 from pathlib import Path
@@ -27,7 +32,8 @@ from inteligencia.classificador import FAIXAS, MODELO_PADRAO, RAIZ, Classificado
     escolher_cortes, faixa, probabilidades_fora_da_amostra
 from inteligencia.texto import normalizar
 
-BASE_PADRAO = RAIZ / "data" / "processados" / "treino" / "treino.json"
+BASES = RAIZ / "data" / "processados" / "treino"   # treino.csv, teste.csv, teste_curtos.csv
+ROTULOS = {"falso": True, "verdadeiro": False}     # classe positiva: notícia falsa
 PARAMS_PADRAO = RAIZ / "params.yaml"
 RESULTADOS = RAIZ / "experiments" / "results"
 
@@ -41,34 +47,38 @@ MINIMO_POR_CLASSE_FONTE = 30   # relato complementar: F1 dentro de cada fonte
 # ---------------------------------------------------------------- dados
 
 def _validar_item(item, posicao: int) -> dict:
-    """Único lugar que conhece o esquema da base de treino: se a frente de Dados mudar, muda só aqui."""
+    """Único lugar que conhece o esquema da base de treino: se a frente de Dados mudar, muda só aqui.
+
+    Colunas: texto, rotulo ("falso"/"verdadeiro"), fonte, data (AAAA-MM-DD ou vazia).
+    """
     try:
-        texto, rotulo, ano, fonte = item["texto"], item["rotulo"], item["ano"], item["fonte"]
+        texto, rotulo, fonte, data = item["texto"], item["rotulo"], item["fonte"], item["data"]
     except (KeyError, TypeError) as erro:
-        raise ValueError(f"Item {posicao} sem texto, rotulo, ano ou fonte.") from erro
+        raise ValueError(f"Linha {posicao} sem texto, rotulo, fonte ou data.") from erro
     if not isinstance(texto, str) or not texto.strip():
-        raise ValueError(f"Item {posicao} tem texto vazio.")
-    if not isinstance(rotulo, bool):
-        raise ValueError(f"Item {posicao}: rotulo deve ser true (falsa) ou false (verdadeira).")
-    if type(ano) is not int:
-        raise ValueError(f"Item {posicao}: ano deve ser inteiro.")
-    return {"texto": texto.strip(), "rotulo": rotulo, "ano": ano, "fonte": str(fonte)}
+        raise ValueError(f"Linha {posicao} tem texto vazio.")
+    if rotulo not in ROTULOS:
+        raise ValueError(f"Linha {posicao}: rotulo deve ser 'falso' ou 'verdadeiro', veio {rotulo!r}.")
+    return {"texto": texto.strip(), "rotulo": ROTULOS[rotulo], "fonte": fonte, "data": data}
 
 
-def carregar_base(caminho: Path) -> list[dict]:
-    bruto = json.loads(Path(caminho).read_text(encoding="utf-8"))
-    if not isinstance(bruto, list) or not bruto:
-        raise ValueError("A base de treino deve ser uma lista não vazia.")
-    return [_validar_item(item, i) for i, item in enumerate(bruto, 1)]
+def carregar_csv(caminho: Path) -> list[dict]:
+    try:
+        with Path(caminho).open(encoding="utf-8", newline="") as f:
+            linhas = list(csv.DictReader(f))
+    except OSError as erro:
+        raise ValueError(f"Não foi possível ler {caminho}. Rode: dvc repro treino") from erro
+    if not linhas:
+        raise ValueError(f"{caminho} está vazio.")
+    return [_validar_item(linha, i) for i, linha in enumerate(linhas, 2)]   # linha 1 é o cabeçalho
 
 
-def dividir(itens: list[dict], ano_corte: int) -> tuple[list[dict], list[dict], int]:
-    """Treino: ano ≤ corte. Teste: ano > corte, sem textos que já estão no treino (normalizados)."""
-    treino = [i for i in itens if i["ano"] <= ano_corte]
+def remover_repetidos(treino: list[dict], teste: list[dict]) -> tuple[list[dict], int]:
+    """Tira do teste os textos que já estão no treino (normalizados). A frente de Dados já deduplica;
+    esta conferência é a do protocolo e deve dar zero."""
     vistos = {normalizar(i["texto"]) for i in treino}
-    teste_bruto = [i for i in itens if i["ano"] > ano_corte]
-    teste = [i for i in teste_bruto if normalizar(i["texto"]) not in vistos]
-    return treino, teste, len(teste_bruto) - len(teste)
+    limpo = [i for i in teste if normalizar(i["texto"]) not in vistos]
+    return limpo, len(teste) - len(limpo)
 
 
 # ---------------------------------------------------------------- métricas
@@ -138,37 +148,51 @@ def avaliar(clf: Classificador, treino: list[dict], teste: list[dict], semente: 
 
 # ---------------------------------------------------------------- comando
 
-def treinar(itens: list[dict], params: dict) -> tuple[Classificador, list[dict], list[dict], int]:
-    treino, teste, repetidos = dividir(itens, params["camada2"]["ano_corte"])
+def treinar(treino: list[dict], params: dict) -> Classificador:
+    """Cortes das faixas pela validação cruzada no treino; depois, o modelo final com o treino inteiro."""
     X, y = [i["texto"] for i in treino], np.array([i["rotulo"] for i in treino], dtype=int)
     p_oof = probabilidades_fora_da_amostra(X, y, params)
     alto, baixo = escolher_cortes(p_oof, y, params["camada2"]["margem_faixas"])
     pipeline = criar_pipeline(params).fit(X, y)
-    return Classificador(pipeline, alto, baixo), treino, teste, repetidos
+    return Classificador(pipeline, alto, baixo)
+
+
+def _sha256(caminho: Path) -> str:
+    return hashlib.sha256(caminho.read_bytes()).hexdigest()
 
 
 def main() -> None:
     import yaml
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--base", type=Path, default=BASE_PADRAO)
+    parser.add_argument("--bases", type=Path, default=BASES)
     parser.add_argument("--modelo", type=Path, default=MODELO_PADRAO)
     parser.add_argument("--saida", type=Path, default=RESULTADOS)
     a = parser.parse_args()
 
     params = yaml.safe_load(PARAMS_PADRAO.read_text(encoding="utf-8"))
-    itens = carregar_base(a.base)
-    clf, treino, teste, repetidos = treinar(itens, params)
+    arquivos = {n: a.bases / f"{n}.csv" for n in ("treino", "teste", "teste_curtos")}
+    treino = carregar_csv(arquivos["treino"])
+    teste, repetidos = remover_repetidos(treino, carregar_csv(arquivos["teste"]))
+    curtos, repetidos_curtos = remover_repetidos(treino, carregar_csv(arquivos["teste_curtos"]))
+
+    clf = treinar(treino, params)
     clf.salvar(a.modelo)
     metricas = avaliar(clf, treino, teste, params["semente"])
+    # teste extra (tweets curtos, outra fonte e época): só relato, não entra na decisão
+    extra = avaliar(clf, treino, curtos, params["semente"])
+    metricas["complementar"]["teste_curtos"] = {k: extra[k] for k in ("teste", "f1_macro", "falso_alarme",
+                                                                       "matriz_confusao", "faixas_por_classe")}
     a.saida.mkdir(parents=True, exist_ok=True)
     (a.saida / "metricas_camada2.json").write_text(json.dumps(metricas, ensure_ascii=False, indent=1) + "\n",
                                                    encoding="utf-8")
     usados = {"semente": params["semente"], "camada2": params["camada2"],
-              "sha256_base": hashlib.sha256(Path(a.base).read_bytes()).hexdigest(),
-              "treino": len(treino), "teste": len(teste), "teste_removidos_por_repeticao": repetidos}
+              "sha256": {n: _sha256(c) for n, c in arquivos.items()},
+              "linhas": {"treino": len(treino), "teste": len(teste), "teste_curtos": len(curtos)},
+              "removidos_por_repeticao": {"teste": repetidos, "teste_curtos": repetidos_curtos}}
     (a.saida / "params_camada2.json").write_text(json.dumps(usados, ensure_ascii=False, indent=1) + "\n",
                                                  encoding="utf-8")
-    print(f"Treino {len(treino)} | teste {len(teste)} ({repetidos} repetidos removidos)")
+    print(f"Treino {len(treino)} | teste {len(teste)} | teste_curtos {len(curtos)} "
+          f"({repetidos} + {repetidos_curtos} repetidos removidos)")
     print(f"F1 macro {metricas['f1_macro']:.3f} | falso alarme {metricas['falso_alarme']:.1%} "
           f"→ {metricas['decisao'].upper()}")
     for motivo in metricas["motivos_no_go"]:

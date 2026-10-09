@@ -12,8 +12,13 @@ Regra de escolha (fixada antes de rodar com a base real):
       mostrada. O custo aparece na coluna `reescritas_mostradas`.
 2. Maximiza: reescritas (gíria, apelido, erro ortográfico, recorrência temporal) em que a checagem
    certa aparece no top-3 **e é mostrada** ao usuário (faixa `ja_checado` ou `relacionada`).
-3. Desempates, nesta ordem: mais casos `match_confirmado` em `ja_checado`; limite alto maior;
-   limite médio maior (na dúvida, o mais conservador).
+3. Desempates, nesta ordem: menos controles em `ja_checado`; mais casos `match_confirmado` em
+   `ja_checado`; limite alto maior; limite médio maior (na dúvida, o mais conservador).
+   Ajuste de 09/10/2026, feito depois da 1ª calibração na base real: o desempate original escolheu
+   0,76/0,76, com 2 notícias reais em "já checado" (uma delas: "Datafolha divulga nova pesquisa").
+   0,82/0,76 tinha a mesma cobertura e 0 notícias reais em "já checado". Dizer "já checado" para
+   uma notícia verdadeira é o pior erro do bot (RN-01). Registro em
+   experiments/results/calibracao_camada1.csv e no design.md da change.
 
 O top-3 (RNF-04) não depende dos limites: é relatado à parte, com e sem a normalização da consulta
 (normalizacao.py), para mostrar quanto do resultado vem dos dicionários. A checagem certa é achada pelo
@@ -111,8 +116,8 @@ def escolher(g: pd.DataFrame, max_mostrados: int | None = MAX_CONTROLES_MOSTRADO
         validos = validos[validos["controles_mostrados"] <= max_mostrados]
     if validos.empty:
         return None
-    ordem = ["reescritas_mostradas", "confirmados_ja_checado", "limite_alta", "limite_media"]
-    return validos.sort_values(ordem, ascending=False).iloc[0]
+    ordem = ["reescritas_mostradas", "controles_ja_checado", "confirmados_ja_checado", "limite_alta", "limite_media"]
+    return validos.sort_values(ordem, ascending=[False, True, False, False, False]).iloc[0]
 
 
 def casos_com_faixa(d: pd.DataFrame, alta: float, media: float) -> pd.DataFrame:

@@ -31,12 +31,26 @@ Definições:
 
 ## Protocolo
 
-### Dados e divisão por época (RN-04)
+### Dados e divisão (RN-04)
 
-- Base de treino da frente de Dados. Cada item tem texto, rótulo (falsa/verdadeira), ano e fonte.
-- **Treino:** itens com ano ≤ 2020. **Teste:** itens com ano ≥ 2021.
-- Um texto do teste que, depois de normalizar caixa, acento e espaços, for idêntico a um texto do
-  treino sai do teste. Assim, o teste não premia memorização.
+> **Emenda de 09/10/2026, registrada antes de qualquer execução no teste.** A base de treino
+> entregue pela frente de Dados ([docs/dados.md](dados.md)) usa fontes diferentes das previstas
+> (Fake.br, FakeWhatsApp.Br e FakeTweet.Br) e vai só até 2019. Com ela, a regra "treino ≤ 2020,
+> teste ≥ 2021" deixaria o teste vazio. Adotamos a divisão temporal já feita pela frente de Dados,
+> que atende à RN-04 (teste posterior ao treino). **O critério de decisão não muda.** A divisão
+> original está no histórico do git desta página (commit `7b39f08`).
+
+- **Treino:** `data/processados/treino/treino.csv`, com textos até 15/09/2018 (Fake.br e
+  FakeWhatsApp.Br).
+- **Teste (decide `go`/`no-go`):** `teste.csv`, com mensagens do FakeWhatsApp.Br de 16/09 a
+  28/10/2018.
+- **Teste extra (só relato complementar):** `teste_curtos.csv`, com tweets do FakeTweet.Br de 2010
+  a 2019.
+- A frente de Dados já remove repetições e quase-duplicatas entre os arquivos. O protocolo confere
+  de novo: um texto do teste que, depois de normalizar caixa, acento e espaços, for idêntico a um
+  texto do treino sai do teste. Assim, o teste não premia memorização.
+- **Limitação, segundo a própria frente de Dados:** o teste é do mesmo canal e de semanas logo
+  depois do treino, então a métrica tende a ser otimista para mensagens de 2026.
 
 ### Modelo (fixo, sem ajuste no teste)
 
