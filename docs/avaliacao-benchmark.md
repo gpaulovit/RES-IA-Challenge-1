@@ -8,7 +8,7 @@ Este documento registra a metodologia, os resultados de linha de base (*baseline
 
 Em conformidade com as diretrizes de MLOps do projeto, uma métrica isolada não tem valor sem contexto: **precisamos saber exatamente qual dado entrou, qual modelo foi avaliado, quais hashes garantem a integridade dos artefatos e qual foi o comportamento por categoria de linguagem**.
 
-O módulo `src/checagens/avaliacao.py` automatiza esse processo, gerando relatórios auditáveis com metadados de execução, versão e latência.
+As métricas de avaliação e posicionamento no ranking estão implementadas em `experiments/avaliacao.py` e validadas nos testes de busca em `tests/test_busca.py`.
 
 ---
 
@@ -80,20 +80,17 @@ Executado sobre o índice de 1.882 registros em `data/indices/experimental`:
 ---
 
 ## 5. Como Executar e Reproduzir
-
-Com o ambiente ativado:
-
-```sh
-python -m checagens.avaliacao
-```
-
-Para avaliar um modelo ou pasta de índice específica:
-
-```sh
-python -m checagens.avaliacao \
-  --indice data/indices/NOME_DA_PASTA \
-  --modelo NOME_DO_MODELO \
-  --saida data/relatorios/avaliacao-NOME.json
-```
-
-O relatório completo com hashes de linhagem e detalhamento de cada caso é salvo automaticamente em formato JSON.
+ 
+ Para validar as funções de ranking e testes de busca automatizados:
+ 
+ ```sh
+ pytest tests/test_busca.py
+ ```
+ 
+ Para reproduzir a análise empírica comparativa dos modelos e estratos do benchmark, utilize o notebook:
+ 
+ ```sh
+ jupyter notebook experiments/05_avaliacao.ipynb
+ ```
+ 
+ O cálculo das posições no ranking e métricas de Recall@k e MRR pode ser importado diretamente a partir de `experiments.avaliacao`.

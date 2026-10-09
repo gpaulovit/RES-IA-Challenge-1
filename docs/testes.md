@@ -34,27 +34,25 @@ A suíte cobre tanto os componentes algorítmicos quanto os requisitos do Bot e 
 | `tests/test_reprodutibilidade.py`| **RNF-10** | Garante que o treino com semente fixa gera métricas e coeficientes idênticos em rodadas sucessivas. |
 | `tests/test_manutencao.py` | **RNF-11** | Comprova que uma nova checagem entra na base apenas reindexando os vetores, sem necessidade de retreino. |
 | `tests/test_mensagens_benchmark.py` | **RNF-01** | Valida a integridade do conjunto das 30 mensagens eleitorais de teste. |
-| `tests/test_avaliacao.py` | **RNF-04, RNF-05** | Valida o módulo de cálculo de métricas de benchmark (Recall@k, MRR e latência). |
-| `tests/test_retrieval.py` | **RF-06** | Busca exata k-NN, ordenação estável e integridade de hashes do índice. |
-| `tests/test_embeddings.py` | **RF-06** | Consistência dimensional e reprodutibilidade do gerador vetorial. |
+| `tests/test_bases.py` | **RF-07, RN-02, RN-04** | Validação das bases de dados, regras de descarte, duplicatas e integridade temporal. |
+| `tests/test_busca.py` | **RF-05, RF-06, RN-05** | Camada 1: busca vetorial k-NN por cosseno, ordenação do ranking e faixas de similaridade. |
+| `tests/test_classificador.py` | **RF-08, RNF-02, RNF-03** | Camada 2: classificação em faixas de alerta, termos com maior peso e fallback. |
+| `tests/test_normalizacao.py` | **RN-02** | Normalização de texto, remoção de diacríticos e pontuação. |
+| `tests/test_experimentos.py` | **RN-04** | Limpeza de títulos de checagens e remoção de carimbos das agências. |
 
 ---
 
-## 3. Avaliação Automatizada de Benchmark (RNF-04 e RNF-05)
+## 3. Avaliação de Benchmark (RNF-04 e RNF-05)
 
-Para aferir a qualidade da busca semântica em relação a paráfrases, gírias, erros ortográficos e controles negativos, utilize o módulo de avaliação MLOps:
+A aferição da busca semântica em relação a paráfrases, gírias, erros ortográficos e controles negativos utiliza o conjunto de benchmark versionado em `data/testes_benchmark.json`:
 
-```sh
-python -m checagens.avaliacao \
-  --benchmark data/testes_benchmark.json \
-  --indice data/indices/amostra \
-  --modelo baseline-hashing \
-  --top-k 3
-```
+- As funções de cálculo de **Recall@k**, **MRR** e **posições no ranking** estão implementadas em `experiments/avaliacao.py`.
+- O experimento empírico comparativo está documentado no notebook `experiments/05_avaliacao.ipynb`.
+- Os testes automatizados da suíte (`tests/test_busca.py` e `tests/test_mensagens_benchmark.py`) garantem que os algoritmos de busca e as entradas de teste permaneçam íntegros a cada commit.
 
 ### Critérios de Aceitação:
-- **RNF-04:** A checagem correta deve aparecer entre as 3 primeiras em **≥ 70%** dos casos de reescrita, gíria e erro ortográfico.
-- **RNF-05:** No máximo **2 de 32** notícias reais de controle podem ser classificadas falsamente como "já checado".
+- **RNF-04:** A checagem correta deve aparecer entre as 3 primeiras em **≥ 70%** dos 24 casos de reescrita, gíria, erro ortográfico e recorrência temporal.
+- **RNF-05:** No máximo **2 de 32** notícias reais de controle podem ser classificadas falsamente como "já checado" (com casos de negação reportados à parte).
 
 ---
 

@@ -3,6 +3,10 @@ stages:
   baixar:
     cmd: python -m checagens.bases.baixar
     deps:
+    - path: data/externos/google_factcheck.json
+      hash: md5
+      md5: 4b7f9971b28088152df68aab5c2ecb69
+      size: 790950
     - path: src/checagens/bases/baixar.py
       hash: md5
       md5: a9adcf26044bee0140bf2a2c23c15536
@@ -14,9 +18,9 @@ stages:
     outs:
     - path: data/brutos
       hash: md5
-      md5: 19e038189277af9946fbe163d55c10c6.dir
-      size: 138706672
-      nfiles: 7
+      md5: ecfaaf2402dcecb5958a9b28920e3577.dir
+      size: 138737779
+      nfiles: 8
   checagens:
     cmd: python -m checagens.bases.checagens
     deps:
@@ -37,8 +41,8 @@ stages:
       nfiles: 1
     - path: src/checagens/bases/checagens.py
       hash: md5
-      md5: 1058e495bed149195dc0ef642f5e1d02
-      size: 12971
+      md5: 9573a1fb76cce58f2c15bf7f0fc2d1f7
+      size: 13803
     - path: src/checagens/bases/texto.py
       hash: md5
       md5: 65a8c97d35f7cd3518b1c3bcece134e0
@@ -50,16 +54,16 @@ stages:
     outs:
     - path: data/processados/checagens/amostra_teste_30.json
       hash: md5
-      md5: 7ad5bcc58f4471726728f875b3582310
-      size: 12780
+      md5: 3eb9003fef1ca860291cba76baadc7a2
+      size: 12881
     - path: data/processados/checagens/checagens.json
       hash: md5
-      md5: 0b8a3f5d447e50c95cf0b38e5b441d2b
-      size: 4424617
+      md5: e5bd2e5e28bebc53151e9ced47532f64
+      size: 4905967
     - path: data/relatorios/checagens.json
       hash: md5
-      md5: f38bc58863c43f824f0c44ed3b09db8e
-      size: 14723
+      md5: 4113bf7ca6ad4b794bebe30a31e2e2b3
+      size: 16813
   treino:
     cmd: python -m checagens.bases.treino --corte 2018-09-15
     deps:
