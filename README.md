@@ -16,14 +16,13 @@ em que devem ser lidos e guardam código e resultado lado a lado, para auditar c
 | `00_load_corpus.ipynb` | Carga do corpus de checagens (formato e colunas) |
 | `01_embeddings.ipynb` | Embeddings das duas versões dos dados |
 | `02_clusters.ipynb` | Agrupamento das alegações |
-| `03_recurrence.ipynb` | Taxa de reciclagem: alegações falsas voltam a circular depois de checadas? |
-| `04_reciclagem_entre_ciclos.ipynb` | Reciclagem de alegações entre ciclos eleitorais |
 | `05_avaliacao.ipynb` | Conjunto de teste de reescrita e normalização da consulta |
 | `06_modelos.ipynb` | Comparação de modelos de embeddings (Recall@k e MRR) |
 
 Os módulos `.py` da pasta guardam a lógica que os notebooks importam; o
-[README de experiments](experiments/README.md) descreve cada um. O registro dos gates está em
-[historico-gates.md](experiments/historico-gates.md).
+[README de experiments](experiments/README.md) descreve cada um. Produtos descartados e o
+registro dos gates deles estão em [archive/](archive/README.md) e não devem ser usados como
+referência.
 
 ```sh
 python3 -m venv .venv
@@ -34,6 +33,10 @@ cd experiments && ../.venv/bin/jupyter lab
 
 ## Código do bot: `src/`
 
+[src/inteligencia/](src/inteligencia/README.md) tem as duas camadas que o bot chama:
+`buscar()` (checagens parecidas) e `classificar()` (sinais de alerta). O contrato está no README
+dele.
+
 [src/checagens/](src/checagens/) guarda as regras que o bot aplica:
 
 - `mensagens.py`: formatação, robustez e transparência das respostas.
@@ -43,20 +46,21 @@ cd experiments && ../.venv/bin/jupyter lab
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[test]'
-python -m pytest -q        # testes do bot e das regras do gate
+python -m pytest -q        # testes do bot e dos experimentos
 make latency               # tempo de resposta nas 30 mensagens de teste (RNF-01)
 ```
 
 ## Estrutura
 
 - [experiments/](experiments/): notebooks, módulos e resultados dos modelos.
+- [src/inteligencia/](src/inteligencia/README.md): camadas 1 e 2 (busca e sinais de alerta).
 - [src/checagens/](src/checagens/): regras de mensagens e registros do bot.
 - [tests/](tests/): verificações automáticas (rodam no CI).
 - [scripts/](scripts/): medição de latência.
 - [data/](data/): mensagens de teste e benchmark.
 - [docs/](docs/): documentação publicada via GitHub Pages (docsify).
 - [openspec/](openspec/): propostas e specs geridas pelo [OpenSpec](https://openspec.dev).
+- [archive/](archive/README.md): produtos descartados; não usar como referência.
 
 O protótipo de busca das semanas 1 a 3 (API, embeddings e retrieval em `src/`) foi retirado; ele
-continua no histórico do git (tag `legado-busca` e commits da `main`) e nos guias semanais em
-[docs/](docs/).
+continua no histórico do git (tag `legado-busca` e commits da `main`).

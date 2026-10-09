@@ -1,0 +1,42 @@
+# Pipeline das duas camadas (RF-14). Comando único: `dvc repro` (ou um estágio: `dvc repro treinar`).
+# Rode com o ambiente ativado (source .venv/bin/activate) e o pacote instalado (pip install -e '.[busca]'). Resultados pequenos (CSV/JSON) ficam no git
+# (cache: false); modelo e índice ficam no cache do DVC.
+stages:
+  indice:
+    cmd: python -m inteligencia.busca --construir
+    deps:
+      - data/processados/checagens/checagens.json
+      - src/inteligencia/busca.py
+    outs:
+      - data/indices/camada1
+
+  calibrar:
+    # Não grava params.yaml sozinho: revise calibracao_camada1_casos.csv e rode com --gravar à mão.
+    cmd: python -m inteligencia.calibracao
+    deps:
+      - data/indices/camada1
+      - data/testes_benchmark.json
+      - src/inteligencia/calibracao.py
+      - src/inteligencia/busca.py
+    outs:
+      - experiments/results/calibracao_camada1.csv:
+          cache: false
+      - experiments/results/calibracao_camada1_casos.csv:
+          cache: false
+
+  treinar:
+    cmd: python -m inteligencia.treino
+    deps:
+      - data/processados/treino/treino.json
+      - src/inteligencia/treino.py
+      - src/inteligencia/classificador.py
+    params:
+      - semente
+      - camada2
+    outs:
+      - models/classificador.joblib
+      - experiments/results/params_camada2.json:
+          cache: false
+    metrics:
+      - experiments/results/metricas_camada2.json:
+          cache: false

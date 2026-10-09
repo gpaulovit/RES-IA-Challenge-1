@@ -30,8 +30,8 @@ The system SHALL downgrade `ja_checado` to `relacionada` when exactly one of the
 - **THEN** the `faixa` is `relacionada`
 
 ### Requirement: Calibrated against the benchmark
-The thresholds SHALL be chosen on `data/testes_benchmark.json` so that the correct fact-check is in the top 3 for at least 70% of the 24 rewrites (RNF-04) and at most 2 of the 32 controls are `ja_checado` (RNF-05), with the 6 negation cases reported separately.
+The thresholds SHALL be chosen on `data/testes_benchmark.json` so that the correct fact-check is in the top 3 for at least 70% of the 24 rewrites (RNF-04) and at most 2 of the 32 controls are `ja_checado` (RNF-05). As an internal criterion of the models team (not a requirement), at most 8 of the 32 controls may receive any fact-check (`ja_checado` or `relacionada`). The 6 negation cases are reported separately.
 
 #### Scenario: Calibration report
 - **WHEN** the calibration script runs
-- **THEN** it writes `experiments/results/calibracao_camada1.csv` with top-3 hit rate, controls marked `ja_checado` and negation outcomes for each threshold pair, and stores the chosen pair in `params.yaml`
+- **THEN** it writes `experiments/results/calibracao_camada1.csv` with top-3 hit rate, controls marked `ja_checado` and `relacionada`, and negation outcomes for each threshold pair, prints the outcome with and without that cap, and stores the chosen pair in `params.yaml`

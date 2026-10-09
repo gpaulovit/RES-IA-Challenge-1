@@ -3,6 +3,8 @@
 - [Requisitos](requisitos.md)
 - [Histórias de usuário](historias.md)
 - [Referências](refs.md)
+- Modelos de IA
+  - [Relatório da camada 2](relatorio-camada2.md)
 - Engenharia
   - [Guia da arquiteta](guia-arquiteta.md)
   - [Testes e benchmark](testes.md)

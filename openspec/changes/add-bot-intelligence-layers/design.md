@@ -7,10 +7,10 @@
 
 ## Decisions
 
-### 1. Protótipo em `experiments/`, depois `src/checagens/`
+### 1. Protótipo em `experiments/`, depois `src/inteligencia/`
 
 Cada camada nasce em `experiments/` e é validada com a base real. Só então sobe para
-`src/checagens/`, com testes que não baixam modelo. O código de busca antigo foi removido no
+`src/inteligencia/` (pacote separado do `src/checagens/` da Engenharia), com testes que não baixam modelo. O código de busca antigo foi removido no
 refactor e não é reaproveitado.
 
 ### 2. Esquema da base de checagens
@@ -27,6 +27,27 @@ validação fica numa função só, para que uma mudança de esquema mexa num lu
 - O índice é salvo com hash SHA-256 dos arquivos e conferido ao carregar.
 - Limites iniciais 0,85 / 0,60 (RN-05), recalibrados no benchmark. O resultado fica em
   `params.yaml` e o arquivo de origem em `experiments/results/calibracao_camada1.csv`.
+- **Critério interno na calibração:** no máximo 8 dos 32 controles (25%) recebem alguma checagem
+  (`ja_checado` + `relacionada`), além da RNF-05 (no máximo 2 em `ja_checado`). Contar só
+  `relacionada` permitiria cumprir o teto empurrando controles para `ja_checado`. Esse critério não está nos requisitos. Ele existe porque, no
+  teste de fumaça com o FactPolCheckBr, a regra sem teto escolheu limite médio 0,50, e 26 de 32
+  notícias reais receberiam uma checagem "relacionada" sem relação.
+  **Onde impacta:**
+  - limite médio mais alto em `params.yaml`;
+  - menos reescritas com a checagem certa mostrada (`reescritas_mostradas`: 71% → cerca de 25% no
+    teste de fumaça). O top-3 da RNF-04 não muda, porque não depende dos limites;
+  - mais mensagens vão direto para a camada 2 sem checagem mostrada. Se a camada 2 for `no-go`,
+    essas mensagens recebem só "não encontrei" e os links das agências (RN-04);
+  - a faixa `relacionada` pode sumir (limite médio = limite alto) quando ela não acrescenta
+    nenhuma checagem certa além das que custam controles. Isso aconteceu no teste de fumaça, e o
+    fluxo "relacionada + camada 2" da RN-05 fica sem uso.
+
+  O script imprime o resultado com e sem o teto, para o custo ficar visível a cada execução. A
+  decisão deve ser comunicada a Produto (Ana).
+- Normalização da consulta (RF-05): dicionários de apelidos e internetês (`src/inteligencia/normalizacao.py`),
+  sem Enelvo. Os dicionários são posteriores ao benchmark e podem ter sido montados olhando para ele,
+  então o ganho em apelidos é otimista. A calibração relata o top-3 com e sem a normalização, e
+  nenhuma entrada nova deve ser criada a partir do benchmark.
 - Negação (RN-06): uma lista de palavras de negação, depois de normalizar caixa e acento. Se só um
   dos dois textos (consulta ou checagem) tiver negação, a faixa máxima é `relacionada`.
 
@@ -34,15 +55,16 @@ validação fica numa função só, para que uma mudança de esquema mexa num lu
 
 - `TfidfVectorizer` seguido de `LogisticRegression(class_weight="balanced")`, com semente fixa
   (RNF-10).
-- Divisão por época: treino até 2019, validação 2020 (só para escolher os cortes das faixas),
-  teste 2021–2022 (RN-04).
+- Divisão por época: treino com ano ≤ 2020, teste com ano ≥ 2021 (RN-04). Os cortes das faixas
+  saem de validação cruzada em 5 partes dentro do treino. Com treino até 2019, quase todas as
+  verdadeiras viriam só do Fake.br, o que reforçaria o atalho de fonte.
 - Sinais: os termos presentes no texto com maior contribuição (`tfidf × coeficiente`) na direção
   da faixa.
 
 ### 5. Critério de go/no-go (escrito antes do teste)
 
 `go` ⇔ F1 macro ≥ 0,75 (RNF-02) **e** no máximo 15% das notícias verdadeiras do teste em
-`muitos_sinais` (RNF-03). O critério é registrado em `docs/relatorio-camada2.md` antes da primeira
+`muitos_sinais` (RNF-03) **e** ao menos 100 itens de cada classe no teste. O critério é registrado em `docs/relatorio-camada2.md` antes da primeira
 execução no teste. Com `no-go`, o bot vai ao ar só com a camada 1.
 
 ### 6. Versionamento (RF-14)
