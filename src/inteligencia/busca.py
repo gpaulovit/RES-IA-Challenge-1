@@ -28,7 +28,8 @@ RAIZ = Path(__file__).resolve().parents[2]
 BASE_PADRAO = RAIZ / "data" / "processados" / "checagens" / "checagens.json"
 INDICE_PADRAO = RAIZ / "data" / "indices" / "camada1"
 
-# Mesmo modelo e revisão de experiments/modelos.py (MINILM), escolhido no notebook 06
+# Mesmo modelo e revisão de experiments/modelos.py (MINILM). Comparação preliminar no notebook 06: com a
+# consulta normalizada, empata com os outros 5 candidatos (MRR 0,917 contra 0,909–0,929) e é o mais rápido
 MODELO = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 REVISAO = "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
 PARAMS_PADRAO = RAIZ / "params.yaml"

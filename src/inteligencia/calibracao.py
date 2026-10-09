@@ -1,14 +1,11 @@
 """Calibra os limites da RN-05 no benchmark (RNF-04, RNF-05) e relata os casos de negação (RN-06).
 
-Regra de escolha (fixada antes de rodar com a base real):
+Regra de escolha:
 1. Restrições:
    a. no máximo 2 dos 32 controles caem em `ja_checado` (RNF-05);
    b. no máximo 8 dos 32 controles (25%) recebem alguma checagem (`ja_checado` + `relacionada`).
-      Contar só `relacionada` deixaria a regra "cumprir" o teto empurrando controles para
-      `ja_checado`, que é pior. Esse é um critério interno da
-      frente de Modelos, não um requisito: sem ele, o limite médio desce até o bot mostrar uma
-      checagem sem relação para quase toda notícia real (26 de 32 no teste de fumaça com o
-      FactPolCheckBr). Impacto: o limite médio sobe, e menos reescritas têm a checagem certa
+      Contar só `relacionada` deixaria a regra "cumprir" o teto empurrando controles para `ja_checado`, que é pior. Esse é um critério interno da
+      frente de Modelos, não um requisito: sem ele, o limite médio desce até o bot mostrar uma checagem sem relação para quase toda notícia real. Impacto: o limite médio sobe, e menos reescritas têm a checagem certa 
       mostrada. O custo aparece na coluna `reescritas_mostradas`.
 2. Maximiza: reescritas (gíria, apelido, erro ortográfico, recorrência temporal) em que a checagem
    certa aparece no top-3 **e é mostrada** ao usuário (faixa `ja_checado` ou `relacionada`).
@@ -48,7 +45,7 @@ BENCHMARK = RAIZ / "data" / "testes_benchmark.json"
 RESULTADOS = RAIZ / "experiments" / "results"
 REESCRITAS = {"giria", "apelido", "erro_ortografico", "recorrencia_temporal"}
 MAX_CONTROLES_JA_CHECADO = 2   # RNF-05
-MAX_CONTROLES_MOSTRADOS = 8    # critério interno (25% dos 32 controles); ver regra 1b no topo
+MAX_CONTROLES_MOSTRADOS = 8    
 META_TOP3 = 0.70               # RNF-04
 K = 3
 

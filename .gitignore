@@ -53,3 +53,4 @@ __pycache__/
 # Dados gerados localmente e registros de auditoria
 data/indices/
 data/registros/
+entrega_*.zip

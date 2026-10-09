@@ -37,14 +37,13 @@ ROTULOS = {"falso": True, "verdadeiro": False}     # classe positiva: notícia f
 PARAMS_PADRAO = RAIZ / "params.yaml"
 RESULTADOS = RAIZ / "experiments" / "results"
 
-# Critério pré-registrado (docs/relatorio-camada2.md, "Critério de decisão"). Não mudar depois do teste.
 F1_MINIMO = 0.75          # RNF-02
 FALSO_ALARME_MAXIMO = 0.15  # RNF-03
 MINIMO_POR_CLASSE = 100
 MINIMO_POR_CLASSE_FONTE = 30   # relato complementar: F1 dentro de cada fonte
 
 
-# ---------------------------------------------------------------- dados
+# dados
 
 def _validar_item(item, posicao: int) -> dict:
     """Único lugar que conhece o esquema da base de treino: se a frente de Dados mudar, muda só aqui.
@@ -81,7 +80,7 @@ def remover_repetidos(treino: list[dict], teste: list[dict]) -> tuple[list[dict]
     return limpo, len(teste) - len(limpo)
 
 
-# ---------------------------------------------------------------- métricas
+#  métricas
 
 def _r(x: float) -> float:
     return round(float(x), 6)
@@ -146,7 +145,7 @@ def avaliar(clf: Classificador, treino: list[dict], teste: list[dict], semente: 
     }
 
 
-# ---------------------------------------------------------------- comando
+# comando
 
 def treinar(treino: list[dict], params: dict) -> Classificador:
     """Cortes das faixas pela validação cruzada no treino; depois, o modelo final com o treino inteiro."""
