@@ -53,8 +53,8 @@ preenchidas, mas ainda existem problemas que precisam permanecer visíveis:
 - o título da checagem pode conter uma correção e não apenas a alegação original.
 
 Por isso, a inspeção está concluída, mas o corpus ainda não está pronto para a
-análise. O diagnóstico detalhado e os comandos de reprodução estão em
-[Semana 1 — Engenharia](semana-1-engenharia.md).
+análise. O tratamento adotado para esses pontos (datas, vereditos vazios,
+duplicatas) e os comandos de reprodução estão em [Dados](dados.md).
 
 ## 4. Mapa das entregas de Engenharia
 
@@ -173,8 +173,8 @@ conceitos que aparecem na entrega atual:
 4. **Embeddings e similaridade:** representação numérica e comparação de textos.
 5. **k-NN e top-k:** busca dos itens mais próximos e quantidade de resultados.
 
-O [Glossário](glossario.md) explica os termos do projeto. A
-[Organização da Engenharia](engenharia.md) mostra a estrutura do protótipo atual.
+O contrato das bases de dados (campos, caminhos e como regenerá-las) está em
+[Dados](dados.md).
 
 ## Resumo
 

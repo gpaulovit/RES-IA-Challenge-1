@@ -6,6 +6,7 @@ agências (camada 1) e, sem checagem parecida, mostra uma faixa de alerta (camad
 ## Conteúdo
 
 - [Perguntas](perguntas.md): problema, dados por eixo e respostas de MLOps.
+- [Dados do bot](dados.md) — base de checagens (camada 1) e base de treino do classificador (camada 2): fontes, campos, tamanhos, licenças, limitações e como regenerar.
 - [Requisitos](requisitos.md): o bot no Telegram, com decisões, requisitos funcionais e não funcionais, regras e prioridade.
 - [Histórias de usuário](historias.md): quem usa o bot e para quê, com critérios de aceitação.
 - [Referências](refs.md): datasets usados, MLOps e SDD.

@@ -1,0 +1,734 @@
+{
+  "corte": "2018-09-15",
+  "estrategia": "treino = Fake.br-Corpus (size_normalized_texts) + FakeWhatsApp.Br até o corte; teste = FakeWhatsApp.Br depois do corte; teste_curtos = FakeTweet.Br",
+  "entrada": {
+    "Fake.br-Corpus": 7200,
+    "FakeWhatsApp.Br": {
+      "mensagens": 282601,
+      "rotuladas": 21289,
+      "rotuladas_texto": 21289
+    },
+    "FakeTweet.Br": 299
+  },
+  "carimbos_removidos": {
+    "Fake.br-Corpus / falso": {
+      "e_fake_e_falso": 20,
+      "palavra_em_maiusculas": 13
+    },
+    "Fake.br-Corpus / verdadeiro": {
+      "e_fake_e_falso": 3
+    },
+    "FakeWhatsApp.Br / falso": {
+      "e_fake_e_falso": 128,
+      "palavra_em_maiusculas": 74,
+      "trecho_de_link_com_rotulo": 11,
+      "link_de_agencia": 7,
+      "hashtag_de_rotulo": 5
+    },
+    "FakeWhatsApp.Br / verdadeiro": {
+      "e_fake_e_falso": 49,
+      "palavra_em_maiusculas": 14,
+      "trecho_de_link_com_rotulo": 14,
+      "link_de_agencia": 11,
+      "hashtag_de_rotulo": 6
+    }
+  },
+  "carimbos_removidos_teste_curtos": {
+    "FakeTweet.Br / falso": {
+      "link_de_agencia": 1,
+      "hashtag_de_rotulo": 1,
+      "trecho_de_link_com_rotulo": 1,
+      "e_fake_e_falso": 1
+    },
+    "FakeTweet.Br / verdadeiro": {
+      "e_fake_e_falso": 23,
+      "link_de_agencia": 22,
+      "trecho_de_link_com_rotulo": 15,
+      "hashtag_de_rotulo": 10,
+      "palavra_em_maiusculas": 6
+    }
+  },
+  "exemplos_carimbos": {
+    "e_fake_e_falso | Fake.br-Corpus / falso": [
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "Fake.br-Corpus",
+        "rotulo": "falso",
+        "antes": "Após denúncia da Veja, irmã de Aécio publica vídeo e chora: \"Vamos provar que é mentira\". .  Após ser denunciado por uma matéria na Revista Veja neste fim de semana, o senador Aécio Neves se mostrou indignado com as acusações recebidas. De acordo com a revista, Benedicto Junior, executivo da Odebrec",
+        "depois": "Após denúncia da Veja, irmã de Aécio publica vídeo e chora: \"Vamos provar que \". Após ser denunciado por uma matéria na Revista Veja neste fim de semana, o senador Aécio Neves se mostrou indignado com as acusações recebidas. De acordo com a revista, Benedicto Junior, executivo da Odebrecht, afirmou "
+      },
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "Fake.br-Corpus",
+        "rotulo": "falso",
+        "antes": "Promotor desmente homem mais honesto do país. .  Brasília (DF) – O ex-presidente Luiz Inácio Lula da Silva mentiu ao dizer que comprou cotas de um apartamento tríplex no Guarujá (SP),  segundo o conselheiro da Associação das Vítimas da Cooperativa do Sindicato dos Bancários de São Paulo (Bancoop),  ",
+        "depois": "Promotor desmente homem mais honesto do país. Brasília (DF) – O ex-presidente Luiz Inácio Lula da Silva mentiu ao dizer que comprou cotas de um apartamento tríplex no Guarujá (SP), segundo o conselheiro da Associação das Vítimas da Cooperativa do Sindicato dos Bancários de São Paulo (Bancoop), Marco"
+      },
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "Fake.br-Corpus",
+        "rotulo": "falso",
+        "antes": "Após Lula dizer que vai processá-lo,  Wanderlei Silva não se cala e parte pra cima.  Ao saber que o ex-presidente Luiz Inácio Lula da Silva havia se manifestado pelo Facebook dizendo que ia processar o lutador por uma postagem,   a reação de Silva foi imediata.  \"Eu é que tenho que processá-lo. Porq",
+        "depois": "Após Lula dizer que vai processá-lo, Wanderlei Silva não se cala e parte pra cima. Ao saber que o ex-presidente Luiz Inácio Lula da Silva havia se manifestado pelo Facebook dizendo que ia processar o lutador por uma postagem, a reação de Silva foi imediata. \"Eu é que tenho que processá-lo. Porque el"
+      }
+    ],
+    "e_fake_e_falso | Fake.br-Corpus / verdadeiro": [
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "Fake.br-Corpus",
+        "rotulo": "verdadeiro",
+        "antes": "Acidente com Teori Zavascki: veja o que se sabe até agora e o que é boato ou não tem fundamento. Saiba o que foi confirmado, o que está sendo investigado e o que já foi descartado com relação a perguntas e boatos que circulam na internet sobre o acidente.. Após a morte do ministro Teori Zavascki e d",
+        "depois": "Acidente com Teori Zavascki: veja o que se sabe até agora e o que ou não tem fundamento. Saiba o que foi confirmado, o que está sendo investigado e o que já foi descartado com relação a perguntas e boatos que circulam na internet sobre o acidente.. Após a morte do ministro Teori Zavascki e de mais q"
+      },
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "Fake.br-Corpus",
+        "rotulo": "verdadeiro",
+        "antes": "Jogo da Baleia Azul: Até que ponto devemos nos preocupar?. Relatos no Brasil citam adolescentes vulneráveis que estariam sendo encorajados a retirar a própria vida em desafios online; conheça histórico do caso e saiba como detectar sinais de assédio na internet.. A Prefeitura de Curitiba (PR) emite ",
+        "depois": "Jogo da Baleia Azul: Até que ponto devemos nos preocupar?. Relatos no Brasil citam adolescentes vulneráveis que estariam sendo encorajados a retirar a própria vida em desafios online; conheça histórico do caso e saiba como detectar sinais de assédio na internet.. A Prefeitura de Curitiba (PR) emite "
+      },
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "Fake.br-Corpus",
+        "rotulo": "verdadeiro",
+        "antes": "Após Temer ceder à pressão de procuradores e do Banco Central para determinar o afastamento de quatro vice-presidentes da Caixa, o banco divulgou que o presidente Gilberto Occhi assinou portaria para substituir, por 30 dias, os executivos. “Após os 30 dias, caso haja necessidade, as designações pass",
+        "depois": "Após Temer ceder à pressão de procuradores e do Banco Central para determinar o afastamento de quatro vice-presidentes da Caixa, o banco divulgou que o presidente Gilberto Occhi assinou portaria para substituir, por 30 dias, os executivos. “Após os 30 dias, caso haja necessidade, as designações pass"
+      }
+    ],
+    "e_fake_e_falso | FakeWhatsApp.Br / falso": [
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "Atenção ....está circulando aí um pedido para que adicione Flávio Bolsonaro nos seus  contatos . Não faça isso pois é fake;  é um hacker que está tentando pegar dados de celular.  Passe para quem você puder. Isso foi checado.\n\nRealmente é um vírus. Cuidado.",
+        "depois": "Atenção ....está circulando aí um pedido para que adicione Flávio Bolsonaro nos seus contatos Não faça isso pois ; é um hacker que está tentando pegar dados de celular. Passe para quem você puder. Isso foi checado. Realmente é um vírus. Cuidado."
+      },
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "GRAVÍSSIMO ESTE ÁUDIO !!☝☝ TEMOS QUE TER A CERTEZA QUE NÃO É MENTIRA.  VAMOS COMPARTILHAR PARA ALGUÉM DAR ALGUMA RESPOSTA",
+        "depois": "GRAVÍSSIMO ESTE ÁUDIO !!☝☝ TEMOS QUE TER A CERTEZA QUE NÃO VAMOS COMPARTILHAR PARA ALGUÉM DAR ALGUMA RESPOSTA"
+      },
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "Atenção pessoal: vídeo da Joice com informações urgentes sobre um possível atentado forjado ao Haddad ou a alguém ligado a esquerda, na próxima semana, dias antes das eleições! Repassem para o máximo de pessoas possíveis com essa mensagem, pra pessoa ficar a par do que se trata. NÃO É FAKE NEWS!!!!",
+        "depois": "Atenção pessoal: vídeo da Joice com informações urgentes sobre um possível atentado forjado ao Haddad ou a alguém ligado a esquerda, na próxima semana, dias antes das eleições! Repassem para o máximo de pessoas possíveis com essa mensagem, pra pessoa ficar a par do que se trata. NÃO"
+      }
+    ],
+    "e_fake_e_falso | FakeWhatsApp.Br / verdadeiro": [
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "*Amigos apoiadores do Capitão, temos um recado:*\n\nHá uma falsa corrente circulando pelo Whatsapp, com o nome 'Fiscais do Jair', que induz as pessoas a escreverem o número 17 em seu comprovante de votação, tirarem foto e a enviarem para grupos de Whatsapp. *Isso é FALSO*.\n\nSabemos que o apoio a Bolso",
+        "depois": "*Amigos apoiadores do Capitão, temos um recado:* Há uma falsa corrente circulando pelo Whatsapp, com o nome 'Fiscais do Jair', que induz as pessoas a escreverem o número 17 em seu comprovante de votação, tirarem foto e a enviarem para grupos de Whatsapp. *Isso Sabemos que o apoio a Bolsonaro, pelas "
+      },
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "Vocês Acredito que ainda vai ter gente com a cara de pau de dizer que isso aqui é mentira que vergonha para o Brasil em enquanto isso um pai de família uma dona de casa que trabalha a vida inteira é maior humilhação para se aposentar e vem uma pessoa dessa à toa que poderia criar vergonha na cara e ",
+        "depois": "Vocês Acredito que ainda vai ter gente com a cara de pau de dizer que isso aqui vergonha para o Brasil em enquanto isso um pai de família uma dona de casa que trabalha a vida inteira é maior humilhação para se aposentar e vem uma pessoa dessa à toa que poderia criar vergonha na cara e respeitar o po"
+      },
+      {
+        "tipo": "e_fake_e_falso",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "🔴🇧🇷 Atenção não fotografem seu comprovante de voto . Bolsonaro não está pedindo isso e pior, *pode configurar crime eleitoral. Não enviem NADA para Bolsonaro* 👊🏻 isso é Fake News contra o candidato. Todo cuidado é pouco. Pode configurar a prestação de contas da compra do voto,  além de romper com o ",
+        "depois": "🔴🇧🇷 Atenção não fotografem seu comprovante de voto Bolsonaro não está pedindo isso e pior, *pode configurar crime eleitoral. Não enviem NADA para Bolsonaro* 👊🏻 isso contra o candidato. Todo cuidado é pouco. Pode configurar a prestação de contas da compra do voto, além de romper com o princípio do si"
+      }
+    ],
+    "hashtag_de_rotulo | FakeWhatsApp.Br / falso": [
+      {
+        "tipo": "hashtag_de_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "Começaram as remoções dos símbolos comunistas de todo o Brasil. Começou hoje pela estátua de Che Guevara em Paraíba do Sul que foi retirada com o apoio do povo da cidade.  Graças a Deus o povo brasileiro está acordando para o sistema comunista que querem implantar no Brasil igual a Cuba e Venezuela.",
+        "depois": "Começaram as remoções dos símbolos comunistas de todo o Brasil. Começou hoje pela estátua de Che Guevara em Paraíba do Sul que foi retirada com o apoio do povo da cidade. Graças a Deus o povo brasileiro está acordando para o sistema comunista que querem implantar no Brasil igual a Cuba e Venezuela. "
+      },
+      {
+        "tipo": "hashtag_de_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "Começaram as remoções dos símbolos comunistas de todo o Brasil. Começou hoje pela estátua de Che Guevara em Paraíba do Sul que foi retirada com o apoio do povo da cidade.  Graças a Deus o povo brasileiro está acordando para o sistema comunista que querem implantar no Brasil igual a Cuba e Venezuela.",
+        "depois": "Começaram as remoções dos símbolos comunistas de todo o Brasil. Começou hoje pela estátua de Che Guevara em Paraíba do Sul que foi retirada com o apoio do povo da cidade. Graças a Deus o povo brasileiro está acordando para o sistema comunista que querem implantar no Brasil igual a Cuba e Venezuela. "
+      },
+      {
+        "tipo": "hashtag_de_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "Começaram as remoções dos símbolos comunistas de todo o Brasil. Começou hoje pela estátua de Che Guevara em Paraíba do Sul que foi retirada com o apoio do povo da cidade.  Graças a Deus o povo brasileiro está acordando para o sistema comunista que querem implantar no Brasil igual a Cuba e Venezuela.",
+        "depois": "Começaram as remoções dos símbolos comunistas de todo o Brasil. Começou hoje pela estátua de Che Guevara em Paraíba do Sul que foi retirada com o apoio do povo da cidade. Graças a Deus o povo brasileiro está acordando para o sistema comunista que querem implantar no Brasil igual a Cuba e Venezuela. "
+      }
+    ],
+    "hashtag_de_rotulo | FakeWhatsApp.Br / verdadeiro": [
+      {
+        "tipo": "hashtag_de_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "#ATENÇÃO Não haverá paralisação nenhuma dia 7 de setembro. Não caia em #fakenews de quem quer usar os caminhoneiros como massa de manobra. A mídia nacional está publicando em massa uma nota falsa de uma entidade que nunca ouvimos falar. Já está marcada, sim, com todas as entidades reais e lideranças",
+        "depois": "#ATENÇÃO Não haverá paralisação nenhuma dia 7 de setembro. Não caia em de quem quer usar os caminhoneiros como massa de manobra. A mídia nacional está publicando em massa uma nota falsa de uma entidade que nunca ouvimos falar. Já está marcada, sim, com todas as entidades reais e lideranças represent"
+      },
+      {
+        "tipo": "hashtag_de_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "#ATENÇÃO Não haverá paralisação nenhuma dia 7 de setembro. Não caia em #fakenews de quem quer usar os caminhoneiros como massa de manobra. A mídia nacional está publicando em massa uma nota falsa de uma entidade que nunca ouvimos falar. Já está marcada, sim, com todas as entidades reais e lideranças",
+        "depois": "#ATENÇÃO Não haverá paralisação nenhuma dia 7 de setembro. Não caia em de quem quer usar os caminhoneiros como massa de manobra. A mídia nacional está publicando em massa uma nota falsa de uma entidade que nunca ouvimos falar. Já está marcada, sim, com todas as entidades reais e lideranças represent"
+      }
+    ],
+    "link_de_agencia | FakeWhatsApp.Br / falso": [
+      {
+        "tipo": "link_de_agencia",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "O primeiro-ministro chinês Wen Jiabao fez essas recomendações aos países emergentes:\n\n*\"Pena de morte por crimes comprovados:* nenhuma sociedade honesta e trabalhadora merece viver com tanto medo. \nA eliminação de criminosos perigosos assusta o resto dos criminosos. \n*A segurança pública crescerá e ",
+        "depois": "O primeiro-ministro chinês Wen Jiabao fez essas recomendações aos países emergentes: *\"Pena de morte por crimes comprovados:* nenhuma sociedade honesta e trabalhadora merece viver com tanto medo. A eliminação de criminosos perigosos assusta o resto dos criminosos. *A segurança pública crescerá e seu"
+      },
+      {
+        "tipo": "link_de_agencia",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "O primeiro-ministro chinês Wen Jiabao fez essas recomendações aos países emergentes:\n\n*\"Pena de morte por crimes comprovados:* nenhuma sociedade honesta e trabalhadora merece viver com tanto medo. \nA eliminação de criminosos perigosos assusta o resto dos criminosos. \n*A segurança pública crescerá e ",
+        "depois": "O primeiro-ministro chinês Wen Jiabao fez essas recomendações aos países emergentes: *\"Pena de morte por crimes comprovados:* nenhuma sociedade honesta e trabalhadora merece viver com tanto medo. A eliminação de criminosos perigosos assusta o resto dos criminosos. *A segurança pública crescerá e seu"
+      },
+      {
+        "tipo": "link_de_agencia",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "O primeiro-ministro chinês Wen Jiabao fez essas recomendações aos países emergentes:\n\n*\"Pena de morte por crimes comprovados:* nenhuma sociedade honesta e trabalhadora merece viver com tanto medo. \nA eliminação de criminosos perigosos assusta o resto dos criminosos. \n*A segurança pública crescerá e ",
+        "depois": "O primeiro-ministro chinês Wen Jiabao fez essas recomendações aos países emergentes: *\"Pena de morte por crimes comprovados:* nenhuma sociedade honesta e trabalhadora merece viver com tanto medo. A eliminação de criminosos perigosos assusta o resto dos criminosos. *A segurança pública crescerá e seu"
+      }
+    ],
+    "link_de_agencia | FakeWhatsApp.Br / verdadeiro": [
+      {
+        "tipo": "link_de_agencia",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "Urnas eletrônicas estão programadas para o horário de verão #boato https://www.boatos.org/politica/urnas-eletronicas-horario-verao.html",
+        "depois": "Urnas eletrônicas estão programadas para o horário de verão"
+      },
+      {
+        "tipo": "link_de_agencia",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "Lula vai dar entrevista para TV no dia 27/10, véspera das eleições #boato https://www.boatos.org/politica/lula-entrevista-dia-27-eleicoes.html",
+        "depois": "Lula vai dar entrevista para TV no dia 27/10, véspera das eleições"
+      },
+      {
+        "tipo": "link_de_agencia",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "Acabei de ver um comercial do Haddad dizendo que o Bolsonaro votou contra os deficientes. Mais uma fake news!!!\n\nEspalhem a verdade:\n\nhttps://m.facebook.com/story.php?story_fbid=2346199888940990&id=232788843580414&_rdr\n\nhttps://www.boatos.org/politica/bolsonaro-filho-contra-lei-de-inclusao.html",
+        "depois": "Acabei de ver um comercial do Haddad dizendo que o Bolsonaro votou contra os deficientes. Mais uma fake news!!! Espalhem a verdade: https://m.facebook.com/story.php?story_fbid=2346199888940990&id=232788843580414&_rdr"
+      }
+    ],
+    "palavra_em_maiusculas | Fake.br-Corpus / falso": [
+      {
+        "tipo": "palavra_em_maiusculas",
+        "fonte": "Fake.br-Corpus",
+        "rotulo": "falso",
+        "antes": "MAIS FALSO QUE NOTA DE 4 REAIS: Lula ataca Dilma novamente:\"Ela mexeu no bolso do trabalhador\".  Está claro,  óbvio,  cristalino que Lula está tentando conseguir uma \"boquinha\" no governo de Michel Temer para obter o foro privilegiado.  O ex-presidente percebeu que não adianta mais defender a presid",
+        "depois": "MAIS QUE NOTA DE 4 REAIS: Lula ataca Dilma novamente:\"Ela mexeu no bolso do trabalhador\". Está claro, óbvio, cristalino que Lula está tentando conseguir uma \"boquinha\" no governo de Michel Temer para obter o foro privilegiado. O ex-presidente percebeu que não adianta mais defender a presidente Dilma"
+      },
+      {
+        "tipo": "palavra_em_maiusculas",
+        "fonte": "Fake.br-Corpus",
+        "rotulo": "falso",
+        "antes": "Mendes toma novo \"esculacho\" de Barroso ao defender Michel Temer.  Os ministros Gilmar Mendes e Luís Barroso voltaram a se estranhar no STF.  (sessão de hoje 19/12) A discussão ocorreu durante um debate sobre as atuações da PGR e do Ministério Público no combate à corrupção. Gilmar atacou Rodrigo Ja",
+        "depois": "Mendes toma novo \"esculacho\" de Barroso ao defender Michel Temer. Os ministros Gilmar Mendes e Luís Barroso voltaram a se estranhar no STF. (sessão de hoje 19/12) A discussão ocorreu durante um debate sobre as atuações da PGR e do Ministério Público no combate à corrupção. Gilmar atacou Rodrigo Jano"
+      },
+      {
+        "tipo": "palavra_em_maiusculas",
+        "fonte": "Fake.br-Corpus",
+        "rotulo": "falso",
+        "antes": "Desarmar o CIDADÃO DE BEM é a solução? Brasil tem \"3 massacres de Las Vegas\" por dia!.  Estudo feito em Harvard comprova que a posse de armas deixa uma população mais segura.  No último domingo (01), cerca de 59 pessoas morreram e outras 500 ficaram feridas após um homem atirar contra uma multidão e",
+        "depois": "Desarmar o CIDADÃO DE BEM é a solução? Brasil tem \"3 massacres de Las Vegas\" por dia!. Estudo feito em Harvard comprova que a posse de armas deixa uma população mais segura. No último domingo (01), cerca de 59 pessoas morreram e outras 500 ficaram feridas após um homem atirar contra uma multidão em "
+      }
+    ],
+    "palavra_em_maiusculas | FakeWhatsApp.Br / falso": [
+      {
+        "tipo": "palavra_em_maiusculas",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "*https://youtu.be/KBybiklu6Fk..................... 📣📢FALSO ATENTADO PODE ESTAR EM CURSO!!! .......... Divulgue para todos seus contatos!!!!*",
+        "depois": "*https://youtu.be/KBybiklu6Fk..................... 📣📢 ATENTADO PODE ESTAR EM CURSO!!! Divulgue para todos seus contatos!!!!*"
+      },
+      {
+        "tipo": "palavra_em_maiusculas",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "*Jovem se esfaqueia para provar que facada de Bolsonaro foi falsa e acaba morrendo😳*\n\nUm homem inconformado por a facada de Bolsonaro não ter saído sangue resolve se esfaquear e provar para os amigos que a facada foi falsa, após se alto desferir a facada, Denilson Lopes não resistiu ao ferimento e a",
+        "depois": "*Jovem se esfaqueia para provar que facada de Bolsonaro foi falsa e acaba morrendo😳* Um homem inconformado por a facada de Bolsonaro não ter saído sangue resolve se esfaquear e provar para os amigos que a facada foi falsa, após se alto desferir a facada, Denilson Lopes não resistiu ao ferimento e ac"
+      },
+      {
+        "tipo": "palavra_em_maiusculas",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "Aplaudindo com pés e mãos.... sensacional \n\nAssino junto.\n\nDESABAFO DE MÃE!\n\n“ O pior para mim... é a juventude - representada pela figura de Manuela D ́Ávila...\nJuventude da classe média ou média alta, que foi educada em colégios particulares, que moram em casas confortáveis, desfrutam de comida de",
+        "depois": "Aplaudindo com pés e mãos.... sensacional Assino junto. DESABAFO DE MÃE! “ O pior para mim... é a juventude representada pela figura de Manuela D ́Ávila... Juventude da classe média ou média alta, que foi educada em colégios particulares, que moram em casas confortáveis, desfrutam de comida de quali"
+      }
+    ],
+    "palavra_em_maiusculas | FakeWhatsApp.Br / verdadeiro": [
+      {
+        "tipo": "palavra_em_maiusculas",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "ATENÇÃO CATÓLICOS: O PT ESTÁ TENTANDO CONQUISTAR VOTOS MANIPULANDO FATOS PARA DAR A ENTENDER QUE A CNBB  MANIFESTOU OFICIALMENTE APOIO A  HADDAD. MENTIRA. Estão espalhando o artigo de um  bispo como se fosse o pronunciamento oficial da CNBB.  HADDAD, ardilosamente,  teve uma audiência no dia 11/10/2",
+        "depois": "ATENÇÃO CATÓLICOS: O PT ESTÁ TENTANDO CONQUISTAR VOTOS MANIPULANDO FATOS PARA DAR A ENTENDER QUE A CNBB MANIFESTOU OFICIALMENTE APOIO A HADDAD. Estão espalhando o artigo de um bispo como se fosse o pronunciamento oficial da CNBB. HADDAD, ardilosamente, teve uma audiência no dia 11/10/2018 com o Secr"
+      },
+      {
+        "tipo": "palavra_em_maiusculas",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "https://youtu.be/WcXXsERafNA.                       *MAIS UMA FAKE NEWS do HADDAD DESMACARADA!!!* ..............O safado acusou *General Mourão* de torturar cantor, mas a mentira caiu por terra em poucos minutos!!! ........... *compartilhe com todos os seus contatos!!!* ............. vamos colocar e",
+        "depois": "https://youtu.be/WcXXsERafNA. *MAIS UMA do HADDAD DESMACARADA!!!* ..............O safado acusou *General Mourão* de torturar cantor, mas a mentira caiu por terra em poucos minutos!!! *compartilhe com todos os seus contatos!!!* vamos colocar este vídeo em alta no YouTube!!!!"
+      },
+      {
+        "tipo": "palavra_em_maiusculas",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "*Eu sou Militar*\n\nConcursado, conquistei a minha vaga, não houve conchavo nem trapaça. Não houve político que me tenha dado vantagem. Essa vaga foi minha por direito e sou um trabalhador como outro qualquer. \nNo exercício do Cargo Público, nunca roubei, não pedi nem recebi nenhum benefício de quem q",
+        "depois": "*Eu sou Militar* Concursado, conquistei a minha vaga, não houve conchavo nem trapaça. Não houve político que me tenha dado vantagem. Essa vaga foi minha por direito e sou um trabalhador como outro qualquer. No exercício do Cargo Público, nunca roubei, não pedi nem recebi nenhum benefício de quem que"
+      }
+    ],
+    "trecho_de_link_com_rotulo | FakeWhatsApp.Br / falso": [
+      {
+        "tipo": "trecho_de_link_com_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "!!URGENTE !! \n\nCAIXA 2... HADDAD PT \n\n\nE agora, mídia esquerdopata?\nE agora, Folha de SP?\n\nVai dar o mesmo destaque a esta notícia VERDADEIRA sobre Caixa-2 DE HADDAD ou não?? \n\n#FOLHALIXO\n\n“Caixa 2: TRE apreende jornais com fake news favor de Fernando Haddad e contra Jair Bolsonaro na sede do Sindip",
+        "depois": "!!URGENTE CAIXA 2... HADDAD PT E agora, mídia esquerdopata? E agora, Folha de SP? Vai dar o mesmo destaque a esta notícia VERDADEIRA sobre Caixa-2 DE HADDAD ou não?? #FOLHALIXO “Caixa 2: TRE apreende jornais com fake news favor de Fernando Haddad e contra Jair Bolsonaro na sede do Sindipetro em Maca"
+      },
+      {
+        "tipo": "trecho_de_link_com_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "“Kit gay” é fake do Bolsonaro ? Então vamos para as fontes! \nRecord: https://youtu.be/jsV96xxF8dw\nVeja: https://veja.abril.com.br/educacao/kit-gay-sera-reformulado-e-lancado-ate-fim-do-ano-diz-haddad/amp/\nJean Willys criticando o governo por desistir de distribuir o Kit Gay nas Escolas: https://www.",
+        "depois": "“Kit gay” do Bolsonaro ? Então vamos para as fontes! Record: https://youtu.be/jsV96xxF8dw Veja: https://veja.abril.com.br/educacao/kit-gay-sera-reformulado-e-lancado-ate-fim-do-ano-diz-haddad/amp/ Jean Willys criticando o governo por desistir de distribuir o Kit Gay nas Escolas: https://www.google.c"
+      },
+      {
+        "tipo": "trecho_de_link_com_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "falso",
+        "antes": "http://sensoincomum.org/2018/08/17/fact-checking-onu-liminar-lula-fake-news/\n\nA ONU não falou nada. \n\nA UOL,  Sakamoto e Haddad precisam ser indiciados.",
+        "depois": "A ONU não falou nada. A UOL, Sakamoto e Haddad precisam ser indiciados."
+      }
+    ],
+    "trecho_de_link_com_rotulo | FakeWhatsApp.Br / verdadeiro": [
+      {
+        "tipo": "trecho_de_link_com_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "https://www.conjur.com.br/2018-out-15/tse-suspende-insercao-pt-informacao-falsa-bolsonaro TSE suspende propaganda de Haddad com informação falsa sobre Bolsonaro",
+        "depois": "TSE suspende propaganda de Haddad com informação falsa sobre Bolsonaro"
+      },
+      {
+        "tipo": "trecho_de_link_com_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "É falsa pesquisa do Ibope em São Paulo onde Haddad tem 51% e Bolsonaro 49% - https://expressodiario.com/e-falsa-pesquisa-do-ibope-em-sao-paulo-onde-haddad-tem-51-e-bolsonaro-49/",
+        "depois": "pesquisa do Ibope em São Paulo onde Haddad tem 51% e Bolsonaro 49%"
+      },
+      {
+        "tipo": "trecho_de_link_com_rotulo",
+        "fonte": "FakeWhatsApp.Br",
+        "rotulo": "verdadeiro",
+        "antes": "https://cliquediario.com.br/politica/caixa-2-tre-apreende-jornais-com-fake-news-favor-de-fernando-haddad-e-contra-jair-bolsonaro-na-sede-do-sindipetro-em-macae\n\n*GRAÇAS A DEUS, SÃO MUITO BURROS ESSES ESQUERDOPATAS*\n😂🤣\n*BOLSONARO 1⃣7⃣*",
+        "depois": "*GRAÇAS A DEUS, SÃO MUITO BURROS ESSES ESQUERDOPATAS* 😂🤣 *BOLSONARO 1⃣7⃣*"
+      }
+    ]
+  },
+  "exemplos_carimbos_teste_curtos": [
+    {
+      "tipo": "hashtag_de_rotulo",
+      "fonte": "FakeTweet.Br",
+      "rotulo": "verdadeiro",
+      "antes": "Moro não disse que manifestações são de ‘meia dúzia de estudantes despreparados ’. Leia mais em: http:// bit.ly/2HzkiMI via Aos Fatos | Em busca da verdade na política. #fakenão #fakenews #FactCheck #CheckBR #SerMultimidia",
+      "depois": "Moro não disse que manifestações são de ‘meia dúzia de estudantes despreparados ’. Leia mais em: http:// bit.ly/2HzkiMI via Aos Fatos | Em busca da verdade na política. #fakenão #FactCheck #CheckBR #SerMultimidia"
+    },
+    {
+      "tipo": "e_fake_e_falso",
+      "fonte": "FakeTweet.Br",
+      "rotulo": "verdadeiro",
+      "antes": "É #FAKE que Lula aparece na lista de mais ricos do mundo da revista Forbes . #FatoouFake http:// glo.bo/2uK0dNN pic.twitter.com/6B1qIFc9rB",
+      "depois": "Lula aparece na lista de mais ricos do mundo da revista Forbes http:// glo.bo/2uK0dNN pic.twitter.com/6B1qIFc9rB"
+    },
+    {
+      "tipo": "trecho_de_link_com_rotulo",
+      "fonte": "FakeTweet.Br",
+      "rotulo": "verdadeiro",
+      "antes": "É falsa a informação de que o governo editou um decreto que acaba com a obrigatoriedade da inscrição nos quadros da OAB para o exercício da advocacia, bem como a necessidade de realização do Exame de Ordem para tal registro. https://www. oab.org.br/noticia/57148/ e-falsa-a-noticia-sobre-decreto-que-",
+      "depois": "a informação de que o governo editou um decreto que acaba com a obrigatoriedade da inscrição nos quadros da OAB para o exercício da advocacia, bem como a necessidade de realização do Exame de Ordem para tal registro. https://www. oab.org.br/noticia/57148/ …"
+    }
+  ],
+  "descartes": {
+    "menos_de_5_palavras": {},
+    "rotulo_conflitante": 9,
+    "texto_repetido": 14972
+  },
+  "quase_duplicatas_removidas_do_teste": {
+    "limiar_cosseno": 0.9,
+    "total": 279,
+    "exemplos": [
+      "O que a mídia divulga sobre o que o Mourão, vice do Bolsonaro, disse: \"Casa só com 'mãe e avó' é 'fábrica de desajustados' para tráfico, diz Mourão\" O que o Mourão disse: \"Família sempre foi o núcleo ",
+      "Patriotas Olha que idéia inteligente desse professor da UNICAMP para fiscalizar o resultado das urnas eletrônicas de cada seção eleitoral no final da votação as 17h00. Eu vou aderir e fazer minha part",
+      "😎😎😎😎😎😎😎😎😎😎 Minha opinião: *Não é para vc mudar seu voto, apenas para vc entender meu voto* \"😎 O meu candidato incomoda ativistas de esquerda que defendem aborto, liberação das drogas, erotização preco",
+      "Rejeição a Bolsonaro Dra. Isabele Papafanurakis Ferreira Noronha, juíza substituta da 6a Vara Criminal de Londrina PR escreveu: Que sua rejeição por ele não seja maior que sua rejeição pela corrupção.",
+      "A Dra. Isabele Papafanurakis Ferreira Noronha, Juíza substituta da 6a Vara Criminal aqui de Londrina PR escreveu um texto espetacular que merece ser compartilhado por todos! \"Que sua rejeição por ele "
+    ]
+  },
+  "teste_curtos_descartes": {
+    "lidos": 299,
+    "menos_de_5_palavras": 1,
+    "rotulo_conflitante": 0,
+    "texto_repetido": 1,
+    "texto_igual_ao_de_treino_ou_teste": 0,
+    "quase_duplicata_do_treino": 0
+  },
+  "vazamentos_exploratorios_treino_e_teste": {
+    "palavra_fake_falso_boato_mentira": {
+      "Fake.br-Corpus / falso": {
+        "textos": 123,
+        "pct": 3.4
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 88,
+        "pct": 2.4
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 217,
+        "pct": 7.8
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 103,
+        "pct": 3.2
+      }
+    },
+    "verificamos_checamos": {
+      "Fake.br-Corpus / falso": {
+        "textos": 4,
+        "pct": 0.1
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 5,
+        "pct": 0.1
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 0,
+        "pct": 0.0
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 0,
+        "pct": 0.0
+      }
+    },
+    "agencia_de_checagem": {
+      "Fake.br-Corpus / falso": {
+        "textos": 70,
+        "pct": 1.9
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 64,
+        "pct": 1.8
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 67,
+        "pct": 2.4
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 37,
+        "pct": 1.1
+      }
+    },
+    "estadao_conteudo": {
+      "Fake.br-Corpus / falso": {
+        "textos": 3,
+        "pct": 0.1
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 0,
+        "pct": 0.0
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 0,
+        "pct": 0.0
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 0,
+        "pct": 0.0
+      }
+    },
+    "agencia_brasil": {
+      "Fake.br-Corpus / falso": {
+        "textos": 14,
+        "pct": 0.4
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 8,
+        "pct": 0.2
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 1,
+        "pct": 0.0
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 1,
+        "pct": 0.0
+      }
+    },
+    "folha_folhapress": {
+      "Fake.br-Corpus / falso": {
+        "textos": 32,
+        "pct": 0.9
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 14,
+        "pct": 0.4
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 1,
+        "pct": 0.0
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 5,
+        "pct": 0.2
+      }
+    },
+    "reuters_ap_efe": {
+      "Fake.br-Corpus / falso": {
+        "textos": 13,
+        "pct": 0.4
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 30,
+        "pct": 0.8
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 3,
+        "pct": 0.1
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 1,
+        "pct": 0.0
+      }
+    },
+    "g1_o_globo": {
+      "Fake.br-Corpus / falso": {
+        "textos": 149,
+        "pct": 4.1
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 365,
+        "pct": 10.1
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 44,
+        "pct": 1.6
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 34,
+        "pct": 1.0
+      }
+    },
+    "veja_istoe_revista": {
+      "Fake.br-Corpus / falso": {
+        "textos": 417,
+        "pct": 11.6
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 419,
+        "pct": 11.6
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 213,
+        "pct": 7.6
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 121,
+        "pct": 3.7
+      }
+    },
+    "leia_mais_veja_tambem": {
+      "Fake.br-Corpus / falso": {
+        "textos": 241,
+        "pct": 6.7
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 52,
+        "pct": 1.4
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 1,
+        "pct": 0.0
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 5,
+        "pct": 0.2
+      }
+    },
+    "link": {
+      "Fake.br-Corpus / falso": {
+        "textos": 4,
+        "pct": 0.1
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 21,
+        "pct": 0.6
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 645,
+        "pct": 23.1
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 892,
+        "pct": 27.5
+      }
+    },
+    "compartilhe_repasse": {
+      "Fake.br-Corpus / falso": {
+        "textos": 162,
+        "pct": 4.5
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 124,
+        "pct": 3.4
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 639,
+        "pct": 22.9
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 365,
+        "pct": 11.3
+      }
+    },
+    "urgente": {
+      "Fake.br-Corpus / falso": {
+        "textos": 69,
+        "pct": 1.9
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 9,
+        "pct": 0.3
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 129,
+        "pct": 4.6
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 38,
+        "pct": 1.2
+      }
+    },
+    "credito_foto": {
+      "Fake.br-Corpus / falso": {
+        "textos": 34,
+        "pct": 0.9
+      },
+      "Fake.br-Corpus / verdadeiro": {
+        "textos": 38,
+        "pct": 1.1
+      },
+      "FakeWhatsApp.Br / falso": {
+        "textos": 57,
+        "pct": 2.0
+      },
+      "FakeWhatsApp.Br / verdadeiro": {
+        "textos": 6,
+        "pct": 0.2
+      }
+    }
+  },
+  "arquivos": {
+    "treino": {
+      "linhas": 9934,
+      "por_rotulo": {
+        "falso": 4762,
+        "verdadeiro": 5172
+      },
+      "proporcao_falso": 0.4794,
+      "por_fonte": {
+        "Fake.br-Corpus": {
+          "linhas": 7199,
+          "por_rotulo": {
+            "falso": 3600,
+            "verdadeiro": 3599
+          },
+          "periodo": [
+            "2009-06-01",
+            "2018-07-23"
+          ],
+          "sem_data": 7
+        },
+        "FakeWhatsApp.Br": {
+          "linhas": 2735,
+          "por_rotulo": {
+            "falso": 1162,
+            "verdadeiro": 1573
+          },
+          "periodo": [
+            "2018-07-02",
+            "2018-09-15"
+          ],
+          "sem_data": 0
+        }
+      }
+    },
+    "teste": {
+      "linhas": 3295,
+      "por_rotulo": {
+        "falso": 1628,
+        "verdadeiro": 1667
+      },
+      "proporcao_falso": 0.4941,
+      "por_fonte": {
+        "FakeWhatsApp.Br": {
+          "linhas": 3295,
+          "por_rotulo": {
+            "falso": 1628,
+            "verdadeiro": 1667
+          },
+          "periodo": [
+            "2018-09-16",
+            "2018-10-28"
+          ],
+          "sem_data": 0
+        }
+      }
+    },
+    "teste_curtos": {
+      "linhas": 297,
+      "por_rotulo": {
+        "falso": 199,
+        "verdadeiro": 98
+      },
+      "proporcao_falso": 0.67,
+      "por_fonte": {
+        "FakeTweet.Br": {
+          "linhas": 297,
+          "por_rotulo": {
+            "falso": 199,
+            "verdadeiro": 98
+          },
+          "periodo": [
+            "2010-10-31",
+            "2019-05-18"
+          ],
+          "sem_data": 0
+        }
+      }
+    }
+  },
+  "verificacoes": {
+    "textos_em_comum_treino_teste": 0,
+    "textos_em_comum_com_teste_curtos": 0,
+    "teste_todo_depois_do_corte": true,
+    "treino_whatsapp_todo_ate_o_corte": true,
+    "carimbos_restantes": 0,
+    "duplicatas_internas": 0
+  }
+}

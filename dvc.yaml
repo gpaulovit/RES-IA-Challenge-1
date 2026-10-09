@@ -1,7 +1,49 @@
-# Pipeline das duas camadas (RF-14). Comando único: `dvc repro` (ou um estágio: `dvc repro treinar`).
-# Rode com o ambiente ativado (source .venv/bin/activate) e o pacote instalado (pip install -e '.[busca]'). Resultados pequenos (CSV/JSON) ficam no git
-# (cache: false); modelo e índice ficam no cache do DVC.
+# Pipeline completo: bases de dados (docs/dados.md) + duas camadas (RF-14).
+# Comando único: `dvc repro` (ou um estágio: `dvc repro treinar`).
+# Rode com o ambiente ativado (source .venv/bin/activate) e o pacote instalado (pip install -e '.[busca]').
+# Resultados pequenos (CSV/JSON) ficam no git (cache: false); dados brutos, modelo e índice ficam no cache do DVC.
 stages:
+  baixar:
+    cmd: python -m checagens.bases.baixar
+    deps:
+      - src/checagens/bases/baixar.py
+      - src/checagens/bases/fontes.py
+    outs:
+      - data/brutos:
+          persist: true
+
+  checagens:
+    cmd: python -m checagens.bases.checagens
+    deps:
+      - src/checagens/bases/checagens.py
+      - src/checagens/bases/texto.py
+      - src/checagens/bases/vereditos.py
+      - data/brutos/factpolcheckbr
+      - data/brutos/factckbr
+      - data/brutos/factchecksbr
+    outs:
+      - data/processados/checagens/checagens.json
+      - data/processados/checagens/amostra_teste_30.json
+    metrics:
+      - data/relatorios/checagens.json:
+          cache: false
+
+  treino:
+    cmd: python -m checagens.bases.treino --corte 2018-09-15
+    deps:
+      - src/checagens/bases/treino.py
+      - src/checagens/bases/texto.py
+      - data/brutos/fakebr
+      - data/brutos/fakewhatsappbr
+      - data/brutos/faketweetbr
+    outs:
+      - data/processados/treino/treino.csv
+      - data/processados/treino/teste.csv
+      - data/processados/treino/teste_curtos.csv
+    metrics:
+      - data/relatorios/treino.json:
+          cache: false
+
   indice:
     cmd: python -m inteligencia.busca --construir
     deps:
@@ -11,7 +53,6 @@ stages:
       - data/indices/camada1
 
   calibrar:
-    # Não grava params.yaml sozinho: revise calibracao_camada1_casos.csv e rode com --gravar à mão.
     cmd: python -m inteligencia.calibracao
     deps:
       - data/indices/camada1
@@ -27,7 +68,7 @@ stages:
   treinar:
     cmd: python -m inteligencia.treino
     deps:
-      - data/processados/treino/treino.json
+      - data/processados/treino/treino.csv
       - src/inteligencia/treino.py
       - src/inteligencia/classificador.py
     params:

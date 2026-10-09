@@ -1,0 +1,562 @@
+{
+  "lidos_por_fonte": {
+    "FACTCK.BR": 1313,
+    "FactChecks.br/Central de Fatos": 10461,
+    "FactChecks.br/FakeRecogna": 11773,
+    "FactPolCheckBr": 1882
+  },
+  "descartes_por_fonte_e_motivo": {
+    "FACTCK.BR": {
+      "multi_alegacao": 87,
+      "sem_veredito": 4,
+      "varias_alegacoes_no_mesmo_link": 333
+    },
+    "FactChecks.br/Central de Fatos": {
+      "multi_alegacao": 2,
+      "sem_carimbo_da_agencia": 3177
+    },
+    "FactChecks.br/FakeRecogna": {
+      "carimbo_contradiz_is_fake": 8,
+      "is_fake_diferente_de_1": 5951,
+      "sem_carimbo_da_agencia": 2272,
+      "sem_data": 346
+    },
+    "FactPolCheckBr": {
+      "multi_alegacao": 4,
+      "sem_link": 1,
+      "sem_veredito": 50
+    }
+  },
+  "validos_por_fonte": {
+    "FACTCK.BR": 889,
+    "FactChecks.br/Central de Fatos": 7282,
+    "FactChecks.br/FakeRecogna": 3196,
+    "FactPolCheckBr": 1827
+  },
+  "duplicatas_removidas": {
+    "criterio": "primeiro saem todos os registros de um link com vereditos normalizados diferentes; depois, duplicatas por link normalizado (https, sem www, sem utm_*/fbclid/gclid/igshid/amp, sem fragmento nem barra final, caminho decodificado) e por alegação normalizada (NFKC, caixa, pontuação e espaços); fica o registro da fonte mais prioritária: FACTCK.BR > FactPolCheckBr > FactChecks.br/Central de Fatos > FactChecks.br/FakeRecogna",
+    "total": 2752,
+    "por_criterio": {
+      "mesma_alegacao": 55,
+      "mesmo_link": 2689,
+      "veredito_conflitante_no_mesmo_link": 8
+    },
+    "por_fonte_removida": {
+      "FACTCK.BR": 4,
+      "FactChecks.br/Central de Fatos": 247,
+      "FactChecks.br/FakeRecogna": 2478,
+      "FactPolCheckBr": 23
+    },
+    "por_par_removida_mantida": {
+      "FACTCK.BR -> (nenhuma)": 4,
+      "FactChecks.br/Central de Fatos -> (nenhuma)": 4,
+      "FactChecks.br/Central de Fatos -> FACTCK.BR": 228,
+      "FactChecks.br/Central de Fatos -> FactChecks.br/Central de Fatos": 15,
+      "FactChecks.br/FakeRecogna -> FactChecks.br/Central de Fatos": 2467,
+      "FactChecks.br/FakeRecogna -> FactChecks.br/FakeRecogna": 11,
+      "FactPolCheckBr -> FactPolCheckBr": 23
+    }
+  },
+  "factckbr_links_com_varias_alegacoes": {
+    "links": 91,
+    "linhas": 420,
+    "links_com_rotulos_diferentes": 61
+  },
+  "final": {
+    "total": 10442,
+    "por_fonte": {
+      "FACTCK.BR": 885,
+      "FactChecks.br/Central de Fatos": 7035,
+      "FactChecks.br/FakeRecogna": 718,
+      "FactPolCheckBr": 1804
+    },
+    "por_agencia": {
+      "AFP Checamos": 198,
+      "Agência Lupa": 1352,
+      "Agência Pública": 135,
+      "Aos Fatos": 967,
+      "Boatos.org": 5693,
+      "CNJ": 1,
+      "E-farsas": 48,
+      "Estadão Verifica": 101,
+      "Fato ou Boato (Justiça Eleitoral)": 171,
+      "Fato ou Fake": 1214,
+      "Folha de S. Paulo": 2,
+      "Projeto Comprova": 309,
+      "UOL": 1,
+      "UOL Confere": 250
+    },
+    "por_veredito_normalizado": {
+      "enganoso": 115,
+      "falso": 10244,
+      "outro": 21,
+      "verdadeiro": 62
+    },
+    "periodo_por_fonte": {
+      "FACTCK.BR": [
+        "2016-06-15",
+        "2019-07-22"
+      ],
+      "FactChecks.br/Central de Fatos": [
+        "2013-07-02",
+        "2021-05-19"
+      ],
+      "FactChecks.br/FakeRecogna": [
+        "2018-11-13",
+        "2021-09-03"
+      ],
+      "FactPolCheckBr": [
+        "2022-08-01",
+        "2022-12-01"
+      ]
+    },
+    "periodo": [
+      "2013-07-02",
+      "2022-12-01"
+    ],
+    "por_ano": {
+      "2013": 49,
+      "2014": 100,
+      "2015": 66,
+      "2016": 593,
+      "2017": 800,
+      "2018": 1604,
+      "2019": 1848,
+      "2020": 2514,
+      "2021": 1064,
+      "2022": 1804
+    }
+  },
+  "por_fonte_e_veredito": {
+    "FACTCK.BR": {
+      "enganoso": 75,
+      "falso": 756,
+      "outro": 21,
+      "verdadeiro": 33
+    },
+    "FactChecks.br/Central de Fatos": {
+      "enganoso": 21,
+      "falso": 6994,
+      "verdadeiro": 20
+    },
+    "FactChecks.br/FakeRecogna": {
+      "enganoso": 16,
+      "falso": 702
+    },
+    "FactPolCheckBr": {
+      "enganoso": 3,
+      "falso": 1792,
+      "verdadeiro": 9
+    }
+  },
+  "cobertura_2022": {
+    "por_mes": {
+      "2022-08": 245,
+      "2022-09": 368,
+      "2022-10": 726,
+      "2022-11": 444,
+      "2022-12": 21
+    },
+    "por_agencia": {
+      "AFP Checamos": 187,
+      "Agência Lupa": 239,
+      "Aos Fatos": 302,
+      "Boatos.org": 314,
+      "CNJ": 1,
+      "E-farsas": 48,
+      "Fato ou Boato (Justiça Eleitoral)": 171,
+      "Fato ou Fake": 150,
+      "Folha de S. Paulo": 2,
+      "Projeto Comprova": 169,
+      "UOL Confere": 221
+    }
+  },
+  "mapeamento_vereditos": [
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "De olho",
+      "veredito_normalizado": "outro",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "Discutível",
+      "veredito_normalizado": "outro",
+      "registros": 8
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "Distorcido",
+      "veredito_normalizado": "enganoso",
+      "registros": 6
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "Exagerado",
+      "veredito_normalizado": "enganoso",
+      "registros": 24
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "Falso",
+      "veredito_normalizado": "falso",
+      "registros": 428
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "Impossível provar",
+      "veredito_normalizado": "outro",
+      "registros": 7
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "Sem contexto",
+      "veredito_normalizado": "enganoso",
+      "registros": 10
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "Subestimado",
+      "veredito_normalizado": "enganoso",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "Verdadeiro",
+      "veredito_normalizado": "verdadeiro",
+      "registros": 32
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "distorcido",
+      "veredito_normalizado": "enganoso",
+      "registros": 29
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "exagerado",
+      "veredito_normalizado": "enganoso",
+      "registros": 3
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "falso",
+      "veredito_normalizado": "falso",
+      "registros": 328
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "impreciso",
+      "veredito_normalizado": "enganoso",
+      "registros": 2
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "insustentável",
+      "veredito_normalizado": "outro",
+      "registros": 4
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "outros",
+      "veredito_normalizado": "outro",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FACTCK.BR",
+      "veredito_original": "verdadeiro",
+      "veredito_normalizado": "verdadeiro",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "#Boato",
+      "veredito_normalizado": "falso",
+      "registros": 2
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "#boato",
+      "veredito_normalizado": "falso",
+      "registros": 5018
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "Boato",
+      "veredito_normalizado": "falso",
+      "registros": 21
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "FALSO",
+      "veredito_normalizado": "falso",
+      "registros": 2
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "Falso",
+      "veredito_normalizado": "falso",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "É #FAKE",
+      "veredito_normalizado": "falso",
+      "registros": 775
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "É #FATO",
+      "veredito_normalizado": "verdadeiro",
+      "registros": 3
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "É enganosa",
+      "veredito_normalizado": "enganoso",
+      "registros": 5
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "É enganoso",
+      "veredito_normalizado": "enganoso",
+      "registros": 16
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "É falsa",
+      "veredito_normalizado": "falso",
+      "registros": 38
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "É falso",
+      "veredito_normalizado": "falso",
+      "registros": 1135
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "É verdade",
+      "veredito_normalizado": "verdadeiro",
+      "registros": 4
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "É verdadeira",
+      "veredito_normalizado": "verdadeiro",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "É verdadeiro",
+      "veredito_normalizado": "verdadeiro",
+      "registros": 10
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "é #FAKE",
+      "veredito_normalizado": "falso",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "é #FATO",
+      "veredito_normalizado": "verdadeiro",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "é falsa",
+      "veredito_normalizado": "falso",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "veredito_original": "é verdadeira",
+      "veredito_normalizado": "verdadeiro",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "veredito_original": "#boato",
+      "veredito_normalizado": "falso",
+      "registros": 338
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "veredito_original": "FALSO",
+      "veredito_normalizado": "falso",
+      "registros": 1
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "veredito_original": "É #FAKE",
+      "veredito_normalizado": "falso",
+      "registros": 284
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "veredito_original": "É enganosa",
+      "veredito_normalizado": "enganoso",
+      "registros": 3
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "veredito_original": "É enganoso",
+      "veredito_normalizado": "enganoso",
+      "registros": 13
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "veredito_original": "É falsa",
+      "veredito_normalizado": "falso",
+      "registros": 8
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "veredito_original": "É falso",
+      "veredito_normalizado": "falso",
+      "registros": 71
+    },
+    {
+      "fonte_dataset": "FactPolCheckBr",
+      "veredito_original": "Falsa",
+      "veredito_normalizado": "falso",
+      "registros": 1792
+    },
+    {
+      "fonte_dataset": "FactPolCheckBr",
+      "veredito_original": "Parcialmente verdadeira",
+      "veredito_normalizado": "enganoso",
+      "registros": 3
+    },
+    {
+      "fonte_dataset": "FactPolCheckBr",
+      "veredito_original": "Verdadeira",
+      "veredito_normalizado": "verdadeiro",
+      "registros": 9
+    }
+  ],
+  "factchecksbr_carimbo_por_agencia": [
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "agencia": "Agência Lupa",
+      "registros": 1824,
+      "com_carimbo": 911,
+      "sem_carimbo": 913
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "agencia": "Aos Fatos",
+      "registros": 1430,
+      "com_carimbo": 350,
+      "sem_carimbo": 1080
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "agencia": "Boatos.org",
+      "registros": 5468,
+      "com_carimbo": 5044,
+      "sem_carimbo": 424
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "agencia": "Estadão Verifica",
+      "registros": 593,
+      "com_carimbo": 112,
+      "sem_carimbo": 481
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "agencia": "Fato ou Fake",
+      "registros": 785,
+      "com_carimbo": 782,
+      "sem_carimbo": 3
+    },
+    {
+      "fonte_dataset": "FactChecks.br/Central de Fatos",
+      "agencia": "Projeto Comprova",
+      "registros": 361,
+      "com_carimbo": 85,
+      "sem_carimbo": 276
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "agencia": "AFP Checamos",
+      "registros": 503,
+      "com_carimbo": 12,
+      "sem_carimbo": 491
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "agencia": "Boatos.org",
+      "registros": 2425,
+      "com_carimbo": 2420,
+      "sem_carimbo": 5
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "agencia": "E-farsas",
+      "registros": 804,
+      "com_carimbo": 0,
+      "sem_carimbo": 804
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "agencia": "Fato ou Fake",
+      "registros": 1125,
+      "com_carimbo": 947,
+      "sem_carimbo": 178
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "agencia": "G1",
+      "registros": 3,
+      "com_carimbo": 0,
+      "sem_carimbo": 3
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "agencia": "Projeto Comprova",
+      "registros": 669,
+      "com_carimbo": 140,
+      "sem_carimbo": 529
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "agencia": "UOL",
+      "registros": 18,
+      "com_carimbo": 1,
+      "sem_carimbo": 17
+    },
+    {
+      "fonte_dataset": "FactChecks.br/FakeRecogna",
+      "agencia": "UOL Confere",
+      "registros": 275,
+      "com_carimbo": 30,
+      "sem_carimbo": 245
+    }
+  ],
+  "factpolcheckbr_regra_data": {
+    "ambigua_lida_mes_dia": 738,
+    "dia_mes": 8,
+    "mes_dia": 1136
+  },
+  "amostra_teste_30": {
+    "por_agencia": {
+      "AFP Checamos": 4,
+      "Agência Lupa": 4,
+      "Aos Fatos": 4,
+      "Boatos.org": 4,
+      "E-farsas": 3,
+      "Fato ou Boato (Justiça Eleitoral)": 4,
+      "Fato ou Fake": 2,
+      "Projeto Comprova": 4,
+      "UOL Confere": 1
+    },
+    "periodo": [
+      "2022-11-29",
+      "2022-12-01"
+    ]
+  }
+}

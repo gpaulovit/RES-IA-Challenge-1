@@ -3,6 +3,8 @@
 - [Requisitos](requisitos.md)
 - [Histórias de usuário](historias.md)
 - [Referências](refs.md)
+- Domínio de dados
+  - [Dados do bot](dados.md)
 - Modelos de IA
   - [Relatório da camada 2](relatorio-camada2.md)
 - Engenharia
