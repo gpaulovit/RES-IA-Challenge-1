@@ -21,4 +21,4 @@ latency:
 	$(PYTHON) scripts/medir_latencia.py
 
 clean:
-	rm -rf __pycache__ .pytest_cache .coverage src/checagens/__pycache__ tests/__pycache__ *.egg-info
+	rm -rf __pycache__ .pytest_cache .coverage src/*/__pycache__ tests/__pycache__ *.egg-info

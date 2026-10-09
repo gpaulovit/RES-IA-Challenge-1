@@ -1,14 +1,33 @@
 # Experimentos
 
-Código e resultados da frente **Modelos de IA**. Hoje servem ao gate de generalização temporal da
-change [`add-fake-news-pattern-scoring`](../openspec/changes/add-fake-news-pattern-scoring/design.md):
-um modelo treinado com notícias de um período separa falsas de verdadeiras num período posterior?
+Protótipos da frente **Modelos de IA** para as duas camadas do bot (ver
+[Requisitos](../docs/requisitos.md) e a change
+[`add-bot-intelligence-layers`](../openspec/changes/add-bot-intelligence-layers/design.md)).
+Cada camada nasce aqui e, depois de validada, sobe para `src/inteligencia/`.
 
-**Situação (2026-10-06):** 1ª rodada concluída, **NO-GO**. Fonte e ano sozinhos preveem o rótulo
-melhor que o modelo. Números e leitura em
-[`design.md` → Resultado da 1ª rodada](../openspec/changes/add-fake-news-pattern-scoring/design.md).
-O registro dos gates anteriores (reciclagem de alegação, notebooks 00–05) está em
-[`historico-gates.md`](historico-gates.md).
+O código das camadas já foi validado aqui e subiu para [`src/inteligencia/`](../src/inteligencia/README.md):
+
+| Camada | Contrato com o bot | Arquivos | Saídas |
+|---|---|---|---|
+| 1. Busca de checagens (RF-06, RN-05, RN-06) | `buscar(texto, k=3) -> list[dict]` | `busca.py`, `calibracao.py` | `data/indices/camada1/`, `results/calibracao_camada1*.csv` |
+| 2. Sinais de alerta (RF-08, RF-14) | `classificar(texto) -> {"faixa", "sinais"}` | `classificador.py`, `treino.py` | `models/classificador.joblib`, `results/metricas_camada2.json`, `results/params_camada2.json` |
+
+Tudo roda pelo [`dvc.yaml`](../dvc.yaml) da raiz, com os parâmetros em [`params.yaml`](../params.yaml):
+
+```bash
+source .venv/bin/activate
+dvc repro                 # índice → calibração, e treino da camada 2
+dvc repro treinar         # só a camada 2
+python -m inteligencia.calibracao --gravar   # depois de revisar a calibração: grava os limites
+```
+
+As bases de entrada vêm da frente de Dados: `data/processados/checagens/checagens.json` (camada 1)
+e `data/processados/treino/treino.json` (camada 2). O formato de cada uma é conferido num lugar só:
+`_validar_registro()` em `busca.py` e `_validar_item()` em `treino.py`. O critério de go/no-go da
+camada 2 está em [docs/relatorio-camada2.md](../docs/relatorio-camada2.md).
+
+Os produtos descartados (reciclagem de alegação e scoring de fake news) e o gate deles estão em
+[`/archive`](../archive/README.md).
 
 ## Ambiente
 
@@ -18,37 +37,34 @@ Um ambiente só para o repositório inteiro:
 python3 -m venv .venv
 .venv/bin/pip install -r experiments/requirements.txt
 .venv/bin/dvc pull                     # baixa experiments/data (ver "Dados (DVC)")
-.venv/bin/python -m pytest -q          # testes da limpeza e das regras do gate
-cd experiments && ../.venv/bin/python gate.py
+.venv/bin/python -m pytest -q
 ```
 
-- Python 3.14.6; versões fixadas em [`requirements.txt`](requirements.txt).
-- O `gate.py` e os notebooks rodam a partir de `experiments/` (caminhos `data/` e `results/`).
-- A 1ª execução do `gate.py` baixa o modelo do Hugging Face; os embeddings ficam em cache em
+- Versões fixadas em [`requirements.txt`](requirements.txt).
+- Notebooks e scripts rodam a partir de `experiments/` (caminhos `data/` e `results/`).
+- A 1ª geração de embeddings baixa o modelo do Hugging Face; os vetores ficam em cache em
   `data/emb/`, pela revisão do modelo e pelo hash dos textos.
 
 ## Módulos
 
-| Arquivo | Responsabilidade | Usado por |
-|---|---|---|
-| `limpeza.py` | `limpar_titulo()` (prefixos de veredito e carimbos de agência) e `eh_multi_alegacao()` | todos |
-| `corpora.py` | Lê FactPolCheckBr e o zip do FactChecks.br (Fake.br, FakeRecogna, Central de Fatos) no esquema `claim, is_fake, ano, fonte, categoria, origem` | gate, 06 |
-| `modelos.py` | Lista de modelos candidatos (id, revisão, prefixo) e `embeddings()` com cache | gate, 06 |
-| `gate.py` | Testes A e B, as três linhas de base, os critérios da Decisão 4 e o veredito | — |
-| `reescrita.py` | Reescritas de apelido, gíria, erro de digitação e negação | gate, 05 |
-| `normalizacao.py` | Normalização da consulta (Enelvo + apelidos) | 05, 06 |
-| `avaliacao.py` | Recall@k e MRR da busca (gates anteriores) | 05, 06 |
-
-## Gate temporal (`gate.py`)
-
-| Saída | Conteúdo |
+| Arquivo | Responsabilidade |
 |---|---|
-| `results/gate_conjuntos.csv` | contagem por teste, lado, origem, ano e classe, mais o SHA-256 de cada conjunto (tarefa 2.3) |
-| `results/gate_temporal.csv` | AUC, ECE, Brier e Brier skill por teste, modelo e fonte; variação de gíria por classe |
-| `results/gate_criterios.csv` | nível de cada critério (GO / inconclusivo / NO-GO) e o veredito agregado |
+| `limpeza.py` | `limpar_titulo()` (prefixos de veredito e carimbos de agência) e `eh_multi_alegacao()` |
+| `corpora.py` | Lê FactPolCheckBr e o zip do FactChecks.br (Fake.br, FakeRecogna, Central de Fatos) no esquema `claim, is_fake, ano, fonte, categoria, origem` |
+| `modelos.py` | Modelos de embeddings candidatos (id, revisão fixada, prefixo) e `embeddings()` com cache |
+| `reescrita.py` | Reescritas de apelido, gíria, erro de digitação e negação |
+| `normalizacao.py` | Normalização da consulta (Enelvo + apelidos) |
+| `avaliacao.py` | Recall@k e MRR de uma busca |
 
-As regras (unidade de texto, ano, recorte político, fonte e pares de gíria) estão pré-registradas
-no `design.md`, Decisão 5, "1ª rodada do gate". Elas não são repetidas aqui.
+## Notebooks
+
+| Notebook | O que responde |
+|---|---|
+| `00_load_corpus.ipynb` | Carga e limpeza do FactPolCheckBr |
+| `01_embeddings.ipynb` | Embeddings das alegações |
+| `02_clusters.ipynb` | Agrupamento das alegações |
+| `05_avaliacao.ipynb` | Teste de reescrita (gíria, apelido, erro, negação) e normalização da consulta |
+| `06_modelos.ipynb` | Comparação de modelos de embeddings (Recall@k e MRR), base da escolha do MiniLM |
 
 ## Dados (DVC)
 

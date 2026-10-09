@@ -5,6 +5,8 @@
 - [Referências](refs.md)
 - Domínio de dados
   - [Dados do bot](dados.md)
+- Modelos de IA
+  - [Relatório da camada 2](relatorio-camada2.md)
 - Engenharia
   - [Guia da arquiteta](guia-arquiteta.md)
   - [Testes e benchmark](testes.md)

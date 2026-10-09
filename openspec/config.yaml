@@ -15,7 +15,7 @@ context: |
 
   Stack: Python 3.11+, scikit-learn, sentence-transformers (MiniLM multilíngue com revisão fixada),
   DVC para dados, modelo e métricas, pytest. Custo zero de infraestrutura (R-02).
-  Código novo nasce em experiments/ como protótipo e sobe para src/checagens/ depois de validado.
+  Código novo nasce em experiments/ como protótipo e sobe para src/inteligencia/ (camadas 1 e 2) depois de validado. src/checagens/ é da Engenharia (mensagens e registros).
 
 rules:
   proposal:
