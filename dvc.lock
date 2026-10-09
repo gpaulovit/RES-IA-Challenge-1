@@ -149,3 +149,51 @@ stages:
       hash: md5
       md5: 3c5b18f5559ed2d6a1236e2fcf4cd3fc
       size: 14331
+  treinar:
+    cmd: python -m inteligencia.treino
+    deps:
+    - path: data/processados/treino/teste.csv
+      hash: md5
+      md5: 559d8bb466f4eef4539858010c1786c2
+      size: 2494995
+    - path: data/processados/treino/teste_curtos.csv
+      hash: md5
+      md5: 08df6c4d9a9c2bcbc74e64dcd69adbf0
+      size: 70337
+    - path: data/processados/treino/treino.csv
+      hash: md5
+      md5: eb612d40cb5c34a93664e00dce0bafee
+      size: 10461770
+    - path: src/inteligencia/classificador.py
+      hash: md5
+      md5: 2afb55b024f6402afd755e1b56d8dc2c
+      size: 7244
+    - path: src/inteligencia/treino.py
+      hash: md5
+      md5: 9363077db22a184a79b10d400f434807
+      size: 10525
+    params:
+      params.yaml:
+        camada2:
+          ngram_range:
+          - 1
+          - 2
+          min_df: 2
+          C: 1.0
+          max_iter: 1000
+          folds: 5
+          margem_faixas: 0.1
+        semente: 42
+    outs:
+    - path: experiments/results/metricas_camada2.json
+      hash: md5
+      md5: 5c0bdcdcbe73a1b2617389dfb1c510fd
+      size: 1557
+    - path: experiments/results/params_camada2.json
+      hash: md5
+      md5: 1aeeeb72a78aba85908269e5626e1cfe
+      size: 559
+    - path: models/classificador.joblib
+      hash: md5
+      md5: 6800a57344021dbebfeafb4b7f9d4b1e
+      size: 5925890

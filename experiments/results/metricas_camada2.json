@@ -1,0 +1,97 @@
+{
+ "criterio": {
+  "f1_macro_minimo": 0.75,
+  "falso_alarme_maximo": 0.15,
+  "minimo_por_classe": 100
+ },
+ "decisao": "no-go",
+ "motivos_no_go": [
+  "F1 macro 0.673 < 0.75 (RNF-02)",
+  "falso alarme 30.8% > 15% (RNF-03)"
+ ],
+ "teste": {
+  "falsas": 1628,
+  "verdadeiras": 1667
+ },
+ "f1_macro": 0.672958,
+ "falso_alarme": 0.307738,
+ "matriz_confusao": {
+  "linhas_real_colunas_previsto": [
+   "verdadeira",
+   "falsa"
+  ],
+  "valores": [
+   [
+    1070,
+    597
+   ],
+   [
+    480,
+    1148
+   ]
+  ]
+ },
+ "cortes": {
+  "alto": 0.526842,
+  "baixo": 0.482715
+ },
+ "faixas_por_classe": {
+  "verdadeiras": {
+   "muitos_sinais": 513,
+   "incerto": 161,
+   "poucos_sinais": 993
+  },
+  "falsas": {
+   "muitos_sinais": 1063,
+   "incerto": 152,
+   "poucos_sinais": 413
+  }
+ },
+ "complementar": {
+  "por_fonte": {
+   "FakeWhatsApp.Br": {
+    "falsas": 1628,
+    "verdadeiras": 1667,
+    "f1_macro": 0.672958
+   }
+  },
+  "linha_de_base_majoritaria_f1": 0.335953,
+  "linha_de_base_so_fonte_f1": 0.335953,
+  "teste_curtos": {
+   "teste": {
+    "falsas": 199,
+    "verdadeiras": 98
+   },
+   "f1_macro": 0.584268,
+   "falso_alarme": 0.377551,
+   "matriz_confusao": {
+    "linhas_real_colunas_previsto": [
+     "verdadeira",
+     "falsa"
+    ],
+    "valores": [
+     [
+      56,
+      42
+     ],
+     [
+      75,
+      124
+     ]
+    ]
+   },
+   "faixas_por_classe": {
+    "verdadeiras": {
+     "muitos_sinais": 37,
+     "incerto": 17,
+     "poucos_sinais": 44
+    },
+    "falsas": {
+     "muitos_sinais": 110,
+     "incerto": 19,
+     "poucos_sinais": 70
+    }
+   }
+  }
+ }
+}
