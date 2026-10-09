@@ -49,3 +49,7 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .coverage
+
+# Dados gerados localmente e registros de auditoria
+data/indices/
+data/registros/
