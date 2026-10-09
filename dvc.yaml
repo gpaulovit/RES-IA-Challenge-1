@@ -8,6 +8,7 @@ stages:
     deps:
       - src/checagens/bases/baixar.py
       - src/checagens/bases/fontes.py
+      - data/externos/google_factcheck.json
     outs:
       - data/brutos:
           persist: true
