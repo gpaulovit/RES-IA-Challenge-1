@@ -35,7 +35,7 @@ A suíte cobre tanto os componentes algorítmicos quanto os requisitos do Bot e 
 | `tests/test_manutencao.py` | **RNF-11** | Comprova que uma nova checagem entra na base apenas reindexando os vetores, sem necessidade de retreino. |
 | `tests/test_mensagens_benchmark.py` | **RNF-01** | Valida a integridade do conjunto das 30 mensagens eleitorais de teste. |
 | `tests/test_bases.py` | **RF-07, RN-02, RN-04** | Validação das bases de dados, regras de descarte, duplicatas e integridade temporal. |
-| `tests/test_busca.py` | **RF-05, RF-06, RN-05** | Camada 1: busca vetorial k-NN por cosseno, ordenação do ranking e faixas de similaridade. |
+| `tests/test_busca.py` | **RF-05, RF-06, RN-05** | Camada 1: busca híbrida em 3 etapas (cosseno, cobertura de termos de assunto e reranker cross-encoder), ordenação do ranking e faixas de similaridade. |
 | `tests/test_classificador.py` | **RF-08, RNF-02, RNF-03** | Camada 2: classificação em faixas de alerta, termos com maior peso e fallback. |
 | `tests/test_normalizacao.py` | **RN-02** | Normalização de texto, remoção de diacríticos e pontuação. |
 | `tests/test_experimentos.py` | **RN-04** | Limpeza de títulos de checagens e remoção de carimbos das agências. |
