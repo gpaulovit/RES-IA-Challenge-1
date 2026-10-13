@@ -530,7 +530,7 @@ def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     logging.getLogger("httpx").setLevel(logging.WARNING)  # não imprimir o token nos logs
     carregar_env()
-    token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+    token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip() or os.getenv("TELEGRAM_TOKEN", "").strip()
     if not token or token == "seu_token_aqui":
         raise SystemExit("Coloque o token do BotFather no arquivo .env na raiz do projeto.")
 
