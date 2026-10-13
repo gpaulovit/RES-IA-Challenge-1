@@ -121,7 +121,7 @@ def carregar_google_factcheck() -> pd.DataFrame:
         return _base("Google Fact Check Tools", [], [], [], [], [], [])
     b = pd.DataFrame(json.loads(GOOGLE_FACTCHECK.read_text(encoding="utf-8")))
     d = _base("Google Fact Check Tools", [f"googlefc-{i:05d}" for i in range(len(b))], b["alegacao"],
-              b["veredito_original"], [nome_agencia(u) for u in b["link"]], b["data"].map(ler_data), b["link"])
+              b["veredito_original"], [nome_agencia(u) or a for u, a in zip(b["link"], b["agencia"])], b["data"].map(ler_data), b["link"])
     return _filtros_comuns(d)
 
 

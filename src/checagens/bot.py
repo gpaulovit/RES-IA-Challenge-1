@@ -197,20 +197,24 @@ def ligado(nome: str) -> bool:
 # ---------------------------------------------------------------------------
 
 def carregar_camadas():
-    """Devolve (buscar, classificar, modo). Cada função pode ser None se ainda não existir."""
+    """Devolve (buscar, classificar, modo). Cada função pode ser None se não existir."""
     if ligado("MODO_TESTE"):
         return buscar_falso, classificar_falso, "falso"
 
     try:
-        from checagens.busca import buscar
+        from inteligencia import buscar as _buscar, classificar as _classificar
     except ImportError:
-        buscar = None
-    classificar = None
-    if ligado("CAMADA2_LIGADA"):  # RN-04: só depois do "go" no relatório da camada 2
+        log.warning("Pacote inteligencia não encontrado: rode pip install -e '.[busca]'.")
+        return None, None, "real"
+
+    def buscar(texto, k=3):
         try:
-            from checagens.classificador import classificar
-        except ImportError:
-            log.warning("CAMADA2_LIGADA=1, mas checagens.classificador não existe ainda.")
+            return _buscar(texto, k=k)
+        except ValueError:  # índice ausente ou desatualizado: responde "não encontrei"
+            log.exception("Busca indisponível")
+            return []
+
+    classificar = _classificar if ligado("CAMADA2_LIGADA") else None  # RN-04: no-go
     return buscar, classificar, "real"
 
 
