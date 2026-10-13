@@ -14,15 +14,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copia arquivos de configuração de pacote
+# Copia arquivos de configuração de pacote e código fonte
 COPY pyproject.toml README.md ./
+COPY src/ ./src/
 
 # Instala o pacote e dependências (busca para camada 1 e test para validações)
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -e '.[test,busca]'
 
-# Copia o código da aplicação e artefatos autocontidos (modelo e índice)
-COPY src/ ./src/
+# Copia experimentos, dados, testes e artefatos
 COPY experiments/*.py ./experiments/
 COPY data/ ./data/
 COPY tests/ ./tests/
