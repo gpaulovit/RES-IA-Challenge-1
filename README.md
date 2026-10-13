@@ -64,3 +64,84 @@ make latency               # tempo de resposta nas 30 mensagens de teste (RNF-01
 
 O protótipo de busca das semanas 1 a 3 (API, embeddings e retrieval em `src/`) foi retirado; ele
 continua no histórico do git (tag `legado-busca` e commits da `main`).
+
+## Configurar Azure (DVC, MLflow e Deploy)
+
+O ecossistema em nuvem na Azure padroniza o versionamento de dados, modelos e o deploy serverless (custo praticamente zero, sem computação 24h ligada).
+
+### 1. Divisão de Papéis
+- **DVC (Azure Blob Storage)**: Versiona dados brutos/processados, pipelines (`dvc.yaml`), o índice vetorial da **Camada 1** (`data/indices/camada1`) e o artefato `models/classificador.joblib`.
+- **MLflow (Azure ML Workspace)**: Rastreia os parâmetros, métricas e artefatos de treino da **Camada 2**, registrando o modelo como `pyfunc` no Model Registry com o nome `checagens-camada2`. O deploy consome o modelo com o alias `producao`.
+- **Application Insights**: Monitora a observabilidade em produção no Azure Container Apps (latência, volume de requisições e taxa de erros).
+- **Azure Container Apps**: Hospeda o bot do Telegram em modo serverless com escala a zero (`min-replicas 0`).
+
+### 2. Instalação e Dependências
+Para instalar os pacotes de integração com a Azure:
+```sh
+pip install -e '.[azure,busca]'
+```
+
+### 3. Remote do DVC na Azure
+O remote do DVC está configurado em `.dvc/config` apontando para:
+`azure://dvc/res-ia-challenge-1` (Storage Account padrão: `stresiachallenge1`).
+
+As credenciais **nunca** vão para o repositório git. Configure de uma das seguintes formas:
+1. **Via Variável de Ambiente (Recomendado para CI/CD e local)**:
+   ```sh
+   export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=...;AccountKey=...;EndpointSuffix=core.windows.net"
+   ```
+2. **Via Configuração Local do DVC**:
+   ```sh
+   dvc config --local remote.azure.connection_string "sua_connection_string"
+   # ou com SAS token:
+   # dvc config --local remote.azure.sas_token "seu_sas_token"
+   ```
+
+Para restaurar dados e índice da camada 1:
+```sh
+dvc pull                           # restaura todos os dados rastreados
+dvc pull data/indices/camada1      # restaura especificamente o índice da camada 1
+```
+
+Para sincronizar novos dados com o remote:
+```sh
+dvc push
+dvc status -c                      # verifica se o cache local e a Azure estão em sincronia
+```
+
+### 4. Rastreamento e Registro com MLflow (Azure ML)
+O rastreamento via MLflow é **opcional**: se `MLFLOW_TRACKING_URI` não estiver definida, o treino roda normalmente em modo offline (garantindo determinismo RNF-10 e compatibilidade com `pytest`).
+
+Para treinar registrando no Azure ML Studio:
+1. Obtenha a Tracking URI do seu workspace Azure ML:
+   ```sh
+   export MLFLOW_TRACKING_URI=$(az ml workspace show --resource-group rg-res-ia --name mlw-res-ia --query mlflow_tracking_uri -o tsv)
+   ```
+2. Execute o treinamento:
+   ```sh
+   python -m inteligencia.treino    # ou: dvc repro -f treinar
+   ```
+   A execução registrará automaticamente:
+   - Parâmetros do `params.yaml`
+   - Métricas (`f1_macro`, `falso_alarme`, indicador numérico `go_no_go`)
+   - Tags de rastreabilidade (`git_commit`, `hash_base`, `decisao`)
+   - Artefatos JSON (`metricas_camada2.json`, `params_camada2.json`)
+   - Modelo registrado como `checagens-camada2` (flavor `pyfunc` encapsulando `Classificador`)
+
+### 5. Promoção Auditável para Produção
+Como trava humana auditável antes do deploy, a promoção exige conferência dos critérios pré-registrados:
+```sh
+# Promove a versão aprovada (valida go/no-go) para o alias 'producao':
+python scripts/promover_modelo.py --versao 1
+```
+
+### 6. Deploy Autocontido no Azure Container Apps
+No build do deploy (automatizado via `.github/workflows/ci.yml`):
+1. Os artefatos são baixados antes da criação da imagem Docker:
+   ```sh
+   python scripts/baixar_artefatos_deploy.py
+   ```
+2. O `Dockerfile` empacota `models/` e `data/indices/` diretamente dentro da imagem.
+3. A imagem resultante é **autocontida** e serve inferências em runtime sem depender de credenciais externas da nuvem.
+4. Observabilidade em tempo real é fornecida pelo Application Insights via `APPLICATIONINSIGHTS_CONNECTION_STRING`.
+

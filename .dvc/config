@@ -1,0 +1,5 @@
+[core]
+    remote = azure
+['remote "azure"']
+    url = azure://dvc/res-ia-challenge-1
+    account_name = stresiachallenge1

@@ -53,3 +53,12 @@ __pycache__/
 # Dados gerados localmente e registros de auditoria
 data/indices/
 data/registros/
+
+# MLflow local e banco de testes
+mlruns/
+mlflow.db
+
+# Modelos gerados localmente (versionados pelo DVC e MLflow Registry)
+models/*
+!models/.gitkeep
+

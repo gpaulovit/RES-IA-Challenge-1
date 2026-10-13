@@ -15,6 +15,7 @@ Uso (a partir da raiz, com o ambiente ativado):  python -m inteligencia.treino  
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 
 import numpy as np
@@ -174,6 +175,91 @@ def main() -> None:
     for motivo in metricas["motivos_no_go"]:
         print(f"  - {motivo}")
 
+    tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+    if tracking_uri:
+        registrar_mlflow(clf, a.modelo, params, metricas, usados, a.saida, tracking_uri)
+
+
+def _achatar_params(d: dict, prefixo: str = "") -> dict:
+    achatados = {}
+    for k, v in d.items():
+        chave = f"{prefixo}{k}" if prefixo else str(k)
+        if isinstance(v, dict):
+            achatados.update(_achatar_params(v, f"{chave}."))
+        else:
+            achatados[chave] = v if not isinstance(v, list) else str(v)
+    return achatados
+
+
+def _obter_git_commit() -> str:
+    import subprocess
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=str(RAIZ),
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+    except Exception:
+        return "desconhecido"
+
+
+def registrar_mlflow(
+    clf: Classificador,
+    caminho_modelo: Path,
+    params: dict,
+    metricas: dict,
+    usados: dict,
+    saida: Path,
+    tracking_uri: str,
+) -> None:
+    """Registra execução, parâmetros, métricas, artefatos e modelo pyfunc no MLflow (Azure ML).
+
+    Opcional: só é chamado quando MLFLOW_TRACKING_URI está definida.
+    """
+    import mlflow
+    import mlflow.pyfunc
+    from inteligencia.classificador import ClassificadorPyFunc
+
+    mlflow.set_tracking_uri(tracking_uri)
+
+    run = mlflow.active_run() or mlflow.start_run()
+    with run:
+        # 1. log_params (parâmetros versionados do params.yaml)
+        mlflow.log_params(_achatar_params(params))
+
+        # 2. log_metrics (F1, falso alarme e indicador go/no-go)
+        mlflow.log_metrics({
+            "f1_macro": float(metricas["f1_macro"]),
+            "falso_alarme": float(metricas["falso_alarme"]),
+            "go_no_go": 1.0 if metricas.get("decisao") == "go" else 0.0,
+        })
+
+        # 3. log_artifact dos JSONs que já existem
+        metricas_json = saida / "metricas_camada2.json"
+        params_json = saida / "params_camada2.json"
+        if metricas_json.exists():
+            mlflow.log_artifact(str(metricas_json))
+        if params_json.exists():
+            mlflow.log_artifact(str(params_json))
+
+        # 4. Tags git_commit, hash_base e decisao
+        git_commit = _obter_git_commit()
+        mlflow.set_tag("git_commit", git_commit)
+        mlflow.set_tag("hash_base", usados.get("sha256_base", ""))
+        mlflow.set_tag("decisao", metricas.get("decisao", "inconclusivo"))
+
+        # 5. Registrar o modelo como pyfunc que envolve Classificador
+        mlflow.pyfunc.log_model(
+            name="modelo",
+            python_model=ClassificadorPyFunc(clf),
+            artifacts={"modelo_joblib": str(caminho_modelo.resolve())},
+            registered_model_name="checagens-camada2",
+            code_paths=[str(RAIZ / "src")],
+        )
+        print(f"MLflow: execução registrada no tracking URI '{tracking_uri}' com modelo 'checagens-camada2'.")
+
 
 if __name__ == "__main__":
     main()
+

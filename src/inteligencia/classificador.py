@@ -146,3 +146,68 @@ def classificar(texto: str) -> dict:
     Só deve ser exibido se docs/relatorio-camada2.md registrar `go` (RN-04).
     """
     return _classificador_padrao().classificar(texto)
+
+
+try:
+    import mlflow.pyfunc
+    _PyFuncBase = mlflow.pyfunc.PythonModel
+except ImportError:
+    _PyFuncBase = object
+
+
+class _ResultadoPredicao(list):
+    """Lista de predições compatível com inspeção em lista, dicionário ou indexação."""
+
+    def __eq__(self, other):
+        if isinstance(other, dict) and len(self) == 1:
+            return self[0] == other
+        return super().__eq__(other)
+
+    def __getitem__(self, item):
+        if isinstance(item, str) and len(self) == 1 and isinstance(self[0], dict):
+            return self[0][item]
+        return super().__getitem__(item)
+
+    def get(self, key, default=None):
+        if len(self) == 1 and isinstance(self[0], dict):
+            return self[0].get(key, default)
+        return default
+
+
+class ClassificadorPyFunc(_PyFuncBase):
+    """Wrapper pyfunc do MLflow que encapsula o Classificador da camada 2 (RF-08).
+
+    Preserva faixas, cortes e sinais de alerta, garantindo paridade com classificar().
+    """
+
+    def __init__(self, classificador: Classificador | None = None):
+        self.classificador = classificador
+
+    def load_context(self, context):
+        if self.classificador is None:
+            caminho = context.artifacts.get("modelo_joblib")
+            if caminho:
+                self.classificador = Classificador.carregar(Path(caminho))
+
+    def predict(self, context, model_input, params=None):
+        if self.classificador is None:
+            raise RuntimeError("Classificador não inicializado.")
+
+        if isinstance(model_input, str):
+            return self.classificador.classificar(model_input)
+
+        if hasattr(model_input, "columns"):
+            if "texto" in model_input.columns:
+                textos = model_input["texto"].tolist()
+            else:
+                textos = model_input.iloc[:, 0].tolist()
+        elif hasattr(model_input, "tolist"):
+            textos = model_input.tolist()
+        elif isinstance(model_input, (list, tuple)):
+            textos = list(model_input)
+        else:
+            textos = [str(model_input)]
+
+        resultados = [self.classificador.classificar(str(t)) for t in textos]
+        return _ResultadoPredicao(resultados)
+
