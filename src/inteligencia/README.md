@@ -28,8 +28,43 @@ Devolve as `k` checagens mais parecidas, da mais parecida para a menos:
 - A consulta passa por um dicionário de apelidos e internetês antes da busca ("Xandão" → "Alexandre de Moraes", "ñ" → "não"). O bot pode mandar o texto como chegou.
 - A negação (RN-06) já vem aplicada: "X NÃO fez Y" contra "X fez Y" nunca sai como `ja_checado`.
 - Pré-requisito: o índice em `data/indices/camada1/` (`dvc repro indice`) e o pacote instalado com
-  `pip install -e '.[busca]'`. A 1ª chamada carrega o modelo (alguns segundos); depois, cerca de
-  10 ms por busca.
+  `pip install -e '.[busca]'`. A 1ª chamada baixa e carrega os dois modelos (~470 MB cada, alguns
+  segundos depois de baixados); depois, cerca de 0,7 s por busca na CPU (RNF-01: < 5 s).
+
+### Como a busca decide (3 etapas)
+
+O MiniLM sozinho errava quando a mensagem tinha nomes famosos e uma palavra que ele não conhece:
+"Flávio Bolsonaro e o tesouraço" saía como `ja_checado` com a checagem da saidinha de Natal, só
+por citar Flávio Bolsonaro. Por isso a busca tem três etapas:
+
+1. **Cosseno (MiniLM):** semelhança entre a mensagem e cada checagem. É o `semelhanca` devolvido.
+2. **Candidatas (híbrida):** as 20 melhores pelo cosseno + as 20 melhores pela nota
+   `cosseno + 0,2 × cobertura do assunto`. A cobertura é a fração das palavras de assunto da
+   mensagem (as que não são nomes) presentes na checagem, pesadas pela raridade na base.
+3. **Reranker:** um cross-encoder multilíngue (`cross-encoder/mmarco-mMiniLMv2-L12-H384-v1`,
+   Apache-2.0, revisão fixada) lê mensagem e checagem juntas e dá uma nota. A ordem e a faixa saem
+   dessa nota:
+
+| Faixa | Regra |
+| --- | --- |
+| `ja_checado` | nota ≥ 9, cosseno ≥ `limite_alta` e a mesma negação nos dois textos |
+| `relacionada` | nota ≥ 4 |
+| `baixa` | o resto |
+
+Os valores ficam no topo de `busca.py`. Foram escolhidos por grade no benchmark de 62 mensagens e
+em 25 perguntas soltas, numa região estável (notas de 3 a 5 dão o mesmo resultado):
+
+| | Só cosseno | Com reranker |
+| --- | --- | --- |
+| Notícias reais (controles) com alguma checagem mostrada | 20/32 | 1/32 |
+| Notícias reais como `ja_checado` | 1 | 0 |
+| Checagem certa no top-3 (24 reescritas) | 17/24 | 21/24 |
+| Checagem certa mostrada | 11/24 | 12/24 |
+| 25 perguntas soltas com resposta certa | 13/25 | 22/25 |
+
+`Buscador(..., reranquear=None, hibrida=False)` volta ao comportamento antigo (só cosseno), para
+comparar. **`calibracao.py` ainda mede só o cosseno**: os números dele não descrevem a busca com
+reranker.
 
 ## `classificar(texto: str) -> dict` (camada 2: RF-08)
 
@@ -53,7 +88,7 @@ ausente e índice alterado depois de gerado. O bot deve capturar e responder com
 
 | Arquivo | O quê |
 | --- | --- |
-| `busca.py` | camada 1: base, índice com hash, faixas e negação |
+| `busca.py` | camada 1: base, índice com hash, busca híbrida, reranker, faixas e negação |
 | `calibracao.py` | calibra os limites da RN-05 no `data/testes_benchmark.json` |
 | `classificador.py` | camada 2: modelo, faixas e sinais |
 | `treino.py` | treino com um comando (RF-14) e critério de go/no-go |
