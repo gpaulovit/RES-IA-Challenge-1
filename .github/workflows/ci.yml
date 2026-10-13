@@ -33,7 +33,7 @@ jobs:
       - name: Atualizar pip e instalar dependências
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e '.[test,azure]'
+          python -m pip install -e '.[test,azure,busca]'
 
       - name: Executar suíte de testes (pytest)
         run: |

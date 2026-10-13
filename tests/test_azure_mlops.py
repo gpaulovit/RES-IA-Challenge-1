@@ -14,7 +14,10 @@ import tempfile
 from pathlib import Path
 
 import pytest
-import tomli
+try:
+    import tomllib
+except ImportError:
+    import tomli as tomllib
 
 from inteligencia.classificador import Classificador, ClassificadorPyFunc, criar_pipeline
 from inteligencia.treino import _achatar_params, registrar_mlflow
@@ -24,7 +27,7 @@ RAIZ = Path(__file__).resolve().parents[1]
 
 def test_extra_azure_definido_em_pyproject():
     """Garante que as dependências do extra azure estão especificadas conforme a arquitetura."""
-    dados = tomli.loads((RAIZ / "pyproject.toml").read_text(encoding="utf-8"))
+    dados = tomllib.loads((RAIZ / "pyproject.toml").read_text(encoding="utf-8"))
     extras = dados["project"]["optional-dependencies"]
     assert "azure" in extras
     deps_azure = extras["azure"]
