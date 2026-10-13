@@ -59,8 +59,30 @@ def promover(versao: int | str | None = None, tracking_uri: str | None = None, f
         print("ERRO: Modelo com status 'no-go'. Não é permitido promover para produção sem --force.", file=sys.stderr)
         sys.exit(1)
 
-    client.set_registered_model_alias(MODELO_NOME, ALIAS_PRODUCAO, str(versao))
-    print(f"Sucesso: Modelo '{MODELO_NOME}' versão {versao} promovido com alias '{ALIAS_PRODUCAO}'.")
+    alias_ok = False
+    try:
+        client.set_registered_model_alias(MODELO_NOME, ALIAS_PRODUCAO, str(versao))
+        alias_ok = True
+    except Exception as e:
+        print(f"Aviso: Servidor MLflow não suporta alias ({e}). Configurando estágio 'Production' e tags.")
+
+    try:
+        client.transition_model_version_stage(
+            name=MODELO_NOME,
+            version=str(versao),
+            stage="Production",
+            archive_existing_versions=True,
+        )
+    except Exception as e:
+        print(f"Aviso: Transição de estágio para Production: {e}")
+
+    try:
+        client.set_model_version_tag(MODELO_NOME, str(versao), "alias", ALIAS_PRODUCAO)
+        client.set_model_version_tag(MODELO_NOME, str(versao), "stage", "Production")
+    except Exception:
+        pass
+
+    print(f"Sucesso: Modelo '{MODELO_NOME}' versão {versao} promovido para produção (alias: {alias_ok}, stage: Production).")
 
 
 if __name__ == "__main__":

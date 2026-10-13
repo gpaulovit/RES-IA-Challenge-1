@@ -116,11 +116,52 @@ stages:
       size: 5161706
     - path: src/inteligencia/busca.py
       hash: md5
-      md5: 457b84f534e6501de8f75cdce8423272
-      size: 10448
+      md5: 29ef55f1ad3ea7e3b4e353386dabbc5f
+      size: 20046
     outs:
     - path: data/indices/camada1
       hash: md5
-      md5: c246109d91942b042f323c11d8a96922.dir
+      md5: 9b3e125abc66157f3eab3b10c26012d5.dir
       size: 23750193
       nfiles: 3
+  treinar:
+    cmd: python -m inteligencia.treino
+    deps:
+    - path: data/processados/treino/treino.csv
+      hash: md5
+      md5: eb612d40cb5c34a93664e00dce0bafee
+      size: 10461770
+    - path: src/inteligencia/classificador.py
+      hash: md5
+      md5: adecd859109bfb9f89709808849439ba
+      size: 9429
+    - path: src/inteligencia/treino.py
+      hash: md5
+      md5: 6279f53aab2b3db813a3baa92b71ec4b
+      size: 16802
+    params:
+      params.yaml:
+        camada2:
+          ano_corte: 2020
+          ngram_range:
+          - 1
+          - 2
+          min_df: 2
+          C: 1.0
+          max_iter: 1000
+          folds: 5
+          margem_faixas: 0.1
+        semente: 42
+    outs:
+    - path: experiments/results/metricas_camada2.json
+      hash: md5
+      md5: 5c0bdcdcbe73a1b2617389dfb1c510fd
+      size: 1557
+    - path: experiments/results/params_camada2.json
+      hash: md5
+      md5: 189d3d1661c96a2ebf663f33e394b072
+      size: 664
+    - path: models/classificador.joblib
+      hash: md5
+      md5: fb5c92914b210013f7ffc0d65b09f209
+      size: 14076735

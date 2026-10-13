@@ -28,22 +28,39 @@ def baixar_artefatos() -> None:
         from mlflow.artifacts import download_artifacts
 
         mlflow.set_tracking_uri(tracking_uri)
-        try:
-            caminho_artefato = download_artifacts(artifact_uri="models:/checagens-camada2@producao")
+        caminho_artefato = None
+        sucesso = False
+        for uri_modelo in [
+            "models:/checagens-camada2@producao",
+            "models:/checagens-camada2/Production",
+            "models:/checagens-camada2/1",
+        ]:
+            try:
+                print(f"Tentando baixar artefato via URI '{uri_modelo}'...")
+                caminho_artefato = download_artifacts(artifact_uri=uri_modelo)
+                sucesso = True
+                break
+            except Exception as e:
+                print(f"Aviso: falha ao buscar '{uri_modelo}': {e}")
+
+        if sucesso and caminho_artefato:
             destino = RAIZ / "models"
             destino.mkdir(parents=True, exist_ok=True)
 
-            origem_joblib = Path(caminho_artefato) / "artifacts" / "modelo_joblib"
-            if origem_joblib.exists():
-                shutil.copy2(origem_joblib, destino / "classificador.joblib")
+            art_dir = Path(caminho_artefato) / "artifacts"
+            if (art_dir / "classificador.joblib").exists():
+                shutil.copy2(art_dir / "classificador.joblib", destino / "classificador.joblib")
+                print(f"Modelo classificador.joblib extraído para {destino / 'classificador.joblib'}")
+            elif (art_dir / "modelo_joblib").exists():
+                shutil.copy2(art_dir / "modelo_joblib", destino / "classificador.joblib")
                 print(f"Modelo classificador.joblib extraído para {destino / 'classificador.joblib'}")
             elif (Path(caminho_artefato) / "classificador.joblib").exists():
                 shutil.copy2(Path(caminho_artefato) / "classificador.joblib", destino / "classificador.joblib")
                 print(f"Modelo classificador.joblib copiado para {destino / 'classificador.joblib'}")
             else:
                 print(f"Artefatos baixados em {caminho_artefato}")
-        except Exception as e:
-            print(f"Erro ao baixar modelo via MLflow: {e}", file=sys.stderr)
+        else:
+            print("Erro: Não foi possível obter o modelo de produção via MLflow.", file=sys.stderr)
     else:
         print("Aviso: MLFLOW_TRACKING_URI não definida. Pulando download do MLflow.", file=sys.stderr)
 

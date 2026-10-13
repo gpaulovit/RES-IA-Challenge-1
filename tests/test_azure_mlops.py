@@ -189,7 +189,7 @@ def test_promover_modelo_e_alias_producao(monkeypatch, tmp_path):
         mlflow.set_tag("git_commit", "abc456")
         mlflow.set_tag("hash_base", "basehash789")
         mlflow.pyfunc.log_model(
-            name="modelo",
+            artifact_path="modelo",
             python_model=DummyPyFunc(),
             registered_model_name="checagens-camada2",
         )
