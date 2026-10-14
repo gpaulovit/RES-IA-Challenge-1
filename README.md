@@ -5,12 +5,50 @@ antes de repassar, se aquilo já foi desmentido. O bot nunca dá veredito própr
 "mentira". O desenho completo está em [Requisitos](docs/requisitos.md).
 
 > [!TIP]
-> **Links de Acesso Rápido**:
-> - 🤖 **Bot no Telegram**: [https://t.me/checaai_bot](https://t.me/checaai_bot) (`@checaai_bot`)
-> - 📄 **Documentação Online (GitHub Pages)**: [https://gpaulovit.github.io/RES-IA-Challenge-1/](https://gpaulovit.github.io/RES-IA-Challenge-1/)
-> - ☁️ **Azure Portal (Resource Group `rg-res-ia`)**: [https://portal.azure.com/.../rg-res-ia](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/overview)
-> - 🧪 **Azure ML Studio (Model Registry & MLflow)**: [https://ml.azure.com/.../mlw-res-ia](https://ml.azure.com/?wsid=/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourcegroups/rg-res-ia/workspaces/mlw-res-ia)
-> - 🚀 **Azure Container Apps (`aca-res-ia-bot`)**: [https://portal.azure.com/.../aca-res-ia-bot](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot)
+> **Links de Acesso**:
+> - **Bot no Telegram**: [https://t.me/checaai_bot](https://t.me/checaai_bot) (`@checaai_bot`)
+> - **Documentação Online (GitHub Pages)**: [https://gpaulovit.github.io/RES-IA-Challenge-1/](https://gpaulovit.github.io/RES-IA-Challenge-1/)
+> - **Azure Portal (Resource Group `rg-res-ia`)**: [https://portal.azure.com/.../rg-res-ia](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/overview)
+> - **Azure ML Studio (Model Registry & MLflow)**: [https://ml.azure.com/.../mlw-res-ia](https://ml.azure.com/?wsid=/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourcegroups/rg-res-ia/workspaces/mlw-res-ia)
+> - **Azure Container Apps (`aca-res-ia-bot`)**: [https://portal.azure.com/.../aca-res-ia-bot](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot)
+
+## Divisão da Equipe e Responsabilidades
+
+| Integrante | Papel / Frente | Foco Principal |
+|---|---|---|
+| **Ana Júlia** | Produto e Decisão | Especificação funcional, redação de mensagens do bot, fluxos de experiência do usuário e apresentação executiva. |
+| **Cibelly Lourenço** | Domínio de Dados | Curadoria, saneamento e balanceamento das bases de checagens históricas e de treino do classificador. |
+| **Eduarda** | Engenharia de Software | Desenvolvimento do bot no Telegram (`python-telegram-bot`), extração de links e integração de comandos. |
+| **Paulo** | Modelos de IA | Calibração de limiares da Camada 1, treinamento do classificador baseline da Camada 2 e relatório Go/No-Go. |
+| **Ingrid Soares** | DevOps e MLOps | Arquitetura em nuvem (Azure), esteira de CI/CD (GitHub Actions), DVC, MLflow Model Registry, Docker e testes automatizados. |
+
+### Contribuições de MLOps, Nuvem e Qualidade (Ingrid Soares)
+
+A frente de DevOps e MLOps liderada por Ingrid Soares viabilizou a entrega operacional e a homologação do bot em ambiente de nuvem corporativo:
+
+1. **Arquitetura em Nuvem na Microsoft Azure**:
+   - Provisionamento e governança do Resource Group `rg-res-ia` na região `eastus`.
+   - Armazenamento de dados no Azure Blob Storage (`stresiachallenge1`) com o container `dvc`.
+   - Repositório privado de imagens no Azure Container Registry (`crresiachallenge1`).
+   - Ambiente serverless no Azure Container Apps (`env-res-ia`) com perfil Consumption e microsserviço `aca-res-ia-bot` configurado para long-polling contínuo (`--min-replicas 1 --max-replicas 1`, 0.5 vCPU e 1.0 GiB RAM).
+   - Telemetria e observabilidade em tempo real com Azure Application Insights (`mlwresiainsightsd3c0939f`).
+
+2. **Engenharia de Dados e Versionamento com DVC**:
+   - Configuração do remote DVC oficial apontando para `azure://dvc/res-ia-challenge-1`.
+   - Versionamento de 12.245 checagens com vetores densos pré-indexados (`data/indices/camada1`), datasets de treino e testes.
+   - Sincronização via `dvc push` de 10 artefatos e validação de integridade por checksums SHA-256 no manifesto.
+
+3. **Governança de IA com MLflow e Azure ML Studio**:
+   - Integração de tracking no módulo `inteligencia.treino` apontando para o Azure ML Workspace (`mlw-res-ia`), com fallback determinístico offline (RNF-10).
+   - Registro de parâmetros (`params.yaml`), métricas (`f1_macro`, `falso_alarme`, `go_no_go`) e tags de auditoria.
+   - Empacotamento do modelo como flavor `pyfunc` (`ClassificadorPyFunc`) garantindo paridade com a API de inferência.
+   - Implementação de trava humana de auditoria (`scripts/promover_modelo.py`) para promoção formal ao estágio `Production` / alias `producao`.
+
+4. **Contêiner Autocontido e CI/CD no GitHub Actions**:
+   - Estruturação do `Dockerfile` com inclusão de `params.yaml`, código e artefatos, garantindo execução autônoma sem requisições externas para limites em runtime.
+   - Automação da esteira em [.github/workflows/ci.yml](.github/workflows/ci.yml) com matriz paralela Python 3.11/3.12 e suíte de 115 testes automatizados (robustez RNF-09, transparência RNF-07, reprodutibilidade RNF-10 e conformidade LGPD de registros anônimos RF-13/RNF-08).
+   - Deploy automatizado com login no ACR, compilação de imagem e atualização idempotente do Container App na Azure.
+
 
 
 
