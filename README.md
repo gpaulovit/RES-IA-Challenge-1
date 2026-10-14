@@ -4,7 +4,10 @@ Bot no Telegram para quem recebeu uma mensagem ou link sobre as eleições de 20
 antes de repassar, se aquilo já foi desmentido. O bot nunca dá veredito próprio de "verdade" ou
 "mentira". O desenho completo está em [Requisitos](docs/requisitos.md).
 
-📄 Página do projeto: [gpaulovit.github.io/RES-IA-Challenge-1](https://gpaulovit.github.io/RES-IA-Challenge-1/)
+🤖 **Bot Oficial no Telegram**: [@checaai_bot](https://t.me/checaai_bot)  
+📄 **Página do Projeto (Docsify)**: [gpaulovit.github.io/RES-IA-Challenge-1](https://gpaulovit.github.io/RES-IA-Challenge-1/)  
+☁️ **Infraestrutura Azure**: [Resource Group `rg-res-ia`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/overview) · [Azure ML Studio (Model Registry)](https://ml.azure.com/?wsid=/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourcegroups/rg-res-ia/workspaces/mlw-res-ia) · [Container App `aca-res-ia-bot`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot)
+
 
 ## Por onde começar: `experiments/`
 
@@ -136,12 +139,12 @@ python scripts/promover_modelo.py --versao 1
 ```
 
 ### 6. Deploy Autocontido no Azure Container Apps
-No build do deploy (automatizado via `.github/workflows/ci.yml`):
-1. Os artefatos são baixados antes da criação da imagem Docker:
-   ```sh
-   python scripts/baixar_artefatos_deploy.py
-   ```
-2. O `Dockerfile` empacota `models/` e `data/indices/` diretamente dentro da imagem.
-3. A imagem resultante é **autocontida** e serve inferências em runtime sem depender de credenciais externas da nuvem.
-4. Observabilidade em tempo real é fornecida pelo Application Insights via `APPLICATIONINSIGHTS_CONNECTION_STRING`.
+O deploy é automatizado via GitHub Actions ([.github/workflows/ci.yml](.github/workflows/ci.yml)):
+1. **Download de Artefatos**: Baixados via `scripts/baixar_artefatos_deploy.py` (sincronizando o índice da Camada 1 via DVC e o modelo de produção da Camada 2 via Azure ML Model Registry).
+2. **Build Docker Autocontido**: O [Dockerfile](Dockerfile) empacota o código, `params.yaml`, `models/` e `data/indices/` diretamente dentro da imagem.
+3. **Registro de Contêineres (ACR)**: Enviado para o registro privado `crresiachallenge1.azurecr.io/res-ia-bot:latest`.
+4. **Hospedagem no Azure Container Apps**: O contêiner roda no [Container App `aca-res-ia-bot`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot) no ambiente `env-res-ia` com `--min-replicas 1 --max-replicas 1` para garantir polling contínuo sem conflitos no Telegram.
+5. **Acesso do Usuário Final**: Qualquer pessoa pode testar o bot diretamente pelo Telegram em [@checaai_bot](https://t.me/checaai_bot).
+6. **Observabilidade**: O monitoramento de requisições, latência e logs é agregado via Application Insights (`mlwresiainsightsd3c0939f`).
+
 
