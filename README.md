@@ -4,9 +4,14 @@ Bot no Telegram para quem recebeu uma mensagem ou link sobre as eleições de 20
 antes de repassar, se aquilo já foi desmentido. O bot nunca dá veredito próprio de "verdade" ou
 "mentira". O desenho completo está em [Requisitos](docs/requisitos.md).
 
-🤖 **Bot Oficial no Telegram**: [@checaai_bot](https://t.me/checaai_bot)  
-📄 **Página do Projeto (Docsify)**: [gpaulovit.github.io/RES-IA-Challenge-1](https://gpaulovit.github.io/RES-IA-Challenge-1/)  
-☁️ **Infraestrutura Azure**: [Resource Group `rg-res-ia`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/overview) · [Azure ML Studio (Model Registry)](https://ml.azure.com/?wsid=/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourcegroups/rg-res-ia/workspaces/mlw-res-ia) · [Container App `aca-res-ia-bot`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot)
+### Acessos e Links Principais
+
+* 🤖 **Bot Oficial no Telegram**: [@checaai_bot](https://t.me/checaai_bot)
+* 📄 **Página do Projeto (Docsify)**: [gpaulovit.github.io/RES-IA-Challenge-1](https://gpaulovit.github.io/RES-IA-Challenge-1/)
+* ☁️ **Infraestrutura Azure**:
+  * [Resource Group `rg-res-ia`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/overview)
+  * [Azure ML Studio (Model Registry)](https://ml.azure.com/?wsid=/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourcegroups/rg-res-ia/workspaces/mlw-res-ia)
+  * [Container App `aca-res-ia-bot`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot)
 
 
 ## Por onde começar: `experiments/`
@@ -139,12 +144,30 @@ python scripts/promover_modelo.py --versao 1
 ```
 
 ### 6. Deploy Autocontido no Azure Container Apps
-O deploy é automatizado via GitHub Actions ([.github/workflows/ci.yml](.github/workflows/ci.yml)):
-1. **Download de Artefatos**: Baixados via `scripts/baixar_artefatos_deploy.py` (sincronizando o índice da Camada 1 via DVC e o modelo de produção da Camada 2 via Azure ML Model Registry).
-2. **Build Docker Autocontido**: O [Dockerfile](Dockerfile) empacota o código, `params.yaml`, `models/` e `data/indices/` diretamente dentro da imagem.
-3. **Registro de Contêineres (ACR)**: Enviado para o registro privado `crresiachallenge1.azurecr.io/res-ia-bot:latest`.
-4. **Hospedagem no Azure Container Apps**: O contêiner roda no [Container App `aca-res-ia-bot`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot) no ambiente `env-res-ia` com `--min-replicas 1 --max-replicas 1` para garantir polling contínuo sem conflitos no Telegram.
-5. **Acesso do Usuário Final**: Qualquer pessoa pode testar o bot diretamente pelo Telegram em [@checaai_bot](https://t.me/checaai_bot).
-6. **Observabilidade**: O monitoramento de requisições, latência e logs é agregado via Application Insights (`mlwresiainsightsd3c0939f`).
+
+O fluxo de CI/CD automatizado via GitHub Actions ([.github/workflows/ci.yml](.github/workflows/ci.yml)) puxa artefatos via DVC e MLflow, monta a imagem autocontida, envia para o Azure Container Registry (`crresiachallenge1.azurecr.io`) e provisiona o bot com réplica contínua e monitoramento via Application Insights:
+
+1. **Download de Artefatos**: Executado via `scripts/baixar_artefatos_deploy.py`, sincronizando o índice vetorial da Camada 1 via DVC (Azure Blob Storage) e extraindo o modelo de produção da Camada 2 via Azure ML Model Registry.
+2. **Build Docker Autocontido**: O [Dockerfile](Dockerfile) empacota o código-fonte, configurações ([params.yaml](params.yaml)), modelos (`models/`) e índices (`data/indices/`) diretamente na imagem, eliminando dependência de credenciais em runtime.
+3. **Registro de Contêineres (ACR)**: A imagem é versionada e armazenada no registro privado `crresiachallenge1.azurecr.io/res-ia-bot:latest`.
+4. **Hospedagem no Azure Container Apps**: O worker é instanciado no [Container App `aca-res-ia-bot`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot) dentro do ambiente `env-res-ia`, configurado com `--min-replicas 1 --max-replicas 1` (essencial para long-polling contínuo no Telegram sem duplicidade de instâncias).
+5. **Acesso do Usuário Final**: Usuários acessam e interagem diretamente pelo Telegram via [@checaai_bot](https://t.me/checaai_bot).
+6. **Observabilidade e Telemetria**: Logs, taxa de acertos e tempos de resposta são agregados pelo Application Insights (`mlwresiainsightsd3c0939f`).
+
+#### Tabela: Resumo de Funções e Componentes da Arquitetura
+
+| Componente / Módulo | Função / Comando Principal | Descrição e Papel na Arquitetura |
+|---|---|---|
+| **Camada 1 (Busca)** | `inteligencia.busca.buscar()` | Busca híbrida (similaridade semântica + filtro de negação) em 12.245 checagens com vetores pré-computados |
+| **Camada 2 (Alerta)** | `inteligencia.classificador.classificar()` | Classificação de estilo e detecção de sinais linguísticos suspeitos com termos-gatilho |
+| **Bot Telegram** | `python -m checagens.bot` | Serviço contínuo via long-polling integrado à API do Telegram para atendimento direto em `@checaai_bot` |
+| **DVC Remote** | `dvc pull` / `dvc push` | Versionamento de dados brutos/processados e índices pesados no Azure Blob Storage (`stresiachallenge1`) |
+| **MLflow Tracking** | `python -m inteligencia.treino` | Registro de experimentos, hiperparâmetros e métricas Go/No-Go no Azure ML Workspace (`mlw-res-ia`) |
+| **Model Registry** | `scripts/promover_modelo.py` | Governança com trava humana para validação e promoção do modelo ao estágio `Production` / alias `producao` |
+| **Deploy Pipeline** | `scripts/baixar_artefatos_deploy.py` | Script de esteira para baixar artefatos aprovados e preparar o build Docker autocontido |
+| **Container Registry** | `az acr login` / `docker push` | Armazenamento de imagens Docker no Azure Container Registry (`crresiachallenge1.azurecr.io`) |
+| **Container Apps** | `aca-res-ia-bot` (`env-res-ia`) | Execução serverless com 0.5 vCPU e 1.0 GiB de RAM mantendo réplica única ativa 24/7 |
+| **Observabilidade** | Azure Application Insights | Monitoramento contínuo de latência (RNF-01), volume de mensagens e diagnóstico de erros |
+
 
 
