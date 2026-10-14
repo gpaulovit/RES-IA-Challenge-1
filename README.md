@@ -20,34 +20,17 @@ antes de repassar, se aquilo já foi desmentido. O bot nunca dá veredito própr
 | **Cibelly Lourenço** | Domínio de Dados | Curadoria, saneamento e balanceamento das bases de checagens históricas e de treino do classificador. |
 | **Eduarda** | Engenharia de Software | Desenvolvimento do bot no Telegram (`python-telegram-bot`), extração de links e integração de comandos. |
 | **Paulo** | Modelos de IA | Calibração de limiares da Camada 1, treinamento do classificador baseline da Camada 2 e relatório Go/No-Go. |
-| **Ingrid Soares** | DevOps e MLOps | Arquitetura em nuvem (Azure), esteira de CI/CD (GitHub Actions), DVC, MLflow Model Registry, Docker e testes automatizados. |
+| **Ingrid Soares** | [DevOps e MLOps](docs/devops-mlops.md) | Arquitetura em nuvem (Azure), esteira de CI/CD (GitHub Actions), DVC, MLflow Model Registry, Docker e testes automatizados. |
 
-### Contribuições de MLOps, Nuvem e Qualidade (Ingrid Soares)
+### Frente de DevOps e MLOps (Ingrid Soares)
 
-A frente de DevOps e MLOps liderada por Ingrid Soares viabilizou a entrega operacional e a homologação do bot em ambiente de nuvem corporativo:
+A especificação completa de infraestrutura, esteira automatizada e governança está detalhada em **[docs/devops-mlops.md](docs/devops-mlops.md)**. Em resumo:
 
-1. **Arquitetura em Nuvem na Microsoft Azure**:
-   - Provisionamento e governança do Resource Group `rg-res-ia` na região `eastus`.
-   - Armazenamento de dados no Azure Blob Storage (`stresiachallenge1`) com o container `dvc`.
-   - Repositório privado de imagens no Azure Container Registry (`crresiachallenge1`).
-   - Ambiente serverless no Azure Container Apps (`env-res-ia`) com perfil Consumption e microsserviço `aca-res-ia-bot` configurado para long-polling contínuo (`--min-replicas 1 --max-replicas 1`, 0.5 vCPU e 1.0 GiB RAM).
-   - Telemetria e observabilidade em tempo real com Azure Application Insights (`mlwresiainsightsd3c0939f`).
+* **Nuvem Azure**: Provisionamento serverless do Resource Group `rg-res-ia`, Azure Blob Storage (`stresiachallenge1` / `dvc`), Azure Container Registry (`crresiachallenge1`) e Azure Container Apps (`aca-res-ia-bot` no ambiente `env-res-ia` com réplica contínua e telemetria no Application Insights).
+* **DVC e Versionamento**: Remote oficial `azure://dvc/res-ia-challenge-1` rastreando o índice da Camada 1 (12.245 checagens com vetores de 384 dimensões), dados de treino/teste e integridade SHA-256.
+* **MLflow e Governança**: Rastreamento de parâmetros, métricas e tags no Azure ML Workspace (`mlw-res-ia`), modelo `checagens-camada2` empacotado em `pyfunc` e trava humana de homologação (`scripts/promover_modelo.py`) para o alias `producao`.
+* **Docker e CI/CD**: Contêiner autocontido com [params.yaml](params.yaml) e pipeline no GitHub Actions ([.github/workflows/ci.yml](.github/workflows/ci.yml)) executando 115 testes automatizados (Python 3.11/3.12), auditoria LGPD de registros anônimos e deploy contínuo na Azure.
 
-2. **Engenharia de Dados e Versionamento com DVC**:
-   - Configuração do remote DVC oficial apontando para `azure://dvc/res-ia-challenge-1`.
-   - Versionamento de 12.245 checagens com vetores densos pré-indexados (`data/indices/camada1`), datasets de treino e testes.
-   - Sincronização via `dvc push` de 10 artefatos e validação de integridade por checksums SHA-256 no manifesto.
-
-3. **Governança de IA com MLflow e Azure ML Studio**:
-   - Integração de tracking no módulo `inteligencia.treino` apontando para o Azure ML Workspace (`mlw-res-ia`), com fallback determinístico offline (RNF-10).
-   - Registro de parâmetros (`params.yaml`), métricas (`f1_macro`, `falso_alarme`, `go_no_go`) e tags de auditoria.
-   - Empacotamento do modelo como flavor `pyfunc` (`ClassificadorPyFunc`) garantindo paridade com a API de inferência.
-   - Implementação de trava humana de auditoria (`scripts/promover_modelo.py`) para promoção formal ao estágio `Production` / alias `producao`.
-
-4. **Contêiner Autocontido e CI/CD no GitHub Actions**:
-   - Estruturação do `Dockerfile` com inclusão de `params.yaml`, código e artefatos, garantindo execução autônoma sem requisições externas para limites em runtime.
-   - Automação da esteira em [.github/workflows/ci.yml](.github/workflows/ci.yml) com matriz paralela Python 3.11/3.12 e suíte de 115 testes automatizados (robustez RNF-09, transparência RNF-07, reprodutibilidade RNF-10 e conformidade LGPD de registros anônimos RF-13/RNF-08).
-   - Deploy automatizado com login no ACR, compilação de imagem e atualização idempotente do Container App na Azure.
 
 
 
@@ -111,88 +94,30 @@ make latency               # tempo de resposta nas 30 mensagens de teste (RNF-01
 O protótipo de busca das semanas 1 a 3 (API, embeddings e retrieval em `src/`) foi retirado; ele
 continua no histórico do git (tag `legado-busca` e commits da `main`).
 
-## Configurar Azure (DVC, MLflow e Deploy)
+## Configuração e Deploy na Azure (DVC, MLflow e Container Apps)
 
-O ecossistema em nuvem na Azure padroniza o versionamento de dados, modelos e o deploy serverless (custo praticamente zero, sem computação 24h ligada).
+O ecossistema em nuvem na Microsoft Azure padroniza o versionamento de dados, a governança de modelos e o deploy serverless contínuo do bot. O guia detalhado de infraestrutura e operações está documentado em **[docs/devops-mlops.md](docs/devops-mlops.md)**.
 
-### 1. Divisão de Papéis
-- **DVC (Azure Blob Storage)**: Versiona dados brutos/processados, pipelines (`dvc.yaml`), o índice vetorial da **Camada 1** (`data/indices/camada1`) e o artefato `models/classificador.joblib`.
-- **MLflow (Azure ML Workspace)**: Rastreia os parâmetros, métricas e artefatos de treino da **Camada 2**, registrando o modelo como `pyfunc` no Model Registry com o nome `checagens-camada2`. O deploy consome o modelo com o alias `producao`.
-- **Application Insights**: Monitora a observabilidade em produção no Azure Container Apps (latência, volume de requisições e taxa de erros).
-- **Azure Container Apps**: Hospeda o bot do Telegram em modo serverless com escala a zero (`min-replicas 0`).
+### Comandos Rápidos de Operação
 
-### 2. Instalação e Dependências
-Para instalar os pacotes de integração com a Azure:
 ```sh
+# Instalação das dependências de nuvem
 pip install -e '.[azure,busca]'
-```
 
-### 3. Remote do DVC na Azure
-O remote do DVC está configurado em `.dvc/config` apontando para:
-`azure://dvc/res-ia-challenge-1` (Storage Account padrão: `stresiachallenge1`).
+# Restaurar artefatos e índice vetorial da Camada 1 via DVC
+dvc pull
 
-As credenciais **nunca** vão para o repositório git. Configure de uma das seguintes formas:
-1. **Via Variável de Ambiente (Recomendado para CI/CD e local)**:
-   ```sh
-   export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=...;AccountKey=...;EndpointSuffix=core.windows.net"
-   ```
-2. **Via Configuração Local do DVC**:
-   ```sh
-   dvc config --local remote.azure.connection_string "sua_connection_string"
-   # ou com SAS token:
-   # dvc config --local remote.azure.sas_token "seu_sas_token"
-   ```
+# Treinamento com tracking no Azure ML (opcional se MLFLOW_TRACKING_URI estiver definida)
+python -m inteligencia.treino
 
-Para restaurar dados e índice da camada 1:
-```sh
-dvc pull                           # restaura todos os dados rastreados
-dvc pull data/indices/camada1      # restaura especificamente o índice da camada 1
-```
-
-Para sincronizar novos dados com o remote:
-```sh
-dvc push
-dvc status -c                      # verifica se o cache local e a Azure estão em sincronia
-```
-
-### 4. Rastreamento e Registro com MLflow (Azure ML)
-O rastreamento via MLflow é **opcional**: se `MLFLOW_TRACKING_URI` não estiver definida, o treino roda normalmente em modo offline (garantindo determinismo RNF-10 e compatibilidade com `pytest`).
-
-Para treinar registrando no Azure ML Studio:
-1. Obtenha a Tracking URI do seu workspace Azure ML:
-   ```sh
-   export MLFLOW_TRACKING_URI=$(az ml workspace show --resource-group rg-res-ia --name mlw-res-ia --query mlflow_tracking_uri -o tsv)
-   ```
-2. Execute o treinamento:
-   ```sh
-   python -m inteligencia.treino    # ou: dvc repro -f treinar
-   ```
-   A execução registrará automaticamente:
-   - Parâmetros do `params.yaml`
-   - Métricas (`f1_macro`, `falso_alarme`, indicador numérico `go_no_go`)
-   - Tags de rastreabilidade (`git_commit`, `hash_base`, `decisao`)
-   - Artefatos JSON (`metricas_camada2.json`, `params_camada2.json`)
-   - Modelo registrado como `checagens-camada2` (flavor `pyfunc` encapsulando `Classificador`)
-
-### 5. Promoção Auditável para Produção
-Como trava humana auditável antes do deploy, a promoção exige conferência dos critérios pré-registrados:
-```sh
-# Promove a versão aprovada (valida go/no-go) para o alias 'producao':
+# Promoção auditável da versão do modelo para produção
 python scripts/promover_modelo.py --versao 1
+
+# Download de artefatos para deploy autocontido
+python scripts/baixar_artefatos_deploy.py
 ```
 
-### 6. Deploy Autocontido no Azure Container Apps
-
-O fluxo de CI/CD automatizado via GitHub Actions ([.github/workflows/ci.yml](.github/workflows/ci.yml)) puxa artefatos via DVC e MLflow, monta a imagem autocontida, envia para o Azure Container Registry (`crresiachallenge1.azurecr.io`) e provisiona o bot com réplica contínua e monitoramento via Application Insights:
-
-1. **Download de Artefatos**: Executado via `scripts/baixar_artefatos_deploy.py`, sincronizando o índice vetorial da Camada 1 via DVC (Azure Blob Storage) e extraindo o modelo de produção da Camada 2 via Azure ML Model Registry.
-2. **Build Docker Autocontido**: O [Dockerfile](Dockerfile) empacota o código-fonte, configurações ([params.yaml](params.yaml)), modelos (`models/`) e índices (`data/indices/`) diretamente na imagem, eliminando dependência de credenciais em runtime.
-3. **Registro de Contêineres (ACR)**: A imagem é armazenada no registro privado `crresiachallenge1.azurecr.io/res-ia-bot:latest`, provisionado no Resource Group `rg-res-ia` (`eastus`, SKU `Basic`), com permissões autenticadas para o Service Principal `sp-github-res-ia`.
-4. **Hospedagem no Azure Container Apps**: O worker é instanciado no [Container App `aca-res-ia-bot`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot) no ambiente `env-res-ia` (perfil `Consumption`, 0.5 vCPU e 1.0 GiB RAM), com variáveis `TELEGRAM_BOT_TOKEN` e `CAMADA2_LIGADA=1`, operando com `--min-replicas 1 --max-replicas 1` (essencial para long-polling contínuo no Telegram sem duplicidade de instâncias).
-5. **Acesso do Usuário Final**: Usuários acessam e interagem diretamente pelo Telegram via [@checaai_bot](https://t.me/checaai_bot).
-6. **Observabilidade e Telemetria**: Logs, taxa de acertos e tempos de resposta são agregados pelo Application Insights (`mlwresiainsightsd3c0939f`).
-
-#### Tabela: Resumo de Funções e Componentes da Arquitetura
+### Resumo dos Componentes da Arquitetura
 
 | Componente / Módulo | Função / Comando Principal | Descrição e Papel na Arquitetura |
 |---|---|---|
@@ -206,6 +131,7 @@ O fluxo de CI/CD automatizado via GitHub Actions ([.github/workflows/ci.yml](.gi
 | **Container Registry** | `az acr login` / `docker push` | Armazenamento de imagens Docker no Azure Container Registry (`crresiachallenge1.azurecr.io`) |
 | **Container Apps** | `aca-res-ia-bot` (`env-res-ia`) | Execução serverless com 0.5 vCPU e 1.0 GiB de RAM mantendo réplica única ativa 24/7 |
 | **Observabilidade** | Azure Application Insights | Monitoramento contínuo de latência (RNF-01), volume de mensagens e diagnóstico de erros |
+
 
 
 

@@ -11,3 +11,6 @@
   - [Guia da arquiteta](guia-arquiteta.md)
   - [Testes e benchmark](testes.md)
   - [Avaliação do benchmark](avaliacao-benchmark.md)
+- DevOps e MLOps
+  - [Infraestrutura e MLOps](devops-mlops.md)
+
