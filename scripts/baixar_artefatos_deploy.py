@@ -22,7 +22,10 @@ def baixar_artefatos() -> None:
         print("Aviso: 'dvc pull data/indices/camada1' retornou código diferente de zero. Verifique credenciais ou cache.", file=sys.stderr)
 
     print("2. Baixando modelo da camada 2 via MLflow (models:/checagens-camada2@producao)...")
-    tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+    tracking_uri = os.getenv(
+        "MLFLOW_TRACKING_URI",
+        "azureml://eastus.api.azureml.ms/mlflow/v1.0/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.MachineLearningServices/workspaces/mlw-res-ia",
+    )
     if tracking_uri:
         import mlflow
         from mlflow.artifacts import download_artifacts
@@ -60,9 +63,11 @@ def baixar_artefatos() -> None:
             else:
                 print(f"Artefatos baixados em {caminho_artefato}")
         else:
-            print("Erro: Não foi possível obter o modelo de produção via MLflow.", file=sys.stderr)
-    else:
-        print("Aviso: MLFLOW_TRACKING_URI não definida. Pulando download do MLflow.", file=sys.stderr)
+            print("Aviso: Falha ao baixar via MLflow. Tentando fallback DVC...", file=sys.stderr)
+
+    if not (RAIZ / "models" / "classificador.joblib").exists():
+        print("3. Baixando modelo da camada 2 via DVC (models/classificador.joblib)...")
+        subprocess.run(["python", "-m", "dvc", "pull", "models/classificador.joblib"], cwd=str(RAIZ))
 
 
 if __name__ == "__main__":

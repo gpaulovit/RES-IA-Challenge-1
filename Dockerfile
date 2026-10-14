@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copia arquivos de configuração de pacote e código fonte
-COPY pyproject.toml README.md ./
+COPY pyproject.toml README.md params.yaml ./
 COPY src/ ./src/
 
 # Instala o pacote e dependências (busca para camada 1 e test para validações)
