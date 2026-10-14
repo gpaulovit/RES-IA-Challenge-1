@@ -4,14 +4,14 @@ Bot no Telegram para quem recebeu uma mensagem ou link sobre as eleições de 20
 antes de repassar, se aquilo já foi desmentido. O bot nunca dá veredito próprio de "verdade" ou
 "mentira". O desenho completo está em [Requisitos](docs/requisitos.md).
 
-### Acessos e Links Principais
+> [!TIP]
+> **Links de Acesso Rápido**:
+> - 🤖 **Bot no Telegram**: [https://t.me/checaai_bot](https://t.me/checaai_bot) (`@checaai_bot`)
+> - 📄 **Documentação Online (GitHub Pages)**: [https://gpaulovit.github.io/RES-IA-Challenge-1/](https://gpaulovit.github.io/RES-IA-Challenge-1/)
+> - ☁️ **Azure Portal (Resource Group `rg-res-ia`)**: [https://portal.azure.com/.../rg-res-ia](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/overview)
+> - 🧪 **Azure ML Studio (Model Registry & MLflow)**: [https://ml.azure.com/.../mlw-res-ia](https://ml.azure.com/?wsid=/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourcegroups/rg-res-ia/workspaces/mlw-res-ia)
+> - 🚀 **Azure Container Apps (`aca-res-ia-bot`)**: [https://portal.azure.com/.../aca-res-ia-bot](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot)
 
-* 🤖 **Bot Oficial no Telegram**: [@checaai_bot](https://t.me/checaai_bot)
-* 📄 **Página do Projeto (Docsify)**: [gpaulovit.github.io/RES-IA-Challenge-1](https://gpaulovit.github.io/RES-IA-Challenge-1/)
-* ☁️ **Infraestrutura Azure**:
-  * [Resource Group `rg-res-ia`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/overview)
-  * [Azure ML Studio (Model Registry)](https://ml.azure.com/?wsid=/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourcegroups/rg-res-ia/workspaces/mlw-res-ia)
-  * [Container App `aca-res-ia-bot`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot)
 
 
 ## Por onde começar: `experiments/`

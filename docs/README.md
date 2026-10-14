@@ -3,6 +3,16 @@
 Bot no Telegram que confere mensagens e links sobre as eleições de 2026: busca checagens de
 agências (camada 1) e, sem checagem parecida, mostra uma faixa de alerta (camada 2).
 
+### Acessos e Links Rápidos
+
+* 🤖 **Bot Oficial no Telegram**: [https://t.me/checaai_bot](https://t.me/checaai_bot) (`@checaai_bot`)
+* 📄 **Código-Fonte no GitHub**: [https://github.com/gpaulovit/RES-IA-Challenge-1](https://github.com/gpaulovit/RES-IA-Challenge-1)
+* ☁️ **Infraestrutura Azure**:
+  * [Resource Group `rg-res-ia`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/overview)
+  * [Azure ML Studio (Model Registry)](https://ml.azure.com/?wsid=/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourcegroups/rg-res-ia/workspaces/mlw-res-ia)
+  * [Container App `aca-res-ia-bot`](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot)
+
+
 ## Conteúdo
 
 - [Perguntas](perguntas.md): problema, dados por eixo e respostas de MLOps.
