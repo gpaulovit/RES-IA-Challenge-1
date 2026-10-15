@@ -3,14 +3,16 @@
 - [Requisitos](requisitos.md)
 - [Histórias de usuário](historias.md)
 - [Referências](refs.md)
+- [Glossário](glossario.md)
 - Domínio de dados
   - [Dados do bot](dados.md)
 - Modelos de IA
   - [Relatório da camada 2](relatorio-camada2.md)
 - Engenharia
-  - [Guia da arquiteta](guia-arquiteta.md)
   - [Testes e benchmark](testes.md)
   - [Avaliação do benchmark](avaliacao-benchmark.md)
+  - [Funcionalidades do bot](funcionalidades-bot.md)
+  - [Engenharia do bot](engenharia-bot.md)
 - DevOps e MLOps
   - [Infraestrutura e MLOps](devops-mlops.md)
 
