@@ -19,9 +19,25 @@
         'Cache-Control': 'no-cache'
       },
       subMaxLevel: 2,
-      auto2top: true
+      auto2top: true,
+      markdown: {
+        renderer: {
+          code: function (code, lang) {
+            if (lang === 'mermaid') {
+              var texto = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+              return '<div class="mermaid">' + texto + '</div>';
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      },
+      plugins: [function (hook) {
+        hook.doneEach(function () { mermaid.run({ querySelector: '.mermaid' }); });
+      }]
     }
   </script>
+  <script src="//cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: false });</script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
 </body>

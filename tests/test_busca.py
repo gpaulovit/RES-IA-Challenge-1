@@ -127,7 +127,6 @@ def test_negacao_em_internetes_e_reconhecida_depois_da_normalizacao(buscador):
     assert r[0]["id"] == "t:1" and r[0]["faixa"] != "ja_checado"
 
 
-<<<<<<< HEAD
 def test_desempate_prefere_menos_noticias_reais_em_ja_checado():
     base = {"controles_mostrados": 2, "reescritas_mostradas": 0.375}
     g = pd.DataFrame([
@@ -135,7 +134,8 @@ def test_desempate_prefere_menos_noticias_reais_em_ja_checado():
         {**base, "limite_alta": 0.82, "limite_media": 0.76, "controles_ja_checado": 0, "confirmados_ja_checado": 4},
     ])
     assert escolher(g)["limite_alta"] == 0.82
-=======
+
+
 def test_busca_hibrida_prefere_checagem_com_nome_raro():
     # O MiniLM quase ignora nomes que não conhece ("Vorcaro"): as checagens genéricas sobre
     # Bolsonaro têm cosseno maior que a certa. A palavra rara em comum tem que decidir.
@@ -200,4 +200,3 @@ def test_reranker_decide_ordem_e_faixa_e_negacao_impede_ja_checado():
     assert [x["id"] for x in r] == ["t:2", "t:3", "t:1"]          # a nota manda, não o cosseno
     assert [x["faixa"] for x in r] == ["ja_checado", "relacionada", "baixa"]   # t:3 tem "não"
     assert r[2]["semelhanca"] == 0.95                               # semelhanca continua o cosseno
->>>>>>> 0ac46b150b78ca33ca248a47c91bcefbf2da3442
