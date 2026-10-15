@@ -62,6 +62,8 @@ mlflow.db
 models/*
 !models/.gitkeep
 
-/entregas
+entregas/
+entrega.zip 
+
 
 
