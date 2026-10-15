@@ -19,7 +19,7 @@ Training SHALL be run by a single command that writes the model, the metrics and
 - **THEN** the metrics files are identical
 
 ### Requirement: Pre-registered go/no-go
-The go/no-go criterion SHALL be written before the first evaluation on the test set: go if macro F1 ≥ 0.75 (RNF-02) and at most 15% of true items in the test set fall in `muitos_sinais` (RNF-03) and the test set has at least 100 items of each class. The test set SHALL contain only items from 2021 onward and training only items up to 2020 (RN-04).
+The go/no-go criterion SHALL be written before the first evaluation on the test set: go if macro F1 ≥ 0.75 (RNF-02) and at most 15% of true items in the test set fall in `muitos_sinais` (RNF-03) and the test set has at least 100 items of each class. The test set SHALL be later in time than the training set (RN-04): the split delivered by the data team (training up to 2018-09-15, test from 2018-09-16), as amended in docs/relatorio-camada2.md before any test run.
 
 #### Scenario: Metrics report
 - **WHEN** training finishes

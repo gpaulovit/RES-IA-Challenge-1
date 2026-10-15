@@ -8,8 +8,6 @@ Saídas:
 - experiments/results/metricas_camada2.json: critério, decisão go/no-go e relato complementar;
 - experiments/results/params_camada2.json: parâmetros usados, hash da base e tamanho dos conjuntos.
 
-Os arquivos não têm data nem hora: rodar duas vezes com os mesmos dados deve dar o mesmo resultado (RNF-10).
-
 Uso (a partir da raiz, com o ambiente ativado):  python -m inteligencia.treino    (ou: dvc repro treinar)
 """
 import argparse
@@ -31,53 +29,31 @@ from inteligencia.texto import normalizar
 
 BASES = RAIZ / "data" / "processados" / "treino"   # treino.csv, teste.csv, teste_curtos.csv
 ROTULOS = {"falso": True, "verdadeiro": False}     # classe positiva: notícia falsa
-BASE_PADRAO = RAIZ / "data" / "processados" / "treino" / "treino.json"
 PARAMS_PADRAO = RAIZ / "params.yaml"
 RESULTADOS = RAIZ / "experiments" / "results"
 
-# Critério pré-registrado (docs/relatorio-camada2.md, "Critério de decisão"). Não mudar depois do teste.
 F1_MINIMO = 0.75          # RNF-02
 FALSO_ALARME_MAXIMO = 0.15  # RNF-03
 MINIMO_POR_CLASSE = 100
 MINIMO_POR_CLASSE_FONTE = 30   # relato complementar: F1 dentro de cada fonte
 
 
-# ---------------------------------------------------------------- dados
+# dados
 
 def _validar_item(item, posicao: int) -> dict:
     """Único lugar que conhece o esquema da base de treino: se a frente de Dados mudar, muda só aqui.
 
-    Suporta formato CSV (texto, rotulo 'falso'/'verdadeiro', fonte, data) ou JSON (texto, rotulo bool, ano, fonte).
+    Colunas: texto, rotulo ("falso"/"verdadeiro"), fonte, data (AAAA-MM-DD ou vazia).
     """
-    if "data" in item:
-        try:
-            texto, rotulo, fonte, data = item["texto"], item["rotulo"], item["fonte"], item["data"]
-        except (KeyError, TypeError) as erro:
-            raise ValueError(f"Linha {posicao} sem texto, rotulo, fonte ou data.") from erro
-        if not isinstance(texto, str) or not texto.strip():
-            raise ValueError(f"Linha {posicao} tem texto vazio.")
-        if rotulo not in ROTULOS:
-            raise ValueError(f"Linha {posicao}: rotulo deve ser 'falso' ou 'verdadeiro', veio {rotulo!r}.")
-        return {"texto": texto.strip(), "rotulo": ROTULOS[rotulo], "fonte": str(fonte), "data": data}
-
     try:
-        texto, rotulo, ano, fonte = item["texto"], item["rotulo"], item["ano"], item["fonte"]
+        texto, rotulo, fonte, data = item["texto"], item["rotulo"], item["fonte"], item["data"]
     except (KeyError, TypeError) as erro:
-        raise ValueError(f"Item {posicao} sem texto, rotulo, ano ou fonte.") from erro
+        raise ValueError(f"Linha {posicao} sem texto, rotulo, fonte ou data.") from erro
     if not isinstance(texto, str) or not texto.strip():
-        raise ValueError(f"Item {posicao} tem texto vazio.")
-    if not isinstance(rotulo, bool):
-        raise ValueError(f"Item {posicao}: rotulo deve ser true (falsa) ou false (verdadeira).")
-    if type(ano) is not int:
-        raise ValueError(f"Item {posicao}: ano deve ser inteiro.")
-    return {"texto": texto.strip(), "rotulo": rotulo, "ano": ano, "fonte": str(fonte)}
-
-
-def carregar_base(caminho: Path) -> list[dict]:
-    bruto = json.loads(Path(caminho).read_text(encoding="utf-8"))
-    if not isinstance(bruto, list) or not bruto:
-        raise ValueError("A base de treino deve ser uma lista não vazia.")
-    return [_validar_item(item, i) for i, item in enumerate(bruto, 1)]
+        raise ValueError(f"Linha {posicao} tem texto vazio.")
+    if rotulo not in ROTULOS:
+        raise ValueError(f"Linha {posicao}: rotulo deve ser 'falso' ou 'verdadeiro', veio {rotulo!r}.")
+    return {"texto": texto.strip(), "rotulo": ROTULOS[rotulo], "fonte": fonte, "data": data}
 
 
 def carregar_csv(caminho: Path) -> list[dict]:
@@ -88,7 +64,7 @@ def carregar_csv(caminho: Path) -> list[dict]:
         raise ValueError(f"Não foi possível ler {caminho}. Rode: dvc repro treino") from erro
     if not linhas:
         raise ValueError(f"{caminho} está vazio.")
-    return [_validar_item(linha, i) for i, linha in enumerate(linhas, 2)]
+    return [_validar_item(linha, i) for i, linha in enumerate(linhas, 2)]   # linha 1 é o cabeçalho
 
 
 def remover_repetidos(treino: list[dict], teste: list[dict]) -> tuple[list[dict], int]:
@@ -103,16 +79,7 @@ def _sha256(caminho: Path) -> str:
     return hashlib.sha256(caminho.read_bytes()).hexdigest()
 
 
-def dividir(itens: list[dict], ano_corte: int) -> tuple[list[dict], list[dict], int]:
-    """Treino: ano ≤ corte. Teste: ano > corte, sem textos que já estão no treino (normalizados)."""
-    treino = [i for i in itens if i["ano"] <= ano_corte]
-    vistos = {normalizar(i["texto"]) for i in treino}
-    teste_bruto = [i for i in itens if i["ano"] > ano_corte]
-    teste = [i for i in teste_bruto if normalizar(i["texto"]) not in vistos]
-    return treino, teste, len(teste_bruto) - len(teste)
-
-
-# ---------------------------------------------------------------- métricas
+#  métricas
 
 def _r(x: float) -> float:
     return round(float(x), 6)
@@ -177,80 +144,50 @@ def avaliar(clf: Classificador, treino: list[dict], teste: list[dict], semente: 
     }
 
 
-# ---------------------------------------------------------------- comando
+# comando
 
-def treinar(itens: list[dict], params: dict):
-    """Cortes das faixas pela validação cruzada no treino; depois, o modelo final com o treino inteiro.
-
-    Se itens contiver 'ano' e params['camada2'] tiver 'ano_corte', divide e retorna (clf, treino, teste, repetidos).
-    Caso contrário, assume que itens já é o conjunto de treino e retorna o Classificador treinado.
-    """
-    if itens and "ano" in itens[0] and "ano_corte" in params.get("camada2", {}):
-        treino, teste, repetidos = dividir(itens, params["camada2"]["ano_corte"])
-        X, y = [i["texto"] for i in treino], np.array([i["rotulo"] for i in treino], dtype=int)
-        p_oof = probabilidades_fora_da_amostra(X, y, params)
-        alto, baixo = escolher_cortes(p_oof, y, params["camada2"]["margem_faixas"])
-        pipeline = criar_pipeline(params).fit(X, y)
-        return Classificador(pipeline, alto, baixo), treino, teste, repetidos
-    else:
-        X, y = [i["texto"] for i in itens], np.array([i["rotulo"] for i in itens], dtype=int)
-        p_oof = probabilidades_fora_da_amostra(X, y, params)
-        alto, baixo = escolher_cortes(p_oof, y, params["camada2"]["margem_faixas"])
-        pipeline = criar_pipeline(params).fit(X, y)
-        return Classificador(pipeline, alto, baixo)
+def treinar(treino: list[dict], params: dict) -> Classificador:
+    """Cortes das faixas pela validação cruzada no treino; depois, o modelo final com o treino inteiro."""
+    X, y = [i["texto"] for i in treino], np.array([i["rotulo"] for i in treino], dtype=int)
+    p_oof = probabilidades_fora_da_amostra(X, y, params)
+    alto, baixo = escolher_cortes(p_oof, y, params["camada2"]["margem_faixas"])
+    pipeline = criar_pipeline(params).fit(X, y)
+    return Classificador(pipeline, alto, baixo)
 
 
 def main() -> None:
     import yaml
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--base", type=Path, default=None)
     parser.add_argument("--bases", type=Path, default=BASES)
     parser.add_argument("--modelo", type=Path, default=MODELO_PADRAO)
     parser.add_argument("--saida", type=Path, default=RESULTADOS)
     a = parser.parse_args()
 
     params = yaml.safe_load(PARAMS_PADRAO.read_text(encoding="utf-8"))
+    arquivos = {n: a.bases / f"{n}.csv" for n in ("treino", "teste", "teste_curtos")}
+    treino = carregar_csv(arquivos["treino"])
+    teste, repetidos = remover_repetidos(treino, carregar_csv(arquivos["teste"]))
+    curtos, repetidos_curtos = remover_repetidos(treino, carregar_csv(arquivos["teste_curtos"]))
 
-    if a.base and a.base.is_file() and a.base.suffix == ".json":
-        itens = carregar_base(a.base)
-        clf, treino, teste, repetidos = treinar(itens, params)
-        clf.salvar(a.modelo)
-        metricas = avaliar(clf, treino, teste, params["semente"])
-        a.saida.mkdir(parents=True, exist_ok=True)
-        (a.saida / "metricas_camada2.json").write_text(json.dumps(metricas, ensure_ascii=False, indent=1) + "\n",
-                                                       encoding="utf-8")
-        usados = {"semente": params["semente"], "camada2": params["camada2"],
-                  "sha256_base": hashlib.sha256(Path(a.base).read_bytes()).hexdigest(),
-                  "treino": len(treino), "teste": len(teste), "teste_removidos_por_repeticao": repetidos}
-        (a.saida / "params_camada2.json").write_text(json.dumps(usados, ensure_ascii=False, indent=1) + "\n",
-                                                     encoding="utf-8")
-        print(f"Treino {len(treino)} | teste {len(teste)} ({repetidos} repetidos removidos)")
-    else:
-        pasta_bases = a.bases if (a.bases / "treino.csv").exists() else BASES
-        arquivos = {n: pasta_bases / f"{n}.csv" for n in ("treino", "teste", "teste_curtos")}
-        treino = carregar_csv(arquivos["treino"])
-        teste, repetidos = remover_repetidos(treino, carregar_csv(arquivos["teste"]))
-        curtos, repetidos_curtos = remover_repetidos(treino, carregar_csv(arquivos["teste_curtos"]))
-
-        clf = treinar(treino, params)
-        clf.salvar(a.modelo)
-        metricas = avaliar(clf, treino, teste, params["semente"])
-        extra = avaliar(clf, treino, curtos, params["semente"])
-        metricas["complementar"]["teste_curtos"] = {
-            k: extra[k] for k in ("teste", "f1_macro", "falso_alarme", "matriz_confusao", "faixas_por_classe")
-        }
-        a.saida.mkdir(parents=True, exist_ok=True)
-        (a.saida / "metricas_camada2.json").write_text(json.dumps(metricas, ensure_ascii=False, indent=1) + "\n",
-                                                       encoding="utf-8")
-        usados = {"semente": params["semente"], "camada2": params["camada2"],
-                  "sha256": {n: _sha256(c) for n, c in arquivos.items()},
-                  "sha256_base": _sha256(arquivos["treino"]),
-                  "linhas": {"treino": len(treino), "teste": len(teste), "teste_curtos": len(curtos)},
-                  "removidos_por_repeticao": {"teste": repetidos, "teste_curtos": repetidos_curtos}}
-        (a.saida / "params_camada2.json").write_text(json.dumps(usados, ensure_ascii=False, indent=1) + "\n",
-                                                     encoding="utf-8")
-        print(f"Treino {len(treino)} | teste {len(teste)} | teste_curtos {len(curtos)} "
-              f"({repetidos} + {repetidos_curtos} repetidos removidos)")
+    clf = treinar(treino, params)
+    clf.salvar(a.modelo)
+    metricas = avaliar(clf, treino, teste, params["semente"])
+    # teste extra (tweets curtos, outra fonte e época): só relato, não entra na decisão
+    extra = avaliar(clf, treino, curtos, params["semente"])
+    metricas["complementar"]["teste_curtos"] = {k: extra[k] for k in ("teste", "f1_macro", "falso_alarme",
+                                                                       "matriz_confusao", "faixas_por_classe")}
+    a.saida.mkdir(parents=True, exist_ok=True)
+    (a.saida / "metricas_camada2.json").write_text(json.dumps(metricas, ensure_ascii=False, indent=1) + "\n",
+                                                   encoding="utf-8")
+    usados = {"semente": params["semente"], "camada2": params["camada2"],
+              "sha256": {n: _sha256(c) for n, c in arquivos.items()},
+              "sha256_base": _sha256(arquivos["treino"]),   # tag hash_base no MLflow
+              "linhas": {"treino": len(treino), "teste": len(teste), "teste_curtos": len(curtos)},
+              "removidos_por_repeticao": {"teste": repetidos, "teste_curtos": repetidos_curtos}}
+    (a.saida / "params_camada2.json").write_text(json.dumps(usados, ensure_ascii=False, indent=1) + "\n",
+                                                 encoding="utf-8")
+    print(f"Treino {len(treino)} | teste {len(teste)} | teste_curtos {len(curtos)} "
+          f"({repetidos} + {repetidos_curtos} repetidos removidos)")
 
     print(f"F1 macro {metricas['f1_macro']:.3f} | falso alarme {metricas['falso_alarme']:.1%} "
           f"→ {metricas['decisao'].upper()}")

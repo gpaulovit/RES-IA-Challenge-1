@@ -42,6 +42,14 @@ validação fica numa função só, para que uma mudança de esquema mexa num lu
     nenhuma checagem certa além das que custam controles. Isso aconteceu no teste de fumaça, e o
     fluxo "relacionada + camada 2" da RN-05 fica sem uso.
 
+- **Ajuste pós-calibração (09/10):** na 1ª calibração com a base real, o desempate escolheu
+  0,76/0,76, com 2 notícias reais em "já checado" ("Datafolha divulga nova pesquisa" virou "já
+  checado"). O desempate passou a preferir menos notícias reais em "já checado", antes dos casos
+  confirmados. Resultado: **0,86/0,76**, com a mesma cobertura (38% das reescritas com a checagem
+  certa mostrada), 0 notícias reais e 0 negações em "já checado", e 2 notícias reais em
+  "relacionada". Custo: 4 boatos, em vez de 9, aparecem como "já checado"; os outros aparecem como
+  "relacionada". Origem: `experiments/results/calibracao_camada1.csv`.
+
   O script imprime o resultado com e sem o teto, para o custo ficar visível a cada execução. A
   decisão deve ser comunicada a Produto (Ana).
 - Normalização da consulta (RF-05): dicionários de apelidos e internetês (`src/inteligencia/normalizacao.py`),
@@ -55,9 +63,10 @@ validação fica numa função só, para que uma mudança de esquema mexa num lu
 
 - `TfidfVectorizer` seguido de `LogisticRegression(class_weight="balanced")`, com semente fixa
   (RNF-10).
-- Divisão por época: treino com ano ≤ 2020, teste com ano ≥ 2021 (RN-04). Os cortes das faixas
-  saem de validação cruzada em 5 partes dentro do treino. Com treino até 2019, quase todas as
-  verdadeiras viriam só do Fake.br, o que reforçaria o atalho de fonte.
+- Divisão por época (RN-04): a da frente de Dados (`docs/dados.md`), com treino até 15/09/2018 e
+  teste no WhatsApp de 16/09 a 28/10/2018. Emenda de 09/10, feita antes de rodar o teste: a regra
+  original (treino ≤ 2020, teste ≥ 2021) não serve para a base entregue, que vai só até 2019. Os
+  cortes das faixas saem de validação cruzada em 5 partes dentro do treino.
 - Sinais: os termos presentes no texto com maior contribuição (`tfidf × coeficiente`) na direção
   da faixa.
 

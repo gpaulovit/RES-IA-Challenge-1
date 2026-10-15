@@ -5,9 +5,7 @@ Só a consulta é normalizada; as alegações da base já vêm em português pad
   são ambíguas: "Barba", "Coiso").
 - Internetês: "vc" → "você", "ñ"/"naum" → "não". Isso também ajuda a RN-06, que procura "não".
 
-Os dicionários vêm de experiments/dicionarios/ (01/10/2026) e são usados como estão. Não
-acrescente entradas olhando data/testes_benchmark.json: a calibração passaria a medir o
-dicionário, e não a busca.
+Os dicionários vêm de experiments/dicionarios/
 
 Sem Enelvo: no notebook 05 ele piorou consultas que já chegavam limpas (Recall@1 na negação caiu
 de 72% para 65%), e a instalação dele não funciona no Python 3.14.

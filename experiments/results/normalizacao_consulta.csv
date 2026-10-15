@@ -1,7 +1,7 @@
 variante,categoria,recall@1,recall@5,recall@10,mrr,n
 alvo,apelido,1.0,1.0,1.0,1.0,100
 alvo,apelido+girias,1.0,1.0,1.0,1.0,100
-alvo,digitacao,1.0,1.0,1.0,1.0,100
+alvo,digitacao,0.99,1.0,1.0,0.995,100
 alvo,girias,1.0,1.0,1.0,1.0,100
 alvo,negacao,1.0,1.0,1.0,1.0,100
 alvo,parafrase_real,1.0,1.0,1.0,1.0,34
@@ -9,48 +9,48 @@ alvo,apelido (desconhecido),1.0,1.0,1.0,1.0,40
 alvo,apelido (conhecido),1.0,1.0,1.0,1.0,60
 alvo_enelvo,apelido,0.98,1.0,1.0,0.99,100
 alvo_enelvo,apelido+girias,1.0,1.0,1.0,1.0,100
-alvo_enelvo,digitacao,1.0,1.0,1.0,1.0,100
-alvo_enelvo,girias,1.0,1.0,1.0,1.0,100
+alvo_enelvo,digitacao,0.97,1.0,1.0,0.9825,100
+alvo_enelvo,girias,0.98,0.99,1.0,0.986,100
 alvo_enelvo,negacao,0.99,0.99,1.0,0.991,100
 alvo_enelvo,parafrase_real,1.0,1.0,1.0,1.0,34
 alvo_enelvo,apelido (desconhecido),1.0,1.0,1.0,1.0,40
 alvo_enelvo,apelido (conhecido),0.9666666666666667,1.0,1.0,0.9833333333333333,60
 alvo_condicional,apelido,1.0,1.0,1.0,1.0,100
 alvo_condicional,apelido+girias,1.0,1.0,1.0,1.0,100
-alvo_condicional,digitacao,1.0,1.0,1.0,1.0,100
+alvo_condicional,digitacao,0.99,1.0,1.0,0.995,100
 alvo_condicional,girias,1.0,1.0,1.0,1.0,100
 alvo_condicional,negacao,1.0,1.0,1.0,1.0,100
 alvo_condicional,parafrase_real,1.0,1.0,1.0,1.0,34
 alvo_condicional,apelido (desconhecido),1.0,1.0,1.0,1.0,40
 alvo_condicional,apelido (conhecido),1.0,1.0,1.0,1.0,60
 bruta,apelido,0.98,1.0,1.0,0.99,100
-bruta,apelido+girias,0.65,0.8,0.86,0.7179127133888256,100
-bruta,digitacao,0.94,0.99,0.99,0.9638888888888889,100
-bruta,girias,0.67,0.89,0.96,0.7644548294495103,100
+bruta,apelido+girias,0.67,0.9,0.94,0.75627495607426,100
+bruta,digitacao,0.92,0.97,0.98,0.9475183150183151,100
+bruta,girias,0.7,0.93,0.96,0.7956633343934719,100
 bruta,negacao,0.72,0.99,0.99,0.8368809523809523,100
 bruta,parafrase_real,0.5588235294117647,0.8823529411764706,0.9705882352941176,0.7152088107970461,34
 bruta,apelido (desconhecido),0.975,1.0,1.0,0.9875,40
 bruta,apelido (conhecido),0.9833333333333333,1.0,1.0,0.9916666666666667,60
 enelvo,apelido,0.93,0.99,1.0,0.9580952380952381,100
-enelvo,apelido+girias,0.94,0.99,0.99,0.96015625,100
-enelvo,digitacao,0.98,1.0,1.0,0.987,100
-enelvo,girias,1.0,1.0,1.0,1.0,100
+enelvo,apelido+girias,0.9,0.98,0.99,0.93325,100
+enelvo,digitacao,0.91,0.96,0.97,0.9348585012600359,100
+enelvo,girias,0.98,0.99,0.99,0.985625,100
 enelvo,negacao,0.65,0.96,0.97,0.782418115942029,100
 enelvo,parafrase_real,0.5588235294117647,0.8823529411764706,0.9705882352941176,0.7140971773324715,34
 enelvo,apelido (desconhecido),0.95,0.975,1.0,0.9660714285714285,40
 enelvo,apelido (conhecido),0.9166666666666666,1.0,1.0,0.9527777777777777,60
 enelvo+apelidos,apelido,0.96,0.99,1.0,0.9764285714285714,100
-enelvo+apelidos,apelido+girias,0.99,1.0,1.0,0.9933333333333333,100
-enelvo+apelidos,digitacao,0.98,1.0,1.0,0.987,100
-enelvo+apelidos,girias,1.0,1.0,1.0,1.0,100
+enelvo+apelidos,apelido+girias,0.95,0.99,1.0,0.9649166666666666,100
+enelvo+apelidos,digitacao,0.91,0.96,0.97,0.9348585012600359,100
+enelvo+apelidos,girias,0.98,0.99,0.99,0.985625,100
 enelvo+apelidos,negacao,0.65,0.96,0.97,0.782418115942029,100
 enelvo+apelidos,parafrase_real,0.5588235294117647,0.8823529411764706,0.9705882352941176,0.7140971773324715,34
 enelvo+apelidos,apelido (desconhecido),0.95,0.975,1.0,0.9660714285714285,40
 enelvo+apelidos,apelido (conhecido),0.9666666666666667,1.0,1.0,0.9833333333333333,60
 condicional,apelido,0.99,1.0,1.0,0.995,100
-condicional,apelido+girias,0.99,1.0,1.0,0.9933333333333333,100
-condicional,digitacao,0.94,0.99,0.99,0.9638888888888889,100
-condicional,girias,1.0,1.0,1.0,1.0,100
+condicional,apelido+girias,0.95,0.99,1.0,0.9649166666666666,100
+condicional,digitacao,0.92,0.97,0.98,0.9475183150183151,100
+condicional,girias,0.98,0.99,0.99,0.985625,100
 condicional,negacao,0.72,0.99,0.99,0.8368809523809523,100
 condicional,parafrase_real,0.5588235294117647,0.8823529411764706,0.9705882352941176,0.7152088107970461,34
 condicional,apelido (desconhecido),0.975,1.0,1.0,0.9875,40

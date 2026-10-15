@@ -4,12 +4,12 @@ semente: 42
 
 camada1:
   # RN-05: ponto de partida. Recalibrados por python -m inteligencia.calibracao --gravar
-  limite_alta: 0.85
-  limite_media: 0.60
+  limite_alta: 0.86
+  limite_media: 0.76
 
 camada2:
   # Protocolo pré-registrado em docs/relatorio-camada2.md. Não ajustar olhando o teste.
-  ano_corte: 2020          # treino: ano ≤ 2020; teste: ano ≥ 2021 (RN-04)
+  # Divisão treino/teste: vem pronta da frente de Dados (--corte 2018-09-15 no stage `treino` do dvc.yaml)
   ngram_range: [1, 2]
   min_df: 2
   C: 1.0
