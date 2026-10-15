@@ -74,7 +74,7 @@ Nunca envie o `.env` preenchido para o GitHub.
 - **Texto das respostas:** o bot cita `docs/textos-bot.md`, que ainda não existe no repositório. Os textos são responsabilidade de Produto. Enquanto o arquivo não existir, os textos ficam só no código.
 - **Modelo de mentira:** o trecho "MODELO DE MENTIRA" em `bot.py` deve ser apagado quando a busca real estiver ligada em todos os ambientes.
 - **Link no meio do texto:** ainda não é reconhecido.
-- **Fonte da base:** `docs/dados.md` descreve a base usada pela busca. Confirme com Dados que essa é a base oficial do bot antes de citar números em outros documentos.
+- **Números da base:** a busca usa **10.442 checagens** (2013 a 2022), conforme [Dados do bot](dados.md). O FactPolCheckBr tem 1.882 registros lidos, mas só 1.804 entram nessa base. Por isso, "1.882" não é o total do bot.
 - **`BOT_MODE`:** remover do `.env.example` ou passar a ser lida pelo código.
 
 ## Decisões de quem
