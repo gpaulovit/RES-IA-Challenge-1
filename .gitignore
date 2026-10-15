@@ -51,8 +51,14 @@ __pycache__/
 .coverage
 
 # Dados gerados localmente e registros de auditoria
-**/data/indices/
-**/data/registros/
-entrega/models/*.pkl
-entrega/models/*.joblib
-entrega_*.zip
+data/indices/
+data/registros/
+
+# MLflow local e banco de testes
+mlruns/
+mlflow.db
+
+# Modelos gerados localmente (versionados pelo DVC e MLflow Registry)
+models/*
+!models/.gitkeep
+

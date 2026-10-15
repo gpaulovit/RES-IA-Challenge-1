@@ -33,9 +33,92 @@ jobs:
       - name: Atualizar pip e instalar dependências
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e '.[test]'
+          python -m pip install -e '.[test,azure,busca]'
 
       - name: Executar suíte de testes (pytest)
         run: |
           python -m pytest -v
+
+  deploy-azure:
+    name: Build Autocontido e Deploy no Azure Container Apps
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: Instalar dependências de MLOps
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '.[azure,busca]'
+
+      - name: Autenticar na Azure
+        if: ${{ env.AZURE_CREDENTIALS != '' }}
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Baixar artefatos rastreáveis (DVC + MLflow @producao)
+        env:
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+        run: |
+          python scripts/baixar_artefatos_deploy.py
+
+      - name: Construir imagem Docker autocontida
+        run: |
+          docker build -t res-ia-bot:latest .
+
+      - name: Deploy no Azure Container Apps
+        if: ${{ env.AZURE_CREDENTIALS != '' }}
+        env:
+          AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP || 'rg-res-ia' }}
+          AZURE_CONTAINERAPP_NAME: ${{ secrets.AZURE_CONTAINERAPP_NAME || 'aca-res-ia-bot' }}
+          AZURE_CONTAINER_REGISTRY: 'crresiachallenge1'
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          APPLICATIONINSIGHTS_CONNECTION_STRING: ${{ secrets.APPLICATIONINSIGHTS_CONNECTION_STRING }}
+        run: |
+          echo "Fazendo login no Azure Container Registry..."
+          az acr login --name "$AZURE_CONTAINER_REGISTRY"
+
+          IMAGE_TAG="${AZURE_CONTAINER_REGISTRY}.azurecr.io/res-ia-bot:latest"
+          docker tag res-ia-bot:latest "$IMAGE_TAG"
+          docker push "$IMAGE_TAG"
+
+          ACR_PASSWORD=$(az acr credential show --name "$AZURE_CONTAINER_REGISTRY" --query "passwords[0].value" -o tsv)
+
+          echo "Configurando Container App $AZURE_CONTAINERAPP_NAME..."
+          if az containerapp show --name "$AZURE_CONTAINERAPP_NAME" --resource-group "$AZURE_RESOURCE_GROUP" &>/dev/null; then
+            echo "Atualizando Container App existente..."
+            az containerapp update \
+              --name "$AZURE_CONTAINERAPP_NAME" \
+              --resource-group "$AZURE_RESOURCE_GROUP" \
+              --image "$IMAGE_TAG" \
+              --set-env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=1
+          else
+            echo "Criando Container App..."
+            az containerapp create \
+              --name "$AZURE_CONTAINERAPP_NAME" \
+              --resource-group "$AZURE_RESOURCE_GROUP" \
+              --environment "env-res-ia" \
+              --image "$IMAGE_TAG" \
+              --registry-server "${AZURE_CONTAINER_REGISTRY}.azurecr.io" \
+              --registry-username "$AZURE_CONTAINER_REGISTRY" \
+              --registry-password "$ACR_PASSWORD" \
+              --env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=1 \
+              --cpu 0.5 \
+              --memory 1.0Gi \
+              --min-replicas 1 \
+              --max-replicas 1
+          fi
+
 

@@ -14,21 +14,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copia arquivos de configuração de pacote
-COPY pyproject.toml README.md ./
-
-# Instala o pacote e dependências
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -e '.[test]'
-
-# Copia o código da aplicação
+# Copia arquivos de configuração de pacote e código fonte
+COPY pyproject.toml README.md params.yaml ./
 COPY src/ ./src/
+
+# Instala o pacote e dependências (busca para camada 1 e test para validações)
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -e '.[test,busca]'
+
+# Copia experimentos, dados, testes e artefatos
 COPY experiments/*.py ./experiments/
 COPY data/ ./data/
 COPY tests/ ./tests/
+COPY models/ ./models/
 
-# Cria diretório para logs persistentes
-RUN mkdir -p data/registros
+# Cria diretório para logs persistentes e índices
+RUN mkdir -p data/registros data/indices models
 
-# Comando padrão: executa a suíte de testes
-CMD ["pytest", "-v"]
+# Comando padrão: executa o bot no Azure Container Apps
+CMD ["python", "-m", "checagens.bot"]
+

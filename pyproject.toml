@@ -20,6 +20,7 @@ dependencies = [
 [project.optional-dependencies]
 test = ["pytest>=8,<10"]
 busca = ["sentence-transformers>=3,<7"]   # camada 1: modelo de embeddings
+azure = ["dvc[azure]", "mlflow<3.0", "azureml-mlflow", "azure-identity"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

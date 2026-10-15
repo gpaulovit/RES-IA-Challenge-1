@@ -1,6 +1,7 @@
 {
  "semente": 42,
  "camada2": {
+  "ano_corte": 2020,
   "ngram_range": [
    1,
    2
@@ -16,6 +17,7 @@
   "teste": "df42ca7f9e8bf6215a5f52ced0cfe8e3e3b641f8679e6affc7dee160c9aad82f",
   "teste_curtos": "8600a3e6c3e4115b54f0fcde4d143e8286e491f4f90f84f099dba3f0431aba7c"
  },
+ "sha256_base": "06775ea8c2e9d1de600040df2e67594b6a5a765ccc6df2026f482ba15e47a8f2",
  "linhas": {
   "treino": 9934,
   "teste": 3295,

@@ -127,6 +127,7 @@ def test_negacao_em_internetes_e_reconhecida_depois_da_normalizacao(buscador):
     assert r[0]["id"] == "t:1" and r[0]["faixa"] != "ja_checado"
 
 
+<<<<<<< HEAD
 def test_desempate_prefere_menos_noticias_reais_em_ja_checado():
     base = {"controles_mostrados": 2, "reescritas_mostradas": 0.375}
     g = pd.DataFrame([
@@ -134,3 +135,69 @@ def test_desempate_prefere_menos_noticias_reais_em_ja_checado():
         {**base, "limite_alta": 0.82, "limite_media": 0.76, "controles_ja_checado": 0, "confirmados_ja_checado": 4},
     ])
     assert escolher(g)["limite_alta"] == 0.82
+=======
+def test_busca_hibrida_prefere_checagem_com_nome_raro():
+    # O MiniLM quase ignora nomes que não conhece ("Vorcaro"): as checagens genéricas sobre
+    # Bolsonaro têm cosseno maior que a certa. A palavra rara em comum tem que decidir.
+    genericas = [checagem(i, f"Checagem genérica número {i} sobre Bolsonaro") for i in range(150)]
+    certa = checagem(999, "Flávio Bolsonaro recebeu dinheiro de Daniel Vorcaro")
+    base = genericas + [certa]
+    vetores = np.array([[0.79, 0.6131]] * 150 + [[0.70, 0.7141]], dtype="float32")
+    b = busca.Buscador(vetores, base, alta=0.85, media=0.60,
+                       vetorizar=lambda textos: np.array([[1.0, 0.0]] * len(textos), dtype="float32"))
+    r = b.buscar("Flávio Bolsonaro aceitou dinheiro do Vorcaro?")
+    assert r[0]["id"] == "t:999" and r[0]["faixa"] == "relacionada"
+    assert all(x["faixa"] == "baixa" for x in r[1:])        # genéricas sem "Vorcaro" não aparecem
+    # sem palavra rara na mensagem, a regra é a de antes (só cosseno)
+    r = b.buscar("Bolsonaro e a checagem genérica")   # "Bolsonaro" está em quase todas: não é raro
+    assert r[0]["id"] != "t:999" and r[0]["faixa"] == "relacionada"
+    # desligando a busca híbrida, volta o comportamento antigo
+    sem = busca.Buscador(vetores, base, alta=0.85, media=0.60, hibrida=False,
+                         vetorizar=lambda textos: np.array([[1.0, 0.0]] * len(textos), dtype="float32"))
+    assert sem.buscar("Flávio Bolsonaro aceitou dinheiro do Vorcaro?")[0]["id"] != "t:999"
+
+
+def test_nomes_so_com_maiuscula_e_ignora_mensagem_toda_em_maiusculas():
+    assert busca.nomes("Flávio Bolsonaro aceitou dinheiro do Vorcaro?") == {"bolsonaro", "vorcaro"}
+    assert busca.nomes("Ele disse que foi assim. Vorcaro pagou a conta do Banco Master") == {"banco", "master"}
+    assert busca.nomes("URGENTE!!! COMPARTILHEM: VORCARO PAGOU TODO MUNDO") == set()
+    assert busca.nomes("ninguém escreve com maiúscula aqui") == set()
+
+
+def test_busca_hibrida_nunca_mostra_o_que_a_antiga_esconderia():
+    genericas = [checagem(i, f"Checagem genérica número {i} sobre Bolsonaro") for i in range(150)]
+    base = genericas + [checagem(999, "Vorcaro em festa")]
+    vetores = np.array([[0.70, 0.7141]] * 150 + [[0.50, 0.866]], dtype="float32")   # cosseno 0,70 e 0,50
+    b = busca.Buscador(vetores, base, alta=0.85, media=0.60,
+                       vetorizar=lambda textos: np.array([[1.0, 0.0]] * len(textos), dtype="float32"))
+    r = b.buscar("Ontem Bolsonaro deu dinheiro ao Vorcaro")
+    assert r[0]["id"] == "t:999" and all(x["faixa"] == "baixa" for x in r)   # "não encontrei"
+
+
+def test_busca_hibrida_exige_palavra_de_assunto():
+    # "tesouraço" não está em nenhuma checagem: o vetor fica dominado por "Flávio Bolsonaro" e a
+    # checagem da saidinha virava "já checado". Sem palavra de assunto em comum, não aparece.
+    base = [checagem(1, "PL relatado por Flávio Bolsonaro impediu saidinha de Natal"),
+            checagem(2, "Flávio Bolsonaro vai acabar com o Bolsa Família")]
+    vetores = np.array([[0.90, 0.4359], [0.86, 0.5103]], dtype="float32")
+    b = busca.Buscador(vetores, base, alta=0.85, media=0.60,
+                       vetorizar=lambda textos: np.array([[1.0, 0.0]] * len(textos), dtype="float32"))
+    assert all(x["faixa"] == "baixa" for x in b.buscar("Flávio Bolsonaro e o tesouraço", k=2))
+    r = b.buscar("Flávio Bolsonaro vai acabar com o Bolsa Família", k=2)
+    assert r[0]["id"] == "t:2" and r[0]["faixa"] == "ja_checado"
+
+
+def test_reranker_decide_ordem_e_faixa_e_negacao_impede_ja_checado():
+    base = [checagem(1, "PL relatado por Flávio Bolsonaro impediu saidinha de Natal"),
+            checagem(2, "Flávio Bolsonaro vai acabar com o Pix"),
+            checagem(3, "Flávio Bolsonaro não vai acabar com o Pix")]
+    vetores = np.array([[0.95, 0.3122], [0.90, 0.4359], [0.90, 0.4359]], dtype="float32")
+    notas = {base[0]["alegacao"]: -1.0, base[1]["alegacao"]: 10.0, base[2]["alegacao"]: 9.5}
+    b = busca.Buscador(vetores, base, alta=0.85, media=0.60,
+                       vetorizar=lambda textos: np.array([[1.0, 0.0]] * len(textos), dtype="float32"),
+                       reranquear=lambda pares: np.array([notas[a] for _, a in pares], dtype="float32"))
+    r = b.buscar("Flávio Bolsonaro vai acabar com o Pix")
+    assert [x["id"] for x in r] == ["t:2", "t:3", "t:1"]          # a nota manda, não o cosseno
+    assert [x["faixa"] for x in r] == ["ja_checado", "relacionada", "baixa"]   # t:3 tem "não"
+    assert r[2]["semelhanca"] == 0.95                               # semelhanca continua o cosseno
+>>>>>>> 0ac46b150b78ca33ca248a47c91bcefbf2da3442
