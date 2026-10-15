@@ -12,6 +12,7 @@ Termos que aparecem nos documentos do projeto, explicados de forma simples. Para
 | **Veredito** | O resultado dado pela agência, por exemplo "Falso" ou "Verdadeiro". |
 | **Alegação** | A afirmação que foi checada, resumida em uma frase. |
 | **Semelhança** | Um número entre 0 e 1 que mostra o quanto a sua mensagem se parece com uma checagem. Não é a chance de a notícia ser falsa. |
+| **Limiar** | O valor de semelhança que separa uma faixa da outra. Por exemplo, acima de 0,85 a notícia é "já conferida". Os valores atuais são provisórios até a calibração ser aprovada por Produto e Modelos. |
 | **Faixa** | O grupo em que a resposta cai, de acordo com a semelhança: já conferida, parecida ou sem correspondência. |
 | **Já conferida** | A notícia é praticamente a mesma de uma checagem existente. |
 | **Relacionada** | Parecida com uma checagem, mas pode não ser exatamente a mesma coisa. |
