@@ -94,6 +94,10 @@ make latency               # tempo de resposta nas 30 mensagens de teste (RNF-01
 Para ver as respostas sem token e sem Telegram, rode `python scripts/testar_bot_terminal.py`.
 Só um computador pode rodar o bot por vez. Detalhes e variáveis de ambiente: [Engenharia do bot](docs/engenharia-bot.md).
 
+"Camada 1: ligada" no terminal quer dizer que o código da busca foi encontrado. A busca só devolve resultados se o índice dela estiver disponível. Sem o índice, o bot responde que nenhum site de checagem conferiu a notícia.
+
+Repositório: [github.com/gpaulovit/RES-IA-Challenge-1](https://github.com/gpaulovit/RES-IA-Challenge-1)
+
 ## Estrutura
 
 - [experiments/](experiments/): notebooks, módulos e resultados dos modelos.

@@ -71,11 +71,12 @@ Nunca envie o `.env` preenchido para o GitHub.
 
 ## Pendências técnicas
 
-- **Texto das respostas:** os textos são de Produto (Ana Júlia). A versão de referência está em [textos-bot.md](engenharia-eduarda/textos-bot.md), e as frases fixas já batem com `src/checagens/bot.py`. O comentário no topo do `bot.py` ainda cita `docs/textos-bot.md`, que não existe. Isso pode ser corrigido depois que Produto decidir o caminho definitivo.
+- **Texto das respostas:** os textos são de Produto (Ana Júlia). A versão de referência está em [textos-bot.md](engenharia-eduarda/textos-bot.md), e as frases fixas já batem com `src/checagens/bot.py`. Os comentários do `bot.py` já apontam para esse arquivo.
 - **Modelo de mentira:** o trecho "MODELO DE MENTIRA" em `bot.py` deve ser apagado quando a busca real estiver ligada em todos os ambientes.
 - **Link no meio do texto:** ainda não é reconhecido.
 - **Números da base:** a busca usa **10.442 checagens** (2013 a 2022), conforme [Dados do bot](dados.md). O FactPolCheckBr tem 1.882 registros lidos, mas só 1.804 entram nessa base. Por isso, "1.882" não é o total do bot.
 - **`BOT_MODE`:** remover do `.env.example` ou passar a ser lida pelo código.
+- **Índice da busca (camada 1):** a busca precisa de um índice de vetores, que fica no DVC (veja [Infraestrutura e MLOps](devops-mlops.md)) e não no Git. Se o índice não existe ou está desatualizado, a busca dá erro. O bot registra o erro no log e responde "nenhum site de checagem conferiu essa notícia ainda". Nesse caso, o terminal continua mostrando "camada 1: ligada", porque o bot só confere se o código da busca foi encontrado, e não se o índice carregou. A busca e o índice são de Modelos. O status mostrado pelo bot é da Engenharia.
 
 ## Decisões de quem
 

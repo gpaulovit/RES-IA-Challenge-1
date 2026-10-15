@@ -70,8 +70,8 @@ Os requisitos completos estão em [Requisitos](requisitos.md). Aqui está o que 
 | RF-03 | Abre o link e extrai título e texto principal. | Feito | `pytest tests/test_bot.py -k extrai_titulo` |
 | RF-04 | Se o link não abre, pede para colar o texto. | Feito (o teste confere o `None`; a mensagem é enviada pelo bot) | `pytest tests/test_bot.py -k "erro_http or sem_internet"` |
 | RF-05 | Limpa e normaliza o texto antes da busca. | Feito (dentro da busca) | `pytest tests/test_normalizacao.py` |
-| RF-06 | Busca as 3 checagens mais parecidas. | Feito (busca real) | `pytest tests/test_busca.py -k contrato_k_padrao` |
-| RF-07 | Mostra "já checado" ou "relacionada", com agência, data e link. | Feito | `pytest tests/test_bot.py -k "ja_conferida or relacionada or negacao"` |
+| RF-06 | Busca as 3 checagens mais parecidas. | Código integrado ao bot. A busca só devolve resultados com o índice disponível. | `pytest tests/test_busca.py -k contrato_k_padrao` |
+| RF-07 | Mostra "já checado" ou "relacionada", com agência, data e link. | Feito, testado com o modo de teste do bot | `pytest tests/test_bot.py -k "ja_conferida or relacionada or negacao"` |
 | RF-08 | Sem checagem parecida, mostra a faixa de alerta com os sinais. | Aguarda decisão (go/no-go do Paulo; liga com `CAMADA2_LIGADA=1`) | `pytest tests/test_classificador.py` |
 | RF-09 | Toda resposta traz aviso e links das agências e do TSE. | Feito | `pytest tests/test_bot.py -k aviso_de_robo` |
 | RF-10 | Áudio, foto, vídeo ou figurinha recebe a resposta "só texto e link". | Feito, sem teste automático | Simulador, com uma mensagem de mídia |
