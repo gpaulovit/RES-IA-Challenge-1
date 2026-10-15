@@ -127,7 +127,7 @@ def test_busca_com_texto_vazio_levanta_erro():
 
 
 def test_sem_camadas_reais_responde_que_nao_encontrou_e_avisa_o_teste():
-    # Estado atual sem busca.py nem classificador.py: o bot não inventa resultado.
+    # Sem busca e sem classificador (None, None): o bot não inventa resultado.
     mensagem, _ = montar_resposta("texto qualquer com palavras suficientes", None, None, "real")
 
     assert bot.AVISO_TESTE in mensagem
