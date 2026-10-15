@@ -9,7 +9,6 @@
 - Modelos de IA
   - [Relatório da camada 2](relatorio-camada2.md)
 - Engenharia
-  - [Guia da arquiteta](guia-arquiteta.md)
   - [Testes e benchmark](testes.md)
   - [Avaliação do benchmark](avaliacao-benchmark.md)
   - [Funcionalidades do bot](funcionalidades-bot.md)
