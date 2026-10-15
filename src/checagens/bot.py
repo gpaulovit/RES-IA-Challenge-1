@@ -37,7 +37,7 @@ Não precisa mexer neste arquivo: basta criar os arquivos abaixo com estes nomes
   relatório da camada 2 (RN-04). Sem ela, o bot responde só com a camada 1.
 - Ao rodar, o terminal diz o que está ligado: "camada 1: ligada · camada 2: desligada".
 - Quando as duas camadas reais existirem, apague a seção MODELO DE MENTIRA no fim do arquivo.
-- Os textos das respostas estão logo abaixo e seguem docs/textos-bot.md. Mudança de texto
+- Os textos das respostas estão logo abaixo e seguem docs/engenharia-eduarda/textos-bot.md. Mudança de texto
   passa por Produto.
 """
 
@@ -67,7 +67,7 @@ from telegram.ext import (
 log = logging.getLogger("checagens.bot")
 
 # ---------------------------------------------------------------------------
-# Textos (fonte: docs/textos-bot.md). Mudou lá, mude aqui.
+# Textos (fonte: docs/engenharia-eduarda/textos-bot.md). Mudou lá, mude aqui.
 # ---------------------------------------------------------------------------
 
 START = (
@@ -282,7 +282,7 @@ def extrair_texto_do_link(url: str) -> str | None:
 
 
 # ---------------------------------------------------------------------------
-# Montagem da resposta (tabela "Como uma resposta é montada" em docs/textos-bot.md)
+# Montagem da resposta (tabela "Como uma resposta é montada" em docs/engenharia-eduarda/textos-bot.md)
 # ---------------------------------------------------------------------------
 
 def _data_br(data: str | None) -> str:
