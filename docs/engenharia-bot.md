@@ -71,7 +71,7 @@ Nunca envie o `.env` preenchido para o GitHub.
 
 ## Pendências técnicas
 
-- **Texto das respostas:** o bot cita `docs/textos-bot.md`, que ainda não existe no repositório. Os textos são responsabilidade de Produto. Enquanto o arquivo não existir, os textos ficam só no código.
+- **Texto das respostas:** os textos são de Produto (Ana Júlia). A versão de referência está em [textos-bot.md](engenharia-eduarda/textos-bot.md), e as frases fixas já batem com `src/checagens/bot.py`. O comentário no topo do `bot.py` ainda cita `docs/textos-bot.md`, que não existe. Isso pode ser corrigido depois que Produto decidir o caminho definitivo.
 - **Modelo de mentira:** o trecho "MODELO DE MENTIRA" em `bot.py` deve ser apagado quando a busca real estiver ligada em todos os ambientes.
 - **Link no meio do texto:** ainda não é reconhecido.
 - **Números da base:** a busca usa **10.442 checagens** (2013 a 2022), conforme [Dados do bot](dados.md). O FactPolCheckBr tem 1.882 registros lidos, mas só 1.804 entram nessa base. Por isso, "1.882" não é o total do bot.
