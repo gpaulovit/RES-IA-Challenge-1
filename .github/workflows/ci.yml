@@ -103,7 +103,7 @@ jobs:
               --name "$AZURE_CONTAINERAPP_NAME" \
               --resource-group "$AZURE_RESOURCE_GROUP" \
               --image "$IMAGE_TAG" \
-              --set-env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=1
+              --set-env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=0 APPLICATIONINSIGHTS_CONNECTION_STRING="$APPLICATIONINSIGHTS_CONNECTION_STRING"
           else
             echo "Criando Container App..."
             az containerapp create \
@@ -114,7 +114,7 @@ jobs:
               --registry-server "${AZURE_CONTAINER_REGISTRY}.azurecr.io" \
               --registry-username "$AZURE_CONTAINER_REGISTRY" \
               --registry-password "$ACR_PASSWORD" \
-              --env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=1 \
+              --env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=0 APPLICATIONINSIGHTS_CONNECTION_STRING="$APPLICATIONINSIGHTS_CONNECTION_STRING" \
               --cpu 0.5 \
               --memory 1.0Gi \
               --min-replicas 1 \

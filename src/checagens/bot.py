@@ -403,8 +403,17 @@ async def responder_texto(update: Update, context: ContextTypes.DEFAULT_TYPE, te
             return
         texto = extraido
 
+    t0 = asyncio.get_event_loop().time()
     buscar, classificar, modo = context.bot_data["camadas"]
     resposta, dados = await asyncio.to_thread(montar_resposta, texto, buscar, classificar, modo)
+    tempo_resposta = asyncio.get_event_loop().time() - t0
+    log.info(
+        "Consulta processada em %.2fs | Tipo: %s | Camada: %s | Faixa: %s",
+        tempo_resposta,
+        tipo,
+        dados.get("camada", 1),
+        dados.get("faixa", "baixa"),
+    )
     id_consulta = registrar(tipo, dados)
     await enviar(update, resposta, botoes_avaliacao(id_consulta))
 
@@ -526,10 +535,40 @@ def classificar_falso(texto: str) -> dict:
     return {"faixa": "poucos_sinais", "sinais": []}
 
 
+def configurar_telemetria() -> None:
+    """Lê APPLICATIONINSIGHTS_CONNECTION_STRING e inicializa integração com Azure Application Insights."""
+    conn_str = os.getenv("APPLICATIONINSIGHTS_CONNECTION_STRING", "").strip()
+    if not conn_str:
+        return
+    log.info("Variável APPLICATIONINSIGHTS_CONNECTION_STRING detectada. Inicializando telemetria Azure...")
+    telemetria_ativa = False
+    try:
+        from opencensus.ext.azure.log_exporter import AzureLogHandler
+        handler = AzureLogHandler(connection_string=conn_str)
+        logging.getLogger().addHandler(handler)
+        telemetria_ativa = True
+        log.info("Telemetria Azure Application Insights (AzureLogHandler) configurada.")
+    except Exception:
+        pass
+
+    if not telemetria_ativa:
+        try:
+            from azure.monitor.opentelemetry import configure_azure_monitor
+            configure_azure_monitor(connection_string=conn_str)
+            telemetria_ativa = True
+            log.info("Telemetria Azure Application Insights (OpenTelemetry) configurada.")
+        except Exception:
+            pass
+
+    if not telemetria_ativa:
+        log.info("Application Insights ativo via Container Apps log stream (telemetria estruturada).")
+
+
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     logging.getLogger("httpx").setLevel(logging.WARNING)  # não imprimir o token nos logs
     carregar_env()
+    configurar_telemetria()
     token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip() or os.getenv("TELEGRAM_TOKEN", "").strip()
     if not token or token == "seu_token_aqui":
         raise SystemExit("Coloque o token do BotFather no arquivo .env na raiz do projeto.")

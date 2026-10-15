@@ -36,15 +36,14 @@ def baixar_artefatos() -> None:
         for uri_modelo in [
             "models:/checagens-camada2@producao",
             "models:/checagens-camada2/Production",
-            "models:/checagens-camada2/1",
         ]:
             try:
-                print(f"Tentando baixar artefato via URI '{uri_modelo}'...")
+                print(f"Tentando baixar artefato homologado via URI '{uri_modelo}'...")
                 caminho_artefato = download_artifacts(artifact_uri=uri_modelo)
                 sucesso = True
                 break
             except Exception as e:
-                print(f"Aviso: falha ao buscar '{uri_modelo}': {e}")
+                print(f"Aviso: modelo homologado não encontrado em '{uri_modelo}': {e}")
 
         if sucesso and caminho_artefato:
             destino = RAIZ / "models"
@@ -53,21 +52,19 @@ def baixar_artefatos() -> None:
             art_dir = Path(caminho_artefato) / "artifacts"
             if (art_dir / "classificador.joblib").exists():
                 shutil.copy2(art_dir / "classificador.joblib", destino / "classificador.joblib")
-                print(f"Modelo classificador.joblib extraído para {destino / 'classificador.joblib'}")
+                print(f"Modelo homologado classificador.joblib extraído para {destino / 'classificador.joblib'}")
             elif (art_dir / "modelo_joblib").exists():
                 shutil.copy2(art_dir / "modelo_joblib", destino / "classificador.joblib")
-                print(f"Modelo classificador.joblib extraído para {destino / 'classificador.joblib'}")
+                print(f"Modelo homologado classificador.joblib extraído para {destino / 'classificador.joblib'}")
             elif (Path(caminho_artefato) / "classificador.joblib").exists():
                 shutil.copy2(Path(caminho_artefato) / "classificador.joblib", destino / "classificador.joblib")
-                print(f"Modelo classificador.joblib copiado para {destino / 'classificador.joblib'}")
+                print(f"Modelo homologado classificador.joblib copiado para {destino / 'classificador.joblib'}")
             else:
                 print(f"Artefatos baixados em {caminho_artefato}")
         else:
-            print("Aviso: Falha ao baixar via MLflow. Tentando fallback DVC...", file=sys.stderr)
-
-    if not (RAIZ / "models" / "classificador.joblib").exists():
-        print("3. Baixando modelo da camada 2 via DVC (models/classificador.joblib)...")
-        subprocess.run(["python", "-m", "dvc", "pull", "models/classificador.joblib"], cwd=str(RAIZ))
+            print("Informação: Nenhum modelo da Camada 2 com alias '@producao' foi encontrado no MLflow.")
+            print("Conforme a RN-04, com a decisão de NO-GO a Camada 2 não é promovida e não deve ser empacotada.")
+            print("O bot operará exclusivamente com a Camada 1 factual em produção (CAMADA2_LIGADA=0).")
 
 
 if __name__ == "__main__":

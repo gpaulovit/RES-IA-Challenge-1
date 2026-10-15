@@ -41,22 +41,35 @@ def promover(versao: int | str | None = None, tracking_uri: str | None = None, f
         versao_obj = client.get_model_version(MODELO_NOME, versao)
         run_id = versao_obj.run_id
 
-    # Auditoria de go/no-go na run
+    # Auditoria de go/no-go na run conforme protocolo pré-registrado (docs/relatorio-camada2.md)
     run = client.get_run(run_id)
     metricas = run.data.metrics
     tags = run.data.tags
     decisao = tags.get("decisao")
     go_no_go = metricas.get("go_no_go")
+    f1_macro = metricas.get("f1_macro")
+    falso_alarme = metricas.get("falso_alarme")
 
     print(f"Auditoria da Versão {versao} (Run ID: {run_id}):")
-    print(f"  - F1 Macro: {metricas.get('f1_macro', 'N/D')}")
-    print(f"  - Falso Alarme: {metricas.get('falso_alarme', 'N/D')}")
+    print(f"  - F1 Macro: {f1_macro if f1_macro is not None else 'N/D'} (Meta RNF-02: >= 0.75)")
+    print(f"  - Falso Alarme: {falso_alarme if falso_alarme is not None else 'N/D'} (Teto RNF-03: <= 15.0%)")
     print(f"  - Decisão: {decisao or 'N/D'} (métrica go_no_go: {go_no_go})")
     print(f"  - Git Commit: {tags.get('git_commit', 'N/D')}")
     print(f"  - Hash Base: {tags.get('hash_base', 'N/D')}")
 
-    if not force and decisao == "no-go":
-        print("ERRO: Modelo com status 'no-go'. Não é permitido promover para produção sem --force.", file=sys.stderr)
+    motivos_rejeicao = []
+    if decisao == "no-go":
+        motivos_rejeicao.append("Decisão formal registrada como 'no-go'")
+    if f1_macro is not None and f1_macro < 0.75:
+        motivos_rejeicao.append(f"F1 macro ({f1_macro:.3f}) < 0.75 (RNF-02)")
+    if falso_alarme is not None and falso_alarme > 0.15:
+        motivos_rejeicao.append(f"Falso alarme ({falso_alarme:.1%}) > 15.0% (RNF-03)")
+
+    if not force and motivos_rejeicao:
+        print(f"ERRO: Modelo versão {versao} reprovado no protocolo de Go/No-Go pela RN-04:", file=sys.stderr)
+        for motivo in motivos_rejeicao:
+            print(f"  - {motivo}", file=sys.stderr)
+        print("Promoção para @producao abortada. O bot operará apenas com a Camada 1 factual.", file=sys.stderr)
         sys.exit(1)
 
     alias_ok = False

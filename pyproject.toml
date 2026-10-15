@@ -30,4 +30,4 @@ inteligencia = ["dicionarios/*.csv"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src", "experiments"]
+pythonpath = ["src", "experiments", "."]
