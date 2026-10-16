@@ -587,6 +587,8 @@ async def rodar_webhook(app: Application, webhook_url: str, porta: int = 8080) -
                 b"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 2\r\nConnection: close\r\n\r\nOK"
             )
             await writer.drain()
+        except asyncio.IncompleteReadError:
+            pass  # probe TCP do Azure Container Apps (abre e fecha socket sem enviar HTTP)
         except Exception:
             log.exception("Erro ao processar requisição HTTP do webhook")
         finally:

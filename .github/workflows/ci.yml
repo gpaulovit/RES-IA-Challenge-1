@@ -112,6 +112,8 @@ jobs:
               --image "$IMAGE_TAG" \
               --cpu 2.0 \
               --memory 4.0Gi \
+              --min-replicas 1 \
+              --max-replicas 1 \
               --set-env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=0 WEBHOOK_URL="https://$FQDN" APPLICATIONINSIGHTS_CONNECTION_STRING="$APPLICATIONINSIGHTS_CONNECTION_STRING"
           else
             echo "Criando Container App..."
