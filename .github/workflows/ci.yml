@@ -103,6 +103,8 @@ jobs:
               --name "$AZURE_CONTAINERAPP_NAME" \
               --resource-group "$AZURE_RESOURCE_GROUP" \
               --image "$IMAGE_TAG" \
+              --cpu 1.0 \
+              --memory 2.0Gi \
               --set-env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=0 APPLICATIONINSIGHTS_CONNECTION_STRING="$APPLICATIONINSIGHTS_CONNECTION_STRING"
           else
             echo "Criando Container App..."
@@ -115,8 +117,8 @@ jobs:
               --registry-username "$AZURE_CONTAINER_REGISTRY" \
               --registry-password "$ACR_PASSWORD" \
               --env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=0 APPLICATIONINSIGHTS_CONNECTION_STRING="$APPLICATIONINSIGHTS_CONNECTION_STRING" \
-              --cpu 0.5 \
-              --memory 1.0Gi \
+              --cpu 1.0 \
+              --memory 2.0Gi \
               --min-replicas 1 \
               --max-replicas 1
           fi

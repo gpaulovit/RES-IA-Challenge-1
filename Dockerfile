@@ -22,6 +22,11 @@ COPY src/ ./src/
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -e '.[test,busca]'
 
+# Pré-carrega e faz cache dos modelos de IA no build (evita download de 1GB e estouro de memória em runtime)
+RUN python -c "from sentence_transformers import SentenceTransformer, CrossEncoder; \
+SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2', revision='e8f8c211226b894fcb81acc59f3b34ba3efd5f42'); \
+CrossEncoder('cross-encoder/mmarco-mMiniLMv2-L12-H384-v1', revision='1427fd652930e4ba29e8149678df786c240d8825')"
+
 # Copia experimentos, dados, testes e artefatos
 COPY experiments/*.py ./experiments/
 COPY data/ ./data/
