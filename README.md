@@ -4,7 +4,7 @@ Bot no Telegram para quem recebeu uma mensagem ou link sobre as eleições de 20
 antes de repassar, se aquilo já foi conferido por uma agência de checagem. O bot nunca dá
 veredito próprio de "verdade" ou "mentira": ele mostra o que uma agência apurou.
 
-**Bot:** [@checaai_bot](https://t.me/checaai_bot) · **Documentação:** [gpaulovit.github.io/RES-IA-Challenge-1](https://gpaulovit.github.io/RES-IA-Challenge-1/)
+**Bot:** [@checaai_bot](https://t.me/checaai_bot) · **Documentação:** [gpaulovit.github.io/RES-IA-Challenge-1](https://gpaulovit.github.io/RES-IA-Challenge-1/) · **Apresentação (YouTube):** [Assistir vídeo do grupo](https://www.youtube.com/watch?v=k-NZh5c5o9g)
 
 ## O produto
 
@@ -37,6 +37,7 @@ Detalhes, métricas e aprendizados: [relatório técnico](docs/relatorio-tecnico
 
 | Item | Onde está |
 |---|---|
+| Vídeo de apresentação | [YouTube](https://www.youtube.com/watch?v=k-NZh5c5o9g) |
 | Descrição do produto | esta página |
 | Requisitos funcionais e não funcionais | [docs/requisitos.md](docs/requisitos.md) · [histórias de usuário](docs/historias.md) |
 | Guiding Questions | [docs/perguntas.md](docs/perguntas.md) |
