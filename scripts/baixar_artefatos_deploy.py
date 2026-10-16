@@ -21,6 +21,17 @@ def baixar_artefatos() -> None:
     if res_dvc.returncode != 0:
         print("Aviso: 'dvc pull data/indices/camada1' retornou código diferente de zero. Verifique credenciais ou cache.", file=sys.stderr)
 
+    manifesto = RAIZ / "data" / "indices" / "camada1" / "manifesto.json"
+    if not manifesto.exists():
+        print("Aviso: índice ausente após dvc pull. Tentando reproduzir com DVC (dvc repro indice)...")
+        res_repro = subprocess.run(["python", "-m", "dvc", "repro", "indice"], cwd=str(RAIZ))
+        if res_repro.returncode == 0 and os.getenv("AZURE_STORAGE_CONNECTION_STRING"):
+            print("Índice reconstruído com sucesso! Enviando para o remote DVC na Azure (dvc push)...")
+            subprocess.run(["python", "-m", "dvc", "push", "data/indices/camada1"], cwd=str(RAIZ))
+
+    if not manifesto.exists():
+        raise RuntimeError("ERRO CRÍTICO DE DEPLOY: O índice da Camada 1 não foi encontrado nem pôde ser construído. Abortando deploy para evitar container vazio.")
+
     print("2. Baixando modelo da camada 2 via MLflow (models:/checagens-camada2@producao)...")
     tracking_uri = os.getenv(
         "MLFLOW_TRACKING_URI",
