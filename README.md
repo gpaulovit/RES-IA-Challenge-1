@@ -42,7 +42,7 @@ Detalhes, métricas e aprendizados: [relatório técnico](docs/relatorio-tecnico
 | Guiding Questions | [docs/perguntas.md](docs/perguntas.md) |
 | Datasets e análise exploratória | [docs/dados.md](docs/dados.md) (bases regeneradas com `dvc repro`) |
 | Modelo de IA e relatório técnico | [src/inteligencia/](src/inteligencia/README.md) · [relatório técnico](docs/relatorio-tecnico.md) |
-| Organização e papéis | [Equipe](#equipe) |
+| Organização e papéis | [Equipe](#equipe) · [Scrum](#organização-scrum-adaptado) |
 | Infraestrutura e MLOps | [docs/devops-mlops.md](docs/devops-mlops.md) |
 
 ## Equipe
@@ -54,6 +54,39 @@ Detalhes, métricas e aprendizados: [relatório técnico](docs/relatorio-tecnico
 | Eduarda | Engenharia de Software | bot no Telegram e leitura de links |
 | Paulo | Modelos de IA | busca (camada 1), classificador (camada 2) e relatório go/no-go |
 | Ingrid Soares | DevOps e MLOps | Azure, CI/CD, DVC, MLflow, Docker e testes |
+
+## Organização (Scrum adaptado)
+
+O desafio durou 6 semanas (08/09 a 16/10/2026).
+
+| Papel no Scrum | Quem | Como funcionou |
+|---|---|---|
+| Product Owner | monitores da Residência | definiram o desafio, as entregas e os critérios de avaliação |
+| Time de desenvolvimento | Ana Júlia, Cibelly, Eduarda, Paulo, Ingrid | uma frente cada: Produto e Decisão, Dados, Engenharia, Modelos, DevOps/MLOps |
+| Scrum Master | não houve papel fixo | a coordenação foi do grupo; ver retrospectiva abaixo |
+
+**Artefatos**
+
+- **Backlog:** [histórias de usuário](docs/historias.md) e [requisitos](docs/requisitos.md), priorizados com MoSCoW (Must, Should, Could).
+- **Planejamento das mudanças:** as propostas do [OpenSpec](openspec/), uma por produto, com as tarefas de cada frente.
+- **Incremento:** cada entrega entrou na `main` por pull request (PRs #26 a #47).
+- **Definição de pronto:** código com testes no CI; para modelos, passar no critério go/no-go escrito antes do teste.
+
+**Fases do projeto**
+
+| Período | O que aconteceu |
+|---|---|
+| 08 a 14/09 | repositório, documentação (Docsify), histórias de usuário e primeiros requisitos |
+| 15 a 28/09 | validação de duas hipóteses de produto com gates de dados: reciclagem de alegações (taxa de 1,4%, abaixo do mínimo) e pontuação de padrões (fonte e ano explicavam mais que o texto); os resultados orientaram a escolha do produto final |
+| 29/09 a 05/10 | definição do bot em duas camadas; requisitos consolidados e contrato entre as frentes (`buscar()` e `classificar()`) |
+| 06 a 09/10 | bases de dados, modelos, checagens recentes do Google, relatório técnico e decisão **no-go** da camada 2 |
+| 13 a 16/10 | integração, busca híbrida, deploy na Azure, CI/CD, correções finais e apresentação |
+
+**Retrospectiva**
+
+- **Manter:** validar hipóteses com dados antes de construir; critério go/no-go definido antes do teste; contrato de interface entre as frentes, que permitiu trabalho em paralelo; integração por pull request com testes no CI.
+- **Melhorar:** antecipar a definição do contrato entre as frentes e os checkpoints diários, adotados na reta final; manter uma única fonte de verdade para a documentação.
+- **Próximos ciclos:** papel de Scrum Master definido e revisão de hipóteses já na primeira semana.
 
 ## Como rodar
 
