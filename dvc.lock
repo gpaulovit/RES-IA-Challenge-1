@@ -18,9 +18,9 @@ stages:
     outs:
     - path: data/brutos
       hash: md5
-      md5: ecfaaf2402dcecb5958a9b28920e3577.dir
-      size: 138737779
-      nfiles: 8
+      md5: 19e038189277af9946fbe163d55c10c6.dir
+      size: 138706672
+      nfiles: 7
   checagens:
     cmd: python -m checagens.bases.checagens
     deps:
@@ -41,8 +41,8 @@ stages:
       nfiles: 1
     - path: src/checagens/bases/checagens.py
       hash: md5
-      md5: 9573a1fb76cce58f2c15bf7f0fc2d1f7
-      size: 13803
+      md5: 90e8d3b5ec598ce63805f5f4d96e0855
+      size: 13830
     - path: src/checagens/bases/texto.py
       hash: md5
       md5: 65a8c97d35f7cd3518b1c3bcece134e0
@@ -54,16 +54,16 @@ stages:
     outs:
     - path: data/processados/checagens/amostra_teste_30.json
       hash: md5
-      md5: 3eb9003fef1ca860291cba76baadc7a2
-      size: 12881
+      md5: 4f6d245352365d3004b6fc034e6b08df
+      size: 13287
     - path: data/processados/checagens/checagens.json
       hash: md5
-      md5: e5bd2e5e28bebc53151e9ced47532f64
-      size: 4905967
+      md5: a57fdb9f435dce08e9b77dd69e27a5ee
+      size: 5161706
     - path: data/relatorios/checagens.json
       hash: md5
-      md5: 4113bf7ca6ad4b794bebe30a31e2e2b3
-      size: 16813
+      md5: bc2a8054dda606b18d025df9973202ae
+      size: 16983
   treino:
     cmd: python -m checagens.bases.treino --corte 2018-09-15
     deps:
@@ -112,17 +112,17 @@ stages:
     deps:
     - path: data/processados/checagens/checagens.json
       hash: md5
-      md5: 0b8a3f5d447e50c95cf0b38e5b441d2b
-      size: 4424617
+      md5: a57fdb9f435dce08e9b77dd69e27a5ee
+      size: 5161706
     - path: src/inteligencia/busca.py
       hash: md5
-      md5: 457b84f534e6501de8f75cdce8423272
-      size: 10448
+      md5: 6307fa931c42505606d824e0cb46e2ef
+      size: 20178
     outs:
     - path: data/indices/camada1
       hash: md5
-      md5: 330bf6e57f4e3d18f822554a15d4c130.dir
-      size: 20276150
+      md5: b0563157804f0360dc82f5c2fa51bfd9.dir
+      size: 23750193
       nfiles: 3
   calibrar:
     cmd: python -m inteligencia.calibracao
