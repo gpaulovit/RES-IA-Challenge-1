@@ -60,6 +60,7 @@ python3 -m venv .venv
 
 | Notebook | O que responde |
 |---|---|
+| `07_eda.ipynb` | **Análise exploratória** das bases de checagens e de treino (figuras em `docs/img/eda/`, resumo em [docs/dados.md](../docs/dados.md#análise-exploratória)) |
 | `00_load_corpus.ipynb` | Carga e limpeza do FactPolCheckBr |
 | `01_embeddings.ipynb` | Embeddings das alegações |
 | `02_clusters.ipynb` | Agrupamento das alegações |
