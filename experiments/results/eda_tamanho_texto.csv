@@ -1,0 +1,5 @@
+arquivo,fonte,mediana_falso,mediana_verdadeiro,AUC_tamanho
+treino,Fake.br-Corpus,156.0,158.0,0.49
+treino,FakeWhatsApp.Br,57.0,28.0,0.67
+teste,FakeWhatsApp.Br,44.0,30.0,0.63
+teste_curtos,FakeTweet.Br,29.0,27.5,0.52
