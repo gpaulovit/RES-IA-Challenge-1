@@ -7,6 +7,7 @@
 - Domínio de dados
   - [Dados do bot](dados.md)
 - Modelos de IA
+  - [Relatório técnico](relatorio-tecnico.md)
   - [Relatório da camada 2](relatorio-camada2.md)
 - Engenharia
   - [Arquitetura](arquitetura.md)
