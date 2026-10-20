@@ -1,0 +1,36 @@
+/* Malachite & Grape: #53dd6c Malachite, #63a088 Seagrass, #56638a Dusty Grape, #483a58 Vintage Grape.
+   Os verdes não têm contraste para texto no fundo branco (Malachite 1,76:1, Seagrass 3,04:1),
+   então no modo claro o destaque é o roxo e o verde fica só em fundos e na faixa.
+   Cinzas puxados para o matiz do Vintage Grape (268°). */
+:root[data-paleta='malachite'] {
+  --sl-color-white: hsl(268, 30%, 98%);
+  --sl-color-gray-1: hsl(268, 18%, 92%);
+  --sl-color-gray-2: hsl(268, 10%, 78%);
+  --sl-color-gray-3: hsl(268, 8%, 58%);
+  --sl-color-gray-4: hsl(268, 10%, 38%);
+  --sl-color-gray-5: hsl(268, 14%, 24%);
+  --sl-color-gray-6: hsl(268, 18%, 15%);
+  --sl-color-black: hsl(268, 18%, 10%);
+
+  --sl-color-accent-low: #483a58; /* Vintage Grape: fundos de destaque, texto sobre o verde */
+  --sl-color-accent: #63a088; /* Seagrass */
+  --sl-color-accent-high: #53dd6c; /* Malachite: links e item ativo (10,3:1 no fundo) */
+
+  --paleta-faixa: linear-gradient(90deg, #53dd6c, #63a088, #56638a, #483a58);
+}
+
+:root[data-paleta='malachite'][data-theme='light'] {
+  --sl-color-white: hsl(268, 21%, 14%);
+  --sl-color-gray-1: hsl(268, 18%, 20%);
+  --sl-color-gray-2: hsl(268, 12%, 28%);
+  --sl-color-gray-3: hsl(268, 8%, 40%);
+  --sl-color-gray-4: hsl(268, 6%, 58%);
+  --sl-color-gray-5: hsl(268, 8%, 80%);
+  --sl-color-gray-6: hsl(268, 20%, 94%);
+  --sl-color-gray-7: hsl(268, 24%, 97%);
+  --sl-color-black: #ffffff;
+
+  --sl-color-accent-low: #d3f6da; /* Malachite clareado */
+  --sl-color-accent: #56638a; /* Dusty Grape: links e item ativo (5,9:1 no branco) */
+  --sl-color-accent-high: #483a58; /* Vintage Grape */
+}

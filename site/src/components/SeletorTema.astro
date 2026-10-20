@@ -1,0 +1,52 @@
+---
+// Substitui o ThemeSelect do Starlight: mantém o seletor claro/escuro e,
+// enquanto houver mais de uma paleta em teste, acrescenta o seletor de paleta.
+import Default from '@astrojs/starlight/components/ThemeSelect.astro';
+
+import { PALETAS } from '../../site.config.mjs';
+---
+
+<Default />
+
+{
+  PALETAS.length > 1 && (
+    <label class="seletor-paleta">
+      <span class="sr-only">Paleta de cores</span>
+      <select>
+        {PALETAS.map((p) => (
+          <option value={p.id}>{p.nome}</option>
+        ))}
+      </select>
+    </label>
+  )
+}
+
+<script>
+  // O Starlight repete os controles do cabeçalho no menu mobile, então há mais de um seletor.
+  const selects = [...document.querySelectorAll<HTMLSelectElement>('.seletor-paleta select')];
+  for (const select of selects) {
+    select.value = document.documentElement.dataset.paleta ?? select.value;
+    select.addEventListener('change', () => {
+      document.documentElement.dataset.paleta = select.value;
+      for (const s of selects) s.value = select.value;
+      try {
+        localStorage.setItem('paleta', select.value);
+      } catch {}
+    });
+  }
+</script>
+
+<style>
+  .seletor-paleta select {
+    background: transparent;
+    color: var(--sl-color-gray-1);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.25rem;
+    font-size: var(--sl-text-sm);
+    cursor: pointer;
+  }
+  .seletor-paleta select:hover {
+    border-color: var(--sl-color-accent);
+  }
+</style>

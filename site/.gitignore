@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.astro/
+# gerado a partir de ../docs por scripts/sync-docs.mjs
+src/content/docs/

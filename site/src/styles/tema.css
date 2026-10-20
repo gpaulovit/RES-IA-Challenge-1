@@ -1,0 +1,15 @@
+/* Cada paleta vive em paletas/<id>.css, escopada por :root[data-paleta='<id>'].
+   A lista e a padrão ficam em site.config.mjs. */
+@import './paletas/malachite.css';
+
+/* Faixa com as cores da paleta no topo do cabeçalho. */
+header.header {
+  border-top: 4px solid transparent;
+  border-image: var(--paleta-faixa) 1;
+}
+
+/* Tabelas largas (equipe, métricas) rolam na horizontal em vez de quebrar o layout. */
+.sl-markdown-content table {
+  display: block;
+  overflow-x: auto;
+}
