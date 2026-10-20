@@ -98,12 +98,23 @@ jobs:
 
           echo "Configurando Container App $AZURE_CONTAINERAPP_NAME..."
           if az containerapp show --name "$AZURE_CONTAINERAPP_NAME" --resource-group "$AZURE_RESOURCE_GROUP" &>/dev/null; then
-            echo "Atualizando Container App existente..."
+            echo "Habilitando ingress HTTPS para Webhook do Telegram..."
+            az containerapp ingress enable \
+              --name "$AZURE_CONTAINERAPP_NAME" \
+              --resource-group "$AZURE_RESOURCE_GROUP" \
+              --type external \
+              --target-port 8080
+            FQDN=$(az containerapp show --name "$AZURE_CONTAINERAPP_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query "properties.configuration.ingress.fqdn" -o tsv)
+            echo "Atualizando Container App existente (Webhook: https://$FQDN)..."
             az containerapp update \
               --name "$AZURE_CONTAINERAPP_NAME" \
               --resource-group "$AZURE_RESOURCE_GROUP" \
               --image "$IMAGE_TAG" \
-              --set-env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=0 APPLICATIONINSIGHTS_CONNECTION_STRING="$APPLICATIONINSIGHTS_CONNECTION_STRING"
+              --cpu 2.0 \
+              --memory 4.0Gi \
+              --min-replicas 1 \
+              --max-replicas 1 \
+              --set-env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=0 WEBHOOK_URL="https://$FQDN" APPLICATIONINSIGHTS_CONNECTION_STRING="$APPLICATIONINSIGHTS_CONNECTION_STRING"
           else
             echo "Criando Container App..."
             az containerapp create \
@@ -114,11 +125,18 @@ jobs:
               --registry-server "${AZURE_CONTAINER_REGISTRY}.azurecr.io" \
               --registry-username "$AZURE_CONTAINER_REGISTRY" \
               --registry-password "$ACR_PASSWORD" \
+              --ingress external \
+              --target-port 8080 \
               --env-vars TELEGRAM_BOT_TOKEN="$TELEGRAM_TOKEN" CAMADA2_LIGADA=0 APPLICATIONINSIGHTS_CONNECTION_STRING="$APPLICATIONINSIGHTS_CONNECTION_STRING" \
-              --cpu 0.5 \
-              --memory 1.0Gi \
+              --cpu 2.0 \
+              --memory 4.0Gi \
               --min-replicas 1 \
               --max-replicas 1
+            FQDN=$(az containerapp show --name "$AZURE_CONTAINERAPP_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query "properties.configuration.ingress.fqdn" -o tsv)
+            az containerapp update \
+              --name "$AZURE_CONTAINERAPP_NAME" \
+              --resource-group "$AZURE_RESOURCE_GROUP" \
+              --set-env-vars WEBHOOK_URL="https://$FQDN"
           fi
 
 

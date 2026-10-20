@@ -14,12 +14,31 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 
-
 def baixar_artefatos() -> None:
+    conn_str = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+    if conn_str:
+        print("Configurando credencial do remote DVC a partir de AZURE_STORAGE_CONNECTION_STRING...")
+        subprocess.run(
+            ["python", "-m", "dvc", "config", "--local", "remote.azure.connection_string", conn_str],
+            cwd=str(RAIZ),
+        )
+
     print("1. Baixando índice da camada 1 via DVC (data/indices/camada1)...")
     res_dvc = subprocess.run(["python", "-m", "dvc", "pull", "data/indices/camada1"], cwd=str(RAIZ))
     if res_dvc.returncode != 0:
         print("Aviso: 'dvc pull data/indices/camada1' retornou código diferente de zero. Verifique credenciais ou cache.", file=sys.stderr)
+
+    manifesto = RAIZ / "data" / "indices" / "camada1" / "manifesto.json"
+    if not manifesto.exists():
+        print("Aviso: índice ausente após dvc pull. Tentando reproduzir com DVC (dvc repro indice)...")
+        res_repro = subprocess.run(["python", "-m", "dvc", "repro", "indice"], cwd=str(RAIZ))
+
+    if not manifesto.exists():
+        raise RuntimeError("ERRO CRÍTICO DE DEPLOY: O índice da Camada 1 não foi encontrado nem pôde ser construído. Abortando deploy para evitar container vazio.")
+
+    if conn_str:
+        print("Carregando todo o versionamento DVC para o remote na Azure (dvc push)...")
+        subprocess.run(["python", "-m", "dvc", "push"], cwd=str(RAIZ))
 
     print("2. Baixando modelo da camada 2 via MLflow (models:/checagens-camada2@producao)...")
     tracking_uri = os.getenv(

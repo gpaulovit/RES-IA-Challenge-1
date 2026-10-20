@@ -5,6 +5,7 @@ agências (camada 1) e, sem checagem parecida, mostra uma faixa de alerta (camad
 
 ### Acessos e Links Rápidos
 
+* **Apresentação no YouTube**: [https://www.youtube.com/watch?v=k-NZh5c5o9g](https://www.youtube.com/watch?v=k-NZh5c5o9g)
 * **Bot Oficial no Telegram**: [https://t.me/checaai_bot](https://t.me/checaai_bot) (`@checaai_bot`)
 * **Código-Fonte no GitHub**: [https://github.com/gpaulovit/RES-IA-Challenge-1](https://github.com/gpaulovit/RES-IA-Challenge-1)
 * **Infraestrutura Azure**:

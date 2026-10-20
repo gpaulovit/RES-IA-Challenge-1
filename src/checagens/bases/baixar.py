@@ -51,7 +51,13 @@ def baixar(fonte: Fonte) -> None:
     temporario = fonte.destino.with_suffix(fonte.destino.suffix + ".part")
     for tentativa in range(1, TENTATIVAS + 1):
         try:
-            with urllib.request.urlopen(fonte.url, timeout=300) as resposta, temporario.open("wb") as f:
+            import ssl
+            try:
+                import certifi
+                ctx = ssl.create_default_context(cafile=certifi.where())
+            except Exception:
+                ctx = ssl.create_default_context()
+            with urllib.request.urlopen(fonte.url, timeout=300, context=ctx) as resposta, temporario.open("wb") as f:
                 while bloco := resposta.read(1 << 20):
                     f.write(bloco)
             break

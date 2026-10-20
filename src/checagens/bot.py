@@ -564,6 +564,60 @@ def configurar_telemetria() -> None:
         log.info("Application Insights ativo via Container Apps log stream (telemetria estruturada).")
 
 
+async def rodar_webhook(app: Application, webhook_url: str, porta: int = 8080) -> None:
+    """Roda o bot em modo Webhook HTTP para evitar conflito de getUpdates com outras instâncias."""
+    import json
+
+    url_completa = webhook_url.rstrip("/") + "/webhook"
+
+    async def _atender_http(reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> None:
+        try:
+            cabecalho = await asyncio.wait_for(reader.readuntil(b"\r\n\r\n"), timeout=10)
+            linhas = cabecalho.decode("latin-1", "replace").split("\r\n")
+            metodo = (linhas[0].split(" ") + [""])[0].upper()
+            tamanho = 0
+            for l in linhas[1:]:
+                if l.lower().startswith("content-length:"):
+                    tamanho = int(l.split(":", 1)[1].strip())
+            corpo = await asyncio.wait_for(reader.readexactly(tamanho), timeout=10) if tamanho > 0 else b""
+            if metodo == "POST" and corpo:
+                dados = json.loads(corpo.decode("utf-8"))
+                await app.update_queue.put(Update.de_json(dados, app.bot))
+            writer.write(
+                b"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 2\r\nConnection: close\r\n\r\nOK"
+            )
+            await writer.drain()
+        except asyncio.IncompleteReadError:
+            pass  # probe TCP do Azure Container Apps (abre e fecha socket sem enviar HTTP)
+        except Exception:
+            log.exception("Erro ao processar requisição HTTP do webhook")
+        finally:
+            writer.close()
+
+    async def _manter_webhook() -> None:
+        while True:
+            await asyncio.sleep(20)
+            try:
+                info = await app.bot.get_webhook_info()
+                if info.url != url_completa:
+                    log.warning("Webhook havia sido removido por outra instância; restaurando %s", url_completa)
+                    await app.bot.set_webhook(url=url_completa)
+            except Exception:
+                pass
+
+    servidor = await asyncio.start_server(_atender_http, "0.0.0.0", porta)
+    async with app, servidor:
+        await app.start()
+        await app.bot.set_webhook(url=url_completa, drop_pending_updates=True)
+        log.info("Webhook ativo em %s (escutando na porta %d)", url_completa, porta)
+        guardiao = asyncio.create_task(_manter_webhook())
+        try:
+            await asyncio.Event().wait()
+        finally:
+            guardiao.cancel()
+            await app.stop()
+
+
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     logging.getLogger("httpx").setLevel(logging.WARNING)  # não imprimir o token nos logs
@@ -574,6 +628,11 @@ def main() -> None:
         raise SystemExit("Coloque o token do BotFather no arquivo .env na raiz do projeto.")
 
     buscar, classificar, modo = carregar_camadas()
+    if modo == "real" and buscar is not None:
+        log.info("Pré-carregando índice da Camada 1 e modelos de IA na memória...")
+        res_aquecimento = buscar("aquecimento inicial do indice de checagens", k=1)
+        log.info("Índice e modelos prontos (%d resultado(s) de teste).", len(res_aquecimento))
+
     app = Application.builder().token(token).build()
     app.bot_data["camadas"] = (buscar, classificar, modo)
     app.add_handler(CommandHandler("start", cmd_start))
@@ -589,7 +648,12 @@ def main() -> None:
                 f"camada 2: {'ligada' if classificar else 'desligada'}",
     }[modo]
     print(f"Bot rodando ({situacao}). Abra o Telegram e mande /start. Ctrl+C para parar.")
-    app.run_polling()
+    webhook_url = os.getenv("WEBHOOK_URL", "").strip()
+    if webhook_url:
+        porta = int(os.getenv("PORT", "8080"))
+        asyncio.run(rodar_webhook(app, webhook_url, porta))
+    else:
+        app.run_polling(drop_pending_updates=True)
 
 
 if __name__ == "__main__":
