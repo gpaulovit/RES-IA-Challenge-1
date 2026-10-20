@@ -263,7 +263,7 @@ O módulo `src/checagens/registros.py`:
 ## 11. Links Oficiais e Acessos Diretos
 
 * **Bot no Telegram**: [https://t.me/checaai_bot](https://t.me/checaai_bot) (`@checaai_bot`)
-* **Documentação Online (GitHub Pages / Docsify)**: [https://gpaulovit.github.io/RES-IA-Challenge-1/](https://gpaulovit.github.io/RES-IA-Challenge-1/)
+* **Documentação Online (GitHub Pages / Astro Starlight)**: [https://gpaulovit.github.io/RES-IA-Challenge-1/](https://gpaulovit.github.io/RES-IA-Challenge-1/)
 * **Azure Portal (Resource Group `rg-res-ia`)**: [https://portal.azure.com/.../rg-res-ia](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/overview)
 * **Azure ML Studio (Workspace `mlw-res-ia`)**: [https://ml.azure.com/.../mlw-res-ia](https://ml.azure.com/?wsid=/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourcegroups/rg-res-ia/workspaces/mlw-res-ia)
 * **Azure Container Apps (`aca-res-ia-bot`)**: [https://portal.azure.com/.../aca-res-ia-bot](https://portal.azure.com/#@ingridsssoaresoutlook.onmicrosoft.com/resource/subscriptions/93afb629-e1be-497f-9482-0d67829f4016/resourceGroups/rg-res-ia/providers/Microsoft.App/containerApps/aca-res-ia-bot)
